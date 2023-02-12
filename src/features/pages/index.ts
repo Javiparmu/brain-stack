@@ -1,0 +1,6 @@
+export * from './pricing/Pricing'
+export * from './howitworks/HowItWorks'
+export * from './home/Home'
+export * from './profile/Profile'
+export * from './auth/Login'
+export * from './auth/Register'

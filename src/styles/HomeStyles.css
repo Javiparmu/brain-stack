@@ -1,0 +1,10 @@
+.audio-player {
+  display: block;
+  border-radius: 5px;
+  position: relative;
+}
+
+.controls .progress {
+  cursor: pointer;
+  width: 75.390625%;
+}
