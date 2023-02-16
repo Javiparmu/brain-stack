@@ -2,7 +2,7 @@ import {
   Box,
   Button,
   FormControl,
-  FormHelperText,
+  FormErrorMessage,
   FormLabel,
   IconButton,
   Image,
@@ -13,20 +13,33 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react'
-import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
-import theme from '../../../theme/theme'
-import { yupResolver } from '@hookform/resolvers/yup'
+import { Link, useNavigate } from 'react-router-dom'
+import theme from '../../theme/theme'
 import * as yup from 'yup'
-import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useEffect, useState } from 'react'
+import { useRegisterUserMutation } from '../endpoints/user'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
+import { User } from '../../interfaces/users'
+import { useDispatch } from 'react-redux'
+import { setCurrentUser } from './authSlice'
+import { useAppDispatch } from '../../app/hooks'
 
 type FormValues = {
+  username: string
   email: string
   password: string
 }
 
 const schema = yup.object({
+  username: yup
+    .string()
+    .min(
+      3,
+      'Username needs to be at least 3 characters long.',
+    )
+    .required('Please enter a username.'),
   email: yup.string().required('Please enter an email.'),
   password: yup
     .string()
@@ -34,19 +47,17 @@ const schema = yup.object({
     .min(8, 'Password too short.')
     .test(
       'Password is strong enough.',
-      'Password must contain lowercase, uppercase, number and a symbol.',
+      'Password must contain lowercase, uppercase and number.',
       (value: string, context: any) => {
         const hasUpperCase = /[A-Z]/.test(value)
         const hasLowerCase = /[a-z]/.test(value)
         const hasNumber = /[0-9]/.test(value)
-        const hasSymbole = /[!@#%&]/.test(value)
         let validConditions = 0
-        const numberOfMustBeValidConditions = 4
+        const numberOfMustBeValidConditions = 3
         const conditions = [
           hasLowerCase,
           hasUpperCase,
           hasNumber,
-          hasSymbole,
         ]
         conditions.forEach(condition =>
           condition ? validConditions++ : null,
@@ -61,7 +72,7 @@ const schema = yup.object({
     ),
 })
 
-export const Login = () => {
+export const Register = () => {
   const {
     register,
     handleSubmit,
@@ -70,8 +81,27 @@ export const Login = () => {
   } = useForm<FormValues>({
     resolver: yupResolver(schema),
   })
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+
   const [passwordVisible, setPasswordVisible] =
     useState(false)
+
+  const [registerUser, { isLoading, error }] =
+    useRegisterUserMutation()
+
+  const onSubmit = async (data: FormValues) => {
+    const response = await registerUser(data as User)
+
+    if ('data' in response) {
+      const data = response.data
+      dispatch(setCurrentUser(data.result))
+
+      const { token, user } = data.result
+      navigate('/')
+    }
+  }
+
   return (
     <Box
       display="flex"
@@ -98,7 +128,8 @@ export const Login = () => {
         </Box>
         <Box
           p={10}
-          m={{ base: '0', md: '5' }}
+          ml={{ base: '0', md: '5' }}
+          mr={{ base: '0', md: '5' }}
           sx={{
             display: 'flex',
             flexDirection: 'column',
@@ -106,17 +137,38 @@ export const Login = () => {
             alignItems: 'center',
           }}
           as="form"
-          onSubmit={handleSubmit(data =>
-            console.log(data),
-          )}>
+          onSubmit={handleSubmit(onSubmit)}>
           <Text fontSize="3xl" fontWeight="bold">
-            Login
+            Register
           </Text>
-          <FormControl
-            id="email"
-            mb={5}
-            mt={10}
-            isInvalid={!!errors?.email}>
+          <FormControl id="email" mb={5} mt={5}>
+            <FormLabel
+              htmlFor="email"
+              fontFamily={'Roboto'}>
+              Username
+            </FormLabel>
+            <Input
+              fontFamily={'Roboto'}
+              type="text"
+              bgColor={useColorModeValue(
+                '#ffffff',
+                '#202023',
+              )}
+              focusBorderColor={theme.colors.primary}
+              _hover={{ borderColor: theme.colors.primary }}
+              _autofill={{
+                WebkitBoxShadow: `0 0 0 1000px ${useColorModeValue(
+                  '#ffffff',
+                  '#202023',
+                )} inset`,
+              }}
+              {...register('username')}
+            />
+            <FormErrorMessage color="red.500">
+              {errors.username?.message}
+            </FormErrorMessage>
+          </FormControl>
+          <FormControl id="email" mb={5}>
             <FormLabel
               htmlFor="email"
               fontFamily={'Roboto'}>
@@ -125,7 +177,6 @@ export const Login = () => {
             <Input
               fontFamily={'Roboto'}
               type="email"
-              placeholder="Enter email"
               bgColor={useColorModeValue(
                 '#ffffff',
                 '#202023',
@@ -140,14 +191,11 @@ export const Login = () => {
               }}
               {...register('email')}
             />
-            <FormHelperText color="red.500">
-              {errors?.email && errors.email.message}
-            </FormHelperText>
+            <FormErrorMessage color="red.500">
+              {errors.email?.message}
+            </FormErrorMessage>
           </FormControl>
-          <FormControl
-            id="password"
-            mb={10}
-            isInvalid={!!errors?.password}>
+          <FormControl id="password" mb={10}>
             <FormLabel
               htmlFor="password"
               fontFamily={'Roboto'}>
@@ -207,9 +255,9 @@ export const Login = () => {
                 />
               </InputRightElement>
             </InputGroup>
-            <FormHelperText color="red.500">
-              {errors?.password && errors.password.message}
-            </FormHelperText>
+            <FormErrorMessage color="red.500">
+              {errors.password?.message}
+            </FormErrorMessage>
           </FormControl>
           <Box
             gap={10}
@@ -222,16 +270,15 @@ export const Login = () => {
             }}>
             <Button
               flex={1}
-              type="button"
               as={Link}
-              to="/signup"
+              to="/login"
               fontWeight={400}
               pr={5}
               pl={5}
               bgColor={theme.colors.primary}
               color={'white'}
               _hover={{ bgColor: '#7e82cf' }}>
-              Register
+              Login
             </Button>
             <Button
               flex={1}
@@ -242,7 +289,7 @@ export const Login = () => {
               bgColor={theme.colors.primary}
               color={'white'}
               _hover={{ bgColor: '#7e82cf' }}>
-              Login
+              Register
             </Button>
           </Box>
         </Box>

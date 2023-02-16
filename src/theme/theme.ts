@@ -96,8 +96,13 @@ const colors = {
   plainOldBlue: 'blue',
 }
 
+type ColorMode = 'light' | 'dark' | 'system' | undefined
+
 const config: ThemeConfig = {
-  initialColorMode: 'dark',
+  initialColorMode:
+    (localStorage.getItem(
+      'chakra-ui-color-mode',
+    ) as ColorMode) || 'dark',
   useSystemColorMode: true,
 }
 

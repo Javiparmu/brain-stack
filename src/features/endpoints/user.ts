@@ -1,4 +1,5 @@
-import { User } from '../../interfaces/users'
+import { Response } from '../../interfaces/response'
+import { User, UserResponse } from '../../interfaces/users'
 import { musicAiApi } from '../api/apiSlice'
 
 export const userApiEndpoints = musicAiApi.injectEndpoints({
@@ -7,10 +8,13 @@ export const userApiEndpoints = musicAiApi.injectEndpoints({
       query: () => '/user',
       providesTags: ['User'],
     }),
-    getUserById: builder.query<User, number>({
+    getUserById: builder.query<User, string>({
       query: id => `/user/${id}`,
     }),
-    registerUser: builder.mutation<User, User>({
+    registerUser: builder.mutation<
+      UserResponse,
+      Partial<User>
+    >({
       query: user => ({
         url: '/user',
         method: 'POST',
@@ -18,7 +22,10 @@ export const userApiEndpoints = musicAiApi.injectEndpoints({
       }),
       invalidatesTags: ['User'],
     }),
-    loginUser: builder.mutation<User, User>({
+    loginUser: builder.mutation<
+      UserResponse,
+      Partial<User>
+    >({
       query: user => ({
         url: '/user/login',
         method: 'POST',
@@ -28,7 +35,7 @@ export const userApiEndpoints = musicAiApi.injectEndpoints({
     }),
     updateUser: builder.mutation<User, User>({
       query: user => ({
-        url: `/user/${user.id}`,
+        url: `/user/${user._id}`,
         method: 'PUT',
         body: user,
       }),
@@ -38,6 +45,14 @@ export const userApiEndpoints = musicAiApi.injectEndpoints({
       query: id => ({
         url: `/user/${id}`,
         method: 'DELETE',
+      }),
+      invalidatesTags: ['User'],
+    }),
+    validateUser: builder.mutation<Response, string>({
+      query: token => ({
+        url: '/user/validate',
+        method: 'POST',
+        body: { token },
       }),
       invalidatesTags: ['User'],
     }),
@@ -51,4 +66,5 @@ export const {
   useLoginUserMutation,
   useUpdateUserMutation,
   useDeleteUserMutation,
+  useValidateUserMutation,
 } = userApiEndpoints

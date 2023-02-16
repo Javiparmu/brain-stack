@@ -8,9 +8,5 @@ export interface Song {
 }
 
 export interface SongResponse extends Response {
-  code: number
-  message: string
   result: Song
-  status: string
-  statusMessage: string
 }

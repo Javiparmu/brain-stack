@@ -9,7 +9,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 export const ThemeToggleButton = () => {
   const { toggleColorMode } = useColorMode()
   return (
-    <AnimatePresence exitBeforeEnter initial={false}>
+    <AnimatePresence mode="wait" initial={true}>
       <motion.div
         style={{ display: 'inline-block' }}
         key={useColorModeValue('light', 'dark')}
