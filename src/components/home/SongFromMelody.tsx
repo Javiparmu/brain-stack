@@ -8,7 +8,7 @@ import { HomeStyles as styles } from '../../styles/HomeStyles';
 import FileUpload from '../FileUpload';
 import { useForm } from 'react-hook-form';
 
-export const SongFromMelody: FC = () => {
+export const SongFromMelody = (): JSX.Element => {
   const [generateInput] = useState<string>('');
   const user = useAppSelector(selectCurrentUser);
 

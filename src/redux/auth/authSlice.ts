@@ -22,12 +22,12 @@ const authSlice = createSlice({
       state.token = token;
     },
   },
-  extraReducers: (builder) => {},
 });
 
 export const { setCurrentUser } = authSlice.actions;
 
 export default authSlice.reducer;
 
-export const selectCurrentUser = (state: RootState) =>
-  state.auth.user;
+export const selectCurrentUser = (
+  state: RootState,
+): User | null => state.auth.user;

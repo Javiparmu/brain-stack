@@ -4,7 +4,7 @@ import {
   Fade,
   Select,
 } from '@chakra-ui/react';
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import ReactAudioPlayer from 'react-audio-player';
 import { useAppSelector } from '../../store/hooks';
 import { selectCurrentUser } from '../../redux/auth/authSlice';
@@ -17,7 +17,7 @@ import {
   moods,
 } from '../../utils/constants';
 
-export const SongFromSelections: FC = () => {
+export const SongFromSelections = (): FC => {
   const [generateInput] = useState<string>('');
   const user = useAppSelector(selectCurrentUser);
 
