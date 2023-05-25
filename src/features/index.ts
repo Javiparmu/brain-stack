@@ -1,6 +1,0 @@
-export * from './home/Home'
-export * from './auth/Login'
-export * from './auth/Register'
-export * from './howitworks/HowItWorks'
-export * from './pricing/Pricing'
-export * from './profile/Profile'
