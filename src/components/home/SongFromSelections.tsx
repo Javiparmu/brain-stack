@@ -17,7 +17,7 @@ import {
   moods,
 } from '../../utils/constants';
 
-export const SongFromSelections = (): FC => {
+export const SongFromSelections = (): JSX.Element => {
   const [generateInput] = useState<string>('');
   const user = useAppSelector(selectCurrentUser);
 

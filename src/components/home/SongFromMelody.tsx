@@ -1,5 +1,5 @@
 import { Box, Button, Fade } from '@chakra-ui/react';
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import ReactAudioPlayer from 'react-audio-player';
 import { useAppSelector } from '../../store/hooks';
 import { selectCurrentUser } from '../../redux/auth/authSlice';
