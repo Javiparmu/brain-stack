@@ -18,6 +18,7 @@ import { SongCategory } from '@/utils/enums';
 
 const SongGeneratorPage: FC = () => {
   const [prompt, setPrompt] = useState<string>('');
+
   const [categoryGroups, setCategoryGroups] = useState<CategoryGroup[]>([]);
 
   const handlePromptChange = (event: React.ChangeEvent<HTMLInputElement>) =>
