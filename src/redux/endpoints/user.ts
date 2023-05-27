@@ -11,10 +11,7 @@ export const userApiEndpoints = musicAiApi.injectEndpoints({
     getUserById: builder.query<User, string>({
       query: (id) => `/user/${id}`,
     }),
-    registerUser: builder.mutation<
-      UserResponse,
-      Partial<User>
-    >({
+    registerUser: builder.mutation<UserResponse, Partial<User>>({
       query: (user) => ({
         url: '/user',
         method: 'POST',
@@ -22,10 +19,7 @@ export const userApiEndpoints = musicAiApi.injectEndpoints({
       }),
       invalidatesTags: ['User'],
     }),
-    loginUser: builder.mutation<
-      UserResponse,
-      Partial<User>
-    >({
+    loginUser: builder.mutation<UserResponse, Partial<User>>({
       query: (user) => ({
         url: '/user/login',
         method: 'POST',

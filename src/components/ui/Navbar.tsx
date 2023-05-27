@@ -9,6 +9,7 @@ import {
   MenuItem,
   MenuList,
   Text,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import { Link } from '@chakra-ui/next-js';
 import { ThemeToggleButton } from './ThemeToggleButton';
@@ -61,14 +62,13 @@ export const Navbar: FC = () => {
           alignItems="center"
           display={{ base: 'none', md: 'flex' }}
         >
-          <Link
-            href="/how-it-works"
-            color="black"
-            textDecoration="none"
-          >
+          <Link href="/how-it-works" color="black" textDecoration="none">
             <Text
               _hover={{
-                color: theme.colors.primary,
+                color: useColorModeValue(
+                  theme.colors.primary,
+                  theme.colors.primaryDark,
+                ),
               }}
             >
               How it works
@@ -77,7 +77,10 @@ export const Navbar: FC = () => {
           <Link href="/pricing" color="black">
             <Text
               _hover={{
-                color: theme.colors.primary,
+                color: useColorModeValue(
+                  theme.colors.primary,
+                  theme.colors.primaryDark,
+                ),
               }}
             >
               Pricing
@@ -89,9 +92,7 @@ export const Navbar: FC = () => {
                 as={Avatar}
                 boxSize={10}
                 src={user.avatar}
-                backgroundColor={
-                  user.avatar ? 'white' : 'gray.400'
-                }
+                backgroundColor={user.avatar ? 'white' : 'gray.400'}
               />
               <MenuList>
                 <MenuItem as={Link} href="/profile">
@@ -136,9 +137,7 @@ export const Navbar: FC = () => {
         </Box>
         <Box gap={1} display="flex" flexDirection="row">
           <ThemeToggleButton />
-          <Box
-            display={{ base: 'inline-block', md: 'none' }}
-          >
+          <Box display={{ base: 'inline-block', md: 'none' }}>
             <Menu isLazy id="navbar-menu">
               <MenuButton
                 as={IconButton}
@@ -158,10 +157,7 @@ export const Navbar: FC = () => {
                     <MenuItem as={Link} href="/profile">
                       Profile
                     </MenuItem>
-                    <MenuItem
-                      as={Link}
-                      onClick={logoutUser}
-                    >
+                    <MenuItem as={Link} onClick={logoutUser}>
                       Logout
                     </MenuItem>
                   </>

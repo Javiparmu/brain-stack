@@ -8,19 +8,11 @@ export const MainHeader: FC = () => {
       textAlign={{ base: 'center', md: 'center' }}
     >
       The{' '}
-      <Text
-        as="span"
-        bgGradient="linear(to-r, #676bb9, #359ebb)"
-        bgClip="text"
-      >
+      <Text as="span" bgGradient="linear(to-r, #676bb9, #359ebb)" bgClip="text">
         easiest{' '}
       </Text>
       way to create your own AI generated{' '}
-      <Text
-        as="span"
-        bgGradient="linear(to-r, #676bb9, #359ebb)"
-        bgClip="text"
-      >
+      <Text as="span" bgGradient="linear(to-r, #676bb9, #359ebb)" bgClip="text">
         music.
       </Text>{' '}
     </Text>

@@ -1,7 +1,4 @@
-import {
-  createApi,
-  fetchBaseQuery,
-} from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const musicAiApi = createApi({
   reducerPath: 'musicAiApi',

@@ -10,10 +10,7 @@ export const songApiEndpoints = musicAiApi.injectEndpoints({
     getSongById: builder.query<SongResponse, number>({
       query: (id) => `/song/${id}`,
     }),
-    createSong: builder.mutation<
-      SongResponse,
-      Partial<Song>
-    >({
+    createSong: builder.mutation<SongResponse, Partial<Song>>({
       query: (song) => ({
         url: '/song',
         method: 'POST',

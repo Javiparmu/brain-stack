@@ -16,12 +16,7 @@ export const HowItWorks: FC = () => {
         py="10"
         rounded="lg"
       >
-        <Box
-          fontSize="4xl"
-          fontWeight="bold"
-          textAlign="center"
-          mb="10"
-        >
+        <Box fontSize="4xl" fontWeight="bold" textAlign="center" mb="10">
           How it works
         </Box>
         <Box
@@ -41,11 +36,7 @@ export const HowItWorks: FC = () => {
               boxShadow="md"
             />
           </Box>
-          <Box
-            className="hiw-text hidden"
-            zIndex={-1}
-            marginLeft={6}
-          >
+          <Box className="hiw-text hidden" zIndex={-1} marginLeft={6}>
             <Box
               as="h3"
               fontSize="2xl"
@@ -55,15 +46,11 @@ export const HowItWorks: FC = () => {
             >
               1. Create a song
             </Box>
-            <Box
-              as="p"
-              textAlign={{ base: 'center', md: 'left' }}
-            >
-              You can create a song by describing it in
-              words. You can also upload an audio file to
-              use as the song base melody or even use our
-              selectors to choose the genre, mood and
-              instrument of your generated song.
+            <Box as="p" textAlign={{ base: 'center', md: 'left' }}>
+              You can create a song by describing it in words. You can also
+              upload an audio file to use as the song base melody or even use
+              our selectors to choose the genre, mood and instrument of your
+              generated song.
             </Box>
             <Box
               as="h3"
@@ -75,13 +62,9 @@ export const HowItWorks: FC = () => {
             >
               2. Download & share
             </Box>
-            <Box
-              as="p"
-              textAlign={{ base: 'center', md: 'left' }}
-            >
-              Download your song and share it with your
-              friends. You can use it as the base from your
-              next song.
+            <Box as="p" textAlign={{ base: 'center', md: 'left' }}>
+              Download your song and share it with your friends. You can use it
+              as the base from your next song.
             </Box>
             <Box
               as="h3"
@@ -93,13 +76,9 @@ export const HowItWorks: FC = () => {
             >
               3. Manage your songs
             </Box>
-            <Box
-              as="p"
-              textAlign={{ base: 'center', md: 'left' }}
-            >
-              See the list of all your songs and manage them
-              from your profile page. Regenerate any song or
-              download it from there.
+            <Box as="p" textAlign={{ base: 'center', md: 'left' }}>
+              See the list of all your songs and manage them from your profile
+              page. Regenerate any song or download it from there.
             </Box>
           </Box>
         </Box>

@@ -24,9 +24,7 @@ export const S3UploadFile = async (
   }
 };
 
-export const S3DeleteFile = async (
-  filepath: string,
-): Promise<any> => {
+export const S3DeleteFile = async (filepath: string): Promise<any> => {
   const s3 = new ReactS3Client(config);
 
   try {

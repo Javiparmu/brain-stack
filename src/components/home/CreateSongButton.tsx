@@ -1,9 +1,4 @@
-import {
-  Box,
-  Button,
-  Text,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import { Box, Button, Text, useColorModeValue } from '@chakra-ui/react';
 import React, { FC } from 'react';
 
 export const CreateSongButton: FC = () => {
@@ -61,10 +56,7 @@ export const CreateSongButton: FC = () => {
       >
         Start creating
       </Button>
-      <Box
-        display={{ base: 'none', md: 'flex' }}
-        flexDir="row"
-      >
+      <Box display={{ base: 'none', md: 'flex' }} flexDir="row">
         <Text
           className="scroll"
           textAlign={{ base: 'center', md: 'left' }}

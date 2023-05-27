@@ -40,11 +40,7 @@ const FileUpload: FC<FileUploadProps> = ({
   });
 
   return (
-    <FormControl
-      isInvalid={invalid}
-      isRequired
-      style={{ ...style }}
-    >
+    <FormControl isInvalid={invalid} isRequired style={{ ...style }}>
       <InputGroup>
         <InputLeftElement pointerEvents="none" top={1}>
           <Icon as={MdMusicNote} />

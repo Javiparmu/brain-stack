@@ -15,17 +15,14 @@ import { useCreateSongMutation } from '../../redux/endpoints/song';
 import { HomeStyles as styles } from '../../styles/HomeStyles';
 
 export const SongFromDescription: FC = () => {
-  const [generateInput, setGenerateInput] =
-    useState<string>('');
+  const [generateInput, setGenerateInput] = useState<string>('');
   const user = useAppSelector(selectCurrentUser);
 
-  const [createSong, { data: song, isLoading }] =
-    useCreateSongMutation();
+  const [createSong, { data: song, isLoading }] = useCreateSongMutation();
 
   const onGenerateInputChange = (e: any) => {
     setGenerateInput(
-      e.target.value.charAt(0).toUpperCase() +
-        e.target.value.slice(1),
+      e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1),
     );
   };
 
@@ -60,9 +57,7 @@ export const SongFromDescription: FC = () => {
           _placeholder={{
             color: placeHolderColor,
           }}
-          textColor={
-            theme.colors.primaryFontColor.lightMode
-          }
+          textColor={theme.colors.primaryFontColor.lightMode}
           variant="outlined"
           value={generateInput}
           onChange={onGenerateInputChange}
@@ -86,12 +81,7 @@ export const SongFromDescription: FC = () => {
             marginTop: '40px',
           }}
         >
-          <img
-            src="/images/loading.svg"
-            alt="loading"
-            width="50"
-            height="50"
-          />
+          <img src="/images/loading.svg" alt="loading" width="50" height="50" />
         </Box>
       ) : (
         <Fade

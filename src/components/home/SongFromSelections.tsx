@@ -1,9 +1,4 @@
-import {
-  Box,
-  Button,
-  Fade,
-  Select,
-} from '@chakra-ui/react';
+import { Box, Button, Fade, Select } from '@chakra-ui/react';
 import { useState } from 'react';
 import ReactAudioPlayer from 'react-audio-player';
 import { useAppSelector } from '../../store/hooks';
@@ -11,18 +6,13 @@ import { selectCurrentUser } from '../../redux/auth/authSlice';
 import { useCreateSongMutation } from '../../redux/endpoints/song';
 import { HomeStyles as styles } from '../../styles/HomeStyles';
 import { MdArrowDropDown } from 'react-icons/md';
-import {
-  genres,
-  instruments,
-  moods,
-} from '../../utils/constants';
+import { genres, instruments, moods } from '../../utils/constants';
 
 export const SongFromSelections = (): JSX.Element => {
   const [generateInput] = useState<string>('');
   const user = useAppSelector(selectCurrentUser);
 
-  const [createSong, { data: song, isLoading }] =
-    useCreateSongMutation();
+  const [createSong, { data: song, isLoading }] = useCreateSongMutation();
 
   const onGenerateSong = async () => {
     if (generateInput !== '' && user) {
@@ -106,12 +96,7 @@ export const SongFromSelections = (): JSX.Element => {
             marginTop: '40px',
           }}
         >
-          <img
-            src="/images/loading.svg"
-            alt="loading"
-            width="50"
-            height="50"
-          />
+          <img src="/images/loading.svg" alt="loading" width="50" height="50" />
         </Box>
       ) : (
         <Fade

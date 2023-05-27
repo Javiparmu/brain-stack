@@ -7,21 +7,14 @@ import {
 } from '@chakra-ui/react';
 import React, { FC } from 'react';
 import { SocialButton } from './SocialButton';
-import {
-  FaInstagram,
-  FaTwitter,
-  FaYoutube,
-} from 'react-icons/fa';
+import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 
 export const Footer: FC = () => {
   return (
     <Box
       borderTopWidth={1}
       borderStyle={'solid'}
-      borderColor={useColorModeValue(
-        'gray.200',
-        'gray.700',
-      )}
+      borderColor={useColorModeValue('gray.200', 'gray.700')}
     >
       <Container
         as={Stack}

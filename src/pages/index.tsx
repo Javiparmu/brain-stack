@@ -1,9 +1,5 @@
-import { useEffect } from 'react';
-import {
-  Box,
-  GridItem,
-  SimpleGrid,
-} from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import { Box, GridItem, SimpleGrid } from '@chakra-ui/react';
 import {
   HowItWorks,
   MainHeader,
@@ -19,20 +15,24 @@ import { User } from '@/interfaces/users';
 import { createObservers } from '@/utils/helpers';
 import { NextPage } from 'next';
 
+const gridSpace = {
+  base: '2vh',
+  md: '4vh',
+  lg: '6vh',
+};
+
 const Home: NextPage = () => {
+  const [user, setUser] = useState<User>({} as User);
+  const [token, setToken] = useState<string>('');
+
   const dispatch = useDispatch();
 
-  let user: User = {} as User;
-  let token = '';
-
-  if (typeof window !== 'undefined') {
-    user = JSON.parse(
-      localStorage.getItem('user') || 'null',
-    );
-    token = localStorage.getItem('token') || '';
-  }
-
   useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setUser(JSON.parse(localStorage.getItem('user') || 'null'));
+      setToken(localStorage.getItem('token') || '');
+    }
+
     dispatch(setCurrentUser({ user, token }));
     createObservers();
   }, [token, user]);
@@ -42,18 +42,9 @@ const Home: NextPage = () => {
       <Box>
         <Box>
           <SimpleGrid
-            marginTop={{
-              base: '2vh',
-              md: '4vh',
-              lg: '6vh',
-            }}
-            rowGap={{
-              base: '2vh',
-              md: '4vh',
-              lg: '6vh',
-            }}
-            pl={{ base: '6vw', md: '8vw', lg: '16vw' }}
-            pr={{ base: '6vw', md: '8vw', lg: '16vw' }}
+            marginTop={gridSpace}
+            rowGap={gridSpace}
+            px={{ base: '6vw', md: '8vw', lg: '16vw' }}
           >
             <GridItem>
               <MainHeader />

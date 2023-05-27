@@ -23,15 +23,9 @@ export const SideBarItem: FC<SideBarItemProps> = ({
       flexDir="row"
       w={navSize === 'small' ? '100%' : '100%'}
       bgColor={active ? '#b9bbf0' : '#fafafa'}
-      borderTopRightRadius={
-        active && navSize === 'large' ? '30px' : '0px'
-      }
-      borderBottomRightRadius={
-        active && navSize === 'large' ? '30px' : '0px'
-      }
-      justifyContent={
-        navSize === 'small' ? 'center' : 'flex-start'
-      }
+      borderTopRightRadius={active && navSize === 'large' ? '30px' : '0px'}
+      borderBottomRightRadius={active && navSize === 'large' ? '30px' : '0px'}
+      justifyContent={navSize === 'small' ? 'center' : 'flex-start'}
       align="center"
       p={4}
       _hover={{
@@ -39,11 +33,7 @@ export const SideBarItem: FC<SideBarItemProps> = ({
       }}
       onClick={onClick}
     >
-      <Icon
-        as={icon}
-        fontSize="24"
-        color={active ? 'gray.700' : 'gray.500'}
-      />
+      <Icon as={icon} fontSize="24" color={active ? 'gray.700' : 'gray.500'} />
       <Text
         ml={4}
         fontSize="md"

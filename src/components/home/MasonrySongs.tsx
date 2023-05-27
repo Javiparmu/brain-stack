@@ -22,13 +22,7 @@ export const MasonrySongs: FC = () => {
             alt="song image preview"
             objectFit="cover"
           />
-          <Center
-            position="absolute"
-            top="0"
-            bottom="0"
-            left="0"
-            right="0"
-          >
+          <Center position="absolute" top="0" bottom="0" left="0" right="0">
             <AudioPlayer song={song} />
           </Center>
         </Box>

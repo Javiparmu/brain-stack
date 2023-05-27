@@ -4,10 +4,7 @@ import { FC } from 'react';
 
 export const Profile: FC = () => {
   return (
-    <Box
-      pl={{ base: 0, md: '16vw' }}
-      pr={{ base: 0, md: '16vw' }}
-    >
+    <Box pl={{ base: 0, md: '16vw' }} pr={{ base: 0, md: '16vw' }}>
       <SideBar />
     </Box>
   );

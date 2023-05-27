@@ -12,8 +12,7 @@ export const SongFromMelody = (): JSX.Element => {
   const [generateInput] = useState<string>('');
   const user = useAppSelector(selectCurrentUser);
 
-  const [createSong, { data: song, isLoading }] =
-    useCreateSongMutation();
+  const [createSong, { data: song, isLoading }] = useCreateSongMutation();
 
   const { control } = useForm({
     defaultValues: {
@@ -63,12 +62,7 @@ export const SongFromMelody = (): JSX.Element => {
             marginTop: '40px',
           }}
         >
-          <img
-            src="/images/loading.svg"
-            alt="loading"
-            width="50"
-            height="50"
-          />
+          <img src="/images/loading.svg" alt="loading" width="50" height="50" />
         </Box>
       ) : (
         <Fade

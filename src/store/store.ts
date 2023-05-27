@@ -1,8 +1,4 @@
-import {
-  configureStore,
-  ThunkAction,
-  Action,
-} from '@reduxjs/toolkit';
+import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import { musicAiApi } from '../redux/api/apiSlice';
 import auth from '../redux/auth/authSlice';

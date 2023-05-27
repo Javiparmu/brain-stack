@@ -16,23 +16,11 @@ export const Pricing: FC = () => {
   return (
     <Box className="hidden" as="section">
       <Box maxW="7xl" mx="auto" px={{ base: '6', md: '8' }}>
-        <Box
-          fontSize="4xl"
-          fontWeight="bold"
-          textAlign="center"
-          mb="10"
-        >
+        <Box fontSize="4xl" fontWeight="bold" textAlign="center" mb="10">
           Pricing
         </Box>
-        <SimpleGrid
-          columns={{ base: 1, md: 3 }}
-          spacing="10"
-        >
-          <Card
-            className="hidden"
-            borderRadius={10}
-            boxShadow="md"
-          >
+        <SimpleGrid columns={{ base: 1, md: 3 }} spacing="10">
+          <Card className="hidden" borderRadius={10} boxShadow="md">
             <CardBody>
               <Stack spacing="4">
                 <Box textAlign="center">
@@ -45,44 +33,20 @@ export const Pricing: FC = () => {
                 </Box>
                 <Divider />
                 <Stack spacing="4">
-                  <Box
-                    display="flex"
-                    flexDir="row"
-                    alignItems="center"
-                  >
+                  <Box display="flex" flexDir="row" alignItems="center">
                     <CheckIcon color="green.500" mr="2" />
                     <Text>5 songs per month</Text>
                   </Box>
-                  <Box
-                    display="flex"
-                    flexDir="row"
-                    alignItems="center"
-                  >
+                  <Box display="flex" flexDir="row" alignItems="center">
                     <CheckIcon color="green.500" mr="2" />
                     <Text>List of your songs</Text>
                   </Box>
-                  <Box
-                    display="flex"
-                    flexDir="row"
-                    alignItems="center"
-                  >
-                    <CloseIcon
-                      color="red.500"
-                      mr="2"
-                      boxSize={3}
-                    />
+                  <Box display="flex" flexDir="row" alignItems="center">
+                    <CloseIcon color="red.500" mr="2" boxSize={3} />
                     <Text>Regenerate songs</Text>
                   </Box>
-                  <Box
-                    display="flex"
-                    flexDir="row"
-                    alignItems="center"
-                  >
-                    <CloseIcon
-                      color="red.500"
-                      mr="2"
-                      boxSize={3}
-                    />
+                  <Box display="flex" flexDir="row" alignItems="center">
+                    <CloseIcon color="red.500" mr="2" boxSize={3} />
                     <Text>Recommended inputs</Text>
                   </Box>
                 </Stack>
@@ -110,11 +74,7 @@ export const Pricing: FC = () => {
               </Button>
             </CardFooter>
           </Card>
-          <Card
-            className="second-card hidden"
-            borderRadius={10}
-            boxShadow="md"
-          >
+          <Card className="second-card hidden" borderRadius={10} boxShadow="md">
             <CardBody>
               <Stack spacing="4">
                 <Box textAlign="center">
@@ -127,40 +87,20 @@ export const Pricing: FC = () => {
                 </Box>
                 <Divider />
                 <Stack spacing="4">
-                  <Box
-                    display="flex"
-                    flexDir="row"
-                    alignItems="center"
-                  >
+                  <Box display="flex" flexDir="row" alignItems="center">
                     <CheckIcon color="green.500" mr="2" />
                     <Text>12 songs per month</Text>
                   </Box>
-                  <Box
-                    display="flex"
-                    flexDir="row"
-                    alignItems="center"
-                  >
+                  <Box display="flex" flexDir="row" alignItems="center">
                     <CheckIcon color="green.500" mr="2" />
                     <Text>List of your songs</Text>
                   </Box>
-                  <Box
-                    display="flex"
-                    flexDir="row"
-                    alignItems="center"
-                  >
+                  <Box display="flex" flexDir="row" alignItems="center">
                     <CheckIcon color="green.500" mr="2" />
                     <Text>Regenerate songs</Text>
                   </Box>
-                  <Box
-                    display="flex"
-                    flexDir="row"
-                    alignItems="center"
-                  >
-                    <CloseIcon
-                      color="red.500"
-                      mr="2"
-                      boxSize={3}
-                    />
+                  <Box display="flex" flexDir="row" alignItems="center">
+                    <CloseIcon color="red.500" mr="2" boxSize={3} />
                     <Text>Recommended inputs</Text>
                   </Box>
                 </Stack>
@@ -188,11 +128,7 @@ export const Pricing: FC = () => {
               </Button>
             </CardFooter>
           </Card>
-          <Card
-            className="third-card hidden"
-            borderRadius={10}
-            boxShadow="md"
-          >
+          <Card className="third-card hidden" borderRadius={10} boxShadow="md">
             <CardBody>
               <Stack spacing="4">
                 <Box textAlign="center">
@@ -205,35 +141,19 @@ export const Pricing: FC = () => {
                 </Box>
                 <Divider />
                 <Stack spacing="4">
-                  <Box
-                    display="flex"
-                    flexDir="row"
-                    alignItems="center"
-                  >
+                  <Box display="flex" flexDir="row" alignItems="center">
                     <CheckIcon color="green.500" mr="2" />
                     <Text>30 songs per month</Text>
                   </Box>
-                  <Box
-                    display="flex"
-                    flexDir="row"
-                    alignItems="center"
-                  >
+                  <Box display="flex" flexDir="row" alignItems="center">
                     <CheckIcon color="green.500" mr="2" />
                     <Text>List of your songs</Text>
                   </Box>
-                  <Box
-                    display="flex"
-                    flexDir="row"
-                    alignItems="center"
-                  >
+                  <Box display="flex" flexDir="row" alignItems="center">
                     <CheckIcon color="green.500" mr="2" />
                     <Text>Regenerate songs</Text>
                   </Box>
-                  <Box
-                    display="flex"
-                    flexDir="row"
-                    alignItems="center"
-                  >
+                  <Box display="flex" flexDir="row" alignItems="center">
                     <CheckIcon color="green.500" mr="2" />
                     <Text>Recommended inputs</Text>
                   </Box>

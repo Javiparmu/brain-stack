@@ -13,32 +13,20 @@ import {
 } from '@chakra-ui/react';
 import { AddIcon, MinusIcon } from '@chakra-ui/icons';
 import { MainLayout } from '@/components';
-import {
-  Category,
-  CategoryGroup,
-  TagItem,
-  categoryOptions,
-} from '@/utils';
+import { Category, CategoryGroup, TagItem, categoryOptions } from '@/utils';
 import { SongCategory } from '@/utils/enums';
 
 const SongGeneratorPage: FC = () => {
   const [prompt, setPrompt] = useState<string>('');
-  const [categoryGroups, setCategoryGroups] = useState<
-    CategoryGroup[]
-  >([]);
+  const [categoryGroups, setCategoryGroups] = useState<CategoryGroup[]>([]);
 
-  const handlePromptChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => setPrompt(event.target.value);
+  const handlePromptChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setPrompt(event.target.value);
 
-  const handleAddOrRemoveCategory = (
-    category: Category,
-  ) => {
+  const handleAddOrRemoveCategory = (category: Category) => {
     setCategoryGroups((prevState) =>
       prevState.some((group) => group.category === category)
-        ? prevState.filter(
-            (group) => group.category !== category,
-          )
+        ? prevState.filter((group) => group.category !== category)
         : [...prevState, { category, tags: [] }],
     );
   };
@@ -53,18 +41,13 @@ const SongGeneratorPage: FC = () => {
     );
   };
 
-  const handleRemoveTag = (
-    category: Category,
-    tagToRemove: TagItem,
-  ) => {
+  const handleRemoveTag = (category: Category, tagToRemove: TagItem) => {
     setCategoryGroups((prevState) =>
       prevState.map((group) =>
         group.category === category
           ? {
               ...group,
-              tags: group.tags.filter(
-                (tag) => tag !== tagToRemove,
-              ),
+              tags: group.tags.filter((tag) => tag !== tagToRemove),
             }
           : group,
       ),
@@ -84,11 +67,7 @@ const SongGeneratorPage: FC = () => {
         pl={{ base: '6vw', md: '8vw', lg: '16vw' }}
         pr={{ base: '6vw', md: '8vw', lg: '16vw' }}
       >
-        <Flex
-          justifyContent="flex-start"
-          width="50%"
-          columnGap={5}
-        >
+        <Flex justifyContent="flex-start" width="50%" columnGap={5}>
           <Input
             placeholder="Introduce el prompt"
             height="60px"
@@ -101,15 +80,12 @@ const SongGeneratorPage: FC = () => {
         </Flex>
         <HStack>
           <Button
-            onClick={() =>
-              handleAddOrRemoveCategory(SongCategory.GENRE)
-            }
+            onClick={() => handleAddOrRemoveCategory(SongCategory.GENRE)}
             colorScheme="blue"
           >
             <HStack spacing={1}>
               {categoryGroups.some(
-                (group) =>
-                  group.category === SongCategory.GENRE,
+                (group) => group.category === SongCategory.GENRE,
               ) ? (
                 <MinusIcon />
               ) : (
@@ -119,15 +95,12 @@ const SongGeneratorPage: FC = () => {
             </HStack>
           </Button>
           <Button
-            onClick={() =>
-              handleAddOrRemoveCategory(SongCategory.MOOD)
-            }
+            onClick={() => handleAddOrRemoveCategory(SongCategory.MOOD)}
             colorScheme="blue"
           >
             <HStack spacing={1}>
               {categoryGroups.some(
-                (group) =>
-                  group.category === SongCategory.MOOD,
+                (group) => group.category === SongCategory.MOOD,
               ) ? (
                 <MinusIcon />
               ) : (
@@ -137,18 +110,12 @@ const SongGeneratorPage: FC = () => {
             </HStack>
           </Button>
           <Button
-            onClick={() =>
-              handleAddOrRemoveCategory(
-                SongCategory.INSTRUMENT,
-              )
-            }
+            onClick={() => handleAddOrRemoveCategory(SongCategory.INSTRUMENT)}
             colorScheme="blue"
           >
             <HStack spacing={1}>
               {categoryGroups.some(
-                (group) =>
-                  group.category ===
-                  SongCategory.INSTRUMENT,
+                (group) => group.category === SongCategory.INSTRUMENT,
               ) ? (
                 <MinusIcon />
               ) : (
@@ -165,17 +132,13 @@ const SongGeneratorPage: FC = () => {
                 placeholder={`Add a ${group.category}`}
                 value={`Add a ${group.category}`}
                 width="250px"
-                onChange={(e) =>
-                  handleAddTag(e.target.value, index)
-                }
+                onChange={(e) => handleAddTag(e.target.value, index)}
               >
-                {categoryOptions[group.category].map(
-                  (option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ),
-                )}
+                {categoryOptions[group.category].map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
               </Select>
             </Flex>
 
@@ -190,9 +153,7 @@ const SongGeneratorPage: FC = () => {
                 >
                   <TagLabel>{tag}</TagLabel>
                   <TagCloseButton
-                    onClick={() =>
-                      handleRemoveTag(group.category, tag)
-                    }
+                    onClick={() => handleRemoveTag(group.category, tag)}
                   />
                 </Tag>
               ))}

@@ -1,83 +1,41 @@
 import {
   Box,
-  Button,
   FormControl,
   FormHelperText,
   FormLabel,
-  IconButton,
-  Input,
   InputGroup,
   InputRightElement,
-  SimpleGrid,
   Text,
-  useColorModeValue,
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
-import theme from '../theme/theme';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import { useState } from 'react';
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useLoginUserMutation } from '../redux/endpoints/user';
 import { setCurrentUser } from '../redux/auth/authSlice';
 import { useDispatch } from 'react-redux';
-import { Image, Link } from '@chakra-ui/next-js';
 import { MainLayout } from '@/components/layouts';
 import { NextPage } from 'next';
-
-type FormValues = {
-  email: string;
-  password: string;
-};
-
-const schema = yup.object({
-  email: yup.string().required('Please enter an email.'),
-  password: yup
-    .string()
-    .required('Please enter a password.')
-    .min(8, 'Password too short.')
-    .test(
-      'Password is strong enough.',
-      'Password must contain lowercase, uppercase and number.',
-      (value: string) => {
-        const hasUpperCase = /[A-Z]/.test(value);
-        const hasLowerCase = /[a-z]/.test(value);
-        const hasNumber = /[0-9]/.test(value);
-        let validConditions = 0;
-        const numberOfMustBeValidConditions = 3;
-        const conditions = [
-          hasLowerCase,
-          hasUpperCase,
-          hasNumber,
-        ];
-        conditions.forEach((condition) =>
-          condition ? validConditions++ : null,
-        );
-        if (
-          validConditions >= numberOfMustBeValidConditions
-        ) {
-          return true;
-        }
-        return false;
-      },
-    ),
-});
+import { loginSchema } from '@/utils/schemas';
+import { LoginFormValues } from '@/utils';
+import { AuthContainer } from '@/components/auth/AuthContainer';
+import { LoginButtons } from '@/components/auth/LoginButtons';
+import { VisibilityButton } from '@/components/auth/VisibilityButton';
+import { AuthInput } from '@/components/auth/AuthInput';
 
 const Login: NextPage = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>({
-    resolver: yupResolver(schema),
+  } = useForm<LoginFormValues>({
+    resolver: yupResolver(loginSchema),
   });
   const dispatch = useDispatch();
-  const [passwordVisible, setPasswordVisible] =
-    useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const [loginUser] = useLoginUserMutation();
 
-  const onSubmit = async (data: FormValues) => {
+  const onSubmit = async (data: LoginFormValues) => {
     try {
       const response = await loginUser(data);
 
@@ -86,211 +44,53 @@ const Login: NextPage = () => {
         dispatch(setCurrentUser(data.result));
         if (typeof window !== undefined) {
           localStorage.setItem('token', data.result.token);
-          localStorage.setItem(
-            'user',
-            JSON.stringify(data.result.user),
-          );
+          localStorage.setItem('user', JSON.stringify(data.result.user));
         }
         window.location.href = '/';
       }
     } catch (error) {
-      console.log(error);
       alert('Something went wrong');
     }
   };
   return (
     <MainLayout>
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <SimpleGrid
-          bgColor={useColorModeValue(
-            'gray.100',
-            'gray.800',
-          )}
-          width={{ base: '90vw', md: '55vw' }}
-          borderRadius={15}
-          columns={{ base: 1, md: 2 }}
-          mt={{ base: '2vh', md: '6vh' }}
-        >
-          <Box display={{ base: 'none', md: 'flex' }}>
-            <Image
-              borderRadius={{
-                base: '20px 20px 0 0',
-                md: '20px 0 0 20px',
-              }}
-              src="/images/login_image.jpg"
-              alt="signUp image"
-              width={400}
-              height={400}
-              boxSize={{ base: 200, md: 500 }}
-              rotate={{ base: '90', md: '0' }}
-              objectFit={'cover'}
+      <Box display="flex" justifyContent="center" alignItems="center">
+        <AuthContainer onSubmit={handleSubmit(onSubmit)}>
+          <Text fontSize="3xl" fontWeight="bold">
+            Login
+          </Text>
+          <FormControl id="email" mb={5} mt={10} isInvalid={!!errors?.email}>
+            <FormLabel htmlFor="email">Email</FormLabel>
+            <AuthInput
+              type="email"
+              placeholder="Enter email"
+              {...register('email')}
             />
-          </Box>
-          <Box
-            p={10}
-            m={{ base: '0', md: '5' }}
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'flex-start',
-              alignItems: 'center',
-            }}
-            as="form"
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <Text fontSize="3xl" fontWeight="bold">
-              Login
-            </Text>
-            <FormControl
-              id="email"
-              mb={5}
-              mt={10}
-              isInvalid={!!errors?.email}
-            >
-              <FormLabel
-                htmlFor="email"
-                fontFamily={'Roboto'}
-              >
-                Email
-              </FormLabel>
-              <Input
-                fontFamily={'Roboto'}
-                type="email"
-                placeholder="Enter email"
-                bgColor={useColorModeValue(
-                  '#ffffff',
-                  '#202023',
-                )}
-                focusBorderColor={theme.colors.primary}
-                _hover={{
-                  borderColor: theme.colors.primary,
-                }}
-                _autofill={{
-                  WebkitBoxShadow: `0 0 0 1000px ${useColorModeValue(
-                    '#ffffff',
-                    '#202023',
-                  )} inset`,
-                }}
-                {...register('email')}
+            <FormHelperText color="red.500">
+              {errors.email?.message}
+            </FormHelperText>
+          </FormControl>
+          <FormControl id="password" mb={10} isInvalid={!!errors?.password}>
+            <FormLabel htmlFor="password">Password</FormLabel>
+            <InputGroup>
+              <AuthInput
+                type={passwordVisible ? 'text' : 'password'}
+                placeholder="Enter password"
+                {...register('password')}
               />
-              <FormHelperText color="red.500">
-                {errors.email?.message}
-              </FormHelperText>
-            </FormControl>
-            <FormControl
-              id="password"
-              mb={10}
-              isInvalid={!!errors?.password}
-            >
-              <FormLabel
-                htmlFor="password"
-                fontFamily={'Roboto'}
-              >
-                Password
-              </FormLabel>
-              <InputGroup>
-                <Input
-                  fontFamily={'Roboto'}
-                  type={
-                    passwordVisible ? 'text' : 'password'
-                  }
-                  placeholder="Enter password"
-                  bgColor={useColorModeValue(
-                    '#ffffff',
-                    '#202023',
-                  )}
-                  focusBorderColor={theme.colors.primary}
-                  _hover={{
-                    borderColor: theme.colors.primary,
-                  }}
-                  _autofill={{
-                    WebkitBoxShadow: `0 0 0 1000px ${useColorModeValue(
-                      '#ffffff',
-                      '#202023',
-                    )} inset`,
-                  }}
-                  {...register('password')}
+              <InputRightElement width="4.5rem">
+                <VisibilityButton
+                  passwordVisible={passwordVisible}
+                  onClick={() => setPasswordVisible(!passwordVisible)}
                 />
-                <InputRightElement width="4.5rem">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    color={useColorModeValue(
-                      'gray.500',
-                      'gray.200',
-                    )}
-                    icon={
-                      passwordVisible ? (
-                        <ViewIcon
-                          color={'gray.500'}
-                          boxSize={5}
-                          _hover={{ color: 'gray.400' }}
-                        />
-                      ) : (
-                        <ViewOffIcon
-                          color={'gray.500'}
-                          boxSize={5}
-                          _hover={{ color: 'gray.400' }}
-                        />
-                      )
-                    }
-                    variant="ghost"
-                    type="button"
-                    onClick={() =>
-                      setPasswordVisible(!passwordVisible)
-                    }
-                    _hover={{
-                      bgColor: 'transparent',
-                    }}
-                  />
-                </InputRightElement>
-              </InputGroup>
-              <FormHelperText color="red.500">
-                {errors.password?.message}
-              </FormHelperText>
-            </FormControl>
-            <Box
-              gap={10}
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: '100%',
-              }}
-            >
-              <Button
-                flex={1}
-                type="button"
-                as={Link}
-                href="/signup"
-                fontWeight={400}
-                pr={5}
-                pl={5}
-                bgColor={theme.colors.primary}
-                color={'white'}
-                _hover={{ bgColor: '#7e82cf' }}
-              >
-                Register
-              </Button>
-              <Button
-                flex={1}
-                type="submit"
-                fontWeight={400}
-                pr={5}
-                pl={5}
-                bgColor={theme.colors.primary}
-                color={'white'}
-                _hover={{ bgColor: '#7e82cf' }}
-              >
-                Login
-              </Button>
-            </Box>
-          </Box>
-        </SimpleGrid>
+              </InputRightElement>
+            </InputGroup>
+            <FormHelperText color="red.500">
+              {errors.password?.message}
+            </FormHelperText>
+          </FormControl>
+          <LoginButtons />
+        </AuthContainer>
       </Box>
     </MainLayout>
   );

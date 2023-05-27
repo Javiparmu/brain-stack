@@ -1,7 +1,4 @@
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-} from '@chakra-ui/icons';
+import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import {
   Box,
   Text,
@@ -78,10 +75,7 @@ export const SongGeneratorSlider: FC = () => {
             }}
             onClick={() => slider?.slickPrev()}
           />
-          <Slider
-            {...settings}
-            ref={(slider) => setSlider(slider)}
-          >
+          <Slider {...settings} ref={(slider) => setSlider(slider)}>
             {texts.map((text, index) => {
               console.log('index', index);
               return (
@@ -91,10 +85,7 @@ export const SongGeneratorSlider: FC = () => {
                     ...styles.createSongContainer,
                   }}
                 >
-                  <Text
-                    textAlign="center"
-                    style={styles.createSongTitle}
-                  >
+                  <Text textAlign="center" style={styles.createSongTitle}>
                     {text}
                   </Text>
                   {index === 0 && <SongFromDescription />}

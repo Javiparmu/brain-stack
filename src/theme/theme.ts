@@ -1,8 +1,4 @@
-import {
-  baseTheme,
-  extendTheme,
-  type ThemeConfig,
-} from '@chakra-ui/react';
+import { baseTheme, extendTheme, type ThemeConfig } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
 
 const styles = {
@@ -37,7 +33,7 @@ const components = {
       textUnderlineOffset: 10,
       fontSize: 20,
       _hover: {
-        color: colors.primary,
+        textDecoration: 'none',
       },
     }),
   },
@@ -102,6 +98,7 @@ const colors = {
     darkMode: baseTheme.colors.gray['400'],
   },
   primary: '#676BB9',
+  primaryDark: '#90CDF4',
   buttonColor: {
     lightMode: '#1E1D30',
     darkMode: '#FFFFFF',

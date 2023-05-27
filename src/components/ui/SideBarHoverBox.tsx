@@ -1,9 +1,4 @@
-import {
-  Flex,
-  Heading,
-  Text,
-  Icon,
-} from '@chakra-ui/react';
+import { Flex, Heading, Text, Icon } from '@chakra-ui/react';
 import React, { FC } from 'react';
 
 interface SideBarHoverBoxProps {
