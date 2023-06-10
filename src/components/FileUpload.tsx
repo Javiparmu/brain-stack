@@ -30,8 +30,9 @@ const FileUpload: FC<FileUploadProps> = ({
   style,
 }) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
+
   const {
-    field: { onChange, value, ...inputProps },
+    field: { onChange, value },
     fieldState: { invalid, error },
   } = useController({
     name,
@@ -46,15 +47,15 @@ const FileUpload: FC<FileUploadProps> = ({
           <Icon as={MdMusicNote} />
         </InputLeftElement>
         <input
+          ref={inputRef}
           type="file"
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           onChange={(e: any) => {
             onChange(e?.target?.files[0]);
           }}
           accept={acceptedFileTypes}
-          {...inputProps}
           style={{ display: 'none' }}
-        ></input>
+        />
         <Input
           placeholder={placeholder || 'Your file...'}
           onClick={() => inputRef?.current?.click()}
@@ -62,10 +63,7 @@ const FileUpload: FC<FileUploadProps> = ({
           borderColor="gray.400"
           _hover={{ borderColor: 'gray.500' }}
           _focus={{ borderColor: 'gray.700' }}
-          height="48px"
-          borderTopRightRadius={0}
-          borderBottomRightRadius={0}
-          bgColor={'white'}
+          height="50px"
         />
       </InputGroup>
       <FormErrorMessage>{error?.message}</FormErrorMessage>

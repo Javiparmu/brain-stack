@@ -1,12 +1,17 @@
-import { Box, Image } from '@chakra-ui/react';
+import { Image } from '@chakra-ui/next-js';
+import { Box } from '@chakra-ui/react';
 import { FC } from 'react';
 
-export const HowItWorks: FC = () => {
+interface HowItWorksProps {
+  show?: boolean;
+}
+
+export const HowItWorks: FC<HowItWorksProps> = ({ show = false }) => {
   return (
     <Box
       as="section"
       id="how-it-works"
-      className="hidden"
+      className={show ? '' : 'hidden'}
       px={{ base: '4', md: '8' }}
     >
       <Box
@@ -27,16 +32,21 @@ export const HowItWorks: FC = () => {
           }}
           gridGap="8"
         >
-          <Box className="hiw-image hidden">
+          <Box className={'hiw-image' + show ? '' : 'hidden'}>
             <Image
               src="/images/how-it-works.png"
               alt="how it works"
               borderRadius={{ base: '10px', md: '15px' }}
-              width={{ base: '80vw', md: '35vw' }}
+              width={600}
+              height={400}
               boxShadow="md"
             />
           </Box>
-          <Box className="hiw-text hidden" zIndex={-1} marginLeft={6}>
+          <Box
+            className={'hiw-text' + show ? '' : 'hidden'}
+            zIndex={-1}
+            marginLeft={6}
+          >
             <Box
               as="h3"
               fontSize="2xl"

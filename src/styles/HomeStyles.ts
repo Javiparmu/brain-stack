@@ -1,3 +1,5 @@
+import theme from '@/theme/theme';
+
 export const HomeStyles = {
   astronaut: {
     display: 'flex',
@@ -12,8 +14,6 @@ export const HomeStyles = {
     marginTop: '3vh',
   },
   createSongInputContainer: {
-    display: 'flex',
-    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: '3vh',
@@ -25,15 +25,13 @@ export const HomeStyles = {
     borderBottomRightRadius: '0px',
   },
   createSongInputButton: {
-    borderColor: '#676BB9',
-    backgroundColor: '#676BB9',
-    color: '#FFFFFF',
+    backgroundColor: theme.colors.primary,
+    padding: '0px 25px',
+    marginTop: '2vh',
+    marginBottom: '5vh',
+    color: theme.colors.white,
     height: '48px',
-    borderTopRightRadius: '5px',
-    borderBottomRightRadius: '5px',
-    borderTopLeftRadius: '0px',
-    borderBottomLeftRadius: '0px',
-    fontWeight: '500',
+    borderRadius: '25px',
   },
   audioPlayerContainer: {
     marginTop: '40px',

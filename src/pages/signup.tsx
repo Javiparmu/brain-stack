@@ -10,18 +10,16 @@ import {
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
-import { useRegisterUserMutation } from '../redux/endpoints/user';
-import { User } from '../interfaces/users';
-import { setCurrentUser } from '../redux/auth/authSlice';
-import { useAppDispatch } from '../store/hooks';
-import { MainLayout } from '@/components/layouts';
+import {
+  MainLayout,
+  AuthContainer,
+  RegisterButtons,
+  AuthInput,
+  VisibilityButton,
+} from '@/components';
 import { NextPage } from 'next';
 import { registerSchema } from '@/utils/schemas';
 import { RegisterFormValues } from '@/utils';
-import { AuthContainer } from '@/components/auth/AuthContainer';
-import { RegisterButtons } from '@/components/auth/RegisterButtons';
-import { AuthInput } from '@/components/auth/AuthInput';
-import { VisibilityButton } from '@/components/auth/VisibilityButton';
 
 const Register: NextPage = () => {
   const {
@@ -31,21 +29,11 @@ const Register: NextPage = () => {
   } = useForm<RegisterFormValues>({
     resolver: yupResolver(registerSchema),
   });
-  const dispatch = useAppDispatch();
 
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const [registerUser] = useRegisterUserMutation();
-
   const onSubmit = async (data: RegisterFormValues) => {
-    const response = await registerUser(data as User);
-
-    if ('data' in response) {
-      const data = response.data;
-      dispatch(setCurrentUser(data.result));
-
-      window.location.href = '/';
-    }
+    console.log(data);
   };
 
   return (

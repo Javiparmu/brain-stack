@@ -12,15 +12,23 @@ import {
 } from '@chakra-ui/react';
 import { FC } from 'react';
 
-export const Pricing: FC = () => {
+interface PricingProps {
+  show?: boolean;
+}
+
+export const Pricing: FC<PricingProps> = ({ show = false }) => {
   return (
-    <Box className="hidden" as="section">
+    <Box className={show ? '' : 'hidden'} as="section">
       <Box maxW="7xl" mx="auto" px={{ base: '6', md: '8' }}>
         <Box fontSize="4xl" fontWeight="bold" textAlign="center" mb="10">
           Pricing
         </Box>
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing="10">
-          <Card className="hidden" borderRadius={10} boxShadow="md">
+          <Card
+            className={show ? '' : 'hidden'}
+            borderRadius={10}
+            boxShadow="md"
+          >
             <CardBody>
               <Stack spacing="4">
                 <Box textAlign="center">
@@ -74,7 +82,11 @@ export const Pricing: FC = () => {
               </Button>
             </CardFooter>
           </Card>
-          <Card className="second-card hidden" borderRadius={10} boxShadow="md">
+          <Card
+            className={'second-card ' + show ? '' : 'hidden'}
+            borderRadius={10}
+            boxShadow="md"
+          >
             <CardBody>
               <Stack spacing="4">
                 <Box textAlign="center">
@@ -128,7 +140,11 @@ export const Pricing: FC = () => {
               </Button>
             </CardFooter>
           </Card>
-          <Card className="third-card hidden" borderRadius={10} boxShadow="md">
+          <Card
+            className={'third-card ' + show ? '' : 'hidden'}
+            borderRadius={10}
+            boxShadow="md"
+          >
             <CardBody>
               <Stack spacing="4">
                 <Box textAlign="center">

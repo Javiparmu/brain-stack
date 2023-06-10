@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Box, GridItem, SimpleGrid } from '@chakra-ui/react';
 import {
   HowItWorks,
@@ -9,11 +9,9 @@ import {
   CreateSongButton,
   MasonrySongs,
 } from '@/components';
-import { useDispatch } from 'react-redux';
-import { setCurrentUser } from '@/redux/auth/authSlice';
-import { User } from '@/interfaces/users';
 import { createObservers } from '@/utils/helpers';
 import { NextPage } from 'next';
+import { useAuthStore } from '@/store/authStore';
 
 const gridSpace = {
   base: '2vh',
@@ -22,20 +20,16 @@ const gridSpace = {
 };
 
 const Home: NextPage = () => {
-  const [user, setUser] = useState<User>({} as User);
-  const [token, setToken] = useState<string>('');
+  const { setUser, setToken } = useAuthStore();
 
-  const dispatch = useDispatch();
+  if (typeof window !== 'undefined') {
+    setUser(JSON.parse(localStorage.getItem('user') || 'null'));
+    setToken(localStorage.getItem('token') || '');
+  }
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setUser(JSON.parse(localStorage.getItem('user') || 'null'));
-      setToken(localStorage.getItem('token') || '');
-    }
-
-    dispatch(setCurrentUser({ user, token }));
     createObservers();
-  }, [token, user]);
+  }, []);
 
   return (
     <MainLayout>

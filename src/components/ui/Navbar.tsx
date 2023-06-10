@@ -11,16 +11,21 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { Link } from '@chakra-ui/next-js';
+import { Image, Link } from '@chakra-ui/next-js';
 import { ThemeToggleButton } from './ThemeToggleButton';
 import theme from '../../theme/theme';
-import { useAppSelector } from '../../store/hooks';
-import { selectCurrentUser } from '../../redux/auth/authSlice';
-import Image from 'next/image';
 import { FC } from 'react';
 
 export const Navbar: FC = () => {
-  const user = useAppSelector(selectCurrentUser);
+  const user = {
+    name: 'John Doe',
+    avatar: 'https://bit.ly/broken-link',
+  };
+
+  const mainBgColor = useColorModeValue(
+    theme.colors.primary,
+    theme.colors.primaryDark,
+  );
 
   const logoutUser = () => {
     if (typeof window !== 'undefined') {
@@ -44,7 +49,7 @@ export const Navbar: FC = () => {
         <Image
           src="/images/music_ai_logo.png"
           alt="logo"
-          height="80"
+          height="65"
           width="180"
         />
       </Link>
@@ -65,10 +70,7 @@ export const Navbar: FC = () => {
           <Link href="/how-it-works" color="black" textDecoration="none">
             <Text
               _hover={{
-                color: useColorModeValue(
-                  theme.colors.primary,
-                  theme.colors.primaryDark,
-                ),
+                color: mainBgColor,
               }}
             >
               How it works
@@ -77,10 +79,7 @@ export const Navbar: FC = () => {
           <Link href="/pricing" color="black">
             <Text
               _hover={{
-                color: useColorModeValue(
-                  theme.colors.primary,
-                  theme.colors.primaryDark,
-                ),
+                color: mainBgColor,
               }}
             >
               Pricing
@@ -104,31 +103,30 @@ export const Navbar: FC = () => {
               </MenuList>
             </Menu>
           ) : (
-            <Box
-              gap={4}
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-              }}
-            >
+            <Box gap={4} display="flex" flexDirection="row" alignItems="center">
               <Button
-                colorScheme="blue"
+                as={Link}
+                href={'/signup'}
+                borderColor={mainBgColor}
+                color={mainBgColor}
+                _hover={{
+                  opacity: 0.9,
+                }}
                 variant="outline"
                 size="sm"
-                onClick={() => {
-                  window.location.href = '/signup';
-                }}
               >
                 Sign up
               </Button>
               <Button
-                colorScheme="blue"
+                as={Link}
+                href={'/login'}
+                bgColor={mainBgColor}
+                color={useColorModeValue('white', 'black')}
+                _hover={{
+                  opacity: 0.9,
+                }}
                 variant="solid"
                 size="sm"
-                onClick={() => {
-                  window.location.href = '/login';
-                }}
               >
                 Sign in
               </Button>

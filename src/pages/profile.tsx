@@ -1,7 +1,5 @@
-import { Profile } from '@/components';
-import { MainLayout } from '@/components/layouts';
+import { MainLayout, Profile } from '@/components';
 import { NextPage } from 'next';
-import React from 'react';
 
 const ProfilePage: NextPage = () => {
   return (

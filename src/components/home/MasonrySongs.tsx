@@ -13,6 +13,7 @@ export const MasonrySongs: FC = () => {
     >
       {masonryItems.map(({ id, image, song }) => (
         <Box key={id} position="relative">
+          {/* TODO: Cambiar por Image de nextjs */}
           <Image
             key={image}
             w="100%"

@@ -1,4 +1,4 @@
-import { ImageSong } from './interfaces';
+import { ImageSong, Model } from './interfaces';
 
 export const moods = [
   'happy',
@@ -177,5 +177,45 @@ export const masonryItems: ImageSong[] = [
     id: '9',
     image: masonryImages[8],
     song: 'https://music-ai-songs.s3.eu-south-2.amazonaws.com/Milo+j+-+Rara+Vez.mp3',
+  },
+];
+
+export const modelList: Model[] = [
+  {
+    artist: 'Adele',
+    image: '/images/artists/adele.png',
+    rate: 4.5,
+    color: '#101419',
+  },
+  {
+    artist: 'Rihanna',
+    image: '/images/artists/rihanna.png',
+    rate: 4.5,
+    color: '#0795C3',
+  },
+  {
+    artist: 'Rosalia',
+    image: '/images/artists/rosalia.png',
+    rate: 4,
+    color: '#593BC3',
+  },
+  {
+    artist: 'Bruno Mars',
+    image: '/images/artists/bruno-mars.png',
+    rate: 5,
+    color: '#222927',
+  },
+  {
+    artist: 'Homer Simpson',
+    image: '/images/artists/homer-simpson.png',
+    rate: 3,
+    language: 'es-latam',
+    color: '#ffffff',
+  },
+  {
+    artist: 'Miley Cyrus',
+    image: '/images/artists/miley-cyrus.png',
+    rate: 4,
+    color: '#222927',
   },
 ];

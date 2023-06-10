@@ -8,8 +8,6 @@ import {
   Text,
 } from '@chakra-ui/react';
 import React, { FC, useState } from 'react';
-import { useAppSelector } from '../../store/hooks';
-import { selectCurrentUser } from '../../redux/auth/authSlice';
 import { SideBarItem } from './SideBarItem';
 import { FiHome } from 'react-icons/fi';
 import { MdLibraryMusic, MdAttachMoney } from 'react-icons/md';
@@ -17,7 +15,12 @@ import { MdLibraryMusic, MdAttachMoney } from 'react-icons/md';
 type sideBarItems = 'dashboard' | 'mySongs' | 'payments' | 'settings';
 
 export const SideBar: FC = () => {
-  const user = useAppSelector(selectCurrentUser);
+  const user = {
+    username: 'John Doe',
+    avatar: 'https://bit.ly/broken-link',
+    email: '123',
+  };
+
   const [selectedItem, setSelectedItem] = useState<sideBarItems>('dashboard');
   const [navSize, setNavSize] = useState<'small' | 'large'>('large');
 

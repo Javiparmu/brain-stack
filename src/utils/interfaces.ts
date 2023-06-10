@@ -3,3 +3,11 @@ export interface ImageSong {
   image: string;
   song: string;
 }
+
+export interface Model {
+  artist: string;
+  image: string;
+  rate: number;
+  language?: string;
+  color: string;
+}

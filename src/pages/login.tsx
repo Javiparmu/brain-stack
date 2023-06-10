@@ -10,17 +10,16 @@ import {
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
-import { useLoginUserMutation } from '../redux/endpoints/user';
-import { setCurrentUser } from '../redux/auth/authSlice';
-import { useDispatch } from 'react-redux';
-import { MainLayout } from '@/components/layouts';
+import {
+  MainLayout,
+  AuthContainer,
+  LoginButtons,
+  VisibilityButton,
+  AuthInput,
+} from '@/components';
 import { NextPage } from 'next';
 import { loginSchema } from '@/utils/schemas';
 import { LoginFormValues } from '@/utils';
-import { AuthContainer } from '@/components/auth/AuthContainer';
-import { LoginButtons } from '@/components/auth/LoginButtons';
-import { VisibilityButton } from '@/components/auth/VisibilityButton';
-import { AuthInput } from '@/components/auth/AuthInput';
 
 const Login: NextPage = () => {
   const {
@@ -30,27 +29,10 @@ const Login: NextPage = () => {
   } = useForm<LoginFormValues>({
     resolver: yupResolver(loginSchema),
   });
-  const dispatch = useDispatch();
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const [loginUser] = useLoginUserMutation();
-
   const onSubmit = async (data: LoginFormValues) => {
-    try {
-      const response = await loginUser(data);
-
-      if ('data' in response) {
-        const data = response.data;
-        dispatch(setCurrentUser(data.result));
-        if (typeof window !== undefined) {
-          localStorage.setItem('token', data.result.token);
-          localStorage.setItem('user', JSON.stringify(data.result.user));
-        }
-        window.location.href = '/';
-      }
-    } catch (error) {
-      alert('Something went wrong');
-    }
+    console.log(data);
   };
   return (
     <MainLayout>
