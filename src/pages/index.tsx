@@ -22,12 +22,12 @@ const gridSpace = {
 const Home: NextPage = () => {
   const { setUser, setToken } = useAuthStore();
 
-  if (typeof window !== 'undefined') {
-    setUser(JSON.parse(localStorage.getItem('user') || 'null'));
-    setToken(localStorage.getItem('token') || '');
-  }
-
   useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setUser(JSON.parse(localStorage.getItem('user') || 'null'));
+      setToken(localStorage.getItem('token') || '');
+    }
+
     createObservers();
   }, []);
 

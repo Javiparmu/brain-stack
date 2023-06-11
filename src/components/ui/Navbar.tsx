@@ -15,24 +15,23 @@ import { Image, Link } from '@chakra-ui/next-js';
 import { ThemeToggleButton } from './ThemeToggleButton';
 import theme from '../../theme/theme';
 import { FC } from 'react';
+import { useAuthStore } from '@/store/authStore';
+import { useRouter } from 'next/router';
 
 export const Navbar: FC = () => {
-  const user = {
-    name: 'John Doe',
-    avatar: 'https://bit.ly/broken-link',
-  };
-
   const mainBgColor = useColorModeValue(
     theme.colors.primary,
     theme.colors.primaryDark,
   );
 
-  const logoutUser = () => {
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      window.location.reload();
-    }
+  const { push } = useRouter();
+
+  const { user, logoutUser } = useAuthStore();
+
+  const onLogout = () => {
+    logoutUser();
+
+    push('/');
   };
 
   return (
@@ -97,7 +96,7 @@ export const Navbar: FC = () => {
                 <MenuItem as={Link} href="/profile">
                   <Text fontSize={16}>Profile</Text>
                 </MenuItem>
-                <MenuItem onClick={logoutUser}>
+                <MenuItem onClick={onLogout}>
                   <Text fontSize={16}>Logout</Text>
                 </MenuItem>
               </MenuList>

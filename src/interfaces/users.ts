@@ -6,12 +6,12 @@ export enum Role {
 }
 
 export interface User {
-  _id: string;
-  avatar: string;
+  _id?: string;
+  avatar?: string;
   username: string;
   email: string;
   password: string;
-  role: Role;
+  role?: Role;
 }
 
 export interface UserResponseData {

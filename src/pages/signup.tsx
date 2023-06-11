@@ -1,15 +1,11 @@
 import {
   Box,
-  FormControl,
-  FormErrorMessage,
   FormLabel,
   InputGroup,
   InputRightElement,
   Text,
 } from '@chakra-ui/react';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import {
   MainLayout,
   AuthContainer,
@@ -18,60 +14,71 @@ import {
   VisibilityButton,
 } from '@/components';
 import { NextPage } from 'next';
-import { registerSchema } from '@/utils/schemas';
-import { RegisterFormValues } from '@/utils';
+import { useAuthStore } from '@/store/authStore';
 
 const Register: NextPage = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<RegisterFormValues>({
-    resolver: yupResolver(registerSchema),
-  });
+  const [username, setUsername] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
-  const [passwordVisible, setPasswordVisible] = useState(false);
+  const { user, registerUser } = useAuthStore();
 
-  const onSubmit = async (data: RegisterFormValues) => {
-    console.log(data);
+  const onSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+
+    await registerUser({ username, email, password });
+
+    if (user) {
+      window.location.href = '/';
+    }
+  };
+
+  const onUsernameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setUsername(event.target.value);
+  };
+
+  const onEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+  };
+
+  const onPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
   };
 
   return (
     <MainLayout>
       <Box display="flex" justifyContent="center" alignItems="center">
-        <AuthContainer onSubmit={handleSubmit(onSubmit)}>
+        <AuthContainer onSubmit={onSubmit}>
           <Text fontSize="3xl" fontWeight="bold">
             Register
           </Text>
-          <FormControl id="username" mb={5} mt={5}>
+          <Box id="username" mb={5} mt={5}>
             <FormLabel htmlFor="username">Username</FormLabel>
             <AuthInput
               type="text"
               placeholder="Enter username"
-              {...register('username')}
+              value={username}
+              onChange={onUsernameChange}
             />
-            <FormErrorMessage color="red.500">
-              {errors.username?.message}
-            </FormErrorMessage>
-          </FormControl>
-          <FormControl id="email" mb={5}>
+          </Box>
+          <Box id="email" mb={5}>
             <FormLabel htmlFor="email">Email</FormLabel>
             <AuthInput
               type="email"
               placeholder="Enter email"
-              {...register('email')}
+              value={email}
+              onChange={onEmailChange}
             />
-            <FormErrorMessage color="red.500">
-              {errors.email?.message}
-            </FormErrorMessage>
-          </FormControl>
-          <FormControl id="password" mb={10}>
+          </Box>
+          <Box id="password" mb={10}>
             <FormLabel htmlFor="password">Password</FormLabel>
             <InputGroup>
               <AuthInput
                 type={passwordVisible ? 'text' : 'password'}
                 placeholder="Enter password"
-                {...register('password')}
+                value={password}
+                onChange={onPasswordChange}
               />
               <InputRightElement width="4.5rem">
                 <VisibilityButton
@@ -80,10 +87,7 @@ const Register: NextPage = () => {
                 />
               </InputRightElement>
             </InputGroup>
-            <FormErrorMessage color="red.500">
-              {errors.password?.message}
-            </FormErrorMessage>
-          </FormControl>
+          </Box>
           <RegisterButtons />
         </AuthContainer>
       </Box>

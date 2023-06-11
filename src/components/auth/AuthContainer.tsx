@@ -1,20 +1,15 @@
 import { Box, SimpleGrid, useColorModeValue } from '@chakra-ui/react';
-import React, { FC, FormEvent, PropsWithChildren } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import { AuthImage } from './AuthImage';
 
 interface AuthContainerProps {
-  onSubmit: (e: FormEvent) => void;
+  onSubmit: (data: any) => Promise<void>;
 }
 
 export const AuthContainer: FC<PropsWithChildren<AuthContainerProps>> = ({
   children,
   onSubmit,
 }) => {
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    onSubmit(e);
-  };
-
   return (
     <SimpleGrid
       bgColor={useColorModeValue('gray.100', 'gray.800')}
@@ -34,7 +29,7 @@ export const AuthContainer: FC<PropsWithChildren<AuthContainerProps>> = ({
           alignItems: 'center',
         }}
         as="form"
-        onSubmit={handleSubmit}
+        onSubmit={onSubmit}
       >
         {children}
       </Box>
