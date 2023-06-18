@@ -1,11 +1,11 @@
-import { Box } from '@chakra-ui/react';
+import styles from '@/styles/Profile.module.css';
 import { SideBar } from '../ui/SideBar';
 import { FC } from 'react';
 
 export const Profile: FC = () => {
   return (
-    <Box pl={{ base: 0, md: '16vw' }} pr={{ base: 0, md: '16vw' }}>
+    <div className={styles.profile}>
       <SideBar />
-    </Box>
+    </div>
   );
 };

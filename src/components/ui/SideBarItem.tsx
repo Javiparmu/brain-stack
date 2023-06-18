@@ -1,10 +1,10 @@
-import { Flex, Text, Icon } from '@chakra-ui/react';
-import { FC } from 'react';
+import React, { FC } from 'react';
+import { IconType } from 'react-icons/lib';
+import styles from '@/styles/Profile.module.css'; // Import CSS
 
 interface SideBarItemProps {
-  icon: any;
+  icon: IconType;
   title: string;
-  description: string;
   active?: boolean;
   navSize: string;
   onClick?: () => void;
@@ -16,32 +16,24 @@ export const SideBarItem: FC<SideBarItemProps> = ({
   active = false,
   navSize,
   onClick,
-}: SideBarItemProps) => {
+}) => {
   return (
-    <Flex
-      mb={5}
-      flexDir="row"
-      w={navSize === 'small' ? '100%' : '100%'}
-      bgColor={active ? '#b9bbf0' : '#fafafa'}
-      borderTopRightRadius={active && navSize === 'large' ? '30px' : '0px'}
-      borderBottomRightRadius={active && navSize === 'large' ? '30px' : '0px'}
-      justifyContent={navSize === 'small' ? 'center' : 'flex-start'}
-      align="center"
-      p={4}
-      _hover={{
-        cursor: 'pointer',
-      }}
+    <div
+      className={`${styles.sidebarItem} ${
+        active ? styles.active : ''
+      } ${navSize}`}
       onClick={onClick}
     >
-      <Icon as={icon} fontSize="24" color={active ? 'gray.700' : 'gray.500'} />
-      <Text
-        ml={4}
-        fontSize="md"
-        fontWeight={active ? 'bold' : 'normal'}
-        display={navSize === 'small' ? 'none' : 'flex'}
-      >
-        {title}
-      </Text>
-    </Flex>
+      {React.createElement(icon, {
+        className: `${styles.sidebarIcon} ${active ? styles.activeIcon : ''}`,
+      })}
+      {navSize === 'large' && (
+        <span
+          className={`${styles.sidebarText} ${active ? styles.activeText : ''}`}
+        >
+          {title}
+        </span>
+      )}
+    </div>
   );
 };

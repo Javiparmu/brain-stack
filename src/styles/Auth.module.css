@@ -1,0 +1,94 @@
+.authContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.authImage img {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    width: 100%;
+    height: 65vh;
+    object-fit: cover;
+}
+
+.authForm {
+    display: flex;
+    flex-direction: column;
+    width: 25vw;
+    max-width: 600px;
+    padding: 5rem;
+    background-color: #2D3748;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.authForm h2 {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.inputContainer label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.authInput {
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.authInput:focus {
+    outline: none;
+    border: 1px solid #676BB9;
+}
+
+.visibilityButton {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 37px;
+    color: rgb(133, 133, 133);
+}
+
+.buttonsContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.buttonsContainer button {
+    width: 100%;
+    margin-top: 2rem;
+    padding: 0.8rem 2rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    background-color: #676BB9;
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    .authImage img {
+        display: none;
+    }
+
+    .authForm {
+        width: 100%;
+        border-radius: 0;
+        margin-top: -3rem;
+    }
+}
+  

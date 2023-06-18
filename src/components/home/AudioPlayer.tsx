@@ -1,4 +1,4 @@
-import { IconButton } from '@chakra-ui/react';
+import styles from '@/styles/Home.module.css';
 import { FC, useEffect, useRef, useState } from 'react';
 import { FaPauseCircle, FaPlayCircle } from 'react-icons/fa';
 
@@ -27,14 +27,12 @@ export const AudioPlayer: FC<AudioPlayerProps> = ({ song }) => {
 
   return (
     <>
-      <IconButton
-        aria-label="play_button"
-        icon={isPlaying ? <FaPauseCircle /> : <FaPlayCircle />}
-        colorScheme="blackAlpha"
+      <button
+        className={styles.playButton + `${isPlaying ? ' pause' : ' play'}`}
         onClick={() => (isPlaying ? pauseSong() : playSong())}
-        bgColor={'transparent'}
-        _hover={{ bgColor: 'transparent', opacity: 0.8 }}
-      />
+      >
+        {isPlaying ? <FaPauseCircle /> : <FaPlayCircle />}
+      </button>
       {isPlaying && (
         <audio
           ref={audioRef}

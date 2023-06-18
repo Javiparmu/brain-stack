@@ -219,3 +219,72 @@ export const modelList: Model[] = [
     color: '#222927',
   },
 ];
+
+export const pricingData = [
+  {
+    plan: 'Basic',
+    features: [
+      {
+        available: true,
+        text: '5 songs per month',
+      },
+      {
+        available: true,
+        text: 'List of your songs',
+      },
+      {
+        available: false,
+        text: 'Regenerate your songs',
+      },
+      {
+        available: false,
+        text: 'Recommended inputs',
+      },
+    ],
+    price: 4.95,
+  },
+  {
+    plan: 'Standard',
+    features: [
+      {
+        available: true,
+        text: '12 songs per month',
+      },
+      {
+        available: true,
+        text: 'List of your songs',
+      },
+      {
+        available: true,
+        text: 'Regenerate your songs',
+      },
+      {
+        available: false,
+        text: 'Recommended inputs',
+      },
+    ],
+    price: 9.95,
+  },
+  {
+    plan: 'Premium',
+    features: [
+      {
+        available: true,
+        text: '30 songs per month',
+      },
+      {
+        available: true,
+        text: 'List of your songs',
+      },
+      {
+        available: true,
+        text: 'Regenerate your songs',
+      },
+      {
+        available: true,
+        text: 'Recommended inputs',
+      },
+    ],
+    price: 19.95,
+  },
+];

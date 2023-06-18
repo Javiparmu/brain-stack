@@ -1,23 +1,17 @@
-import { Image } from '@chakra-ui/next-js';
-import { Box } from '@chakra-ui/react';
+import Image from 'next/image';
+import styles from '@/styles/Auth.module.css';
 import React, { FC } from 'react';
 
 export const AuthImage: FC = () => {
   return (
-    <Box display={{ base: 'none', md: 'flex' }}>
+    <div className={styles.authImage}>
       <Image
-        borderRadius={{
-          base: '20px 20px 0 0',
-          md: '20px 0 0 20px',
-        }}
         src="/images/login_image.jpg"
         alt="signUp image"
         width={400}
         height={400}
-        boxSize={{ base: 200, md: 500 }}
-        rotate={{ base: '90', md: '0' }}
-        objectFit={'cover'}
+        style={{ objectFit: 'cover' }}
       />
-    </Box>
+    </div>
   );
 };

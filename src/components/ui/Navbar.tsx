@@ -1,32 +1,26 @@
-import { HamburgerIcon } from '@chakra-ui/icons';
-import {
-  Avatar,
-  Box,
-  Button,
-  IconButton,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Text,
-  useColorModeValue,
-} from '@chakra-ui/react';
-import { Image, Link } from '@chakra-ui/next-js';
-import { ThemeToggleButton } from './ThemeToggleButton';
-import theme from '../../theme/theme';
-import { FC } from 'react';
-import { useAuthStore } from '@/store/authStore';
+import styles from '@/styles/Ui.module.css';
+import React, { FC, useState } from 'react';
+import { FaBars } from 'react-icons/fa';
 import { useRouter } from 'next/router';
+import { useAuthStore } from '@/store/authStore';
+import Link from 'next/link';
+import Image from 'next/image';
 
 export const Navbar: FC = () => {
-  const mainBgColor = useColorModeValue(
-    theme.colors.primary,
-    theme.colors.primaryDark,
-  );
+  const [showMenu, setShowMenu] = useState(false);
+  const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
 
   const { push } = useRouter();
 
   const { user, logoutUser } = useAuthStore();
+
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
+
+  const toggleHamburgerMenu = () => {
+    setShowHamburgerMenu(!showHamburgerMenu);
+  };
 
   const onLogout = () => {
     logoutUser();
@@ -35,156 +29,107 @@ export const Navbar: FC = () => {
   };
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        px: { base: '6vw', md: '8vw', lg: '16vw' },
-        py: 4,
-      }}
-    >
-      <Link href="/" color="black">
+    <nav className={styles.navbar}>
+      <Link href="/">
         <Image
+          width={200}
+          height={65}
           src="/images/music_ai_logo.png"
           alt="logo"
-          height="65"
-          width="180"
+          className={styles.logo}
         />
       </Link>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-        }}
-      >
-        <Box
-          gap={{ base: 8, lg: 12 }}
-          mr={user ? 5 : 10}
-          flexDirection="row"
-          alignItems="center"
-          display={{ base: 'none', md: 'flex' }}
+      <div className={styles.navItems}>
+        <div className={styles.links}>
+          <Link href="/how-it-works" className={styles.link}>
+            How it works
+          </Link>
+          <Link href="/pricing" className={styles.link}>
+            Pricing
+          </Link>
+        </div>
+        {user ? (
+          <>
+            <div className={styles.avatarContainer} onClick={toggleMenu}>
+              <Image
+                width={40}
+                height={40}
+                src={user.avatar ?? '/images/no-user.png'}
+                alt="Avatar"
+                className={styles.avatar}
+              />
+            </div>
+            {showMenu && (
+              <div className={styles.menu}>
+                <Link href="" className={styles.menuItem} onClick={onLogout}>
+                  Logout
+                </Link>
+                <Link
+                  href="/profile"
+                  className={styles.menuItem}
+                  onClick={() => push('/profile')}
+                >
+                  Profile
+                </Link>
+              </div>
+            )}
+          </>
+        ) : (
+          <>
+            <button
+              className={styles.authButton}
+              onClick={() => push('/login')}
+            >
+              Sign In
+            </button>
+            <button
+              className={styles.authButton}
+              onClick={() => push('/sign-up')}
+            >
+              Sign Up
+            </button>
+          </>
+        )}
+        <button
+          className={styles.hamburgerButton}
+          onClick={toggleHamburgerMenu}
         >
-          <Link href="/how-it-works" color="black" textDecoration="none">
-            <Text
-              _hover={{
-                color: mainBgColor,
-              }}
-            >
+          <FaBars />
+        </button>
+        {showHamburgerMenu && (
+          <div className={styles.hamburgerMenu}>
+            <Link href="/how-it-works" className={styles.menuItem}>
               How it works
-            </Text>
-          </Link>
-          <Link href="/pricing" color="black">
-            <Text
-              _hover={{
-                color: mainBgColor,
-              }}
-            >
+            </Link>
+            <Link href="/pricing" className={styles.menuItem}>
               Pricing
-            </Text>
-          </Link>
-          {user ? (
-            <Menu isLazy id="navbar-menu">
-              <MenuButton
-                as={Avatar}
-                boxSize={10}
-                src={user.avatar}
-                backgroundColor={user.avatar ? 'white' : 'gray.400'}
-              />
-              <MenuList>
-                <MenuItem as={Link} href="/profile">
-                  <Text fontSize={16}>Profile</Text>
-                </MenuItem>
-                <MenuItem onClick={onLogout}>
-                  <Text fontSize={16}>Logout</Text>
-                </MenuItem>
-              </MenuList>
-            </Menu>
-          ) : (
-            <Box gap={4} display="flex" flexDirection="row" alignItems="center">
-              <Button
-                as={Link}
-                href={'/signup'}
-                borderColor={mainBgColor}
-                color={mainBgColor}
-                _hover={{
-                  opacity: 0.9,
-                }}
-                variant="outline"
-                size="sm"
-              >
-                Sign up
-              </Button>
-              <Button
-                as={Link}
-                href={'/login'}
-                bgColor={mainBgColor}
-                color={useColorModeValue('white', 'black')}
-                _hover={{
-                  opacity: 0.9,
-                }}
-                variant="solid"
-                size="sm"
-              >
-                Sign in
-              </Button>
-            </Box>
-          )}
-        </Box>
-        <Box gap={1} display="flex" flexDirection="row">
-          <ThemeToggleButton />
-          <Box display={{ base: 'inline-block', md: 'none' }}>
-            <Menu isLazy id="navbar-menu">
-              <MenuButton
-                as={IconButton}
-                icon={<HamburgerIcon />}
-                variant="outline"
-                aria-label="Options"
-              />
-              <MenuList>
-                <MenuItem as={Link} href="/how-it-works">
-                  How it works
-                </MenuItem>
-                <MenuItem as={Link} href="/pricing">
-                  Pricing
-                </MenuItem>
-                {user ? (
-                  <>
-                    <MenuItem as={Link} href="/profile">
-                      Profile
-                    </MenuItem>
-                    <MenuItem as={Link} onClick={logoutUser}>
-                      Logout
-                    </MenuItem>
-                  </>
-                ) : (
-                  <>
-                    <MenuItem
-                      as={Link}
-                      href="/login"
-                      colorScheme="blue"
-                      variant="solid"
-                      size="sm"
-                    >
-                      Sign in
-                    </MenuItem>
-                    <MenuItem
-                      as={Link}
-                      href="/signup"
-                      colorScheme="blue"
-                      variant="outline"
-                      size="sm"
-                    >
-                      Sign up
-                    </MenuItem>
-                  </>
-                )}
-              </MenuList>
-            </Menu>
-          </Box>
-        </Box>
-      </Box>
-    </Box>
+            </Link>
+            {user ? (
+              <>
+                <Link href="" className={styles.menuItem} onClick={onLogout}>
+                  Logout
+                </Link>
+                <Link
+                  href="/profile"
+                  className={styles.menuItem}
+                  onClick={() => push('/profile')}
+                >
+                  Profile
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link href="/login" className={styles.menuItem}>
+                  Sign In
+                </Link>
+                <Link href="/sign-up" className={styles.menuItem}>
+                  Sign Up
+                </Link>
+              </>
+            )}
+          </div>
+        )}
+      </div>
+    </nav>
   );
 };

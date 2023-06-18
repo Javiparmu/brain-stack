@@ -1,5 +1,5 @@
+import styles from '@/styles/Home.module.css';
 import { useEffect } from 'react';
-import { Box, GridItem, SimpleGrid } from '@chakra-ui/react';
 import {
   HowItWorks,
   MainHeader,
@@ -12,12 +12,6 @@ import {
 import { createObservers } from '@/utils/helpers';
 import { NextPage } from 'next';
 import { useAuthStore } from '@/store/authStore';
-
-const gridSpace = {
-  base: '2vh',
-  md: '4vh',
-  lg: '6vh',
-};
 
 const Home: NextPage = () => {
   const { setUser, setToken } = useAuthStore();
@@ -33,34 +27,14 @@ const Home: NextPage = () => {
 
   return (
     <MainLayout>
-      <Box>
-        <Box>
-          <SimpleGrid
-            marginTop={gridSpace}
-            rowGap={gridSpace}
-            px={{ base: '6vw', md: '8vw', lg: '16vw' }}
-          >
-            <GridItem>
-              <MainHeader />
-            </GridItem>
-            <GridItem>
-              <CreateSongButton />
-            </GridItem>
-            <GridItem>
-              <MasonrySongs />
-            </GridItem>
-            <GridItem>
-              <HowItWorks />
-            </GridItem>
-            <GridItem>
-              <Pricing />
-            </GridItem>
-            <GridItem>
-              <Footer />
-            </GridItem>
-          </SimpleGrid>
-        </Box>
-      </Box>
+      <div className={styles.mainContainer}>
+        <MainHeader />
+        <CreateSongButton />
+        <MasonrySongs />
+        <HowItWorks />
+        <Pricing />
+        <Footer />
+      </div>
     </MainLayout>
   );
 };

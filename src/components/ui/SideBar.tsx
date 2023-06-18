@@ -1,18 +1,11 @@
-import { HamburgerIcon, SettingsIcon } from '@chakra-ui/icons';
-import {
-  Avatar,
-  Divider,
-  Flex,
-  Heading,
-  IconButton,
-  Text,
-} from '@chakra-ui/react';
-import React, { FC, useState } from 'react';
-import { SideBarItem } from './SideBarItem';
+import styles from '@/styles/Profile.module.css';
+import { useState, FC } from 'react';
 import { FiHome } from 'react-icons/fi';
 import { MdLibraryMusic, MdAttachMoney } from 'react-icons/md';
+import { CgProfile } from 'react-icons/cg';
+import { SideBarItem, SideBarHoverBox } from '@/components';
 
-type sideBarItems = 'dashboard' | 'mySongs' | 'payments' | 'settings';
+type SideBarItems = 'dashboard' | 'mySongs' | 'payments' | 'settings';
 
 export const SideBar: FC = () => {
   const user = {
@@ -21,102 +14,77 @@ export const SideBar: FC = () => {
     email: '123',
   };
 
-  const [selectedItem, setSelectedItem] = useState<sideBarItems>('dashboard');
+  const [selectedItem, setSelectedItem] = useState<SideBarItems>('dashboard');
   const [navSize, setNavSize] = useState<'small' | 'large'>('large');
 
   const onItemClick = (item: string) => {
-    setSelectedItem(item as sideBarItems);
+    setSelectedItem(item as SideBarItems);
   };
 
   return (
-    <Flex
-      pos="sticky"
-      zIndex="1"
-      bgColor="white"
-      borderBottomRightRadius={navSize === 'small' ? '10px' : '20px'}
-      backgroundColor="#fafafa"
-      border="1px solid #e2e8f0"
-      borderTop={0}
-      h="80vh"
-      w={navSize === 'small' ? '75px' : '250px'}
-      flexDir="column"
-      justifyContent="space-between"
+    <div
+      className={`${styles.sideBar} ${navSize}`}
+      onClick={() => setNavSize(navSize === 'small' ? 'large' : 'small')}
     >
-      <Flex
-        flexDir="column"
-        alignItems={navSize === 'small' ? 'center' : 'flex-start'}
-        as="nav"
-      >
-        <IconButton
-          p={4}
-          aria-label="Open Menu"
-          background="none"
-          _hover={{ background: 'none' }}
-          icon={<HamburgerIcon />}
-          onClick={() => {
-            if (navSize === 'small') {
-              setNavSize('large');
-            } else {
-              setNavSize('small');
-            }
-          }}
-          mb={10}
+      <SideBarItem
+        navSize={navSize}
+        title="Dashboard"
+        icon={FiHome}
+        active={selectedItem === 'dashboard'}
+        onClick={() => onItemClick('dashboard')}
+      />
+      <SideBarItem
+        navSize={navSize}
+        title="My songs"
+        icon={MdLibraryMusic}
+        active={selectedItem === 'mySongs'}
+        onClick={() => onItemClick('mySongs')}
+      />
+      <SideBarItem
+        navSize={navSize}
+        title="Payments"
+        icon={MdAttachMoney}
+        active={selectedItem === 'payments'}
+        onClick={() => onItemClick('payments')}
+      />
+      <SideBarItem
+        navSize={navSize}
+        title="Settings"
+        icon={CgProfile}
+        active={selectedItem === 'settings'}
+        onClick={() => onItemClick('settings')}
+      />
+      <SideBarHoverBox
+        title="Dashboard"
+        icon={FiHome}
+        description="Dashboard"
+      />
+      <SideBarHoverBox
+        title="My Songs"
+        icon={MdLibraryMusic}
+        description="Your song library"
+      />
+      <SideBarHoverBox
+        title="Payments"
+        icon={MdAttachMoney}
+        description="Your payment settings"
+      />
+      <SideBarHoverBox
+        title="Profile"
+        icon={CgProfile}
+        description="Your profile settings"
+      />
+      <div className={styles.profileInfo}>
+        <img
+          src={user.avatar}
+          alt={user.username}
+          className={styles.profileAvatar}
         />
-        <SideBarItem
-          navSize={navSize}
-          title="Dashboard"
-          icon={FiHome}
-          description="Dashboard"
-          active={selectedItem === 'dashboard'}
-          onClick={() => onItemClick('dashboard')}
-        />
-        <SideBarItem
-          navSize={navSize}
-          title="My songs"
-          icon={MdLibraryMusic}
-          description="My songs"
-          active={selectedItem === 'mySongs'}
-          onClick={() => onItemClick('mySongs')}
-        />
-        <SideBarItem
-          navSize={navSize}
-          title="Payments"
-          icon={MdAttachMoney}
-          description="Payments"
-          active={selectedItem === 'payments'}
-          onClick={() => onItemClick('payments')}
-        />
-        <SideBarItem
-          navSize={navSize}
-          title="Settings"
-          icon={SettingsIcon}
-          description="Settings"
-          active={selectedItem === 'settings'}
-          onClick={() => onItemClick('settings')}
-        />
-      </Flex>
-      <Flex
-        p="5%"
-        flexDir="column"
-        w="100%"
-        mb={4}
-        alignItems={navSize === 'small' ? 'center' : 'flex-start'}
-      >
-        <Divider display={navSize === 'small' ? 'none' : 'flex'} />
-        <Flex mt={4} align="center">
-          <Avatar size="sm" src={user?.avatar} />
-          <Flex
-            flexDir="column"
-            ml={4}
-            display={navSize === 'small' ? 'none' : 'flex'}
-          >
-            <Heading as="h3" size="sm">
-              {user?.username}
-            </Heading>
-            <Text>{user?.email}</Text>
-          </Flex>
-        </Flex>
-      </Flex>
-    </Flex>
+        <div className={styles.profileDetails}>
+          <h3 className={styles.profileName}>{user.username}</h3>
+          <p className={styles.profileEmail}>{user.email}</p>
+        </div>
+      </div>
+    </div>
   );
 };

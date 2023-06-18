@@ -1,50 +1,26 @@
+import styles from '@/styles/SongGenerator.module.css';
 import { FC } from 'react';
-import {
-  Text,
-  VStack,
-  Input,
-  InputGroup,
-  InputLeftElement,
-} from '@chakra-ui/react';
 import { MainLayout, SongUpload } from '@/components';
-import { ModelList } from '@/components/songGenerator/ModelList';
-import { SearchIcon } from '@chakra-ui/icons';
+import ModelList from '@/components/songGenerator/ModelList';
+import { FaSearch } from 'react-icons/fa';
 
 const SongGeneratorPage: FC = () => {
   return (
     <MainLayout>
-      <VStack
-        spacing={'1vh'}
-        marginTop={'2vh'}
-        pl={{ base: '8vw', lg: '16vw' }}
-        pr={{ base: '8vw', lg: '16vw' }}
-      >
-        <Text
-          fontSize={{ base: '3xl', md: '5xl' }}
-          fontWeight="500"
-          textAlign="center"
-        >
-          Upload the voice
-        </Text>
+      <div className={styles.songGenerator}>
+        <h1 className={styles.header}>Upload the voice</h1>
         <SongUpload />
-        <Text fontSize={{ base: 'xl', md: '2xl' }} textAlign="center">
-          Select a model
-        </Text>
-        <InputGroup>
-          <InputLeftElement pointerEvents="none">
-            <SearchIcon color="gray.300" />
-          </InputLeftElement>
-          <Input
+        <h2 className={styles.subheader}>Select a model</h2>
+        <div className={styles.inputGroup}>
+          <FaSearch className={styles.searchIcon} />
+          <input
+            type="text"
             placeholder="Search"
-            size="md"
-            width="15vw"
-            minW={'200px'}
-            borderRadius={'20px'}
-            borderColor={'gray.400'}
+            className={styles.searchInput}
           />
-        </InputGroup>
+        </div>
         <ModelList />
-      </VStack>
+      </div>
     </MainLayout>
   );
 };

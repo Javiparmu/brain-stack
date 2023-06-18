@@ -4,10 +4,8 @@ import { create } from 'zustand';
 interface AuthStore {
   user: User | null;
   setUser: (user: User) => void;
-  removeUser: () => void;
   token: string;
   setToken: (token: string) => void;
-  removeToken: () => void;
   loginUser: (email: string, password: string) => Promise<UserResponse>;
   registerUser: (user: User) => Promise<UserResponse>;
   logoutUser: () => Promise<void>;
@@ -16,10 +14,8 @@ interface AuthStore {
 export const useAuthStore = create<AuthStore>((set) => ({
   user: null,
   setUser: (user: User) => set(() => ({ user })),
-  removeUser: () => set(() => ({ user: null })),
   token: '',
   setToken: (token: string) => set(() => ({ token })),
-  removeToken: () => set(() => ({ token: '' })),
   loginUser: async (email: string, password: string) => {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/user/login`,

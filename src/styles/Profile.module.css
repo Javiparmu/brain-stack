@@ -1,0 +1,155 @@
+.profile {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+@media screen and (min-width: 768px) {
+    .profile {
+        padding-left: 16vw;
+        padding-right: 16vw;
+    }
+}
+  
+
+.sideBar {
+    position: sticky;
+    z-index: 1;
+    background-color: #fafafa;
+    border-right: 1px solid #e2e8f0;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sideBar.small {
+    width: 75px;
+    border-bottom-right-radius: 10px;
+}
+
+.sideBar.large {
+    width: 250px;
+    border-bottom-right-radius: 20px;
+}
+
+.profileInfo {
+    padding: 5%;
+    width: 100%;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profileAvatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+}
+
+.profileDetails {
+    margin-top: 1rem;
+    display: none;
+}
+
+.sideBar.large .profileDetails {
+    display: block;
+}
+
+.profileName {
+    font-size: 1rem;
+}
+
+.profileEmail {
+    font-size: 0.875rem;
+}  
+
+.sideBarItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.sideBarItem.active {
+    background-color: #b9bbf0;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.sideBarItem.small {
+    justify-content: center;
+}
+
+.sideBarItem.large {
+    justify-content: flex-start;
+}
+
+.sideBarIcon {
+    font-size: 24px;
+    color: gray;
+}
+
+.sideBarIcon.activeIcon {
+    color: gray;
+}
+
+.sideBarText {
+    margin-left: 1rem;
+    font-size: 1rem;
+    font-weight: normal;
+    display: none;
+}
+
+.sideBarText.activeText {
+    font-weight: bold;
+}
+
+.sideBarItem.large .sideBarText {
+    display: inline;
+}
+
+.hoverBoxContainer {
+    position: relative;
+}
+
+.hoverBoxArrow {
+    position: absolute;
+    top: calc(100px - 7.5px);
+    left: -10px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid #82AAAD;
+}
+
+.hoverBoxContent {
+    height: 200px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #82AAAD;
+    border-radius: 10px;
+    color: #fff;
+    text-align: center;
+}
+
+.hoverBoxIcon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.hoverBoxTitle {
+    font-size: 1.25rem;
+    font-weight: normal;
+}
+
+.hoverBoxDescription {
+    font-size: 1rem;
+}

@@ -1,10 +1,10 @@
-import { Flex, Heading, Text, Icon } from '@chakra-ui/react';
 import React, { FC } from 'react';
+import { IconType } from 'react-icons/lib';
+import styles from '@/styles/Profile.module.css';
 
 interface SideBarHoverBoxProps {
   title: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  icon: any;
+  icon: IconType;
   description: string;
 }
 
@@ -12,36 +12,15 @@ export const SideBarHoverBox: FC<SideBarHoverBoxProps> = ({
   title,
   icon,
   description,
-}: SideBarHoverBoxProps) => {
+}) => {
   return (
-    <>
-      <Flex
-        pos="absolute"
-        mt="calc(100px - 7.5px)"
-        ml="-10px"
-        width={0}
-        height={0}
-        borderTop="10px solid transparent"
-        borderBottom="10px solid transparent"
-        borderRight="10px solid #82AAAD"
-      />
-      <Flex
-        h={200}
-        w={'100%'}
-        flexDir="column"
-        alignItems="center"
-        justify="center"
-        backgroundColor="#82AAAD"
-        borderRadius="10px"
-        color="#fff"
-        textAlign="center"
-      >
-        <Icon as={icon} fontSize="3xl" mb={4} />
-        <Heading size="md" fontWeight="normal">
-          {title}
-        </Heading>
-        <Text>{description}</Text>
-      </Flex>
-    </>
+    <div className={styles.hoverBoxContainer}>
+      <div className={styles.hoverBoxArrow}></div>
+      <div className={styles.hoverBoxContent}>
+        {React.createElement(icon, { className: styles.hoverBoxIcon })}
+        <h2 className={styles.hoverBoxTitle}>{title}</h2>
+        <p className={styles.hoverBoxDescription}>{description}</p>
+      </div>
+    </div>
   );
 };

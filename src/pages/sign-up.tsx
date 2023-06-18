@@ -1,27 +1,24 @@
-import { useState, useEffect, FormEvent, FC } from 'react';
-import { useRouter } from 'next/router';
-import styles from '@/styles/Auth.module.css';
+import { useState, FormEvent, FC } from 'react';
 import { useAuthStore } from '@/store/authStore';
+import styles from '@/styles/Auth.module.css';
 import { AuthImage, MainLayout } from '@/components';
 
-const Login: FC = () => {
+const SignUp: FC = () => {
+  const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
-  const { push } = useRouter();
-  const { user, loginUser } = useAuthStore();
-
-  useEffect(() => {
-    if (user) {
-      push('/');
-    }
-  }, [user]);
+  const { user, registerUser } = useAuthStore();
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
-    await loginUser(email, password);
+    await registerUser({ username, email, password });
+
+    if (user) {
+      window.location.href = '/';
+    }
   };
 
   return (
@@ -29,7 +26,17 @@ const Login: FC = () => {
       <div className={styles.authContainer}>
         <AuthImage />
         <form onSubmit={onSubmit} className={styles.authForm}>
-          <h2>Login</h2>
+          <h2>Register</h2>
+          <div className={styles.inputContainer} id="username">
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              placeholder="Enter username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className={styles.authInput}
+            />
+          </div>
           <div className={styles.inputContainer} id="email">
             <label htmlFor="email">Email</label>
             <input
@@ -57,8 +64,8 @@ const Login: FC = () => {
             </span>
           </div>
           <div className={styles.buttonsContainer}>
-            <button type="button">Register</button>
             <button type="submit">Login</button>
+            <button type="submit">Register</button>
           </div>
         </form>
       </div>
@@ -66,4 +73,4 @@ const Login: FC = () => {
   );
 };
 
-export default Login;
+export default SignUp;

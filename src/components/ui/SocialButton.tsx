@@ -1,5 +1,6 @@
-import { Button, VisuallyHidden, useColorModeValue } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
+import Link from 'next/link';
+import styles from '@/styles/Home.module.css';
 
 interface SocialButtonProps {
   children: ReactNode;
@@ -13,24 +14,10 @@ export const SocialButton: FC<SocialButtonProps> = ({
   href,
 }) => {
   return (
-    <Button
-      bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
-      rounded={'full'}
-      w={8}
-      h={8}
-      cursor={'pointer'}
-      as={'a'}
-      href={href}
-      display={'inline-flex'}
-      alignItems={'center'}
-      justifyContent={'center'}
-      transition={'background 0.3s ease'}
-      _hover={{
-        bg: useColorModeValue('blackAlpha.200', 'whiteAlpha.200'),
-      }}
-    >
-      <VisuallyHidden>{label}</VisuallyHidden>
-      {children}
-    </Button>
+    <Link href={href}>
+      <div className={styles.footerButton} aria-label={label}>
+        {children}
+      </div>
+    </Link>
   );
 };

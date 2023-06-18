@@ -14,3 +14,21 @@ export const createObservers = (): void => {
     observer.observe(element);
   });
 };
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getRandomItems = (list: any[], count: number): any[] => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const randomItems: any[] = [];
+  const totalItems = list.length;
+
+  while (randomItems.length < count) {
+    const randomIndex = Math.floor(Math.random() * totalItems);
+    const randomItem = list[randomIndex];
+
+    if (!randomItems.includes(randomItem)) {
+      randomItems.push(randomItem);
+    }
+  }
+
+  return randomItems;
+};
