@@ -2,6 +2,7 @@ import styles from '@/styles/SongGenerator.module.css';
 import { FC, useState } from 'react';
 import { modelList } from '@/utils';
 import { FaStar } from 'react-icons/fa';
+import Image from 'next/image';
 
 const ModelList: FC = () => {
   const [selectedModel, setSelectedModel] = useState<string>('');
@@ -21,7 +22,9 @@ const ModelList: FC = () => {
           onClick={() => onModelClick(model.artist)}
         >
           <div className={styles.modelInfo}>
-            <img
+            <Image
+              width={100}
+              height={100}
               src={model.image}
               alt={model.artist}
               className={styles.modelImage}

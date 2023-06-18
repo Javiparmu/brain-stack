@@ -4,6 +4,7 @@ import { FiHome } from 'react-icons/fi';
 import { MdLibraryMusic, MdAttachMoney } from 'react-icons/md';
 import { CgProfile } from 'react-icons/cg';
 import { SideBarItem, SideBarHoverBox } from '@/components';
+import Image from 'next/image';
 
 type SideBarItems = 'dashboard' | 'mySongs' | 'payments' | 'settings';
 
@@ -75,7 +76,9 @@ export const SideBar: FC = () => {
         description="Your profile settings"
       />
       <div className={styles.profileInfo}>
-        <img
+        <Image
+          width={40}
+          height={40}
           src={user.avatar}
           alt={user.username}
           className={styles.profileAvatar}
