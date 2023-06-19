@@ -9,7 +9,7 @@ interface PricingProps {
 
 export const Pricing: FC<PricingProps> = ({ show = false }) => {
   return (
-    <div className={show ? '' : 'hidden'}>
+    <section className={show ? '' : 'hidden'}>
       <div>
         <h2 className={styles.pricingTitle}>Pricing</h2>
         <div className={styles.pricingGrid}>
@@ -50,6 +50,6 @@ export const Pricing: FC<PricingProps> = ({ show = false }) => {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };

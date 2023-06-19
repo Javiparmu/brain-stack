@@ -1,6 +1,6 @@
 import styles from '@/styles/Ui.module.css';
 import React, { FC, useState } from 'react';
-import { FaBars } from 'react-icons/fa';
+import { FaBars, FaUserAlt } from 'react-icons/fa';
 import { useRouter } from 'next/router';
 import { useAuthStore } from '@/store/authStore';
 import Link from 'next/link';
@@ -51,11 +51,9 @@ export const Navbar: FC = () => {
         {user ? (
           <>
             <div className={styles.avatarContainer} onClick={toggleMenu}>
-              <Image
-                width={40}
-                height={40}
-                src={user.avatar ?? '/images/no-user.png'}
-                alt="Avatar"
+              <FaUserAlt
+                fontSize={35}
+                color="#676bb9"
                 className={styles.avatar}
               />
             </div>
@@ -64,11 +62,7 @@ export const Navbar: FC = () => {
                 <Link href="" className={styles.menuItem} onClick={onLogout}>
                   Logout
                 </Link>
-                <Link
-                  href="/profile"
-                  className={styles.menuItem}
-                  onClick={() => push('/profile')}
-                >
+                <Link href="/profile" className={styles.menuItem}>
                   Profile
                 </Link>
               </div>
@@ -76,18 +70,12 @@ export const Navbar: FC = () => {
           </>
         ) : (
           <>
-            <button
-              className={styles.authButton}
-              onClick={() => push('/login')}
-            >
-              Sign In
-            </button>
-            <button
-              className={styles.authButton}
-              onClick={() => push('/sign-up')}
-            >
-              Sign Up
-            </button>
+            <Link href="/login" className={styles.link}>
+              <button className={styles.authButton}>Sign In</button>
+            </Link>
+            <Link href="/sign-up" className={styles.link}>
+              <button className={styles.authButton}>Sign Up</button>
+            </Link>
           </>
         )}
         <button
@@ -109,11 +97,7 @@ export const Navbar: FC = () => {
                 <Link href="" className={styles.menuItem} onClick={onLogout}>
                   Logout
                 </Link>
-                <Link
-                  href="/profile"
-                  className={styles.menuItem}
-                  onClick={() => push('/profile')}
-                >
+                <Link href="/profile" className={styles.menuItem}>
                   Profile
                 </Link>
               </>

@@ -103,7 +103,7 @@
 
 @media screen and (max-width: 768px) {
     .navbar {
-        padding: 1rem 8vw;
+        padding: 1rem 4vw;
     }
 
     .links,
@@ -119,6 +119,10 @@
         display: block;
         top: 60px;
         right: -5vw;
+    }
+
+    .avatarContainer {
+        display: none;
     }
 }
 
