@@ -12,8 +12,8 @@ export const CreateSongButton: FC = () => {
         <p className={`${styles.textBold} ${styles.centerOnMobile}`}>first</p>
         <p className={`${styles.text} ${styles.centerOnMobile}`}>song</p>
       </div>
-      <Link className={styles.link} href="/song-generator">
-        <button className={styles.button}>Start creating</button>
+      <Link className={styles.link} href="/dashboard/song-generator">
+        <button className={styles.button}>Get started</button>
       </Link>
       <div className={`${styles.textContainer} ${styles.hideOnMobile}`}>
         <p className={`${styles.text} ${styles.centerOnMobile}`}>For</p>

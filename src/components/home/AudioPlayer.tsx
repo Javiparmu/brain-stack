@@ -28,6 +28,7 @@ export const AudioPlayer: FC<AudioPlayerProps> = ({ song }) => {
   return (
     <>
       <button
+        aria-label="play"
         className={styles.playButton + `${isPlaying ? ' pause' : ' play'}`}
         onClick={() => (isPlaying ? pauseSong() : playSong())}
       >

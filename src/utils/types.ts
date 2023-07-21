@@ -17,3 +17,5 @@ export type RegisterFormValues = {
   email: string;
   password: string;
 };
+
+export type SideBarItems = 'dashboard' | 'mySongs' | 'payments' | 'settings';

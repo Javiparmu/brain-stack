@@ -5,11 +5,6 @@
     position: relative;
 }
 
-.logo {
-    height: 65px;
-    width: 200px;
-}
-
 .navItems {
     display: flex;
     align-items: center;

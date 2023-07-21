@@ -32,3 +32,14 @@ export const getRandomItems = (list: any[], count: number): any[] => {
 
   return randomItems;
 };
+
+export const fetchAudioUrl = async (key: string): Promise<string> => {
+  const res = await fetch('/api/audio', {
+    method: 'POST',
+    body: JSON.stringify({ key }),
+  });
+
+  const { url } = await res.json();
+
+  return url;
+};

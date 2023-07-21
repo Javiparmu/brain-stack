@@ -15,9 +15,9 @@ export const SocialButton: FC<SocialButtonProps> = ({
 }) => {
   return (
     <Link href={href}>
-      <div className={styles.footerButton} aria-label={label}>
+      <label className={styles.footerButton} aria-label={label}>
         {children}
-      </div>
+      </label>
     </Link>
   );
 };

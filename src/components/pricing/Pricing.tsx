@@ -3,13 +3,9 @@ import styles from '@/styles/Pricing.module.css';
 import { pricingData } from '@/utils';
 import { FC } from 'react';
 
-interface PricingProps {
-  show?: boolean;
-}
-
-export const Pricing: FC<PricingProps> = ({ show = false }) => {
+export const Pricing: FC = () => {
   return (
-    <section className={show ? '' : 'hidden'}>
+    <section>
       <div>
         <h2 className={styles.pricingTitle}>Pricing</h2>
         <div className={styles.pricingGrid}>

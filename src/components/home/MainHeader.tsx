@@ -7,7 +7,7 @@ export const MainHeader: FC = () => {
       <h1 className={styles.title}>
         The <span className={styles.highlight}>easiest </span>
         way to create your own AI generated{' '}
-        <span className={styles.highlight}>music.</span>{' '}
+        <span className={styles.highlight}>voices.</span>{' '}
       </h1>
     </div>
   );

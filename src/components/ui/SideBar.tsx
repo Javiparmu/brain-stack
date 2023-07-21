@@ -5,15 +5,12 @@ import { MdLibraryMusic, MdAttachMoney } from 'react-icons/md';
 import { CgProfile } from 'react-icons/cg';
 import { SideBarItem, SideBarHoverBox } from '@/components';
 import Image from 'next/image';
-
-type SideBarItems = 'dashboard' | 'mySongs' | 'payments' | 'settings';
+import { FaUserAlt } from 'react-icons/fa';
+import { useAuthStore } from '@/store/authStore';
+import { SideBarItems } from '@/utils';
 
 export const SideBar: FC = () => {
-  const user = {
-    username: 'John Doe',
-    avatar: 'https://bit.ly/broken-link',
-    email: '123',
-  };
+  const { user } = useAuthStore();
 
   const [selectedItem, setSelectedItem] = useState<SideBarItems>('dashboard');
   const [navSize, setNavSize] = useState<'small' | 'large'>('large');
@@ -76,16 +73,20 @@ export const SideBar: FC = () => {
         description="Your profile settings"
       />
       <div className={styles.profileInfo}>
-        <Image
-          width={40}
-          height={40}
-          src={user.avatar}
-          alt={user.username}
-          className={styles.profileAvatar}
-        />
+        {user?.avatar ? (
+          <Image
+            width={40}
+            height={40}
+            src={user.avatar}
+            alt={user.username}
+            className={styles.profileAvatar}
+          />
+        ) : (
+          <FaUserAlt fontSize={35} color="#676bb9" className={styles.avatar} />
+        )}
         <div className={styles.profileDetails}>
-          <h3 className={styles.profileName}>{user.username}</h3>
-          <p className={styles.profileEmail}>{user.email}</p>
+          <h3 className={styles.profileName}>{user?.username}</h3>
+          <p className={styles.profileEmail}>{user?.email}</p>
         </div>
       </div>
     </div>

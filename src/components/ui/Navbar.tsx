@@ -1,7 +1,9 @@
+'use client';
+
 import styles from '@/styles/Ui.module.css';
 import React, { FC, useState } from 'react';
 import { FaBars, FaUserAlt } from 'react-icons/fa';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/authStore';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -32,11 +34,10 @@ export const Navbar: FC = () => {
     <nav className={styles.navbar}>
       <Link href="/">
         <Image
-          width={200}
-          height={65}
+          width={256}
+          height={79}
           src="/images/music_ai_logo.png"
           alt="logo"
-          className={styles.logo}
         />
       </Link>
       <div className={styles.navItems}>
