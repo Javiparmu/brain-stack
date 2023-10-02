@@ -1,0 +1,63 @@
+/* @font-face {
+  font-family: 'n27regular';
+  src: url('/assets/fonts/n27regular/n27-regular-webfont.eot');
+  src: url('/assets/fonts/n27regular/n27-regular-webfont.eot?#iefix')
+      format('embedded-opentype'),
+    url('/assets/fonts/n27regular/n27-regular-webfont.woff2') format('woff2'),
+    url('/assets/fonts/n27regular/n27-regular-webfont.woff') format('woff'),
+    url('/assets/fonts/n27regular/n27-regular-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+} */
+
+* {
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #13151A;
+  color: #eaeaea;
+}
+
+.hidden {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateX(-100%);
+  transition: all 600ms;
+}
+
+.visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateX(0);
+  transition: all 600ms;
+}
+
+.hiw-image {
+  transition-delay: 100ms;
+}
+
+.hiw-text {
+  transition-delay: 200ms;
+}
+
+.second-card {
+  transition-delay: 200ms;
+}
+
+.third-card {
+  transition-delay: 400ms;
+}
+
+@media (prefers-reduced-motion) {
+  .hidden {
+    transition: none;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: #eaeaea;
+}

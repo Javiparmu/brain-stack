@@ -2,7 +2,12 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['localhost:3000', 'images.unsplash.com', 'plus.unsplash.com'],
+    domains: [
+      'localhost:3000',
+      'images.unsplash.com',
+      'plus.unsplash.com',
+      'oaidalleapiprodscus.blob.core.windows.net',
+    ],
   },
   webpack: (config, { isServer }) => {
     if (!isServer) {

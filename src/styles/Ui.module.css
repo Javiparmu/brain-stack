@@ -1,7 +1,7 @@
 .navbar {
     display: flex;
     justify-content: space-between;
-    padding: 1rem 16vw;
+    padding: 1.5rem 16vw;
     position: relative;
 }
 
@@ -41,25 +41,35 @@
 
 .menu,
 .hamburgerMenu {
-  position: absolute;
-  top: 70px;
-  right: 14vw;
-  background-color: #2D3748;
-  border-radius: 5px;
-  padding: 1rem 0.2rem;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 10;
-  transform: translateX(-50%);
+    position: absolute;
+    top: 70px;
+    right: 13.5vw;
+    background-color: #1D1E1E;
+    border-radius: 5px;
+    padding: 0.8rem 0.2rem;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 10;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.show {
+    opacity: 1;
 }
 
 .menuItem {
     display: block;
-    font-size: 1.3rem;
+    margin: 0 5px;
+    line-height: 18px;
+    font-size: 1.2rem;
     padding: 0.5rem 1rem;
 }
 
 .menuItem:hover {
-    opacity: 0.8;
+    opacity: 0.9;
+    background-color: #252727;
+    border-radius: 5px;
 }
 
 .authButton,
@@ -76,6 +86,40 @@
 
 .authButton {
     font-size: 1.4rem;
+}
+
+.logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.logoText {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #eaeaea;
+}
+
+.getStarted {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 50px;
+    padding: 16px 20px;
+    font-size: large;
+    font-weight: 500;
+    background: linear-gradient(to right, #676bb9, #359ebb);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease;
+    text-align: center;
+}
+
+.getStarted:hover {
+    box-shadow: 0 0.4rem 0 hsla(215, 44%, 51%, 0.5), 0 0 1.5rem hsla(288, 39%, 60%, 0.5);
 }
 
 .authButton:hover,
@@ -121,5 +165,9 @@
     }
 }
 
-
+.avatarIcon {
+    border-radius: 5px;
+    background-color: #1D1E1E;
+    padding: 0.1rem;
+}
   

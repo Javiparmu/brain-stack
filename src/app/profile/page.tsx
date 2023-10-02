@@ -1,4 +1,4 @@
-import { Profile } from '@/components';
+import { Profile } from '@/app/components';
 import { NextPage } from 'next';
 
 const ProfilePage: NextPage = () => {

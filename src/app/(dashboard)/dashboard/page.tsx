@@ -1,32 +1,68 @@
-'use client';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import styles from '@/styles/Dashboard.module.css';
+import Link from 'next/link';
+import {
+  ChevronRightIcon,
+  CodeIcon,
+  ConversationIcon,
+  ImageIcon,
+  MusicIcon,
+  VideoIcon,
+} from '@/app/components/icons';
 
-import '@/styles/globals.css';
-import styles from '@/styles/SongGenerator.module.css';
-import { FC, useState } from 'react';
-import { SongUpload } from '@/components';
-import ModelList from '@/components/songGenerator/ModelList';
-import { FaSearch } from 'react-icons/fa';
+export default async function DashboardPage(): Promise<JSX.Element> {
+  const session = await getServerSession(authOptions);
 
-const SongGeneratorPage: FC = () => {
-  const [searchText, setSearchText] = useState<string>('');
+  if (!session) {
+    return <h1>Unauthorized</h1>;
+  }
 
   return (
-    <div className={styles.songGenerator}>
-      <h1 className={styles.header}>Upload the voice</h1>
-      <SongUpload />
-      <h2 className={styles.subheader}>Select a model</h2>
-      <div className={styles.inputGroup}>
-        <FaSearch className={styles.searchIcon} />
-        <input
-          type="text"
-          placeholder="Search"
-          onChange={(e) => setSearchText(e.target.value)}
-          className={styles.searchInput}
-        />
-      </div>
-      <ModelList searchText={searchText} />
-    </div>
+    <>
+      <h1 className={styles.title}>BrainStack Dashboard</h1>
+      <h2 className={styles.subTitle}>Try any of our products</h2>
+      <section className={styles.productList}>
+        <Link className={styles.productCard} href="/dashboard/conversation">
+          <div className={styles.cardText}>
+            <ConversationIcon
+              styles={styles.convIcon}
+              size={25}
+              color="#676bb9"
+            />
+            Conversation
+          </div>
+          <ChevronRightIcon size={15} />
+        </Link>
+        <Link className={styles.productCard} href="/dashboard/image-generation">
+          <div className={styles.cardText}>
+            <ImageIcon styles={styles.imgIcon} size={25} color="#e54e4e" />
+            Image Generation
+          </div>
+          <ChevronRightIcon size={15} />
+        </Link>
+        <Link className={styles.productCard} href="/dashboard/code-generation">
+          <div className={styles.cardText}>
+            <CodeIcon styles={styles.codeIcon} size={25} color="#3da555" />
+            Code Generation
+          </div>
+          <ChevronRightIcon size={15} />
+        </Link>
+        <Link className={styles.productCard} href="/dashboard/music-generation">
+          <div className={styles.cardText}>
+            <MusicIcon styles={styles.musicIcon} size={25} color="#dae560" />
+            Music Generation
+          </div>
+          <ChevronRightIcon size={15} />
+        </Link>
+        <Link className={styles.productCard} href="/dashboard/video-generation">
+          <div className={styles.cardText}>
+            <VideoIcon styles={styles.videoIcon} size={25} color="#eab154" />
+            Video Generation
+          </div>
+          <ChevronRightIcon size={15} />
+        </Link>
+      </section>
+    </>
   );
-};
-
-export default SongGeneratorPage;
+}
