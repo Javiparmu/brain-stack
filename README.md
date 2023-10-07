@@ -1,38 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Brain Stack: Be Creative with AI
 
-## Getting Started
+![Brain Stack Logo](https://brain-stack.vercel.com/images/logo_blue.png)
 
-First, run the development server:
+## Description
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
+**Brain Stack** is a SaaS platform that empowers you to unleash your creativity using AI. With Brain Stack, you can generate images, text, music, and videos using cutting-edge AI technologies from OpenAI and Replicate. Whether you're a developer, a content creator, or someone who just loves to experiment, Brain Stack is designed to boost your productivity and unlock new levels of efficiency.
+
+Visit our live application: [Brain Stack Dashboard](https://brain-stack.vercel.com/dashboard)
+
+## Features
+
+- **Chat and Code AI Access**: Interact with AI to generate text-based content.
+- **Image, Video, and Music AI Access**: Create stunning visual and auditory content.
+- **Fine-Tuning**: Customize the AI functionalities to suit your specific needs.
+- **Priority Support**: Get your issues resolved in no time with our 24/7 support.
+- **Early Beta Features and API Access**: Be the first to try out new features and API functionalities.
+
+## Installation
+
+To get started with Brain Stack, you can clone the repository and install the dependencies.
+
+\`\`\`bash
+git clone https://github.com/Javiparmu/brain-stack.git
+cd brain-stack
+pnpm install
 pnpm dev
-```
+\`\`\`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Contributing
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+This is an open-source project. We warmly invite you to collaborate with us. Discover the project on GitHub and become a part of our collaborative community.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Support
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Issues or features? Email us at brain-stack@gmail.com.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## License
 
-## Learn More
+This project is licensed under the MIT License.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

@@ -18,7 +18,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
   setToken: (token: string) => set(() => ({ token })),
   loginUser: async (email: string, password: string) => {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/user/login`,
+      `${process.env.NEXT_PUBLIC_API_URL}/user/login`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -38,14 +38,11 @@ export const useAuthStore = create<AuthStore>((set) => ({
     return result;
   },
   registerUser: async (user: User) => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/user`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(user),
-      },
-    );
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(user),
+    });
 
     const { result } = await response.json();
 
