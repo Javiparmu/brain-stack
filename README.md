@@ -5,9 +5,9 @@
 </p>
 
 <p align="center">
-  ![Static Badge](https://img.shields.io/badge/OpenAI-logo?logo=openai)
-  ![Static Badge](https://img.shields.io/badge/Replicate-logo?logo=Replicate&color=blue)
-  ![Static Badge](https://img.shields.io/badge/Next.js-logo?logo=next.js&color=black)
+  <img src="https://img.shields.io/badge/OpenAI-logo?logo=openai">
+  <img src="https://img.shields.io/badge/Replicate-logo?logo=Replicate&color=blue">
+  <img src="https://img.shields.io/badge/Next.js-logo?logo=next.js&color=black">
 </p>
 
 ## Description
