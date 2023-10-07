@@ -1,6 +1,6 @@
 # Brain Stack: Be Creative with AI
 
-![Brain Stack Logo]([https://ibb.co/4F0LNRd](https://i.ibb.co/hgTN8Ff/logo-blue.png))
+![Brain Stack Logo](https://i.ibb.co/hgTN8Ff/logo-blue.png)
 
 ## Description
 
