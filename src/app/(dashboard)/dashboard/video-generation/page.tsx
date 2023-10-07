@@ -1,25 +1,12 @@
 'use client';
 
-import ImageList from '@/app/components/dashboard/image-list';
-import {
-  ImageIcon,
-  RobotIcon,
-  SendIcon,
-  VideoIcon,
-} from '@/app/components/icons';
+import { RobotIcon, SendIcon, VideoIcon } from '@/app/components/icons';
 import LoadingDots from '@/app/components/ui/loading-dots';
 import styles from '@/styles/Dashboard.module.css';
-import { exampleImages } from '@/utils';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { FC, useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
-
-interface ImageGenerationOptions {
-  prompt: string;
-  amount: number;
-  resolution: string;
-}
 
 const VideoPage: FC = () => {
   const router = useRouter();
@@ -27,8 +14,6 @@ const VideoPage: FC = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [video, setVideo] = useState<string>();
   const [inputPrompt, setInputPrompt] = useState<string>('');
-  const [amount, setAmount] = useState<number>(1);
-  const [resolution, setResolution] = useState<string>('256x256');
   const [loadingResponse, setLoadingResponse] = useState<boolean>(false);
 
   const handleInput = () => {
@@ -53,6 +38,7 @@ const VideoPage: FC = () => {
       setVideo(response.data[0]);
 
       setLoadingResponse(false);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error?.response?.status !== 403) {
         toast.error('Something went wrong.');

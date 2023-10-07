@@ -6,18 +6,19 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { signIn } from 'next-auth/react';
 import AvatarButton from './avatar-button';
-import HamburgerMenu from './hamburger-menu';
 import { MdArrowForwardIos } from 'react-icons/md';
+import { Session } from 'next-auth';
+import logo from '@/assets/images/logo_bs.png';
 
 interface NavbarProps {
-  session: any;
+  session: Session | null;
 }
 
 const Navbar: FC<NavbarProps> = ({ session }) => {
   return (
     <nav className={styles.navbar}>
       <Link href="/" className={styles.logo}>
-        <Image width={50} height={50} src="/images/logo_bs.png" alt="logo" />
+        <Image width={50} height={50} sizes="5vw" src={logo} alt="logo" />
         <span className={styles.logoText}>Brain Stack</span>
       </Link>
       <div className={styles.navItems}>
@@ -29,7 +30,6 @@ const Navbar: FC<NavbarProps> = ({ session }) => {
             <MdArrowForwardIos size={15} />
           </button>
         )}
-        <HamburgerMenu session={session} />
       </div>
     </nav>
   );

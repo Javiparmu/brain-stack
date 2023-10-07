@@ -43,16 +43,16 @@ export const authOptions: NextAuthOptions = {
     newUser: '/dashboard',
   },
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
+    async signIn() {
       return true;
     },
-    async redirect({ url, baseUrl }) {
+    async redirect({ baseUrl }) {
       return baseUrl;
     },
-    async session({ session, token, user }) {
+    async session({ session }) {
       return session;
     },
-    async jwt({ token, user, account, profile, isNewUser }) {
+    async jwt({ token }) {
       return token;
     },
   },

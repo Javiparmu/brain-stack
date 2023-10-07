@@ -5,9 +5,10 @@ import Link from 'next/link';
 import React, { FC, useState } from 'react';
 import { FaBars } from 'react-icons/fa';
 import styles from '@/styles/Ui.module.css';
+import { Session } from 'next-auth';
 
 interface HamburgerMenuProps {
-  session: any;
+  session: Session | null;
 }
 
 const HamburgerMenu: FC<HamburgerMenuProps> = ({ session }) => {

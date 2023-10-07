@@ -50,6 +50,7 @@ const ConversationPage: FC = () => {
       setMessages((current) => [response.data, ...current]);
 
       setLoadingResponse(false);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error?.response?.status !== 403) {
         toast.error('Something went wrong.');

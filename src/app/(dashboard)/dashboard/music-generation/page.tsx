@@ -7,7 +7,6 @@ import axios from 'axios';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import LoadingDots from '@/app/components/ui/loading-dots';
-import MessageList from '@/app/components/dashboard/message-list';
 
 const MusicPage: FC = () => {
   const router = useRouter();
@@ -39,6 +38,7 @@ const MusicPage: FC = () => {
       setMusic(response.data.audio);
 
       setLoadingResponse(false);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error?.response?.status !== 403) {
         toast.error('Something went wrong.');

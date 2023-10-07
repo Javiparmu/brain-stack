@@ -4,7 +4,6 @@ import ImageList from '@/app/components/dashboard/image-list';
 import { ImageIcon, SendIcon } from '@/app/components/icons';
 import LoadingDots from '@/app/components/ui/loading-dots';
 import styles from '@/styles/Dashboard.module.css';
-import { exampleImages } from '@/utils';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { FC, useEffect, useRef, useState } from 'react';
@@ -43,23 +42,18 @@ const ImageGenerationPage: FC = () => {
     try {
       setLoadingResponse(true);
 
-      console.log('values', prompt, amount, resolution);
-
-      const response = await axios.post('/api/image', {
+      const response = await axios.post<{ url: string }[]>('/api/image', {
         prompt,
         amount,
         resolution,
       });
 
-      console.log('response', response);
-
-      const urls = response.data.map((image: { url: string }) => image.url);
-
-      console.log('urls', urls);
+      const urls = response.data.map((image) => image.url);
 
       setImages(urls);
 
       setLoadingResponse(false);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error?.response?.status !== 403) {
         toast.error('Something went wrong.');

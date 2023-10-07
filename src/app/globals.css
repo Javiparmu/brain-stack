@@ -2,7 +2,7 @@
   --background: 222.2 84% 4.9%;
   --foreground: 210 40% 98%;
 
-  --card: 222.2 84% 4.9%;
+  --card: #2c2e35;
   --card-foreground: 210 40% 98%;
 
   --popover: 222.2 84% 4.9%;
@@ -38,16 +38,19 @@
     url('/assets/fonts/n27regular/n27-regular-webfont.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
-} */
+}
 
 * {
-  font-family: system-ui, sans-serif;
+  font-family: 'n27regular', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: hsl(var(--background));
+  background-color: #17181D;
   color: hsl(var(--foreground));
 }
 
