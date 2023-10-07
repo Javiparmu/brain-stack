@@ -1,6 +1,13 @@
 # Brain Stack: Be Creative with AI
 
-<img src="https://i.ibb.co/hgTN8Ff/logo-blue.png" alt="Brain Stack Logo" width="100"/>
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+  <img src="https://i.ibb.co/hgTN8Ff/logo-blue.png" alt="Brain Stack Logo" width="100"/>
+  <div style="display: flex; gap: 1rem;" >
+    ![Static Badge](https://img.shields.io/badge/OpenAI-logo?logo=openai)
+    ![Static Badge](https://img.shields.io/badge/Replicate-logo?logo=Replicate&color=blue)
+    ![Static Badge](https://img.shields.io/badge/Next.js-logo?logo=next.js&color=black)
+  </div>
+</div>
 
 ## Description
 
