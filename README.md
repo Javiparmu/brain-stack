@@ -1,7 +1,7 @@
 # Brain Stack: Be Creative with AI
 
 <p align="center">
-  <img src="https://i.ibb.co/hgTN8Ff/logo-blue.png" alt="Brain Stack Logo" width="100"/>
+  <a href="https://brain-stack.vercel.app"><img src="https://i.ibb.co/hgTN8Ff/logo-blue.png" alt="Brain Stack Logo" width="100"/></a>
 </p>
 
 <p align="center">
