@@ -5,9 +5,9 @@
 </p>
 
 <p align="center">
-  <a href="#"><img src="https://img.shields.io/badge/OpenAI-logo?logo=openai"></a>
-  <a href="#"><img src="https://img.shields.io/badge/Replicate-logo?logo=Replicate&color=blue"></a>
-  <a href="#"><img src="https://img.shields.io/badge/Next.js-logo?logo=next.js&color=black"></a>
+  ![Static Badge](https://img.shields.io/badge/OpenAI-logo?logo=openai)
+  ![Static Badge](https://img.shields.io/badge/Replicate-logo?logo=Replicate&color=blue)
+  ![Static Badge](https://img.shields.io/badge/Next.js-logo?logo=next.js&color=black)
 </p>
 
 ## Description
