@@ -28,8 +28,7 @@ Visit our live application: [Brain Stack Dashboard](https://brain-stack.vercel.c
 
 To get started with Brain Stack, you can clone the repository and install the dependencies.
 
-```
-bash
+```bash
 git clone https://github.com/Javiparmu/brain-stack.git
 cd brain-stack
 pnpm install
