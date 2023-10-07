@@ -1,6 +1,6 @@
 # Brain Stack: Be Creative with AI
 
-![Brain Stack Logo](https://brain-stack.vercel.com/images/logo_blue.png)
+![Brain Stack Logo](https://ibb.co/4F0LNRd)
 
 ## Description
 
@@ -20,12 +20,13 @@ Visit our live application: [Brain Stack Dashboard](https://brain-stack.vercel.c
 
 To get started with Brain Stack, you can clone the repository and install the dependencies.
 
-\`\`\`bash
+```
+bash
 git clone https://github.com/Javiparmu/brain-stack.git
 cd brain-stack
 pnpm install
 pnpm dev
-\`\`\`
+```
 
 ## Contributing
 
