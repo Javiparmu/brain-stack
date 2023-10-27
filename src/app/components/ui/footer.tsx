@@ -8,7 +8,7 @@ export const Footer: FC = () => {
     <footer className={styles.footerHome}>
       <div className={styles.footerContainer}>
         <p className={styles.footerText}>
-          © 2023 Music AI. All rights reserved
+          © 2023 Brain Stack. All rights reserved
         </p>
         <div className={styles.socialContainer}>
           <SocialButton label={'Twitter'} href={'#'}>

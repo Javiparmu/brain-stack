@@ -1,5 +1,5 @@
 {
-  "name": "musicai-next",
+  "name": "brainstack-next",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,11 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@stripe/react-stripe-js": "^2.3.1",
+    "@stripe/stripe-js": "^2.1.9",
     "aws-sdk": "^2.1417.0",
     "axios": "^1.4.0",
+    "bcrypt": "^5.1.1",
     "gsap": "^3.12.2",
-    "next": "^13.4.11",
-    "next-auth": "^4.23.0",
+    "mongoose": "^7.6.0",
+    "next": "13.4.11",
+    "next-auth": "^4.23.2",
     "openai": "^4.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -22,10 +26,12 @@
     "react-markdown": "^8.0.7",
     "replicate": "^0.16.1",
     "sonner": "^0.6.2",
+    "stripe": "^14.1.0",
     "zod": "^3.22.2",
     "zustand": "^4.3.8"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/node": "18.15.5",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",

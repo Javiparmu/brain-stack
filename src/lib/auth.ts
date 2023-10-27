@@ -2,25 +2,54 @@ import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import GithubProvider from 'next-auth/providers/github';
+import dbConnect from '@/db/mongoose';
+import User from '@/models/User';
+import { compare } from 'bcrypt';
 
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'credentials',
       credentials: {
-        username: {
-          label: 'Email',
+        email: {
+          label: 'email',
           type: 'text',
-          placeholder: 'Email',
+          placeholder: 'email',
         },
-        password: { label: 'Password', type: 'password' },
+        password: { label: 'password', type: 'password' },
       },
       async authorize(credentials) {
-        const user = { id: '1', name: 'Admin', email: 'admin@admin.com' };
+        try {
+          console.log('credentials', credentials);
+          const { email, password } = credentials ?? {};
 
-        console.log('credentials', credentials);
+          if (!email || !password) {
+            throw new Error('Invalid credentials');
+          }
 
-        return user;
+          await dbConnect();
+
+          const user = await User.findOne({ email });
+
+          if (!user) {
+            throw new Error('Invalid credentials');
+          }
+
+          const isMatch = await compare(password, user.password);
+
+          if (!isMatch) {
+            throw new Error('Invalid credentials');
+          }
+
+          return {
+            id: user._id,
+            email: user.email,
+          };
+        } catch (error) {
+          console.log('error', error);
+
+          return null;
+        }
       },
     }),
     GoogleProvider({
@@ -38,9 +67,6 @@ export const authOptions: NextAuthOptions = {
   },
   jwt: {
     maxAge: 30 * 24 * 60 * 60,
-  },
-  pages: {
-    newUser: '/dashboard',
   },
   callbacks: {
     async signIn() {

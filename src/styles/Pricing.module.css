@@ -16,11 +16,10 @@
 .pricingHeader {
   text-align: center;
   font-size: 44px;
-  line-height: 1rem;
 }
 
 .pricingSubHeader {
-  margin-top: 0;
+  margin: 0;
   max-width: 500px;
   line-height: 1.5rem;
   text-align: center;
@@ -39,8 +38,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 400px;
-  height: 490px;
+  width: 20.8vw;
   background-color: var(--card);
   border-radius: 15px;
   padding: 2.5rem 2rem;
@@ -129,4 +127,139 @@
   mask-image: radial-gradient(closest-side, white, transparent);
   -webkit-mask-image: radial-gradient(closest-side, white, transparent);
   filter: blur(400px);
+}
+
+@media (max-width: 1280px) {
+  .pricingSection {
+    margin-top: 10rem;
+  }
+
+  .pricingHeader {
+    font-size: 36px;
+  }
+
+  .pricingSubHeader {
+    font-size: 18px;
+  }
+
+  .pricingCardHeader {
+    font-size: 20px;
+  }
+
+  .pricingCardSubHeader {
+    font-size: 16px;
+  }
+
+  .pricingCardText {
+    font-size: 16px;
+  }
+
+  .pricingCardPrice {
+    font-size: 36px;
+  }
+
+  .pricingCardTime {
+    font-size: 16px;
+  }
+
+  .pricingCardListItem {
+    font-size: 16px;
+  }
+
+  .pricingCardButton {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 970px) {
+  .pricingSection {
+    margin-top: 10rem;
+  }
+
+  .pricingHeader {
+    font-size: 36px;
+  }
+
+  .pricingSubHeader {
+    font-size: 16px;
+  }
+
+  .pricingCardHeader {
+    font-size: 18px;
+  }
+
+  .pricingCardSubHeader {
+    font-size: 14px;
+  }
+
+  .pricingCardText {
+    font-size: 14px;
+  }
+
+  .pricingCardPrice {
+    font-size: 32px;
+  }
+
+  .pricingCardTime {
+    font-size: 14px;
+  }
+
+  .pricingCardListItem {
+    font-size: 14px;
+  }
+
+  .pricingCardButton {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pricingCard {
+    width: 50vw;
+  }
+
+  .pricingSection {
+    margin-top: 10rem;
+  }
+
+  .pricingHeader {
+    font-size: 36px;
+  }
+
+  .pricingSubHeader {
+    font-size: 18px;
+  }
+
+  .pricingContainer {
+    margin-top: 3rem;
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .pricingCardHeader {
+    font-size: 20px;
+  }
+
+  .pricingCardSubHeader {
+    font-size: 16px;
+  }
+
+  .pricingCardText {
+    font-size: 16px;
+  }
+
+  .pricingCardPrice {
+    font-size: 36px;
+  }
+
+  .pricingCardTime {
+    font-size: 16px;
+  }
+
+  .pricingCardListItem {
+    font-size: 16px;
+  }
+
+  .pricingCardButton {
+    font-size: 16px;
+  }
 }

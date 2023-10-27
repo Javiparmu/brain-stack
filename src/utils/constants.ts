@@ -1,5 +1,8 @@
+import { PlanEnum } from './enums';
+
 export const pricingData = {
   basic: {
+    name: PlanEnum.BASIC,
     title: 'Basic',
     subtitle: 'Ideal for newcomers exploring AI possibilities at a low cost.',
     features: [
@@ -23,6 +26,7 @@ export const pricingData = {
     price: 9.95,
   },
   standard: {
+    name: PlanEnum.STANDARD,
     title: 'Standard',
     subtitle:
       'Suitable for hobbyists and professionals needing more AI capabilities.',
@@ -47,6 +51,7 @@ export const pricingData = {
     price: 19.95,
   },
   premium: {
+    name: PlanEnum.PREMIUM,
     title: 'Premium',
     subtitle:
       'For demanding users requiring comprehensive AI tools and support.',

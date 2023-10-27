@@ -1,5 +1,5 @@
 :root {
-  --background: 222.2 84% 4.9%;
+  --background: #17181D;
   --foreground: 210 40% 98%;
 
   --card: #2c2e35;
@@ -8,10 +8,11 @@
   --popover: 222.2 84% 4.9%;
   --popover-foreground: 210 40% 98%;
 
-  --primary: 210 40% 98%;
+  --primary: #389ABB;
+  --primary-hover: #247a97;
   --primary-foreground: 222.2 47.4% 11.2%;
 
-  --secondary: 217.2 32.6% 17.5%;
+  --secondary: #979ce7;
   --secondary-foreground: 210 40% 98%;
 
   --muted: 217.2 32.6% 17.5%;
@@ -50,7 +51,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #17181D;
+  background-color: var(--background);
   color: hsl(var(--foreground));
 }
 

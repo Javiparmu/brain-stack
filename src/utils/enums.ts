@@ -1,5 +1,5 @@
-export enum SongCategory {
-  GENRE = 'genre',
-  MOOD = 'mood',
-  INSTRUMENT = 'instrument',
+export enum PlanEnum {
+  BASIC = 'basic',
+  STANDARD = 'standard',
+  PREMIUM = 'premium',
 }

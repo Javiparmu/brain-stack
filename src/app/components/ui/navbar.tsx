@@ -4,7 +4,6 @@ import styles from '@/styles/Ui.module.css';
 import React, { FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { signIn } from 'next-auth/react';
 import AvatarButton from './avatar-button';
 import { MdArrowForwardIos } from 'react-icons/md';
 import { Session } from 'next-auth';
@@ -25,10 +24,10 @@ const Navbar: FC<NavbarProps> = ({ session }) => {
         {session ? (
           <AvatarButton />
         ) : (
-          <button className={styles.getStarted} onClick={() => signIn()}>
+          <Link href="/auth/signup" className={styles.getStarted}>
             <span>Get Started</span>
             <MdArrowForwardIos size={15} />
-          </button>
+          </Link>
         )}
       </div>
     </nav>

@@ -1,10 +1,16 @@
-import React, { FC } from 'react';
 import styles from '@/styles/Pricing.module.css';
 import CheckIcon from './check-icon';
 import CrossIcon from './cross-icon';
+import { createCheckoutSession } from '@/app/actions/stripe';
+import { PlanEnum } from '@/utils/enums';
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
+import dbConnect from '@/db/mongoose';
+import User from '@/models/User';
 
 interface PricingCardProps {
   plan: {
+    name: PlanEnum;
     title: string;
     subtitle: string;
     price: number;
@@ -15,8 +21,32 @@ interface PricingCardProps {
   };
 }
 
-const PricingCard: FC<PricingCardProps> = ({ plan }) => {
+async function PricingCard({ plan }: PricingCardProps): Promise<JSX.Element> {
+  const session = await getServerSession();
+
+  const email = session?.user?.email;
+
   const isStandard = plan.title === 'Standard';
+
+  const handlePayment = async (formData: FormData) => {
+    'use server';
+    if (!email) {
+      redirect('/auth/login');
+    }
+
+    await dbConnect();
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      redirect('/auth/signup');
+    }
+
+    formData.append('email', email);
+    formData.append('plan', plan.name);
+
+    await createCheckoutSession(formData);
+  };
 
   return (
     <div
@@ -61,15 +91,18 @@ const PricingCard: FC<PricingCardProps> = ({ plan }) => {
           ))}
         </ul>
       </div>
-      <button
-        className={`${styles.pricingCardButton} ${
-          isStandard ? styles.standard : styles.normal
-        }`}
-      >
-        Choose plan
-      </button>
+      <form action={handlePayment}>
+        <button
+          type="submit"
+          className={`${styles.pricingCardButton} ${
+            isStandard ? styles.standard : styles.normal
+          }`}
+        >
+          Choose plan
+        </button>
+      </form>
     </div>
   );
-};
+}
 
 export default PricingCard;

@@ -1,3 +1,4 @@
+import { PlanEnum } from './enums';
 import { Point } from './interfaces';
 
 export const createObservers = (): void => {
@@ -70,4 +71,17 @@ export const getRandomPoint = (currentPoint: Point): Point => {
   } while (newPoint === currentPoint);
 
   return newPoint;
+};
+
+export const getPlanId = (plan: PlanEnum): string => {
+  switch (plan) {
+    case 'basic':
+      return process.env.STRIPE_BASIC_PLAN_ID as string;
+    case 'standard':
+      return process.env.STRIPE_STANDARD_PLAN_ID as string;
+    case 'premium':
+      return process.env.STRIPE_PREMIUM_PLAN_ID as string;
+    default:
+      throw new Error('Invalid plan ID');
+  }
 };
