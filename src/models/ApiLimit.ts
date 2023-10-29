@@ -20,3 +20,5 @@ const apiLimitSchema = new Schema(
     collection: 'apiLimits',
   },
 );
+
+export default apiLimitSchema;

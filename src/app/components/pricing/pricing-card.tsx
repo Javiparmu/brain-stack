@@ -28,8 +28,9 @@ async function PricingCard({ plan }: PricingCardProps): Promise<JSX.Element> {
 
   const isStandard = plan.title === 'Standard';
 
-  const handlePayment = async (formData: FormData) => {
+  async function handlePayment(formData: FormData) {
     'use server';
+
     if (!email) {
       redirect('/auth/login');
     }
@@ -46,7 +47,7 @@ async function PricingCard({ plan }: PricingCardProps): Promise<JSX.Element> {
     formData.append('plan', plan.name);
 
     await createCheckoutSession(formData);
-  };
+  }
 
   return (
     <div

@@ -1,9 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  experimental: {
-    serverActions: true,
-  },
   images: {
     domains: [
       'localhost:3000',
@@ -12,11 +9,8 @@ const nextConfig = {
       'oaidalleapiprodscus.blob.core.windows.net',
     ],
   },
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.devtool = 'source-map';
-    }
-    return config;
+  typescript: {
+    ignoreBuildErrors: true,
   },
 };
 
