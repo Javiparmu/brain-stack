@@ -1,19 +1,22 @@
-import React, { FC, PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 import { Metadata } from 'next';
 import styles from '@/styles/Dashboard.module.css';
 import Link from 'next/link';
 import AvatarButton from '@/app/components/ui/avatar-button';
 import Image from 'next/image';
 import Sidebar from '@/app/components/dashboard/sidebar';
+import { getApiLimitCount } from '@/lib/api-limit';
+import { checkSubscription } from '@/lib/subscription';
 
 export const metadata: Metadata = {
   title: 'Brain Stack - Dashboard',
-  description: 'Brain Stack Dashboard for all kind of AI generations.',
+  description: 'Brain Stack helps you build everything with AI powered tools.',
   keywords:
     'ai, dashboard, brain stack, generation, music, chat, image, video, code, gpt, openai',
   openGraph: {
     title: 'Brain Stack - Dashboard',
-    description: 'Brain Stack Dashboard for all kind of AI generations.',
+    description:
+      'Brain Stack helps you build everything with AI powered tools.',
     url: 'https://brain-stack.com/dashboard',
     type: 'website',
     images: [
@@ -27,7 +30,12 @@ export const metadata: Metadata = {
   },
 };
 
-const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
+const DashboardLayout = async ({
+  children,
+}: PropsWithChildren): Promise<JSX.Element> => {
+  const apiLimitCount = await getApiLimitCount();
+  const isSubscribed = await checkSubscription();
+
   return (
     <html lang="en">
       <head>
@@ -56,7 +64,10 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
             </div>
           </nav>
           <main className={styles.mainContainer}>
-            <Sidebar />
+            <Sidebar
+              apiLimitCount={apiLimitCount}
+              isSubscribed={isSubscribed}
+            />
             <section className={styles.content}>{children}</section>
           </main>
         </div>

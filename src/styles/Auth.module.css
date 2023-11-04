@@ -57,6 +57,7 @@
     box-sizing: border-box;
     padding-left: 0.5rem;
     height: 50px;
+    color: black;
     border-radius: 0.5rem;
     border: 1px solid hsl(var(--border));
     font-size: 18px;
@@ -70,6 +71,7 @@
     padding-left: 0.5rem;
     height: 50px;
     border-radius: 0.5rem;
+    color: black;
     border: 1px solid hsl(var(--border));
     font-size: 18px;
     color: hsl(var(--foreground));

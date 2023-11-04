@@ -3,3 +3,7 @@ export enum PlanEnum {
   STANDARD = 'standard',
   PREMIUM = 'premium',
 }
+
+export enum PaymentStatus {
+  PAID = 'paid',
+}

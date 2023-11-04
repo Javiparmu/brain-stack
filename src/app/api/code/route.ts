@@ -1,4 +1,6 @@
-import { NextResponse } from 'next/server';
+import { incrementApiLimit } from '@/lib/api-limit';
+import { getUserIp } from '@/lib/user-data';
+import { NextRequest, NextResponse } from 'next/server';
 import { OpenAI } from 'openai';
 
 import { CreateChatCompletionRequestMessage } from 'openai/resources/chat';
@@ -13,7 +15,7 @@ const instructionMessage: CreateChatCompletionRequestMessage = {
     'You are a code generator. You must answer only in markdown code snippets. Use code comments for explanations. If someone ask you non code questions, you must answer: "I am a code generator chat bot, I can only answer code questions. Try our conversation chat bot to answer that.". Translate that sentence depending on the language of the question.',
 };
 
-export async function POST(req: Request): Promise<NextResponse> {
+export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
     const body = await req.json();
     const { messages } = body;
@@ -22,6 +24,10 @@ export async function POST(req: Request): Promise<NextResponse> {
       model: 'gpt-3.5-turbo',
       messages: [instructionMessage, ...messages],
     });
+
+    const userIp = getUserIp(req);
+
+    await incrementApiLimit(userIp);
 
     return NextResponse.json(response.choices[0].message);
   } catch (error) {

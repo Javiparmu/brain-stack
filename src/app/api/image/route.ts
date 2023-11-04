@@ -1,11 +1,13 @@
-import { NextResponse } from 'next/server';
+import { incrementApiLimit } from '@/lib/api-limit';
+import { getUserIp } from '@/lib/user-data';
+import { NextRequest, NextResponse } from 'next/server';
 import { OpenAI } from 'openai';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-export async function POST(req: Request): Promise<NextResponse> {
+export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
     const body = await req.json();
     const { prompt, amount = 1, resolution = '512x512' } = body;
@@ -27,6 +29,10 @@ export async function POST(req: Request): Promise<NextResponse> {
       n: parseInt(amount, 10),
       size: resolution,
     });
+
+    const userIp = getUserIp(req);
+
+    await incrementApiLimit(userIp);
 
     return NextResponse.json(response.data);
   } catch (error) {

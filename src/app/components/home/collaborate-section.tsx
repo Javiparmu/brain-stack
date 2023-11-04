@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import styles from '@/styles/Home.module.css';
 import { GithubIcon } from '../icons';
+import Link from 'next/link';
 
 const CollaborateSection: FC = () => {
   return (
@@ -12,19 +13,15 @@ const CollaborateSection: FC = () => {
           with us. Discover the project on GitHub and become a part of our
           collaborative community.
         </p>
-        <a
+        <Link
           className={styles.collaborateButton}
-          href="https://github.com/Javiparmu/musicai-web"
+          href="https://github.com/Javiparmu/brain-stack"
           target="_blank"
           rel="noopener noreferrer"
         >
           <GithubIcon size="100px" />
-        </a>
+        </Link>
       </div>
-      {/* <div className={styles.collaborateEmail}>
-        <input type="text" className={styles.collaborateInput} />
-        <button className={styles.collaborateSubmit}>Send</button>
-      </div> */}
     </section>
   );
 };

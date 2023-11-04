@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  margin-top: 15rem;
+  margin-top: 2rem;
 }
 
 .pricingTitle {
@@ -127,6 +127,30 @@
   mask-image: radial-gradient(closest-side, white, transparent);
   -webkit-mask-image: radial-gradient(closest-side, white, transparent);
   filter: blur(400px);
+}
+
+.pricingSkeleton {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  margin-top: 5rem;
+}
+
+.pricingCardSkeleton {
+  width: 20.8vw;
+  height: 550px;
+  background-color: #94a3b8;
+  border-radius: 15px;
+  padding: 2.5rem 2rem;
+}
+
+.pricingMiddleCardSkeleton {
+  width: 20.8vw;
+  height: 550px;
+  background-color: #94a3b8;
+  border-radius: 15px;
+  padding: 2.5rem 2rem;
+  scale: 1.1;
 }
 
 @media (max-width: 1280px) {

@@ -1,3 +1,4 @@
+import { maxFreeCounts } from './constants';
 import { PlanEnum } from './enums';
 import { Point } from './interfaces';
 
@@ -84,4 +85,8 @@ export const getPlanId = (plan: PlanEnum): string => {
     default:
       throw new Error('Invalid plan ID');
   }
+};
+
+export const getProgressPercentage = (progress: number): number => {
+  return (progress / maxFreeCounts) * 100;
 };

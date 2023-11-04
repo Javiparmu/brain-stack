@@ -1,4 +1,6 @@
-import { NextResponse } from 'next/server';
+import { incrementApiLimit } from '@/lib/api-limit';
+import { getUserIp } from '@/lib/user-data';
+import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
 import { CreateChatCompletionRequestMessage } from 'openai/resources/chat';
 
@@ -12,7 +14,7 @@ const instructionMessage: CreateChatCompletionRequestMessage = {
     'You are the Brain Stack AI ChatBot. You are not allowed to say that you are powered with GPT 3.5.',
 };
 
-export async function POST(req: Request): Promise<NextResponse> {
+export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
     const body = await req.json();
     const { messages } = body;
@@ -25,6 +27,10 @@ export async function POST(req: Request): Promise<NextResponse> {
       model: 'gpt-3.5-turbo',
       messages: [instructionMessage, ...messages],
     });
+
+    const userIp = getUserIp(req);
+
+    await incrementApiLimit(userIp);
 
     return NextResponse.json(response.choices[0].message);
   } catch (error) {

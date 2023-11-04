@@ -1,6 +1,5 @@
 'use client';
 
-import { FC } from 'react';
 import {
   CodeIcon,
   ConversationIcon,
@@ -12,8 +11,17 @@ import {
 import Link from 'next/link';
 import styles from '@/styles/Dashboard.module.css';
 import { usePathname } from 'next/navigation';
+import { FreeLimitCounter } from './free-limit-counter';
 
-const Sidebar: FC = () => {
+interface SideBarProps {
+  apiLimitCount?: number;
+  isSubscribed?: boolean;
+}
+
+const Sidebar = ({
+  apiLimitCount = 0,
+  isSubscribed = false,
+}: SideBarProps): JSX.Element => {
   const pathname = usePathname().split('/')[2];
 
   return (
@@ -79,6 +87,10 @@ const Sidebar: FC = () => {
           </Link>
         </li>
       </ul>
+      <FreeLimitCounter
+        apiLimitCount={apiLimitCount}
+        isSubscribed={isSubscribed}
+      />
     </aside>
   );
 };

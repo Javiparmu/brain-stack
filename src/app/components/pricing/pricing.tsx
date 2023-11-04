@@ -15,8 +15,9 @@
 
 import styles from '@/styles/Pricing.module.css';
 import { pricingData } from '@/utils';
-import { FC } from 'react';
+import { FC, Suspense } from 'react';
 import PricingCard from './pricing-card';
+import PricingSkeleton from '../skeletons/pricing-skeleton';
 
 export const Pricing: FC = () => {
   return (
@@ -45,9 +46,11 @@ export const Pricing: FC = () => {
         </defs>
       </svg>
       <div className={styles.pricingContainer}>
-        <PricingCard plan={pricingData.basic} />
-        <PricingCard plan={pricingData.standard} />
-        <PricingCard plan={pricingData.premium} />
+        <Suspense fallback={<PricingSkeleton />}>
+          <PricingCard plan={pricingData.basic} />
+          <PricingCard plan={pricingData.standard} />
+          <PricingCard plan={pricingData.premium} />
+        </Suspense>
       </div>
     </section>
   );

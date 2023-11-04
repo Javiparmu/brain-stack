@@ -80,3 +80,5 @@ export const pricingData = {
     price: 39.95,
   },
 };
+
+export const maxFreeCounts = 5;

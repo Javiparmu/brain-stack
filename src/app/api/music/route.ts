@@ -1,11 +1,13 @@
 import Replicate from 'replicate';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+import { getUserIp } from '@/lib/user-data';
+import { incrementApiLimit } from '@/lib/api-limit';
 
 const replicate = new Replicate({
   auth: process.env.REPLICATE_API_KEY ?? '',
 });
 
-export async function POST(req: Request): Promise<NextResponse> {
+export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
     const body = await req.json();
     const { prompt } = body;
@@ -22,6 +24,10 @@ export async function POST(req: Request): Promise<NextResponse> {
         },
       },
     );
+
+    const userIp = getUserIp(req);
+
+    await incrementApiLimit(userIp);
 
     return NextResponse.json(response);
   } catch (error) {

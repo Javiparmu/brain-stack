@@ -1,4 +1,6 @@
 import styles from '@/styles/Checkout.module.css';
+import { PaymentStatus } from '@/utils/enums';
+import Link from 'next/link';
 
 interface Props {
   searchParams: {
@@ -23,11 +25,9 @@ async function CheckoutPage({ searchParams }: Props): Promise<JSX.Element> {
 
   const payment = await response.json();
 
-  console.log('component payment', payment.paymentStatus);
-
   return (
     <main className={styles.mainContainer}>
-      {payment.paymentStatus === 'paid' ? (
+      {payment.paymentStatus === PaymentStatus.PAID ? (
         <section className={styles.sectionContainer}>
           <h1 className={styles.headerText}>Thank you!</h1>
           <p className={styles.paragraphText}>
@@ -48,6 +48,9 @@ async function CheckoutPage({ searchParams }: Props): Promise<JSX.Element> {
             <path d="M9 11v-5a3 3 0 0 1 6 0v5"></path>
             <path d="M15 19l2 2l4 -4"></path>
           </svg>
+          <Link href="/dashboard" className={styles.dashboardLink}>
+            Go to dashboard
+          </Link>
         </section>
       ) : (
         <section className={styles.sectionContainer}>

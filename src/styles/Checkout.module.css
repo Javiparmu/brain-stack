@@ -34,4 +34,17 @@
 .shoppingIcon {
     stroke: var(--primary);
 }
-  
+
+.dashboardLink {
+    margin-top: 1rem;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--primary);
+    color: var(--white);
+    font-size: 1.2rem;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.dashboardLink:hover {
+    background-color: var(--primary-hover);
+}

@@ -39,6 +39,9 @@
 }
 
 .sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 300px;
     flex-grow: 1;
     overflow-y: auto;

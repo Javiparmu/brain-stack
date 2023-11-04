@@ -20,7 +20,6 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         try {
-          console.log('credentials', credentials);
           const { email, password } = credentials ?? {};
 
           if (!email || !password) {
