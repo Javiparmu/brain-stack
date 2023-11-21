@@ -4,9 +4,10 @@ import { MusicIcon, RobotIcon, SendIcon } from '@/app/components/icons';
 import styles from '@/styles/Dashboard.module.css';
 import { FC, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import { toast } from 'sonner';
+import { Toaster } from 'sonner';
 import { useRouter } from 'next/navigation';
 import LoadingDots from '@/app/components/ui/loading-dots';
+import { errorToast } from '@/lib/toasts';
 
 const MusicPage: FC = () => {
   const router = useRouter();
@@ -41,7 +42,9 @@ const MusicPage: FC = () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error?.response?.status !== 403) {
-        toast.error('Something went wrong.');
+        errorToast(error?.response?.data);
+
+        setLoadingResponse(false);
       }
     } finally {
       router.refresh();
@@ -106,6 +109,7 @@ const MusicPage: FC = () => {
           <RobotIcon size={300} color="#6B6C7B" />
         </section>
       )}
+      <Toaster />
     </>
   );
 };

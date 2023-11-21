@@ -192,7 +192,10 @@
 .avatarIcon {
     border-radius: 5px;
     background-color: #1D1E1E;
-    padding: 0.1rem;
+    padding: 0 0.1rem;
+    position: absolute;
+    top: 1.7rem;
+    left: 1rem;
 }
 
 .progressContainer {

@@ -5,63 +5,67 @@ import { maxFreeCounts } from '@/utils';
 import { getServerSession } from 'next-auth';
 
 export const incrementApiLimit = async (ip?: string): Promise<void> => {
-  const session = await getServerSession();
+  try {
+    const session = await getServerSession();
 
-  if (!session?.user) {
-    return;
-  }
+    if (!session?.user) {
+      return;
+    }
 
-  await dbConnect();
+    await dbConnect();
 
-  const user = await User.findOne({
-    email: session.user.email,
-  });
-
-  if (!user) {
-    return;
-  }
-
-  const userApiLimit = await UserApiLimit.findOne({
-    userId: user._id,
-  });
-
-  if (userApiLimit) {
-    await UserApiLimit.updateOne(
-      {
-        userId: user._id,
-      },
-      {
-        hits: userApiLimit.hits + 1,
-        exceded: (userApiLimit.hits = maxFreeCounts - 1),
-      },
-    );
-  } else {
-    const ipApiLimit = await UserApiLimit.findOne({
-      ip,
+    const user = await User.findOne({
+      email: session.user.email,
     });
 
-    if (ipApiLimit) {
+    if (!user) {
+      return;
+    }
+
+    const userApiLimit = await UserApiLimit.findOne({
+      userId: user._id,
+    });
+
+    if (userApiLimit && !userApiLimit.excended) {
       await UserApiLimit.updateOne(
         {
-          ip,
+          userId: user._id,
         },
         {
-          hits: ipApiLimit.hits + 1,
-          exceded: (ipApiLimit.hits = maxFreeCounts - 1),
+          hits: userApiLimit.hits + 1,
+          exceded: userApiLimit.hits === maxFreeCounts - 1,
         },
       );
     } else {
-      await UserApiLimit.create({
+      const ipApiLimit = await UserApiLimit.findOne({
         ip,
-        userId: user._id,
-        hits: 1,
-        exceded: false,
       });
+
+      if (ipApiLimit && !ipApiLimit.excended) {
+        await UserApiLimit.updateOne(
+          {
+            ip,
+          },
+          {
+            hits: ipApiLimit.hits + 1,
+            exceded: ipApiLimit.hits === maxFreeCounts - 1,
+          },
+        );
+      } else {
+        await UserApiLimit.create({
+          ip,
+          userId: user._id,
+          hits: 1,
+          exceded: false,
+        });
+      }
     }
+  } catch (error: any) {
+    throw new Error(error.message);
   }
 };
 
-export const checkApiLimit = async (): Promise<boolean> => {
+export const checkApiLimit = async (ip?: string): Promise<boolean> => {
   const session = await getServerSession();
 
   if (!session?.user) {
@@ -78,11 +82,17 @@ export const checkApiLimit = async (): Promise<boolean> => {
     return false;
   }
 
-  const userApiLimit = await UserApiLimit.findOne({
+  let userApiLimit = await UserApiLimit.findOne({
     userId: user._id,
   });
 
-  if (!userApiLimit || userApiLimit.count < maxFreeCounts) {
+  if (!userApiLimit) {
+    userApiLimit = await UserApiLimit.findOne({
+      ip,
+    });
+  }
+
+  if (userApiLimit && userApiLimit.hits >= maxFreeCounts) {
     return true;
   } else {
     return false;

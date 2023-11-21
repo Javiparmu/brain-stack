@@ -34,7 +34,9 @@ const DashboardLayout = async ({
   children,
 }: PropsWithChildren): Promise<JSX.Element> => {
   const apiLimitCount = await getApiLimitCount();
-  const isSubscribed = await checkSubscription();
+  const subscription = await checkSubscription();
+
+  const plan = subscription?.plan;
 
   return (
     <html lang="en">
@@ -64,10 +66,7 @@ const DashboardLayout = async ({
             </div>
           </nav>
           <main className={styles.mainContainer}>
-            <Sidebar
-              apiLimitCount={apiLimitCount}
-              isSubscribed={isSubscribed}
-            />
+            <Sidebar apiLimitCount={apiLimitCount} isSubscribed={!!plan} />
             <section className={styles.content}>{children}</section>
           </main>
         </div>

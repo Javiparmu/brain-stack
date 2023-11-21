@@ -3,11 +3,12 @@
 import ImageList from '@/app/components/dashboard/image-list';
 import { ImageIcon, SendIcon } from '@/app/components/icons';
 import LoadingDots from '@/app/components/ui/loading-dots';
+import { errorToast } from '@/lib/toasts';
 import styles from '@/styles/Dashboard.module.css';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { FC, useEffect, useRef, useState } from 'react';
-import { toast } from 'sonner';
+import { Toaster } from 'sonner';
 
 interface ImageGenerationOptions {
   prompt: string;
@@ -56,7 +57,9 @@ const ImageGenerationPage: FC = () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error?.response?.status !== 403) {
-        toast.error('Something went wrong.');
+        errorToast(error?.response?.data);
+
+        setLoadingResponse(false);
       }
     } finally {
       router.refresh();
@@ -146,6 +149,7 @@ const ImageGenerationPage: FC = () => {
           <ImageList images={images} size={256} />
         </section>
       )}
+      <Toaster />
     </>
   );
 };

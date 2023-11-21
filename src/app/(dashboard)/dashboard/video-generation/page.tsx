@@ -2,11 +2,12 @@
 
 import { RobotIcon, SendIcon, VideoIcon } from '@/app/components/icons';
 import LoadingDots from '@/app/components/ui/loading-dots';
+import { errorToast } from '@/lib/toasts';
 import styles from '@/styles/Dashboard.module.css';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { FC, useEffect, useRef, useState } from 'react';
-import { toast } from 'sonner';
+import { Toaster } from 'sonner';
 
 const VideoPage: FC = () => {
   const router = useRouter();
@@ -41,7 +42,9 @@ const VideoPage: FC = () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error?.response?.status !== 403) {
-        toast.error('Something went wrong.');
+        errorToast(error?.response?.data);
+
+        setLoadingResponse(false);
       }
     } finally {
       router.refresh();
@@ -106,6 +109,7 @@ const VideoPage: FC = () => {
           <RobotIcon size={300} color="#6B6C7B" />
         </section>
       )}
+      <Toaster />
     </>
   );
 };

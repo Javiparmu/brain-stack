@@ -1,15 +1,21 @@
 import dbConnect from '@/db/mongoose';
 import User from '@/models/User';
 import UserSubscription from '@/models/UserSubscription';
+import { PlanEnum } from '@/utils/enums';
 import { getServerSession } from 'next-auth';
 
-const DAY_IN_MS = 86400000;
+interface Subscription {
+  plan: PlanEnum;
+  userId: string;
+}
 
-export const checkSubscription = async (): Promise<boolean> => {
+const MONTH_IN_MS = 30 * 86400000;
+
+export const checkSubscription = async (): Promise<Subscription | null> => {
   const session = await getServerSession();
 
   if (!session?.user) {
-    return false;
+    return null;
   }
 
   await dbConnect();
@@ -19,21 +25,20 @@ export const checkSubscription = async (): Promise<boolean> => {
   });
 
   if (!user) {
-    return false;
+    return null;
   }
 
   const userSubscription = await UserSubscription.findOne({
     userId: user._id,
+    stripeCurrentPeriodEnd: { $gt: Date.now() - MONTH_IN_MS },
   });
 
   if (!userSubscription) {
-    return false;
+    return null;
   }
 
-  const isValid =
-    userSubscription.stripePriceId &&
-    userSubscription.stripeCurrentPeriodEnd &&
-    userSubscription.stripeCurrentPeriodEnd + DAY_IN_MS > Date.now();
-
-  return !!isValid;
+  return {
+    plan: userSubscription.stripePriceId,
+    userId: userSubscription.userId,
+  };
 };

@@ -3,20 +3,19 @@
 import { ConversationIcon, RobotIcon, SendIcon } from '@/app/components/icons';
 import styles from '@/styles/Dashboard.module.css';
 import { FC, useEffect, useRef, useState } from 'react';
-import { CreateChatCompletionRequestMessage } from 'openai/resources/chat';
+import { ChatCompletionMessageParam } from 'openai/resources/chat';
 import axios from 'axios';
-import { toast } from 'sonner';
+import { Toaster } from 'sonner';
 import { useRouter } from 'next/navigation';
 import LoadingDots from '@/app/components/ui/loading-dots';
 import MessageList from '@/app/components/dashboard/message-list';
+import { errorToast } from '@/lib/toasts';
 
 const ConversationPage: FC = () => {
   const router = useRouter();
   const [hasText, setHasText] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const [messages, setMessages] = useState<
-    CreateChatCompletionRequestMessage[]
-  >([]);
+  const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([]);
   const [inputPrompt, setInputPrompt] = useState<string>('');
   const [loadingResponse, setLoadingResponse] = useState<boolean>(false);
 
@@ -35,7 +34,7 @@ const ConversationPage: FC = () => {
 
       setInputPrompt('');
 
-      const userMessage: CreateChatCompletionRequestMessage = {
+      const userMessage: ChatCompletionMessageParam = {
         role: 'user',
         content: prompt,
       };
@@ -53,7 +52,9 @@ const ConversationPage: FC = () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error?.response?.status !== 403) {
-        toast.error('Something went wrong.');
+        errorToast(error?.response?.data);
+
+        setLoadingResponse(false);
       }
     } finally {
       router.refresh();
@@ -116,6 +117,7 @@ const ConversationPage: FC = () => {
           <RobotIcon size={300} color="#6B6C7B" />
         </section>
       )}
+      <Toaster />
     </>
   );
 };

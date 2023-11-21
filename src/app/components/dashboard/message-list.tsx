@@ -1,11 +1,11 @@
-import { CreateChatCompletionRequestMessage } from 'openai/resources/chat';
+import { ChatCompletionMessageParam } from 'openai/resources/chat';
 import { FC } from 'react';
 import AvatarIcon from '../ui/avatar-icon';
 import styles from '@/styles/Dashboard.module.css';
 import ReactMarkdown from 'react-markdown';
 
 interface MessageListProps {
-  messages: CreateChatCompletionRequestMessage[];
+  messages: ChatCompletionMessageParam[];
   isCode?: boolean;
 }
 
