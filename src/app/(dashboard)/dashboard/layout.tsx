@@ -23,14 +23,6 @@ export const metadata: Metadata = {
       'Brain Stack helps you build everything with AI powered tools.',
     url: 'https://brain-stack.com/dashboard',
     type: 'website',
-    images: [
-      {
-        url: 'https://brain-stack.com/images/logo_blue.png',
-        width: 800,
-        height: 600,
-        alt: 'Brain Stack Logo',
-      },
-    ],
   },
 };
 
