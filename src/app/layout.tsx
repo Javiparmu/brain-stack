@@ -17,11 +17,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Brain Stack',
     description: 'Brain Stack - be creative with AI.',
-    url: 'https://brain-stack.com/dashboard',
+    url: 'https://brain-stack.vercel.app/dashboard',
     type: 'website',
     images: [
       {
-        url: 'https://brain-stack.com/images/logo_blue.png',
+        url: 'https://brain-stack.vercel.app/images/logo_blue.png',
         width: 800,
         height: 600,
         alt: 'Brain Stack Logo',
