@@ -14,12 +14,12 @@ export const metadata: Metadata = {
   description: 'The universal hub for AI generations.',
   keywords:
     'ai, brain stack, generation, music, chat, image, video, code, gpt, openai, landing page',
-  openGraph: {
-    title: 'Brain Stack',
-    description: 'Brain Stack - be creative with AI.',
-    url: 'https://brain-stack.vercel.app/dashboard',
-    type: 'website',
-  },
+  // openGraph: {
+  //   title: 'Brain Stack',
+  //   description: 'Brain Stack - be creative with AI.',
+  //   url: 'https://brain-stack.vercel.app/dashboard',
+  //   type: 'website',
+  // },
 };
 
 const MainLayout = async ({
