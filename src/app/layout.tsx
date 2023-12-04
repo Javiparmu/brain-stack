@@ -1,6 +1,13 @@
-import React, { FC, PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 import { Metadata } from 'next';
 import './globals.css';
+import { Inter } from 'next/font/google';
+import Navbar from './components/ui/navbar';
+import { getServerSession } from 'next-auth';
+import styles from '@/styles/Home.module.css';
+import { authOptions } from '@/lib/auth';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Brain Stack',
@@ -23,19 +30,24 @@ export const metadata: Metadata = {
   },
 };
 
-const MainLayout: FC<PropsWithChildren> = ({ children }) => {
+const MainLayout = async ({
+  children,
+}: PropsWithChildren): Promise<JSX.Element> => {
+  const session = await getServerSession(authOptions);
+
   return (
     <html lang="en">
-      <head>
-        <link
-          rel="preload"
-          href="/assets/fonts/n27regular/n27-regular-webfont.woff2"
-          as="font"
-          crossOrigin="anonymous"
-          type="font/woff2"
-        />
-      </head>
-      <body>{children}</body>
+      <body className={inter.className}>
+        <header>
+          <Navbar session={session} />
+          <div className={styles.bgWrapper}>
+            <div className={styles.bgTiles}></div>
+          </div>
+        </header>
+        <main className={`${styles.mainContainer} ${inter.className}`}>
+          {children}
+        </main>
+      </body>
     </html>
   );
 };

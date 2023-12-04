@@ -20,6 +20,18 @@ const userSchema = new Schema(
       type: String,
       default: null,
     },
+    requestLimit: {
+      type: Number,
+      default: null,
+    },
+    requestCount: {
+      type: Number,
+      default: 0,
+    },
+    requestReset: {
+      type: Number,
+      default: null,
+    },
   },
   {
     timestamps: true,

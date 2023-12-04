@@ -25,6 +25,7 @@
     "react-icons": "^4.8.0",
     "react-markdown": "^8.0.7",
     "replicate": "^0.16.1",
+    "resend": "^2.0.0",
     "sharp": "^0.32.6",
     "sonner": "^0.6.2",
     "stripe": "^14.1.0",

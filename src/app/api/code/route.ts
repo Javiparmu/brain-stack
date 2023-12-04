@@ -1,5 +1,5 @@
 import { checkApiLimit, incrementApiLimit } from '@/lib/api-limit';
-import { checkSubscription } from '@/lib/subscription';
+import { checkSubscription, checkSubscriptionLimit } from '@/lib/subscription';
 import { getUserIp } from '@/lib/user-data';
 import { NextRequest, NextResponse } from 'next/server';
 import { OpenAI } from 'openai';
@@ -33,6 +33,28 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
           'Free limit reached. You need to upgrade your account.',
           {
             status: 429,
+          },
+        );
+      }
+    } else {
+      const { requestAvailable, resetTime } = await checkSubscriptionLimit();
+
+      if (!requestAvailable && resetTime) {
+        const resetTimeHour = new Date(resetTime).getHours();
+
+        return new NextResponse(
+          `Subscription limit reached. Wait until ${resetTimeHour} and try again.`,
+          {
+            status: 429,
+          },
+        );
+      }
+
+      if (!requestAvailable && !resetTime) {
+        return new NextResponse(
+          'There has been an issue with your request, please try logging again',
+          {
+            status: 500,
           },
         );
       }

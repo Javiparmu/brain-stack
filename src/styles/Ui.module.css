@@ -1,8 +1,8 @@
 .navbar {
+    height: 100px;
     display: flex;
     justify-content: space-between;
-    padding: 1.5rem 15rem;
-    position: relative;
+    padding: 0 15rem;
 }
 
 @media screen and (max-width: 1280px) {
@@ -18,9 +18,11 @@
 }
 
 .navItems {
+    position: relative;
+    top: 0;
+    right: 0;
     display: flex;
     align-items: center;
-    gap: 1rem;
 }
 
 .links {
@@ -40,7 +42,6 @@
 }
 
 .avatarContainer {
-    position: relative;
     border-radius: 50%;
     overflow: hidden;
     cursor: pointer;
@@ -53,20 +54,14 @@
 .menu,
 .hamburgerMenu {
     position: absolute;
-    top: 70px;
-    right: 13.5vw;
+    top: 65px;
+    right: 30px;
     background-color: #1D1E1E;
     border-radius: 5px;
     padding: 0.8rem 0.2rem;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 10;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-}
-
-.show {
-    opacity: 1;
+    transition: all 0.2s ease-in-out;
 }
 
 .menuItem {
@@ -75,9 +70,29 @@
     line-height: 18px;
     font-size: 1.2rem;
     padding: 0.5rem 1rem;
+    transition: all 0.2s ease-in-out;
 }
 
 .menuItem:hover {
+    opacity: 0.9;
+    background-color: #252727;
+    border-radius: 5px;
+}
+
+.upgradeMenuItem {
+    display: block;
+    margin: 0 5px;
+    line-height: 18px;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    color: white;
+    background-color: #1D1E1E;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.upgradeMenuItem:hover {
     opacity: 0.9;
     background-color: #252727;
     border-radius: 5px;
@@ -270,4 +285,157 @@
     stroke-width: 2;
     stroke-linecap: round;
     stroke-linejoin: round;
+}
+
+.upgradeModal {
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 0.5rem;
+    border-color: #252727;
+    width: 35vw;
+    height: 80vh;
+    overflow: auto;
+    background-color: #1D1E1E;
+    color: white;
+    padding: 2.5rem;
+}
+
+.upgradeModal h1 {
+    font-size: 46px;
+    margin: 0;
+}
+
+.upgradeModal p {
+    font-size: 1.2rem;
+    margin: 2rem 0;
+    color: #359ebb;
+}
+
+.closeButton {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: white;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.closeButton:hover,
+.closeButton:focus {
+    color: #bbb;
+    cursor: pointer;
+}
+
+.details div {
+    display: flex;
+    flex-direction: row;
+    font-size: 1.2rem;
+	border-left: 2px solid #0f0f0f;
+	border-right: 2px solid #0f0f0f;
+	border-bottom: 2px solid #0f0f0f;
+	padding: 1.5rem;
+}
+
+.details + details {
+	margin-top: .5rem;
+}
+
+.details li {
+    margin-bottom: .5rem;
+}
+
+.summary {
+    font-size: 1.5rem;
+	list-style: none;
+}
+
+.summary::-webkit-details-marker {
+	display: none;
+}
+
+.summary {
+	border: 2px solid #0f0f0f;
+    border-radius: 0.375rem;
+	padding: .75em 1em;
+	cursor: pointer;
+	position: relative;
+	padding-left: calc(1.75rem + .75rem + .75rem);
+    transition: background-color 0.2s;
+}
+
+.summary:before {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	left: .75rem;
+	content: "↓";
+	width: 1.75rem;
+	height: 1.75rem;
+	color: #FFF;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	flex-shrink: 0;
+}
+
+.details[open] .summary {
+	background-color: #252727;
+}
+
+.details[open] .summary:before {
+	content: "↑";
+}
+
+.summary:hover {
+	background-color: #252727;
+}
+
+.upgradeModal::-webkit-scrollbar {
+    width: 10px;
+}
+  
+.upgradeModal::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.upgradeModal::-webkit-scrollbar-thumb {
+    background: #393c44;
+    border-radius: 5px;
+}
+
+.upgradeModal::-webkit-scrollbar-thumb:hover {
+    background: #4d4f57;
+}
+
+.upgradeButtonContainer {
+    flex: 1;
+    margin-left: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.upgradeButton {
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 1rem;
+    background-color: #359ebb;
+    border-radius: 0.375rem;
+    border: none;
+    font-weight: 500;
+    font-size: 1.2rem;
+    padding: 0.7rem 1.2rem;
+    text-align: center;
+    transition: background-color 0.2s;
+}
+
+.upgradeButton:hover {
+    background-color: #247a97;
 }

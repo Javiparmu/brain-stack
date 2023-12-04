@@ -7,6 +7,10 @@ import Image from 'next/image';
 import Sidebar from '@/app/components/dashboard/sidebar';
 import { getApiLimitCount } from '@/lib/api-limit';
 import { checkSubscription } from '@/lib/subscription';
+import UpgradeModal from '@/app/components/pricing/upgrade-modal';
+import { Inter } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Brain Stack - Dashboard',
@@ -40,19 +44,10 @@ const DashboardLayout = async ({
 
   return (
     <html lang="en">
-      <head>
-        <link
-          rel="preload"
-          href="/assets/fonts/n27regular/n27-regular-webfont.woff2"
-          as="font"
-          crossOrigin="anonymous"
-          type="font/woff2"
-        />
-      </head>
-      <body>
+      <body className={inter.className}>
         <div className={styles.layoutContainer}>
           <nav className={styles.navbar}>
-            <Link href="/dashboard" className={styles.logo}>
+            <Link href="/" className={styles.logo}>
               <Image
                 width={30}
                 height={30}
@@ -62,12 +57,13 @@ const DashboardLayout = async ({
               <span className={styles.logoText}>Brain Stack</span>
             </Link>
             <div className={styles.navItems}>
-              <AvatarButton />
+              <AvatarButton isDashboard />
             </div>
           </nav>
           <main className={styles.mainContainer}>
             <Sidebar apiLimitCount={apiLimitCount} isSubscribed={!!plan} />
-            <section className={styles.content}>{children}</section>
+            <article className={styles.content}>{children}</article>
+            <UpgradeModal plan={plan} />
           </main>
         </div>
       </body>

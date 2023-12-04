@@ -1,7 +1,10 @@
 import dbConnect from '@/db/mongoose';
+import { sendSubscriptionEmail } from '@/lib/email';
 import { stripe } from '@/lib/stripe';
+import { getRequestLimitFromPlan } from '@/lib/subscription';
 import User from '@/models/User';
 import UserSubscription from '@/models/UserSubscription';
+import { getPlanFromId } from '@/utils';
 import { PaymentStatus } from '@/utils/enums';
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
@@ -30,17 +33,32 @@ export async function POST(req: Request): Promise<NextResponse> {
       });
     }
 
+    const planId = checkoutSession.line_items?.data[0].price?.id;
+
+    const planName = getPlanFromId(planId);
+
+    if (!planId || !planName) {
+      return new NextResponse('Plan not found', { status: 400 });
+    }
+
     await UserSubscription.create({
       userId: subscribedUser?._id,
       stripeCustomerId: checkoutSession.customer,
       stripeSubscriptionId: checkoutSession.subscription,
-      stripePriceId: checkoutSession.line_items?.data[0].price?.id,
+      stripePriceId: planId,
       stripeCurrentPeriodEnd: checkoutSession.expires_at * 1000,
     });
 
-    subscribedUser.plan = checkoutSession.line_items?.data[0].price?.id;
+    subscribedUser.plan = planId;
+    subscribedUser.requestLimit = getRequestLimitFromPlan(planId);
 
     await subscribedUser.save();
+
+    await sendSubscriptionEmail(
+      subscribedUser.email,
+      subscribedUser.email.split('@')[0],
+      planName,
+    );
   }
 
   return NextResponse.json({ paymentStatus });

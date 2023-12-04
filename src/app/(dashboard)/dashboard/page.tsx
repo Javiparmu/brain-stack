@@ -20,7 +20,7 @@ export default async function DashboardPage(): Promise<JSX.Element> {
 
   return (
     <>
-      <h1 className={styles.title}>BrainStack Dashboard</h1>
+      <h1 className={styles.title}>Brain Stack Dashboard</h1>
       <h2 className={styles.subTitle}>Try any of our products</h2>
       <section className={styles.productList}>
         <Link className={styles.productCard} href="/dashboard/conversation">

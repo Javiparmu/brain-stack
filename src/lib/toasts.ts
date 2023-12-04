@@ -1,7 +1,7 @@
 import { toast } from 'sonner';
 
-export const errorToast = (message: string): string | number =>
-  toast.error(message ?? 'Something went wrong', {
+export const errorToast = (message = 'Something went wrong'): string | number =>
+  toast.error(message, {
     duration: 5000,
     style: {
       borderRadius: '10px',
