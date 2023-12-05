@@ -1,11 +1,11 @@
 import React, { PropsWithChildren } from 'react';
-import '../globals.css';
+import '@/app/globals.css';
 import { Inter } from 'next/font/google';
 import styles from '@/styles/Home.module.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
-const MainLayout = async ({
+const AuthLayout = async ({
   children,
 }: PropsWithChildren): Promise<JSX.Element> => {
   return (
@@ -19,4 +19,4 @@ const MainLayout = async ({
   );
 };
 
-export default MainLayout;
+export default AuthLayout;
