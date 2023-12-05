@@ -17,13 +17,13 @@ export const metadata: Metadata = {
   description: 'Brain Stack helps you build everything with AI powered tools.',
   keywords:
     'ai, dashboard, brain stack, generation, music, chat, image, video, code, gpt, openai',
-  // openGraph: {
-  //   title: 'Brain Stack - Dashboard',
-  //   description:
-  //     'Brain Stack helps you build everything with AI powered tools.',
-  //   url: 'https://brain-stack.com/dashboard',
-  //   type: 'website',
-  // },
+  openGraph: {
+    title: 'Brain Stack - Dashboard',
+    description:
+      'Brain Stack helps you build everything with AI powered tools.',
+    url: 'https://brain-stack.com/dashboard',
+    type: 'website',
+  },
 };
 
 const DashboardLayout = async ({
