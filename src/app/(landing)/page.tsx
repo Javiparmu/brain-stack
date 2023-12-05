@@ -19,11 +19,11 @@ import {
   GetStartedButton,
   Footer,
 } from '@/app/components';
-import BlurredBg from './components/home/blurred-bg';
-import ProductivitySection from './components/home/productivity-section';
-import ShowcaseSection from './components/home/showcase-section';
-import CollaborateSection from './components/home/collaborate-section';
-import DiscountSection from './components/home/discount-section';
+import BlurredBg from '@/app/components/home/blurred-bg';
+import ProductivitySection from '@/app/components/home/productivity-section';
+import ShowcaseSection from '@/app/components/home/showcase-section';
+import CollaborateSection from '@/app/components/home/collaborate-section';
+import DiscountSection from '@/app/components/home/discount-section';
 import { FC } from 'react';
 
 const Home: FC = () => {

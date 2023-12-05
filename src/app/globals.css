@@ -29,20 +29,7 @@
   --ring: 212.7 26.8% 83.9%;
 }
 
-/* @font-face {
-  font-family: 'n27regular';
-  src: url('/assets/fonts/n27regular/n27-regular-webfont.eot');
-  src: url('/assets/fonts/n27regular/n27-regular-webfont.eot?#iefix')
-      format('embedded-opentype'),
-    url('/assets/fonts/n27regular/n27-regular-webfont.woff2') format('woff2'),
-    url('/assets/fonts/n27regular/n27-regular-webfont.woff') format('woff'),
-    url('/assets/fonts/n27regular/n27-regular-webfont.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-} */
-
 * {
-  /* font-family: 'n27regular', sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;

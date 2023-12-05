@@ -288,6 +288,7 @@
 }
 
 .upgradeModal {
+    display: block;
     position: fixed;
     z-index: 1;
     left: 50%;
@@ -439,3 +440,28 @@
 .upgradeButton:hover {
     background-color: #247a97;
 }
+
+.modalBackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.hidden {
+    animation: fade-out 0.5s forwards;
+}
+
+@keyframes fade-out {
+    to {
+        opacity: 0;
+        display: none;
+    }
+}
+  

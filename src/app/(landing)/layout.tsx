@@ -1,8 +1,8 @@
 import React, { PropsWithChildren } from 'react';
 import { Metadata } from 'next';
-import './globals.css';
+import '@/app/globals.css';
 import { Inter } from 'next/font/google';
-import Navbar from './components/ui/navbar';
+import Navbar from '@/app/components/ui/navbar';
 import { getServerSession } from 'next-auth';
 import styles from '@/styles/Home.module.css';
 import { authOptions } from '@/lib/auth';
@@ -36,9 +36,7 @@ const MainLayout = async ({
             <div className={styles.bgTiles}></div>
           </div>
         </header>
-        <main className={`${styles.mainContainer} ${inter.className}`}>
-          {children}
-        </main>
+        <main className={styles.mainContainer}>{children}</main>
       </body>
     </html>
   );

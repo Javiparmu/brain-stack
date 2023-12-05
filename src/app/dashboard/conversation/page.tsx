@@ -87,7 +87,6 @@ const ConversationPage: FC = () => {
       <section className={styles.inputContainer}>
         <textarea
           ref={textareaRef}
-          spellCheck={false}
           onKeyDown={handleKeyDown}
           onInput={handleInput}
           onChange={(e) => setInputPrompt(e.target.value)}

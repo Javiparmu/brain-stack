@@ -9,6 +9,7 @@ import { getApiLimitCount } from '@/lib/api-limit';
 import { checkSubscription } from '@/lib/subscription';
 import UpgradeModal from '@/app/components/pricing/upgrade-modal';
 import { Inter } from 'next/font/google';
+import '@/app/globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -37,27 +38,25 @@ const DashboardLayout = async ({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className={styles.layoutContainer}>
-          <nav className={styles.navbar}>
-            <Link href="/" className={styles.logo}>
-              <Image
-                width={30}
-                height={30}
-                src="/images/logo_blue.png"
-                alt="logo"
-              />
-              <span className={styles.logoText}>Brain Stack</span>
-            </Link>
-            <div className={styles.navItems}>
-              <AvatarButton isDashboard />
-            </div>
-          </nav>
-          <main className={styles.mainContainer}>
-            <Sidebar apiLimitCount={apiLimitCount} isSubscribed={!!plan} />
-            <article className={styles.content}>{children}</article>
-            <UpgradeModal plan={plan} />
-          </main>
-        </div>
+        <nav className={styles.navbar}>
+          <Link href="/" className={styles.logo}>
+            <Image
+              width={30}
+              height={30}
+              src="/images/logo_blue.png"
+              alt="logo"
+            />
+            <span className={styles.logoText}>Brain Stack</span>
+          </Link>
+          <div className={styles.navItems}>
+            <AvatarButton isDashboard />
+          </div>
+        </nav>
+        <main className={styles.mainContainer}>
+          <Sidebar apiLimitCount={apiLimitCount} isSubscribed={!!plan} />
+          <article className={styles.content}>{children}</article>
+          <UpgradeModal plan={plan} />
+        </main>
       </body>
     </html>
   );
