@@ -6,6 +6,7 @@ import Navbar from '@/app/components/ui/navbar';
 import { getServerSession } from 'next-auth';
 import styles from '@/styles/Home.module.css';
 import { authOptions } from '@/lib/auth';
+import BackgroundTiles from '../components/ui/background-tiles';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -30,11 +31,9 @@ const MainLayout = async ({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <BackgroundTiles />
         <header>
           <Navbar session={session} />
-          <div className={styles.bgWrapper}>
-            <div className={styles.bgTiles}></div>
-          </div>
         </header>
         <main className={styles.mainContainer}>{children}</main>
       </body>

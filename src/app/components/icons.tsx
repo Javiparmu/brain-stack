@@ -261,7 +261,13 @@ export const GithubIcon: FC<IconProps> = ({
   size = '24px',
   color = 'black',
 }) => (
-  <svg className={styles} width={size} height={size} color={color}>
+  <svg
+    className={styles}
+    width={size}
+    height={size}
+    color={color}
+    viewBox={`0 0 ${size} ${size}`}
+  >
     <path
       fillRule="evenodd"
       clipRule="evenodd"

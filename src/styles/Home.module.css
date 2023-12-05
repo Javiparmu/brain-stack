@@ -181,26 +181,27 @@
 .footerHome {
     width: 80%;
     margin-top: 5rem;
+    padding: 1rem 0;
     border-width: 0;
     border-top-width: 1px;
     border-style: solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .footerContainer {
     max-width: 90rem;
-    margin: 0 auto;
-    height: 5rem;
-    padding: 1rem;
+    padding: 2rem 0;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
 .footerText {
+    margin: 0;
     font-size: 1rem;
     color: #eaeaea;
-    margin-bottom: 1rem;
 }
 
 .socialContainer {
@@ -223,11 +224,6 @@
     background-color: rgba(0, 0, 0, 0.1);
     color: #eaeaea;
     border-radius: 50%;
-    width: 2rem;
-    height: 2rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     transition: background-color 0.3s ease;
     text-decoration: none;
 }
