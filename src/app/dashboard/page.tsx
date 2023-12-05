@@ -32,35 +32,35 @@ export default async function DashboardPage(): Promise<JSX.Element> {
             />
             Conversation
           </div>
-          <ChevronRightIcon size={15} />
+          <ChevronRightIcon size={24} color="white" />
         </Link>
         <Link className={styles.productCard} href="/dashboard/image-generation">
           <div className={styles.cardText}>
             <ImageIcon styles={styles.imgIcon} size={25} color="#e54e4e" />
             Image Generation
           </div>
-          <ChevronRightIcon size={15} />
+          <ChevronRightIcon size={24} color="white" />
         </Link>
         <Link className={styles.productCard} href="/dashboard/code-generation">
           <div className={styles.cardText}>
             <CodeIcon styles={styles.codeIcon} size={25} color="#3da555" />
             Code Generation
           </div>
-          <ChevronRightIcon size={15} />
+          <ChevronRightIcon size={24} color="white" />
         </Link>
         <Link className={styles.productCard} href="/dashboard/music-generation">
           <div className={styles.cardText}>
             <MusicIcon styles={styles.musicIcon} size={25} color="#dae560" />
             Music Generation
           </div>
-          <ChevronRightIcon size={15} />
+          <ChevronRightIcon size={24} color="white" />
         </Link>
         <Link className={styles.productCard} href="/dashboard/video-generation">
           <div className={styles.cardText}>
             <VideoIcon styles={styles.videoIcon} size={25} color="#eab154" />
             Video Generation
           </div>
-          <ChevronRightIcon size={15} />
+          <ChevronRightIcon size={24} color="white" />
         </Link>
       </section>
     </>
