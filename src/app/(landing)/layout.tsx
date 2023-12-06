@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import { Metadata } from 'next';
 import '@/app/globals.css';
 import { Inter } from 'next/font/google';

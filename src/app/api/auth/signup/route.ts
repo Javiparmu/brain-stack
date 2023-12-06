@@ -25,15 +25,11 @@ export async function POST(req: Request): Promise<NextResponse> {
       password: hashedPassword,
     });
 
-    console.log('user', user);
-
     if (!user) {
       throw new Error('Could not create user');
     }
 
     const send = await sendRegistrationEmail(email, email.split('@')[0]);
-
-    console.log('send', send);
 
     if (send.error) {
       return NextResponse.json({ status: 500, message: send.error.message });
