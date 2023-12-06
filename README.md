@@ -14,7 +14,7 @@
 
 **Brain Stack** is a SaaS platform that empowers you to unleash your creativity using AI. With Brain Stack, you can generate images, text, music, and videos using cutting-edge AI technologies from OpenAI and Replicate. Whether you're a developer, a content creator, or someone who just loves to experiment, Brain Stack is designed to boost your productivity and unlock new levels of efficiency.
 
-Visit our live application: [Brain Stack Dashboard](https://brain-stack.vercel.com/dashboard)
+Visit our live application: [Brain Stack Dashboard](https://brain-stack.vercel.app/dashboard)
 
 ## Features
 
