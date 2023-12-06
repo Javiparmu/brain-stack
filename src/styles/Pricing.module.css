@@ -196,14 +196,6 @@
 }
 
 @media (max-width: 970px) {
-  .pricingSection {
-    margin-top: 10rem;
-  }
-
-  .pricingHeader {
-    font-size: 36px;
-  }
-
   .pricingSubHeader {
     font-size: 16px;
   }
@@ -239,19 +231,22 @@
 
 @media (max-width: 768px) {
   .pricingCard {
-    width: 50vw;
+    width: 60vw;
+    padding: 1.5rem 2rem;
   }
 
   .pricingSection {
-    margin-top: 10rem;
+    margin-top: 8rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
 
   .pricingHeader {
-    font-size: 36px;
+    font-size: 32px;
   }
 
   .pricingSubHeader {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .pricingContainer {
