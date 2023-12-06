@@ -6,7 +6,7 @@ import { PlanEnum } from '@/utils/enums';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import dbConnect from '@/db/mongoose';
-import User from '@/models/User';
+import User from '@/services/db/models/mongoose/User';
 
 interface PricingCardProps {
   plan: {

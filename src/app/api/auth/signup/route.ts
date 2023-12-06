@@ -1,6 +1,6 @@
 import dbConnect from '@/db/mongoose';
 import { sendRegistrationEmail } from '@/lib/email';
-import User from '@/models/User';
+import User from '@/services/db/models/mongoose/User';
 import { hash } from 'bcrypt';
 import { NextResponse } from 'next/server';
 

@@ -3,7 +3,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import GithubProvider from 'next-auth/providers/github';
 import dbConnect from '@/db/mongoose';
-import User from '@/models/User';
+import User from '@/services/db/models/mongoose/User';
 import { compare } from 'bcrypt';
 
 export const authOptions: NextAuthOptions = {

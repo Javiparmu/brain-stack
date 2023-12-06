@@ -1,6 +1,6 @@
 import dbConnect from '@/db/mongoose';
-import User from '@/models/User';
-import UserApiLimit from '@/models/UserApiLimit';
+import User from '@/services/db/models/mongoose/User';
+import UserApiLimit from '@/services/db/models/mongoose/UserApiLimit';
 import { maxFreeCounts } from '@/utils';
 import { getServerSession } from 'next-auth';
 

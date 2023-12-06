@@ -1,6 +1,6 @@
 import dbConnect from '@/db/mongoose';
-import User from '@/models/User';
-import UserSubscription from '@/models/UserSubscription';
+import User from '@/services/db/models/mongoose/User';
+import UserSubscription from '@/services/db/models/mongoose/UserSubscription';
 import { getPlanFromId } from '@/utils';
 import { PlanEnum } from '@/utils/enums';
 import { getServerSession } from 'next-auth';
