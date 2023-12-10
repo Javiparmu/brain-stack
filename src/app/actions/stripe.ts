@@ -5,8 +5,6 @@ import type { Stripe } from 'stripe';
 import { redirect } from 'next/navigation';
 import { headers } from 'next/headers';
 
-import { CURRENCY } from '@/lib/stripe';
-import { formatAmountForStripe } from '@/utils/stripe-helpers';
 import { stripe } from '@/lib/stripe';
 import { PlanEnum } from '@/utils/enums';
 import { getPlanId } from '@/utils';
