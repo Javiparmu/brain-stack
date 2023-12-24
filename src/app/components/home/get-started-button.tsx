@@ -1,4 +1,4 @@
-import styles from '@/styles/Home.module.css';
+import styles from '@/app/styles/Home.module.css';
 import Link from 'next/link';
 import React, { FC } from 'react';
 

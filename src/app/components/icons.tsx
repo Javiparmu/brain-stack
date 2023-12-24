@@ -6,11 +6,7 @@ interface IconProps {
   color?: string;
 }
 
-export const ConversationIcon: FC<IconProps> = ({
-  styles,
-  size = '24px',
-  color = 'black',
-}) => {
+export const ConversationIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black' }) => {
   return (
     <svg
       className={`${styles} icon icon-tabler icon-tabler-message`}
@@ -31,11 +27,7 @@ export const ConversationIcon: FC<IconProps> = ({
   );
 };
 
-export const DashboardIcon: FC<IconProps> = ({
-  styles,
-  size = '24px',
-  color = 'black',
-}) => {
+export const DashboardIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black' }) => {
   return (
     <svg
       className={`${styles} icon icon-tabler icon-tabler-layout-dashboard`}
@@ -57,11 +49,7 @@ export const DashboardIcon: FC<IconProps> = ({
   );
 };
 
-export const MusicIcon: FC<IconProps> = ({
-  styles,
-  size = '24px',
-  color = 'black',
-}) => {
+export const MusicIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black' }) => {
   return (
     <svg
       className={`${styles} icon icon-tabler icon-tabler-music`}
@@ -83,11 +71,7 @@ export const MusicIcon: FC<IconProps> = ({
   );
 };
 
-export const CodeIcon: FC<IconProps> = ({
-  styles,
-  size = '24px',
-  color = 'black',
-}) => {
+export const CodeIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black' }) => {
   return (
     <svg
       className={`${styles} icon icon-tabler icon-tabler-code`}
@@ -108,11 +92,7 @@ export const CodeIcon: FC<IconProps> = ({
   );
 };
 
-export const ImageIcon: FC<IconProps> = ({
-  styles,
-  size = '24px',
-  color = 'black',
-}) => {
+export const ImageIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black' }) => {
   return (
     <svg
       className={`${styles} icon icon-tabler icon-tabler-photo`}
@@ -134,11 +114,7 @@ export const ImageIcon: FC<IconProps> = ({
   );
 };
 
-export const VideoIcon: FC<IconProps> = ({
-  styles,
-  size = '24px',
-  color = 'black',
-}) => {
+export const VideoIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black' }) => {
   return (
     <svg
       className={`${styles} icon icon-tabler icon-tabler-video`}
@@ -158,11 +134,7 @@ export const VideoIcon: FC<IconProps> = ({
   );
 };
 
-export const ChevronRightIcon: FC<IconProps> = ({
-  styles,
-  size = '24px',
-  color = 'black',
-}) => {
+export const ChevronRightIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black' }) => {
   return (
     <svg
       className={`${styles} icon icon-tabler icon-tabler-chevron-right`}
@@ -181,11 +153,7 @@ export const ChevronRightIcon: FC<IconProps> = ({
   );
 };
 
-export const SendIcon: FC<IconProps> = ({
-  styles,
-  size = '24px',
-  color = 'black',
-}) => {
+export const SendIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black' }) => {
   return (
     <svg
       style={{ transform: 'rotate(90deg)' }}
@@ -203,11 +171,7 @@ export const SendIcon: FC<IconProps> = ({
   );
 };
 
-export const DownloadIcon: FC<IconProps> = ({
-  styles,
-  size = '24px',
-  color = 'black',
-}) => {
+export const DownloadIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black' }) => {
   return (
     <svg
       className={`${styles} icon icon-tabler icon-tabler-download`}
@@ -228,11 +192,7 @@ export const DownloadIcon: FC<IconProps> = ({
   );
 };
 
-export const RobotIcon: FC<IconProps> = ({
-  styles,
-  size = '24px',
-  color = 'black',
-}) => {
+export const RobotIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black' }) => {
   return (
     <svg
       className={`${styles} icon icon-tabler icon-tabler-robot`}
@@ -256,18 +216,8 @@ export const RobotIcon: FC<IconProps> = ({
   );
 };
 
-export const GithubIcon: FC<IconProps> = ({
-  styles,
-  size = '24px',
-  color = 'black',
-}) => (
-  <svg
-    className={styles}
-    width={size}
-    height={size}
-    color={color}
-    viewBox={`0 0 ${size} ${size}`}
-  >
+export const GithubIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black' }) => (
+  <svg className={styles} width={size} height={size} color={color} viewBox={`0 0 ${size} ${size}`}>
     <path
       fillRule="evenodd"
       clipRule="evenodd"

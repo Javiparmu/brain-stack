@@ -4,7 +4,7 @@ import { signIn, signOut } from 'next-auth/react';
 import Link from 'next/link';
 import React, { FC, useState } from 'react';
 import { FaBars } from 'react-icons/fa';
-import styles from '@/styles/Ui.module.css';
+import styles from '@/app/styles/Ui.module.css';
 import { Session } from 'next-auth';
 
 interface HamburgerMenuProps {
@@ -27,11 +27,7 @@ const HamburgerMenu: FC<HamburgerMenuProps> = ({ session }) => {
         <div className={styles.hamburgerMenu}>
           {session ? (
             <>
-              <Link
-                href=""
-                className={styles.menuItem}
-                onClick={() => signOut()}
-              >
+              <Link href="" className={styles.menuItem} onClick={() => signOut()}>
                 Logout
               </Link>
               <Link href="/profile" className={styles.menuItem}>

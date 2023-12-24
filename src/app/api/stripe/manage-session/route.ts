@@ -1,30 +1,37 @@
-import dbConnect from '@/db/mongoose';
-import { sendSubscriptionEmail } from '@/lib/email';
-import { stripe } from '@/lib/stripe';
-import { getRequestLimitFromPlan } from '@/lib/subscription';
-import User from '@/services/db/models/mongoose/User';
-import UserSubscription from '@/services/db/models/mongoose/UserSubscription';
-import { getPlanFromId } from '@/utils';
-import { PaymentStatus } from '@/utils/enums';
+import { sendSubscriptionEmail } from '@/app/lib/email';
+import { stripe } from '@/app/lib/stripe';
+import { getPlanFromId } from '@/app/utils';
+import { PaymentStatus } from '@/app/utils/enums';
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import { UserFinder } from '@/backend/User/application/UserFinder';
+import { MongoUserRepository } from '@/backend/User/infrastructure/persistence/MongoUserRepository';
+import { UserUpgrade } from '@/backend/User/application/UserUpgrade';
+import { randomUUID } from 'crypto';
 
 export async function POST(req: Request): Promise<NextResponse> {
   const { sessionId } = await req.json();
 
-  const checkoutSession: Stripe.Checkout.Session =
-    await stripe.checkout.sessions.retrieve(sessionId, {
-      expand: ['line_items', 'payment_intent'],
-    });
+  const checkoutSession: Stripe.Checkout.Session = await stripe.checkout.sessions.retrieve(sessionId, {
+    expand: ['line_items', 'payment_intent'],
+  });
 
-  const paymentStatus = checkoutSession.payment_status;
+  const {
+    customer,
+    customer_details: customerDetails,
+    line_items: lineItems,
+    payment_status: paymentStatus,
+    subscription,
+    expires_at: expiresAt,
+  } = checkoutSession;
+
+  if (!customer || !customerDetails?.email || !lineItems || !paymentStatus || !subscription) {
+    return new NextResponse('Invalid session', { status: 400 });
+  }
 
   if (paymentStatus === PaymentStatus.PAID) {
-    await dbConnect();
-
-    const subscribedUser = await User.findOne({
-      email: checkoutSession.customer_details?.email,
-    });
+    const userFinder = new UserFinder(new MongoUserRepository());
+    const subscribedUser = await userFinder.run(customerDetails.email);
 
     if (!subscribedUser) {
       return NextResponse.json({
@@ -33,32 +40,24 @@ export async function POST(req: Request): Promise<NextResponse> {
       });
     }
 
-    const planId = checkoutSession.line_items?.data[0].price?.id;
-
+    const planId = lineItems.data[0].price?.id;
     const planName = getPlanFromId(planId);
 
     if (!planId || !planName) {
       return new NextResponse('Plan not found', { status: 400 });
     }
 
-    await UserSubscription.create({
-      userId: subscribedUser?._id,
-      stripeCustomerId: checkoutSession.customer,
-      stripeSubscriptionId: checkoutSession.subscription,
+    const userUpgrade = new UserUpgrade(new MongoUserRepository());
+    await userUpgrade.run({
+      id: randomUUID(),
+      userId: subscribedUser.id.value,
+      stripeCustomerId: customer.toString(),
+      stripeSubscriptionId: subscription.toString(),
       stripePriceId: planId,
-      stripeCurrentPeriodEnd: checkoutSession.expires_at * 1000,
+      stripeCurrentPeriodEnd: expiresAt * 1000,
     });
 
-    subscribedUser.plan = planId;
-    subscribedUser.requestLimit = getRequestLimitFromPlan(planId);
-
-    await subscribedUser.save();
-
-    await sendSubscriptionEmail(
-      subscribedUser.email,
-      subscribedUser.email.split('@')[0],
-      planName,
-    );
+    await sendSubscriptionEmail(subscribedUser.email!.value, subscribedUser.email!.value.split('@')[0], planName);
   }
 
   return NextResponse.json({ paymentStatus });

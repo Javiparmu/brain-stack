@@ -1,6 +1,6 @@
 'use client';
 
-import styles from '@/styles/Ui.module.css';
+import styles from '@/app/styles/Ui.module.css';
 import { FC } from 'react';
 
 interface UpgradeButtonProps {

@@ -1,12 +1,13 @@
-import styles from '@/styles/Pricing.module.css';
+import styles from '@/app/styles/Pricing.module.css';
 import CheckIcon from './check-icon';
 import CrossIcon from './cross-icon';
 import { createCheckoutSession } from '@/app/actions/stripe';
-import { PlanEnum } from '@/utils/enums';
+import { PlanEnum } from '@/app/utils/enums';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
-import dbConnect from '@/db/mongoose';
-import User from '@/services/db/models/mongoose/User';
+import { UserFinder } from '@/backend/User/application/UserFinder';
+import { MongoUserRepository } from '@/backend/User/infrastructure/persistence/MongoUserRepository';
+import { authOptions } from '@/app/lib';
 
 interface PricingCardProps {
   plan: {
@@ -22,31 +23,27 @@ interface PricingCardProps {
 }
 
 async function PricingCard({ plan }: PricingCardProps): Promise<JSX.Element> {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
 
   const email = session?.user?.email;
 
   const isStandard = plan.title === 'Standard';
 
-  async function handlePayment(formData: FormData) {
+  async function handlePayment() {
     'use server';
 
     if (!email) {
       redirect('/auth/login');
     }
 
-    await dbConnect();
-
-    const user = await User.findOne({ email });
+    const userFinder = new UserFinder(new MongoUserRepository());
+    const user = await userFinder.run(email);
 
     if (!user) {
       redirect('/auth/signup');
     }
 
-    formData.append('email', email);
-    formData.append('plan', plan.name);
-
-    await createCheckoutSession(formData);
+    await createCheckoutSession(email, plan.name);
   }
 
   return (
@@ -68,10 +65,7 @@ async function PricingCard({ plan }: PricingCardProps): Promise<JSX.Element> {
       }
     >
       <div>
-        <h3
-          className={styles.pricingCardHeader}
-          style={isStandard ? { color: '#389ABB' } : { outline: '#979ce7' }}
-        >
+        <h3 className={styles.pricingCardHeader} style={isStandard ? { color: '#389ABB' } : { outline: '#979ce7' }}>
           {plan.title}
         </h3>
         <p className={styles.pricingCardSubHeader}>{plan.subtitle}</p>
@@ -93,12 +87,7 @@ async function PricingCard({ plan }: PricingCardProps): Promise<JSX.Element> {
         </ul>
       </div>
       <form action={handlePayment}>
-        <button
-          type="submit"
-          className={`${styles.pricingCardButton} ${
-            isStandard ? styles.standard : styles.normal
-          }`}
-        >
+        <button type="submit" className={`${styles.pricingCardButton} ${isStandard ? styles.standard : styles.normal}`}>
           Choose plan
         </button>
       </form>

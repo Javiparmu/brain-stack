@@ -1,15 +1,8 @@
 'use client';
 
-import {
-  CodeIcon,
-  ConversationIcon,
-  DashboardIcon,
-  ImageIcon,
-  MusicIcon,
-  VideoIcon,
-} from '../icons';
+import { CodeIcon, ConversationIcon, DashboardIcon, ImageIcon, MusicIcon, VideoIcon } from '../icons';
 import Link from 'next/link';
-import styles from '@/styles/Dashboard.module.css';
+import styles from '@/app/styles/Dashboard.module.css';
 import { usePathname } from 'next/navigation';
 import { FreeLimitCounter } from './free-limit-counter';
 
@@ -18,10 +11,7 @@ interface SideBarProps {
   isSubscribed?: boolean;
 }
 
-const Sidebar = ({
-  apiLimitCount = 0,
-  isSubscribed = false,
-}: SideBarProps): JSX.Element => {
+const Sidebar = ({ apiLimitCount = 0, isSubscribed = false }: SideBarProps): JSX.Element => {
   const pathname = usePathname().split('/')[2];
 
   return (
@@ -34,10 +24,7 @@ const Sidebar = ({
           </Link>
         </li>
         <li>
-          <Link
-            href="/dashboard/conversation"
-            className={pathname === 'conversation' ? styles.activeProduct : ''}
-          >
+          <Link href="/dashboard/conversation" className={pathname === 'conversation' ? styles.activeProduct : ''}>
             <ConversationIcon size={25} color="#676bb9" />
             Conversation
           </Link>
@@ -45,9 +32,7 @@ const Sidebar = ({
         <li>
           <Link
             href="/dashboard/image-generation"
-            className={
-              pathname === 'image-generation' ? styles.activeProduct : ''
-            }
+            className={pathname === 'image-generation' ? styles.activeProduct : ''}
           >
             <ImageIcon size={25} color="#e54e4e" />
             Image Generation
@@ -56,9 +41,7 @@ const Sidebar = ({
         <li>
           <Link
             href="/dashboard/code-generation"
-            className={
-              pathname === 'code-generation' ? styles.activeProduct : ''
-            }
+            className={pathname === 'code-generation' ? styles.activeProduct : ''}
           >
             <CodeIcon size={25} color="#3da555" />
             Code Generation
@@ -67,9 +50,7 @@ const Sidebar = ({
         <li>
           <Link
             href="/dashboard/music-generation"
-            className={
-              pathname === 'music-generation' ? styles.activeProduct : ''
-            }
+            className={pathname === 'music-generation' ? styles.activeProduct : ''}
           >
             <MusicIcon size={25} color="#dae560" />
             Music Generation
@@ -78,19 +59,14 @@ const Sidebar = ({
         <li>
           <Link
             href="/dashboard/video-generation"
-            className={
-              pathname === 'video-generation' ? styles.activeProduct : ''
-            }
+            className={pathname === 'video-generation' ? styles.activeProduct : ''}
           >
             <VideoIcon size={25} color="#eab154" />
             Video Generation
           </Link>
         </li>
       </ul>
-      <FreeLimitCounter
-        apiLimitCount={apiLimitCount}
-        isSubscribed={isSubscribed}
-      />
+      <FreeLimitCounter apiLimitCount={apiLimitCount} isSubscribed={isSubscribed} />
     </aside>
   );
 };
