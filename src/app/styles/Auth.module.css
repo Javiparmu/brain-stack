@@ -204,3 +204,15 @@
     left: 0%;
     right: 0%;
 }
+
+@media (max-width: 768px) {
+    .formContainer {
+        width: 80%;
+    }
+}
+
+@media (max-width: 400px) {
+    .authTitle {
+        font-size: 28px;
+    }
+}
