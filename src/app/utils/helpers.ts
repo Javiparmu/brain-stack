@@ -4,11 +4,11 @@ import { PlanEnum } from './enums';
 export const getPlanId = (plan: PlanEnum): string => {
   switch (plan) {
     case PlanEnum.BASIC:
-      return process.env.NEXT_PUBLIC_STRIPE_BASIC_PLAN_ID as string;
+      return (process.env.NEXT_PUBLIC_STRIPE_BASIC_PLAN_ID as string) ?? '';
     case PlanEnum.STANDARD:
-      return process.env.NEXT_PUBLIC_STRIPE_STANDARD_PLAN_ID as string;
+      return (process.env.NEXT_PUBLIC_STRIPE_STANDARD_PLAN_ID as string) ?? '';
     case PlanEnum.PREMIUM:
-      return process.env.NEXT_PUBLIC_STRIPE_PREMIUM_PLAN_ID as string;
+      return (process.env.NEXT_PUBLIC_STRIPE_PREMIUM_PLAN_ID as string) ?? '';
     default:
       throw new Error('Invalid plan ID');
   }

@@ -32,7 +32,7 @@ const MusicPage: FC = () => {
 
     const userId = session.data?.user?.userId;
 
-    const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/music', {
+    const response = await fetch(process.env.NEXT_PUBLIC_API_URL ?? '' + '/music', {
       method: 'POST',
       body: JSON.stringify({
         prompt,

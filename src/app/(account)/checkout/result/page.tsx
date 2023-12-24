@@ -11,7 +11,7 @@ interface Props {
 async function CheckoutPage({ searchParams }: Props): Promise<JSX.Element> {
   if (!searchParams.session_id) throw new Error('Please provide a valid session_id (`cs_test_...`)');
 
-  const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/stripe/manage-session', {
+  const response = await fetch(process.env.NEXT_PUBLIC_API_URL ?? '' + '/stripe/manage-session', {
     method: 'POST',
     body: JSON.stringify({ sessionId: searchParams.session_id }),
   });

@@ -41,7 +41,7 @@ const ImageGenerationPage: FC = () => {
 
     const userId = session.data?.user?.userId;
 
-    const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/image', {
+    const response = await fetch(process.env.NEXT_PUBLIC_API_URL ?? '' + '/image', {
       method: 'POST',
       body: JSON.stringify({
         prompt,

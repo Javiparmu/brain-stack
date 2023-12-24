@@ -5,7 +5,7 @@ import { Resend } from 'resend';
 
 const NO_REPLY_EMAIL = 'noreply@brain-stack.com';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY ?? '');
 
 export const sendRegistrationEmail = async (emailTo: string, username: string): Promise<EmailResponse> => {
   const send = await resend.emails.send({

@@ -34,7 +34,7 @@ const VideoPage: FC = () => {
 
     const userId = session.data?.user?.userId;
 
-    const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/video', {
+    const response = await fetch(process.env.NEXT_PUBLIC_API_URL ?? '' + '/video', {
       method: 'POST',
       body: JSON.stringify({
         prompt,
