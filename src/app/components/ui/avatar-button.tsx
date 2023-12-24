@@ -4,8 +4,8 @@ import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import React, { FC, useState } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
-import styles from '@/styles/Ui.module.css';
-import { useSubscriptionModal } from '@/store/use-subscription-modal';
+import styles from '@/app/styles/Ui.module.css';
+import { useSubscriptionModal } from '@/app/store/use-subscription-modal';
 
 interface AvatarButtonProps {
   isDashboard?: boolean;
@@ -14,6 +14,11 @@ interface AvatarButtonProps {
 const AvatarButton: FC<AvatarButtonProps> = ({ isDashboard = false }) => {
   const [showMenu, setShowMenu] = useState(false);
   const { onOpen } = useSubscriptionModal();
+
+  const handleOpenUpgradeModal = () => {
+    setShowMenu(false);
+    onOpen();
+  };
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -31,7 +36,7 @@ const AvatarButton: FC<AvatarButtonProps> = ({ isDashboard = false }) => {
               Dashboard
             </Link>
           ) : (
-            <button onClick={onOpen} className={styles.upgradeMenuItem}>
+            <button onClick={handleOpenUpgradeModal} className={styles.upgradeMenuItem}>
               Upgrade
             </button>
           )}

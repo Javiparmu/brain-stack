@@ -1,13 +1,13 @@
 'use client';
 
-import styles from '@/styles/Ui.module.css';
+import styles from '@/app/styles/Ui.module.css';
 import React, { FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import AvatarButton from './avatar-button';
 import { MdArrowForwardIos } from 'react-icons/md';
 import { Session } from 'next-auth';
-import logo from '@/assets/images/logo_bs.png';
+import logo from '@/app/assets/images/logo_bs.png';
 
 interface NavbarProps {
   session: Session | null;

@@ -1,4 +1,4 @@
-import styles from '@/styles/Dashboard.module.css';
+import styles from '@/app/styles/Dashboard.module.css';
 import { FC } from 'react';
 
 const LoadingDots: FC = () => {

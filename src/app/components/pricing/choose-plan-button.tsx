@@ -1,9 +1,27 @@
-import React, { FC } from 'react';
-import styles from '@/styles/Ui.module.css';
+'use client';
 
-const ChoosePlanButton: FC = () => {
+import React, { FC } from 'react';
+import styles from '@/app/styles/Ui.module.css';
+import { createCheckoutSession } from '@/app/actions/stripe';
+import { PlanEnum } from '@/app/utils';
+import { redirect } from 'next/navigation';
+
+interface ChoosePlanButtonProps {
+  email?: string;
+  plan: PlanEnum;
+}
+
+const ChoosePlanButton: FC<ChoosePlanButtonProps> = ({ email, plan }) => {
+  const handleSubscription = async () => {
+    if (!email) {
+      redirect('/auth/login');
+    }
+
+    await createCheckoutSession(email, plan);
+  };
+
   return (
-    <button type="button" className={styles.upgradeButton}>
+    <button onClick={handleSubscription} type="button" className={styles.upgradeButton}>
       Choose this plan
       <svg
         xmlns="http://www.w3.org/2000/svg"

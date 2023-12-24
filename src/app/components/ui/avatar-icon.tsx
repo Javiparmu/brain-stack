@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { FC } from 'react';
-import styles from '@/styles/Ui.module.css';
+import styles from '@/app/styles/Ui.module.css';
 
 interface AvatarIconProps {
   img?: string;

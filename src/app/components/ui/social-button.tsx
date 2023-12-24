@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 import Link from 'next/link';
-import styles from '@/styles/Home.module.css';
+import styles from '@/app/styles/Home.module.css';
 
 interface SocialButtonProps {
   children: ReactNode;
@@ -8,11 +8,7 @@ interface SocialButtonProps {
   href: string;
 }
 
-export const SocialButton: FC<SocialButtonProps> = ({
-  children,
-  label,
-  href,
-}) => {
+export const SocialButton: FC<SocialButtonProps> = ({ children, label, href }) => {
   return (
     <Link href={href}>
       <label className={styles.footerButton} aria-label={label}>

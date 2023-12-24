@@ -1,15 +1,8 @@
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
-import styles from '@/styles/Dashboard.module.css';
+import { authOptions } from '@/app/lib/auth';
+import styles from '@/app/styles/Dashboard.module.css';
 import Link from 'next/link';
-import {
-  ChevronRightIcon,
-  CodeIcon,
-  ConversationIcon,
-  ImageIcon,
-  MusicIcon,
-  VideoIcon,
-} from '@/app/components/icons';
+import { ChevronRightIcon, CodeIcon, ConversationIcon, ImageIcon, MusicIcon, VideoIcon } from '@/app/components/icons';
 
 export default async function DashboardPage(): Promise<JSX.Element> {
   const session = await getServerSession(authOptions);
@@ -25,11 +18,7 @@ export default async function DashboardPage(): Promise<JSX.Element> {
       <section className={styles.productList}>
         <Link className={styles.productCard} href="/dashboard/conversation">
           <div className={styles.cardText}>
-            <ConversationIcon
-              styles={styles.convIcon}
-              size={25}
-              color="#676bb9"
-            />
+            <ConversationIcon styles={styles.convIcon} size={25} color="#676bb9" />
             Conversation
           </div>
           <ChevronRightIcon size={24} color="white" />

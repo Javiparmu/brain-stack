@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import React, { FC } from 'react';
-import styles from '@/styles/Home.module.css';
-import dashboardImage from '@/assets/images/image-dashboard.webp';
-import dashboardCode from '@/assets/images/code-dashboard.webp';
-import dashboardMain from '@/assets/images/main-dashboard.webp';
+import styles from '@/app/styles/Home.module.css';
+import dashboardImage from '@/app/assets/images/image-dashboard.webp';
+import dashboardCode from '@/app/assets/images/code-dashboard.webp';
+import dashboardMain from '@/app/assets/images/main-dashboard.webp';
 
 const ShowcaseSection: FC = () => {
   return (
@@ -16,12 +16,7 @@ const ShowcaseSection: FC = () => {
         alt="image generation dashboard"
         priority
       />
-      <Image
-        className={styles.showcaseMain}
-        src={dashboardMain}
-        alt="main dashboard"
-        priority
-      />
+      <Image className={styles.showcaseMain} src={dashboardMain} alt="main dashboard" priority />
       <Image
         className={styles.showcaseCode}
         src={dashboardCode}
