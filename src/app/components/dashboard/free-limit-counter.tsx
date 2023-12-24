@@ -1,8 +1,10 @@
+'use client';
+
 import { useEffect, useState } from 'react';
-import { maxFreeCounts } from '@/utils/constants';
-import { useSubscriptionModal } from '@/store/use-subscription-modal';
+import { maxFreeCounts } from '@/app/utils/constants';
+import { useSubscriptionModal } from '@/app/store/use-subscription-modal';
 import { Progress } from '../ui/progress';
-import styles from '@/styles/Ui.module.css';
+import styles from '@/app/styles/Ui.module.css';
 import UpgradeButton from '../ui/upgrade-button';
 
 export const FreeLimitCounter = ({

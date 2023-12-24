@@ -1,5 +1,5 @@
-import styles from '@/styles/Checkout.module.css';
-import { PaymentStatus } from '@/utils/enums';
+import styles from '@/app/styles/Checkout.module.css';
+import { PaymentStatus } from '@/app/utils/enums';
 import Link from 'next/link';
 
 interface Props {
@@ -9,19 +9,12 @@ interface Props {
 }
 
 async function CheckoutPage({ searchParams }: Props): Promise<JSX.Element> {
-  if (!searchParams.session_id)
-    throw new Error('Please provide a valid session_id (`cs_test_...`)');
+  if (!searchParams.session_id) throw new Error('Please provide a valid session_id (`cs_test_...`)');
 
-  const response = await fetch(
-    process.env.NEXT_PUBLIC_API_URL + '/stripe/manage-session',
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ sessionId: searchParams.session_id }),
-    },
-  );
+  const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/stripe/manage-session', {
+    method: 'POST',
+    body: JSON.stringify({ sessionId: searchParams.session_id }),
+  });
 
   const payment = await response.json();
 
@@ -30,9 +23,7 @@ async function CheckoutPage({ searchParams }: Props): Promise<JSX.Element> {
       {payment.paymentStatus === PaymentStatus.PAID ? (
         <section className={styles.sectionContainer}>
           <h1 className={styles.headerText}>Thank you!</h1>
-          <p className={styles.paragraphText}>
-            Your subscription has been successfully processed.
-          </p>
+          <p className={styles.paragraphText}>Your subscription has been successfully processed.</p>
           <svg
             className={styles.shoppingIcon}
             width="64"
@@ -55,9 +46,7 @@ async function CheckoutPage({ searchParams }: Props): Promise<JSX.Element> {
       ) : (
         <section className={styles.sectionContainer}>
           <h1 className={styles.headerText}>Oops!</h1>
-          <p className={styles.paragraphText}>
-            Something went wrong with your payment. Please try again.
-          </p>
+          <p className={styles.paragraphText}>Something went wrong with your payment. Please try again.</p>
           <svg
             className={styles.shoppingIcon}
             width="64"

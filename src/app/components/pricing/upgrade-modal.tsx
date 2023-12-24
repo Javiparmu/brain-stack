@@ -1,36 +1,32 @@
 'use client';
 
-import { PlanEnum } from '@/utils/enums';
-import styles from '@/styles/Ui.module.css';
-import { useSubscriptionModal } from '@/store/use-subscription-modal';
-import { FC, useEffect, useState } from 'react';
-import { getPlanFromId } from '@/utils';
+import { PlanEnum } from '@/app/utils/enums';
+import styles from '@/app/styles/Ui.module.css';
+import { useSubscriptionModal } from '@/app/store/use-subscription-modal';
+import { FC } from 'react';
+import { getPlanFromId } from '@/app/utils';
 import ChoosePlanButton from './choose-plan-button';
 import CloseButton from './close-button';
 
 interface UpgradeModalProps {
-  plan?: PlanEnum;
+  email?: string;
+  plan?: string;
 }
 
-const UpgradeModal: FC<UpgradeModalProps> = ({ plan }) => {
-  const [planName, setPlanName] = useState<PlanEnum | null>();
+const UpgradeModal: FC<UpgradeModalProps> = ({ email, plan }) => {
+  const planName = getPlanFromId(plan);
 
   const { isOpen, onClose } = useSubscriptionModal();
 
-  useEffect(() => {
-    setPlanName(getPlanFromId(plan));
-  }, [plan]);
-
   return (
     <div className={isOpen ? styles.modalBackdrop : styles.hidden}>
-      <dialog className={isOpen ? styles.upgradeModal : styles.hidden}>
+      <dialog open={isOpen} className={styles.upgradeModal}>
         <CloseButton onClose={onClose} />
         <h1>Manage your subscription</h1>
         <p>
-          You are currently on the <strong>{planName}</strong> plan. Upgrade to
-          get access to more features.
+          You are currently on the <strong>{planName}</strong> plan. Upgrade to get access to more features.
         </p>
-        <details className={styles.details} open>
+        <details name="subscription-plan" className={styles.details} open>
           <summary className={styles.summary}>Get basic plan</summary>
           {planName === PlanEnum.BASIC ? (
             <div>This is your current plan.</div>
@@ -46,12 +42,12 @@ const UpgradeModal: FC<UpgradeModalProps> = ({ plan }) => {
                 </ul>
               </section>
               <aside className={styles.upgradeButtonContainer}>
-                <ChoosePlanButton />
+                <ChoosePlanButton email={email} plan={PlanEnum.BASIC} />
               </aside>
             </div>
           )}
         </details>
-        <details className={styles.details}>
+        <details name="subscription-plan" className={styles.details}>
           <summary className={styles.summary}>Get standard plan</summary>
           {planName === PlanEnum.STANDARD ? (
             <div>This is your current plan.</div>
@@ -67,12 +63,12 @@ const UpgradeModal: FC<UpgradeModalProps> = ({ plan }) => {
                 </ul>
               </section>
               <aside className={styles.upgradeButtonContainer}>
-                <ChoosePlanButton />
+                <ChoosePlanButton email={email} plan={PlanEnum.STANDARD} />
               </aside>
             </div>
           )}
         </details>
-        <details className={styles.details}>
+        <details name="subscription-plan" className={styles.details}>
           <summary className={styles.summary}>Get premium plan</summary>
           {planName === PlanEnum.PREMIUM ? (
             <div>This is your current plan.</div>
@@ -89,7 +85,7 @@ const UpgradeModal: FC<UpgradeModalProps> = ({ plan }) => {
                 </ul>
               </section>
               <aside className={styles.upgradeButtonContainer}>
-                <ChoosePlanButton />
+                <ChoosePlanButton email={email} plan={PlanEnum.PREMIUM} />
               </aside>
             </div>
           )}

@@ -1,0 +1,498 @@
+.navbar {
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15rem;
+}
+
+@media screen and (max-width: 1280px) {
+    .navbar {
+        padding: 1.5rem 8rem;
+    }
+}
+
+@media screen and (max-width: 960px) {
+    .navbar {
+        padding: 1.5rem 4rem;
+    }
+}
+
+.navItems {
+    position: relative;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+}
+
+.links {
+    display: flex;
+    gap: 4rem;
+    margin-right: 4rem;
+}
+
+.link {
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: all ease-in-out 0.3s;
+}
+
+.link:hover {
+    background-color: hsl(var(--card));
+}
+
+.avatarContainer {
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.avatar {
+    object-fit: cover;
+}
+
+.menu,
+.hamburgerMenu {
+    position: absolute;
+    top: 65px;
+    right: 30px;
+    background-color: #1D1E1E;
+    border-radius: 5px;
+    padding: 0.8rem 0.2rem;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 10;
+    transition: all 0.2s ease-in-out;
+}
+
+.menuItem {
+    display: block;
+    margin: 0 5px;
+    line-height: 18px;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.menuItem:hover {
+    opacity: 0.9;
+    background-color: #252727;
+    border-radius: 5px;
+}
+
+.upgradeMenuItem {
+    display: block;
+    margin: 0 5px;
+    line-height: 18px;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    color: white;
+    background-color: #1D1E1E;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.upgradeMenuItem:hover {
+    opacity: 0.9;
+    background-color: #252727;
+    border-radius: 5px;
+}
+
+.authButton,
+.hamburgerButton {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    color: hsl(var(--foreground));
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.authButton.signUp {
+    background: linear-gradient(to right, #676bb9, #359ebb);
+}
+
+.authButton.signIn {
+    background-color: transparent;
+    border-width: 1;
+    border-style: solid;
+    border-color: hsl(var(--foreground));
+}
+
+.logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.logoText {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #eaeaea;
+}
+
+.getStarted {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    border-radius: 50px;
+    padding: 16px 20px;
+    font-size: large;
+    font-weight: 500;
+    background: linear-gradient(to right, #676bb9, #359ebb);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease;
+}
+
+.getStarted:hover {
+    box-shadow: 0 0.4rem 0 hsla(215, 44%, 51%, 0.5), 0 0 1.5rem hsla(288, 39%, 60%, 0.5);
+}
+
+.authButton:hover,
+.hamburgerButton:hover {
+    filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.6));
+}
+
+.authButton:active,
+.hamburgerButton:active {
+    transform: scale(0.98);
+}
+
+.hamburgerButton {
+    display: none;
+}
+
+.hamburgerMenu {
+    display: none
+}
+
+@media screen and (max-width: 768px) {
+    .navbar {
+        padding: 1rem 2rem;
+    }
+
+    .logoText {
+        display: none;
+    }
+
+    .getStarted {
+        font-size: medium;
+    }
+
+    .links,
+    .authButton {
+        display: none;
+    }
+
+    .hamburgerButton {
+        display: block;
+    }
+
+    .hamburgerMenu {
+        display: block;
+        top: 60px;
+        right: -5vw;
+    }
+}
+
+.avatarIcon {
+    border-radius: 5px;
+    background-color: #1D1E1E;
+    padding: 0 0.1rem;
+    position: absolute;
+    top: 1.7rem;
+    left: 1rem;
+}
+
+.progressContainer {
+    width: 100%;
+    background-color: #edf2f7;
+    border-radius: 9999px;
+    height: 0.625rem;
+}
+
+.progressBar {
+    background-color: #4299e1;
+    height: 0.625rem;
+    border-radius: 9999px;
+}
+
+.freeCounter {
+    margin: 0 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.freeContainer {
+    background-color: var(--card);
+    padding: 1.5rem 1rem;
+    border-radius: 0.375rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.freeInner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.freeText {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #ffffff;
+}
+
+.freeButton {
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    gap: 1rem;
+    background-image: linear-gradient(to bottom right, #9f7aea, #4c51bf);
+    border-radius: 0.375rem;
+    border: none;
+    font-weight: 500;
+    font-size: 1.1rem;
+    padding: 0.625rem 1.25rem;
+    text-align: center;
+}
+
+.freeButton:hover {
+    background-image: linear-gradient(to bottom left, #9f7aea, #4c51bf);
+}
+
+.freeButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.25rem #a3bffa;
+}
+
+.zapIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: #ffffff;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.upgradeModal {
+    display: block;
+    position: fixed;
+    z-index: 999;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 0.5rem;
+    border-color: #252727;
+    width: 600px;
+    height: 80vh;
+    overflow: auto;
+    background-color: #1D1E1E;
+    color: white;
+    padding: 2.5rem;
+}
+
+.upgradeModal h1 {
+    font-size: 46px;
+    margin: 0;
+}
+
+.upgradeModal p {
+    font-size: 1.2rem;
+    margin: 2rem 0;
+    color: #359ebb;
+}
+
+.closeButton {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: white;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.closeButton:hover,
+.closeButton:focus {
+    color: #bbb;
+    cursor: pointer;
+}
+
+.details div {
+    display: flex;
+    flex-direction: row;
+    font-size: 1.2rem;
+	border-left: 2px solid #0f0f0f;
+	border-right: 2px solid #0f0f0f;
+	border-bottom: 2px solid #0f0f0f;
+	padding: 1.5rem;
+}
+
+.details + details {
+	margin-top: .5rem;
+}
+
+.details li {
+    margin-bottom: .5rem;
+}
+
+.summary {
+    font-size: 1.5rem;
+	list-style: none;
+}
+
+.summary::-webkit-details-marker {
+	display: none;
+}
+
+.summary {
+	border: 2px solid #0f0f0f;
+    border-radius: 0.375rem;
+	padding: .75em 1em;
+	cursor: pointer;
+	position: relative;
+	padding-left: calc(1.75rem + .75rem + .75rem);
+    transition: background-color 0.2s;
+}
+
+.summary:before {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	left: .75rem;
+	content: "↓";
+	width: 1.75rem;
+	height: 1.75rem;
+	color: #FFF;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	flex-shrink: 0;
+}
+
+.details[open] .summary {
+	background-color: #252727;
+}
+
+.details[open] .summary:before {
+	content: "↑";
+}
+
+.summary:hover {
+	background-color: #252727;
+}
+
+.upgradeModal::-webkit-scrollbar {
+    width: 10px;
+}
+  
+.upgradeModal::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.upgradeModal::-webkit-scrollbar-thumb {
+    background: #393c44;
+    border-radius: 5px;
+}
+
+.upgradeModal::-webkit-scrollbar-thumb:hover {
+    background: #4d4f57;
+}
+
+.upgradeButtonContainer {
+    flex: 1;
+    margin-left: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.upgradeButton {
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 1rem;
+    background-color: #359ebb;
+    border-radius: 0.375rem;
+    border: none;
+    font-weight: 500;
+    font-size: 1.2rem;
+    padding: 0.7rem 1.2rem;
+    text-align: center;
+    transition: background-color 0.2s;
+}
+
+.upgradeButton:hover {
+    background-color: #247a97;
+}
+
+@media (max-width: 768px) {
+    .upgradeModal {
+        width: 80vw;
+        height: 80vh;
+    }
+
+    .upgradeModal h1 {
+        font-size: 2rem;
+    }
+
+    .upgradeModal p {
+        font-size: 1rem;
+    }
+
+    .upgradeButton {
+        font-size: 1rem;
+    }
+
+    .upgradeButtonContainer {
+        margin-left: 0;
+        margin-top: 1rem;
+    }
+
+    .upgradeButtonContainer button {
+        padding: 0.5rem 1rem;
+    }
+
+    .details div {
+        font-size: 1rem;
+        flex-direction: column;
+        padding: 1rem;
+        align-items: flex-start;
+    }
+}
+
+.modalBackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.hidden {
+    animation: fade-out 0.1s forwards;
+}
+
+@keyframes fade-out {
+    to {
+        opacity: 0;
+        display: none;
+    }
+}
+  

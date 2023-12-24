@@ -1,4 +1,10 @@
+export { default as avatarButton } from './avatar-button';
+export { default as avatarIcon } from './avatar-icon';
+export { default as backgroundTiles } from './background-tiles';
 export * from './footer';
-export * from './navbar';
+export { default as hamburgerMenu } from './hamburger-menu';
+export { default as loadingDots } from './loading-dots';
+export { default as navbar } from './navbar';
+export * from './progress';
 export * from './social-button';
-export * from './hamburger-menu';
+export { default as upgradeButton } from './upgrade-button';

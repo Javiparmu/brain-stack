@@ -1,4 +1,4 @@
-import styles from '@/styles/Profile.module.css';
+import styles from '@/app/styles/Profile.module.css';
 import { FC } from 'react';
 
 export const Profile: FC = () => {

@@ -1,8 +1,9 @@
 import Replicate from 'replicate';
 import { NextRequest, NextResponse } from 'next/server';
-import { getUserIp } from '@/lib/user-data';
-import { checkApiLimit, incrementApiLimit } from '@/lib/api-limit';
-import { checkSubscription, checkSubscriptionLimit } from '@/lib/subscription';
+import { getUserIp } from '@/app/lib/user-data';
+import { RequestCreator } from '@/backend/User/application/RequestCreator';
+import { MongoUserRepository } from '@/backend/User/infrastructure/persistence/MongoUserRepository';
+import { CustomException } from '@/backend/Shared/domain/exception/CustomException';
 
 const replicate = new Replicate({
   auth: process.env.REPLICATE_API_KEY ?? '',
@@ -11,7 +12,7 @@ const replicate = new Replicate({
 export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
     const body = await req.json();
-    const { prompt } = body;
+    const { prompt, userId } = body;
 
     if (!prompt) {
       return new NextResponse('Prompt is required', { status: 400 });
@@ -19,42 +20,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
     const userIp = getUserIp(req);
 
-    const isSubscribed = await checkSubscription();
-
-    if (!isSubscribed) {
-      const limitReached = await checkApiLimit(userIp);
-
-      if (limitReached) {
-        return new NextResponse(
-          'Free limit reached. You need to upgrade your account.',
-          {
-            status: 429,
-          },
-        );
-      }
-    } else {
-      const { requestAvailable, resetTime } = await checkSubscriptionLimit();
-
-      if (!requestAvailable && resetTime) {
-        const resetTimeHour = new Date(resetTime).getHours();
-
-        return new NextResponse(
-          `Subscription limit reached. Wait until ${resetTimeHour} and try again.`,
-          {
-            status: 429,
-          },
-        );
-      }
-
-      if (!requestAvailable && !resetTime) {
-        return new NextResponse(
-          'There has been an issue with your request, please try logging again',
-          {
-            status: 500,
-          },
-        );
-      }
-    }
+    const requestCreator = new RequestCreator(new MongoUserRepository());
+    await requestCreator.run({ userId, userIp });
 
     const response = await replicate.run(
       'anotherjesse/zeroscope-v2-xl:71996d331e8ede8ef7bd76eba9fae076d31792e4ddf4ad057779b443d6aea62f',
@@ -65,12 +32,12 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       },
     );
 
-    if (!isSubscribed) {
-      await incrementApiLimit(userIp);
-    }
-
     return NextResponse.json(response);
   } catch (error) {
-    return new NextResponse('Internal Error', { status: 500 });
+    if (error instanceof CustomException) {
+      return new NextResponse(error.message, { status: error.status });
+    } else {
+      return new NextResponse('Internal Error', { status: 500 });
+    }
   }
 }

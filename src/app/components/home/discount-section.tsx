@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import styles from '@/styles/Home.module.css';
+import styles from '@/app/styles/Home.module.css';
 
 const DiscountSection: FC = () => {
   return (
@@ -25,10 +25,7 @@ const DiscountSection: FC = () => {
         </svg>
       </div>
       <div className={styles.discountContent}>
-        <p className={styles.discountText}>
-          Collaborate with us on Github and get a discount on your first
-          purchase.
-        </p>
+        <p className={styles.discountText}>Collaborate with us on Github and get a discount on your first purchase.</p>
       </div>
     </section>
   );

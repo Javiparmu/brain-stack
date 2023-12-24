@@ -13,12 +13,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import {
-  MainHeader,
-  Pricing,
-  GetStartedButton,
-  Footer,
-} from '@/app/components';
+import { MainHeader, Pricing, GetStartedButton, Footer } from '@/app/components';
 import BlurredBg from '@/app/components/home/blurred-bg';
 import ProductivitySection from '@/app/components/home/productivity-section';
 import ShowcaseSection from '@/app/components/home/showcase-section';

@@ -1,6 +1,7 @@
-import { checkApiLimit, incrementApiLimit } from '@/lib/api-limit';
-import { checkSubscription, checkSubscriptionLimit } from '@/lib/subscription';
-import { getUserIp } from '@/lib/user-data';
+import { CustomException } from '@/backend/Shared/domain/exception/CustomException';
+import { RequestCreator } from '@/backend/User/application/RequestCreator';
+import { MongoUserRepository } from '@/backend/User/infrastructure/persistence/MongoUserRepository';
+import { getUserIp } from '@/app/lib/user-data';
 import { NextRequest, NextResponse } from 'next/server';
 import { OpenAI } from 'openai';
 
@@ -19,58 +20,24 @@ const instructionMessage: ChatCompletionMessageParam = {
 export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
     const body = await req.json();
-    const { messages } = body;
+    const { userId, messages } = body;
 
     const userIp = getUserIp(req);
 
-    const isSubscribed = await checkSubscription();
-
-    if (!isSubscribed) {
-      const limitReached = await checkApiLimit(userIp);
-
-      if (limitReached) {
-        return new NextResponse(
-          'Free limit reached. You need to upgrade your account.',
-          {
-            status: 429,
-          },
-        );
-      }
-    } else {
-      const { requestAvailable, resetTime } = await checkSubscriptionLimit();
-
-      if (!requestAvailable && resetTime) {
-        const resetTimeHour = new Date(resetTime).getHours();
-
-        return new NextResponse(
-          `Subscription limit reached. Wait until ${resetTimeHour} and try again.`,
-          {
-            status: 429,
-          },
-        );
-      }
-
-      if (!requestAvailable && !resetTime) {
-        return new NextResponse(
-          'There has been an issue with your request, please try logging again',
-          {
-            status: 500,
-          },
-        );
-      }
-    }
+    const requestCreator = new RequestCreator(new MongoUserRepository());
+    await requestCreator.run({ userId, userIp });
 
     const response = await openai.chat.completions.create({
       model: 'gpt-4-1106-preview',
       messages: [instructionMessage, ...messages],
     });
 
-    if (!isSubscribed) {
-      await incrementApiLimit(userIp);
-    }
-
     return NextResponse.json(response.choices[0].message);
   } catch (error) {
-    return new NextResponse('Internal Error', { status: 500 });
+    if (error instanceof CustomException) {
+      return NextResponse.json({ error: error.message }, { status: error.status });
+    } else {
+      return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    }
   }
 }

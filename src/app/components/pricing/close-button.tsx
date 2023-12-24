@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import styles from '@/styles/Ui.module.css';
+import styles from '@/app/styles/Ui.module.css';
 
 interface CloseButtonProps {
   onClose: () => void;

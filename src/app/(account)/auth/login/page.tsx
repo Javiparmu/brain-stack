@@ -1,7 +1,7 @@
 'use client';
 
 import { FC, FormEvent } from 'react';
-import styles from '@/styles/Auth.module.css';
+import styles from '@/app/styles/Auth.module.css';
 import { signIn } from 'next-auth/react';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
@@ -48,21 +48,11 @@ const Login: FC = () => {
         <form onSubmit={handleSubmit} className={styles.authForm}>
           <div className={styles.emailContainer}>
             <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              className={styles.emailInput}
-              required
-            />
+            <input type="email" id="email" className={styles.emailInput} color="black" required />
           </div>
           <div className={styles.passwordContainer}>
             <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              className={styles.passwordInput}
-              required
-            />
+            <input type="password" id="password" className={styles.passwordInput} color="black" required />
           </div>
           <button type="submit" className={styles.submitButton}>
             Sign in
@@ -70,11 +60,7 @@ const Login: FC = () => {
         </form>
         <div className={styles.authDivider} />
         <button className={styles.googleAuthButton}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            preserveAspectRatio="xMidYMid"
-            viewBox="0 0 256 262"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" viewBox="0 0 256 262">
             <path
               fill="#4285F4"
               d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027"
@@ -95,17 +81,9 @@ const Login: FC = () => {
           Sign up with Google
         </button>
         <button className={styles.githubAuthButton}>
-          <svg
-            fill="#ffffff"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-          >
+          <svg fill="#ffffff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <g strokeWidth="0" id="SVGRepo_bgCarrier"></g>
-            <g
-              strokeLinejoin="round"
-              strokeLinecap="round"
-              id="SVGRepo_tracerCarrier"
-            ></g>
+            <g strokeLinejoin="round" strokeLinecap="round" id="SVGRepo_tracerCarrier"></g>
             <g id="SVGRepo_iconCarrier">
               <title>github</title>
               <rect fill="none" height="24" width="24"></rect>

@@ -13,8 +13,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import styles from '@/styles/Pricing.module.css';
-import { pricingData } from '@/utils';
+import styles from '@/app/styles/Pricing.module.css';
+import { pricingData } from '@/app/utils';
 import { FC, Suspense } from 'react';
 import PricingCard from './pricing-card';
 import PricingSkeleton from '../skeletons/pricing-skeleton';
@@ -23,21 +23,12 @@ export const Pricing: FC = () => {
   return (
     <section className={styles.pricingSection}>
       <h2 className={styles.pricingTitle}>Pricing</h2>
-      <h3 className={styles.pricingHeader}>
-        Choose the plan that fits your needs
-      </h3>
+      <h3 className={styles.pricingHeader}>Choose the plan that fits your needs</h3>
       <p className={styles.pricingSubHeader}>
-        Your journey towards mastering artificial intelligence begins with a
-        simple choice below.
+        Your journey towards mastering artificial intelligence begins with a simple choice below.
       </p>
       <svg className={styles.pricingGradient} viewBox="0 0 1208 1024">
-        <ellipse
-          cx={604}
-          cy={512}
-          fill="url(#6d1bd035-0dd1-437e-93fa-59d316231eb0)"
-          rx={604}
-          ry={512}
-        />
+        <ellipse cx={604} cy={512} fill="url(#6d1bd035-0dd1-437e-93fa-59d316231eb0)" rx={604} ry={512} />
         <defs>
           <radialGradient id="6d1bd035-0dd1-437e-93fa-59d316231eb0">
             <stop stopColor="#7fc5f8" />
