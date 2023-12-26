@@ -1,5 +1,5 @@
-import { ValidUserSubscriptionFinder } from '@/backend/User/application/ValidUserSubscriptionFinder';
-import { MongoUserSubscriptionRepository } from '@/backend/User/infrastructure/persistence/MongoUserSubscriptionRepository';
+import { ValidUserSubscriptionFinder } from '@/modules/User/application/ValidUserSubscriptionFinder';
+import { MongoUserSubscriptionRepository } from '@/modules/User/infrastructure/persistence/MongoUserSubscriptionRepository';
 import { getPlanFromId } from '@/app/utils';
 import { PlanEnum } from '@/app/utils/enums';
 

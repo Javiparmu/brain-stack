@@ -4,9 +4,9 @@ import { getPlanFromId } from '@/app/utils';
 import { PaymentStatus } from '@/app/utils/enums';
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { UserFinder } from '@/backend/User/application/UserFinder';
-import { MongoUserRepository } from '@/backend/User/infrastructure/persistence/MongoUserRepository';
-import { UserUpgrade } from '@/backend/User/application/UserUpgrade';
+import { UserFinder } from '@/modules/User/application/UserFinder';
+import { MongoUserRepository } from '@/modules/User/infrastructure/persistence/MongoUserRepository';
+import { UserUpgrade } from '@/modules/User/application/UserUpgrade';
 import { randomUUID } from 'crypto';
 
 export async function POST(req: Request): Promise<NextResponse> {

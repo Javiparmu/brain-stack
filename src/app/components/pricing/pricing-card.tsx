@@ -5,8 +5,8 @@ import { createCheckoutSession } from '@/app/actions/stripe';
 import { PlanEnum } from '@/app/utils/enums';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
-import { UserFinder } from '@/backend/User/application/UserFinder';
-import { MongoUserRepository } from '@/backend/User/infrastructure/persistence/MongoUserRepository';
+import { UserFinder } from '@/modules/User/application/UserFinder';
+import { MongoUserRepository } from '@/modules/User/infrastructure/persistence/MongoUserRepository';
 import { authOptions } from '@/app/lib';
 
 interface PricingCardProps {

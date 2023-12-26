@@ -1,6 +1,6 @@
-import { CustomException } from '@/backend/Shared/domain/exception/CustomException';
-import { RequestCreator } from '@/backend/User/application/RequestCreator';
-import { MongoUserRepository } from '@/backend/User/infrastructure/persistence/MongoUserRepository';
+import { CustomException } from '@/modules/Shared/domain/exception/CustomException';
+import { RequestCreator } from '@/modules/User/application/RequestCreator';
+import { MongoUserRepository } from '@/modules/User/infrastructure/persistence/MongoUserRepository';
 import { getUserIp } from '@/app/lib/user-data';
 import { NextRequest, NextResponse } from 'next/server';
 import { OpenAI } from 'openai';

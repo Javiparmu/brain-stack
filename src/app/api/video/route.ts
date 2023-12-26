@@ -1,9 +1,9 @@
 import Replicate from 'replicate';
 import { NextRequest, NextResponse } from 'next/server';
 import { getUserIp } from '@/app/lib/user-data';
-import { RequestCreator } from '@/backend/User/application/RequestCreator';
-import { MongoUserRepository } from '@/backend/User/infrastructure/persistence/MongoUserRepository';
-import { CustomException } from '@/backend/Shared/domain/exception/CustomException';
+import { RequestCreator } from '@/modules/User/application/RequestCreator';
+import { MongoUserRepository } from '@/modules/User/infrastructure/persistence/MongoUserRepository';
+import { CustomException } from '@/modules/Shared/domain/exception/CustomException';
 
 const replicate = new Replicate({
   auth: process.env.REPLICATE_API_KEY ?? '',

@@ -1,9 +1,9 @@
 import { sendRegistrationEmail } from '@/app/lib/email';
 import { hash } from 'bcrypt';
 import { NextResponse } from 'next/server';
-import { UserCreator } from '@/backend/User/application/UserCreator';
-import { MongoUserRepository } from '@/backend/User/infrastructure/persistence/MongoUserRepository';
-import { UserFinder } from '@/backend/User/application/UserFinder';
+import { UserCreator } from '@/modules/User/application/UserCreator';
+import { MongoUserRepository } from '@/modules/User/infrastructure/persistence/MongoUserRepository';
+import { UserFinder } from '@/modules/User/application/UserFinder';
 
 export async function POST(req: Request): Promise<NextResponse> {
   const { email, password, userId } = await req.json();

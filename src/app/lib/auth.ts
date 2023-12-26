@@ -2,8 +2,8 @@ import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import GithubProvider from 'next-auth/providers/github';
-import { UserFinder } from '@/backend/User/application/UserFinder';
-import { MongoUserRepository } from '@/backend/User/infrastructure/persistence/MongoUserRepository';
+import { UserFinder } from '@/modules/User/application/UserFinder';
+import { MongoUserRepository } from '@/modules/User/infrastructure/persistence/MongoUserRepository';
 
 export const authOptions: NextAuthOptions = {
   providers: [
