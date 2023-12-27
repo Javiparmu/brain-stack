@@ -12,6 +12,7 @@ import { FreeLimitException } from '@/modules/Shared/domain/exception/FreeLimitE
 import { randomUUID } from 'crypto';
 import { UserApiLimitId } from '../../domain/UserApiLimtId';
 import { UserApiHits } from '../../domain/value-object/UserApiHits';
+import { MongooseConnection } from '@/modules/Shared/infrastructure/persistence/MongooseConnection';
 
 export class MongoUserApiLimitRepository extends MongoRepository<UserApiLimit> implements UserApiLimitRepository {
   constructor() {
@@ -23,12 +24,16 @@ export class MongoUserApiLimitRepository extends MongoRepository<UserApiLimit> i
   }
 
   public async search(userId: UserId): Promise<UserApiLimit | null> {
+    await MongooseConnection.connect({ url: process.env.MONGO_URL ?? '' });
+
     const userApiLimit = await UserApiLimitModel.findOne({ userId }).lean<UserApiLimitDocument>();
 
     return userApiLimit ? UserApiLimit.fromPrimitives({ ...userApiLimit, id: userApiLimit._id }) : null;
   }
 
   public async searchByUserIp(userIp: UserIp): Promise<UserApiLimit | null> {
+    await MongooseConnection.connect({ url: process.env.MONGO_URL ?? '' });
+
     const userApiLimit = await UserApiLimitModel.findOne({ userIp }).lean<UserApiLimitDocument>();
 
     return userApiLimit ? UserApiLimit.fromPrimitives({ ...userApiLimit, id: userApiLimit._id }) : null;
@@ -36,6 +41,8 @@ export class MongoUserApiLimitRepository extends MongoRepository<UserApiLimit> i
 
   public async getHits({ userId, userIp }: { userId?: UserId; userIp?: UserIp }): Promise<number> {
     if (!userId && !userIp) throw new InvalidRequestException('No matching criteria provided for user api limit');
+
+    await MongooseConnection.connect({ url: process.env.MONGO_URL ?? '' });
 
     let userApiLimit = null;
 
@@ -53,6 +60,8 @@ export class MongoUserApiLimitRepository extends MongoRepository<UserApiLimit> i
   }
 
   public async getIsExceeded(matching: { userId?: UserId; userIp?: UserIp; hits?: number }): Promise<boolean> {
+    await MongooseConnection.connect({ url: process.env.MONGO_URL ?? '' });
+
     const userApiLimitHits = matching.hits ?? (await this.getHits(matching));
 
     return userApiLimitHits >= MAX_FREE_COUNTS;
@@ -60,6 +69,8 @@ export class MongoUserApiLimitRepository extends MongoRepository<UserApiLimit> i
 
   public async incrementHits({ userId, userIp }: { userId: UserId; userIp: UserIp }): Promise<void> {
     if (!userId && !userIp) throw new InvalidRequestException('No matching criteria provided for user api limit');
+
+    await MongooseConnection.connect({ url: process.env.MONGO_URL ?? '' });
 
     const userApiLimit = (await this.search(userId)) ?? (await this.searchByUserIp(userIp!));
 

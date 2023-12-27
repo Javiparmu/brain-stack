@@ -5,6 +5,7 @@ import { UserId } from '../../domain/value-object/UserId';
 import UserSubscriptionModel from './mongoose/UserSubscription';
 import { UserSubscriptionDocument } from './mongoose/documents';
 import { MONTH_IN_MS } from '../../Shared/constants';
+import { MongooseConnection } from '@/modules/Shared/infrastructure/persistence/MongooseConnection';
 
 export class MongoUserSubscriptionRepository
   extends MongoRepository<UserSubscription>
@@ -19,12 +20,16 @@ export class MongoUserSubscriptionRepository
   }
 
   public async search(userId: UserId): Promise<UserSubscription | null> {
+    await MongooseConnection.connect({ url: process.env.MONGO_URL ?? '' });
+
     const userSubscription = await UserSubscriptionModel.findOne({ userId }).lean<UserSubscriptionDocument>();
 
     return userSubscription ? UserSubscription.fromPrimitives({ ...userSubscription, id: userSubscription._id }) : null;
   }
 
   public async searchValid(userId: UserId): Promise<UserSubscription | null> {
+    await MongooseConnection.connect({ url: process.env.MONGO_URL ?? '' });
+
     const userSubscription = await UserSubscriptionModel.findOne({
       userId,
       stripeCurrentPeriodEnd: { $gt: Date.now() - MONTH_IN_MS },

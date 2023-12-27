@@ -4,7 +4,7 @@ import SendButton from '@/app/components/dashboard/send-button';
 import { RobotIcon, VideoIcon } from '@/app/components/icons';
 import LoadingDots from '@/app/components/ui/loading-dots';
 import { useFetch } from '@/app/hooks/use-fetch';
-import { useMultiLineInput } from '@/app/hooks/use-mutiline-input';
+import { useMultilineInput } from '@/app/hooks/use-mutiline-input';
 import { errorToast } from '@/app/lib/toasts';
 import styles from '@/app/styles/Dashboard.module.css';
 import { useSession } from 'next-auth/react';
@@ -16,7 +16,7 @@ const VideoPage: FC = () => {
   const router = useRouter();
   const session = useSession();
   const fetchApi = useFetch<string[]>();
-  const { inputRef, hasText, handleInput, handleEnter } = useMultiLineInput({
+  const { inputRef, hasText, handleInput, handleEnter } = useMultilineInput({
     onEnter: (value) => onSubmit(value),
   });
 

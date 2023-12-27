@@ -3,6 +3,7 @@
     position: relative;
     display: grid;
     place-items: center;
+    overflow: hidden;
 }
 
 .bgWrapper {
@@ -342,7 +343,11 @@
     }
 
     .boostTextContainer {
-        margin-top: 15rem;
+        margin-top: 18rem;
+    }
+
+    .backgroundDiv {
+        top: 1200px;
     }
 }
 
@@ -380,6 +385,10 @@
         height: auto;
     }
 
+    .boostTextContainer {
+        margin-top: 10rem;
+    }
+
     .backgroundDiv {
         top: 1150px;
     }
@@ -391,7 +400,7 @@
     }
 
     .boostTextContainer {
-        margin: 10rem 0rem;
+        margin-top: 8rem;
     }
 
     .boostTitle {
@@ -404,12 +413,24 @@
         padding-right: 2rem;
         line-height: 1.8rem;
     }
+
+    .backgroundDiv {
+        top: 1000px;
+    }
+
+    .gradientDiv {
+        width: 54rem;
+    }
 }
 
 @media (max-width: 500px) {
     .showcaseContainer {
         margin-top: 4rem;
         height: 300px;
+    }
+
+    .boostTextContainer {
+        margin-top: 5rem;
     }
 
     .boostTitle {
@@ -420,10 +441,14 @@
         font-size: 18px;
         line-height: 1.5rem;
     }
+
+    .backgroundDiv {
+        top: 900px;
+    }   
 }
 
 .collaborateContainer {
-    margin-top: 15rem;
+    margin-top: 18rem;
     margin-bottom: 13rem;
     display: flex;
     flex-direction: column;
@@ -508,7 +533,7 @@
 
 @media (max-width: 1280px) {
     .collaborateContainer {
-        margin: 10rem 0rem;
+        margin-top: 18rem;
     }
 
     .collaborateHeader {
@@ -523,7 +548,8 @@
 
 @media (max-width: 768px) {
     .collaborateContainer {
-        margin: 10rem 1.5rem;
+        margin: 0 1.5rem;
+        margin-top: 12rem;
     }
 
     .collaborateHeader {

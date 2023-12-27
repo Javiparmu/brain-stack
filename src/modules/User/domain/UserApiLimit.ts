@@ -3,6 +3,7 @@ import { AggregateRoot } from '@/modules/Shared/domain/AggregateRoot';
 import { UserIp } from './value-object/UserIp';
 import { UserApiHits } from './value-object/UserApiHits';
 import { UserApiLimitId } from './UserApiLimtId';
+import { Primitives } from '@/modules/Shared/domain/Primitives';
 
 export class UserApiLimit extends AggregateRoot {
   readonly id: UserApiLimitId;
@@ -32,19 +33,7 @@ export class UserApiLimit extends AggregateRoot {
     this.exceeded = exceeded;
   }
 
-  static fromPrimitives({
-    id,
-    userId,
-    userIp,
-    hits,
-    exceeded,
-  }: {
-    id: string;
-    userId: string;
-    userIp: string;
-    hits: number;
-    exceeded: boolean;
-  }): UserApiLimit {
+  static fromPrimitives({ id, userId, userIp, hits, exceeded }: Primitives<UserApiLimit>): UserApiLimit {
     return new UserApiLimit({
       id: new UserApiLimitId(id),
       userId: new UserId(userId),
@@ -54,13 +43,7 @@ export class UserApiLimit extends AggregateRoot {
     });
   }
 
-  toPrimitives(): {
-    id: string;
-    userId: string;
-    userIp: string;
-    hits: number;
-    exceeded: boolean;
-  } {
+  toPrimitives(): Primitives<UserApiLimit> {
     return {
       id: this.id.value,
       userId: this.userId.value,

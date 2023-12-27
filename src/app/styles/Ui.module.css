@@ -7,13 +7,27 @@
 
 @media screen and (max-width: 1280px) {
     .navbar {
+        height: 90px;
         padding: 1.5rem 8rem;
     }
 }
 
 @media screen and (max-width: 960px) {
     .navbar {
+        height: 80px;
         padding: 1.5rem 4rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .navbar {
+        height: 70px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .navbar {
+        height: 60px;
     }
 }
 

@@ -1,25 +1,25 @@
 import { KeyboardEvent, RefObject, useEffect, useRef, useState } from 'react';
 
-interface UseMultiLineInputOptions {
+interface UseMultilineInputOptions {
   onEnter?: (value: string) => void;
 }
 
-interface UseMultiLineInputWithoutEnter {
+interface UseMultilineInputWithoutEnter {
   inputRef: RefObject<HTMLTextAreaElement>;
   hasText: boolean;
   handleInput: () => void;
 }
 
-interface UseMultiLineInputWithEnter extends UseMultiLineInputWithoutEnter {
+interface UseMultilineInputWithEnter extends UseMultilineInputWithoutEnter {
   handleEnter: (event: KeyboardEvent<HTMLTextAreaElement>) => void;
 }
 
-type UseMultiLineInput = UseMultiLineInputWithEnter | UseMultiLineInputWithoutEnter;
+type UseMultilineInput = UseMultilineInputWithEnter | UseMultilineInputWithoutEnter;
 
-export function useMultiLineInput(options: { onEnter: (value: string) => void }): UseMultiLineInputWithEnter;
-export function useMultiLineInput(options?: UseMultiLineInputOptions): UseMultiLineInputWithoutEnter;
+export function useMultilineInput(options: { onEnter: (value: string) => void }): UseMultilineInputWithEnter;
+export function useMultilineInput(options?: UseMultilineInputOptions): UseMultilineInputWithoutEnter;
 
-export function useMultiLineInput({ onEnter }: UseMultiLineInputOptions = {}): UseMultiLineInput {
+export function useMultilineInput({ onEnter }: UseMultilineInputOptions = {}): UseMultilineInput {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const [hasText, setHasText] = useState(false);
 

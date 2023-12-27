@@ -2,7 +2,7 @@
 
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
-import React, { FC, useState } from 'react';
+import React, { FC, useRef, useState } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
 import styles from '@/app/styles/Ui.module.css';
 import { useSubscriptionModal } from '@/app/store/use-subscription-modal';
@@ -13,9 +13,10 @@ interface AvatarButtonProps {
 }
 
 const AvatarButton: FC<AvatarButtonProps> = ({ isDashboard = false }) => {
+  const avatarRef = useRef<HTMLDivElement>(null);
   const [showMenu, setShowMenu] = useState(false);
   const { onOpen } = useSubscriptionModal();
-  const menuRef = useClickOutside(() => setShowMenu(false));
+  const menuRef = useClickOutside(() => setShowMenu(false), avatarRef);
 
   const handleOpenUpgradeModal = () => {
     setShowMenu(false);
@@ -28,7 +29,7 @@ const AvatarButton: FC<AvatarButtonProps> = ({ isDashboard = false }) => {
 
   return (
     <>
-      <div className={styles.avatarContainer} onClick={toggleMenu}>
+      <div ref={avatarRef} className={styles.avatarContainer} onClick={toggleMenu}>
         <FaUserAlt color="#eaeaea" className={styles.avatar} />
       </div>
       {showMenu && (

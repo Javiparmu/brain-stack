@@ -18,6 +18,7 @@ import { UserSubscription } from '../../domain/UserSubscription';
 import { UserPlan } from '../../domain/value-object/UserPlan';
 import { getRequestLimitFromPlan } from '@/app/lib';
 import { UserRequestLimit } from '../../domain/value-object/UserRequestLimit';
+import { MongooseConnection } from '@/modules/Shared/infrastructure/persistence/MongooseConnection';
 
 export class MongoUserRepository extends MongoRepository<User> implements UserRepository {
   private readonly userSubscriptionRepository = new MongoUserSubscriptionRepository();
@@ -32,18 +33,24 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
   }
 
   public async search(id: UserId): Promise<User | null> {
+    await MongooseConnection.connect({ url: process.env.MONGO_URL ?? '' });
+
     const user = await UserModel.findById(id).lean<UserDocument>();
 
     return user ? User.fromPrimitives({ ...user, id: user._id }) : null;
   }
 
   public async searchByEmail(email: UserEmail): Promise<User | null> {
+    await MongooseConnection.connect({ url: process.env.MONGO_URL ?? '' });
+
     const user = await UserModel.findOne({ email: email.value }).lean<UserDocument>();
 
     return user ? User.fromPrimitives({ ...user, id: user._id }) : null;
   }
 
   public async subscribe(subscription: UserSubscription): Promise<void> {
+    await MongooseConnection.connect({ url: process.env.MONGO_URL ?? '' });
+
     await this.userSubscriptionRepository.save(subscription);
 
     const requestLimit = getRequestLimitFromPlan(subscription.stripePriceId.value);
@@ -59,6 +66,8 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
   }
 
   public async incrementRequestCount(id: UserId): Promise<void> {
+    await MongooseConnection.connect({ url: process.env.MONGO_URL ?? '' });
+
     const user = await UserModel.findById(id);
 
     if (!user) throw new UserNotFoundException();

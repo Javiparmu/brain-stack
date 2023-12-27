@@ -1,3 +1,4 @@
+import { Primitives } from '@/modules/Shared/domain/Primitives';
 import { UserEmail } from './value-object/UserEmail';
 import { UserId } from './value-object/UserId';
 import { UserPassword } from './value-object/UserPassword';
@@ -57,38 +58,20 @@ export class User extends AggregateRoot {
     requestLimit,
     requestCount,
     requestReset,
-  }: {
-    id: string;
-    email: string;
-    password: string;
-    role: string;
-    plan: string;
-    requestLimit: number;
-    requestCount: number;
-    requestReset: number;
-  }): User {
+  }: Primitives<User>): User {
     return new User({
       id: new UserId(id),
-      email: new UserEmail(email),
-      password: new UserPassword(password),
-      role: new UserRole(role),
-      plan: new UserPlan(plan),
-      requestLimit: new UserRequestLimit(requestLimit),
-      requestCount: new UserRequestCount(requestCount),
-      requestReset: new UserRequestReset(requestReset),
+      email: new UserEmail(email!),
+      password: new UserPassword(password!),
+      role: new UserRole(role!),
+      plan: new UserPlan(plan!),
+      requestLimit: new UserRequestLimit(requestLimit!),
+      requestCount: new UserRequestCount(requestCount!),
+      requestReset: new UserRequestReset(requestReset!),
     });
   }
 
-  toPrimitives(): {
-    id: string;
-    email?: string;
-    password?: string;
-    role?: string;
-    plan?: string;
-    requestLimit?: number;
-    requestCount?: number;
-    requestReset?: number;
-  } {
+  toPrimitives(): Primitives<User> {
     return {
       id: this.id.value,
       email: this.email?.value,

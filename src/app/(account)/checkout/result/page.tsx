@@ -1,6 +1,10 @@
+import ErrorWithPayment from '@/app/components/error-with-payment';
+import { useFetch } from '@/app/hooks/use-fetch';
+import { errorToast } from '@/app/lib';
 import styles from '@/app/styles/Checkout.module.css';
 import { PaymentStatus } from '@/app/utils/enums';
 import Link from 'next/link';
+import { Toaster } from 'sonner';
 
 interface Props {
   searchParams: {
@@ -11,16 +15,25 @@ interface Props {
 async function CheckoutPage({ searchParams }: Props): Promise<JSX.Element> {
   if (!searchParams.session_id) throw new Error('Please provide a valid session_id (`cs_test_...`)');
 
-  const response = await fetch(process.env.NEXT_PUBLIC_API_URL ?? '' + '/stripe/manage-session', {
-    method: 'POST',
-    body: JSON.stringify({ sessionId: searchParams.session_id }),
+  const fetchApi = useFetch<{ paymentStatus: PaymentStatus }>();
+
+  const response = await fetchApi('/stripe/manage-session', {
+    body: { sessionId: searchParams.session_id },
   });
 
-  const payment = await response.json();
+  if (!response.ok) {
+    errorToast(response.error);
+
+    return (
+      <main className={styles.mainContainer}>
+        <ErrorWithPayment />
+      </main>
+    );
+  }
 
   return (
     <main className={styles.mainContainer}>
-      {payment.paymentStatus === PaymentStatus.PAID ? (
+      {response.data.paymentStatus === PaymentStatus.PAID ? (
         <section className={styles.sectionContainer}>
           <h1 className={styles.headerText}>Thank you!</h1>
           <p className={styles.paragraphText}>Your subscription has been successfully processed.</p>
@@ -44,27 +57,9 @@ async function CheckoutPage({ searchParams }: Props): Promise<JSX.Element> {
           </Link>
         </section>
       ) : (
-        <section className={styles.sectionContainer}>
-          <h1 className={styles.headerText}>Oops!</h1>
-          <p className={styles.paragraphText}>Something went wrong with your payment. Please try again.</p>
-          <svg
-            className={styles.shoppingIcon}
-            width="64"
-            height="64"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <circle cx="12" cy="12" r="9"></circle>
-            <line x1="9" y1="10" x2="9.01" y2="10"></line>
-            <line x1="15" y1="10" x2="15.01" y2="10"></line>
-            <path d="M9.5 16a10 10 0 0 1 6 -1.5"></path>
-          </svg>
-        </section>
+        <ErrorWithPayment />
       )}
+      <Toaster />
     </main>
   );
 }

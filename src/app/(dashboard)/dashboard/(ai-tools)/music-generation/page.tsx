@@ -10,13 +10,13 @@ import { errorToast } from '@/app/lib/toasts';
 import { useSession } from 'next-auth/react';
 import SendButton from '@/app/components/dashboard/send-button';
 import { useFetch } from '@/app/hooks/use-fetch';
-import { useMultiLineInput } from '@/app/hooks/use-mutiline-input';
+import { useMultilineInput } from '@/app/hooks/use-mutiline-input';
 
 const MusicPage: FC = () => {
   const router = useRouter();
   const session = useSession();
   const fetchApi = useFetch<{ audio: string }>();
-  const { inputRef, hasText, handleInput, handleEnter } = useMultiLineInput({
+  const { inputRef, hasText, handleInput, handleEnter } = useMultilineInput({
     onEnter: (value) => onSubmit(value),
   });
 

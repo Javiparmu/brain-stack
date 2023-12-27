@@ -5,6 +5,7 @@ import { StripePriceId } from './value-object/stripe/StripePriceid';
 import { StripeCustomerId } from './value-object/stripe/StripeCustomerId';
 import { StripeCurrentPeriodEnd } from './value-object/stripe/StripeCurrentPeriodEnd';
 import { UserSubscriptionId } from './value-object/UserSubscriptionId';
+import { Primitives } from '@/modules/Shared/domain/Primitives';
 
 export class UserSubscription extends AggregateRoot {
   readonly id: UserSubscriptionId;
@@ -45,14 +46,7 @@ export class UserSubscription extends AggregateRoot {
     stripePriceId,
     stripeCustomerId,
     stripeCurrentPeriodEnd,
-  }: {
-    id: string;
-    userId: string;
-    stripeSubscriptionId: string;
-    stripePriceId: string;
-    stripeCustomerId: string;
-    stripeCurrentPeriodEnd: number;
-  }): UserSubscription {
+  }: Primitives<UserSubscription>): UserSubscription {
     return new UserSubscription({
       id: new UserSubscriptionId(id),
       userId: new UserId(userId),
@@ -63,14 +57,7 @@ export class UserSubscription extends AggregateRoot {
     });
   }
 
-  toPrimitives(): {
-    id: string;
-    userId: string;
-    stripeSubscriptionId: string;
-    stripePriceId: string;
-    stripeCustomerId: string;
-    stripeCurrentPeriodEnd: number;
-  } {
+  toPrimitives(): Primitives<UserSubscription> {
     return {
       id: this.id.value,
       userId: this.userId.value,
