@@ -18,35 +18,35 @@ export default async function DashboardPage(): Promise<JSX.Element> {
       <section className={styles.productList}>
         <Link className={styles.productCard} href="/dashboard/conversation">
           <div className={styles.cardText}>
-            <ConversationIcon styles={styles.convIcon} size={25} color="#676bb9" />
+            <ConversationIcon styles={`${styles.icon} ${styles.convIcon}`} size={25} color="#676bb9" />
             Conversation
           </div>
           <ChevronRightIcon size={24} color="white" />
         </Link>
         <Link className={styles.productCard} href="/dashboard/image-generation">
           <div className={styles.cardText}>
-            <ImageIcon styles={styles.imgIcon} size={25} color="#e54e4e" />
+            <ImageIcon styles={`${styles.icon} ${styles.imgIcon}`} size={25} color="#e54e4e" />
             Image Generation
           </div>
           <ChevronRightIcon size={24} color="white" />
         </Link>
         <Link className={styles.productCard} href="/dashboard/code-generation">
           <div className={styles.cardText}>
-            <CodeIcon styles={styles.codeIcon} size={25} color="#3da555" />
+            <CodeIcon styles={`${styles.icon} ${styles.codeIcon}`} size={25} color="#3da555" />
             Code Generation
           </div>
           <ChevronRightIcon size={24} color="white" />
         </Link>
         <Link className={styles.productCard} href="/dashboard/music-generation">
           <div className={styles.cardText}>
-            <MusicIcon styles={styles.musicIcon} size={25} color="#dae560" />
+            <MusicIcon styles={`${styles.icon} ${styles.musicIcon}`} size={25} color="#dae560" />
             Music Generation
           </div>
           <ChevronRightIcon size={24} color="white" />
         </Link>
         <Link className={styles.productCard} href="/dashboard/video-generation">
           <div className={styles.cardText}>
-            <VideoIcon styles={styles.videoIcon} size={25} color="#eab154" />
+            <VideoIcon styles={`${styles.icon} ${styles.videoIcon}`} size={25} color="#eab154" />
             Video Generation
           </div>
           <ChevronRightIcon size={24} color="white" />

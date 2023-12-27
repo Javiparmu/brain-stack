@@ -1,9 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import { Metadata } from 'next';
 import styles from '@/app/styles/Dashboard.module.css';
-import Link from 'next/link';
-import AvatarButton from '@/app/components/ui/avatar-button';
-import Image from 'next/image';
 import Sidebar from '@/app/components/dashboard/sidebar';
 import { getApiLimitCount } from '@/app/lib/api-limit';
 import { checkSubscription } from '@/app/lib/subscription';
@@ -12,6 +9,7 @@ import { Inter } from 'next/font/google';
 import '@/app/globals.css';
 import { authOptions } from '@/app/lib';
 import { getServerSession } from 'next-auth';
+import Navbar from '@/app/components/dashboard/navbar';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -38,15 +36,7 @@ const DashboardLayout = async ({ children }: PropsWithChildren): Promise<JSX.Ele
   return (
     <html lang="en">
       <body className={inter.className}>
-        <nav className={styles.navbar}>
-          <Link href="/" className={styles.logo}>
-            <Image width={30} height={30} src="/images/logo_blue.png" alt="logo" />
-            <span className={styles.logoText}>Brain Stack</span>
-          </Link>
-          <div className={styles.navItems}>
-            <AvatarButton isDashboard />
-          </div>
-        </nav>
+        <Navbar />
         <main className={styles.mainContainer}>
           <Sidebar apiLimitCount={apiLimitCount} isSubscribed={!!plan} />
           <article className={styles.content}>{children}</article>

@@ -5,6 +5,8 @@ import Link from 'next/link';
 import styles from '@/app/styles/Dashboard.module.css';
 import { usePathname } from 'next/navigation';
 import { FreeLimitCounter } from './free-limit-counter';
+import { useSidebar } from '@/app/store/use-sidebar';
+import CloseButton from '../pricing/close-button';
 
 interface SideBarProps {
   apiLimitCount?: number;
@@ -13,24 +15,31 @@ interface SideBarProps {
 
 const Sidebar = ({ apiLimitCount = 0, isSubscribed = false }: SideBarProps): JSX.Element => {
   const pathname = usePathname().split('/')[2];
+  const { isOpen: sidebarOpen, onClose: closeSidebar } = useSidebar();
 
   return (
-    <aside className={styles.sidebar}>
+    <aside className={`${styles.sidebar} ${sidebarOpen ? styles.open : styles.close}`}>
+      <CloseButton onClose={closeSidebar} show={sidebarOpen} />
       <ul className={styles.sidebarList}>
         <li>
-          <Link href="/dashboard">
+          <Link onClick={closeSidebar} href="/dashboard">
             <DashboardIcon size={25} color="#359EBB" />
             Dashboard
           </Link>
         </li>
         <li>
-          <Link href="/dashboard/conversation" className={pathname === 'conversation' ? styles.activeProduct : ''}>
+          <Link
+            onClick={closeSidebar}
+            href="/dashboard/conversation"
+            className={pathname === 'conversation' ? styles.activeProduct : ''}
+          >
             <ConversationIcon size={25} color="#676bb9" />
             Conversation
           </Link>
         </li>
         <li>
           <Link
+            onClick={closeSidebar}
             href="/dashboard/image-generation"
             className={pathname === 'image-generation' ? styles.activeProduct : ''}
           >
@@ -40,6 +49,7 @@ const Sidebar = ({ apiLimitCount = 0, isSubscribed = false }: SideBarProps): JSX
         </li>
         <li>
           <Link
+            onClick={closeSidebar}
             href="/dashboard/code-generation"
             className={pathname === 'code-generation' ? styles.activeProduct : ''}
           >
@@ -49,6 +59,7 @@ const Sidebar = ({ apiLimitCount = 0, isSubscribed = false }: SideBarProps): JSX
         </li>
         <li>
           <Link
+            onClick={closeSidebar}
             href="/dashboard/music-generation"
             className={pathname === 'music-generation' ? styles.activeProduct : ''}
           >
@@ -58,6 +69,7 @@ const Sidebar = ({ apiLimitCount = 0, isSubscribed = false }: SideBarProps): JSX
         </li>
         <li>
           <Link
+            onClick={closeSidebar}
             href="/dashboard/video-generation"
             className={pathname === 'video-generation' ? styles.activeProduct : ''}
           >

@@ -1,8 +1,8 @@
 'use client';
 
-import { CodeIcon, RobotIcon, SendIcon } from '@/app/components/icons';
+import { CodeIcon, RobotIcon } from '@/app/components/icons';
 import styles from '@/app/styles/Dashboard.module.css';
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 import { ChatCompletionMessageParam } from 'openai/resources/chat';
 import { Toaster } from 'sonner';
 import { useRouter } from 'next/navigation';
@@ -10,78 +10,56 @@ import LoadingDots from '@/app/components/ui/loading-dots';
 import MessageList from '@/app/components/dashboard/message-list';
 import { errorToast } from '@/app/lib/toasts';
 import { useSession } from 'next-auth/react';
+import SendButton from '@/app/components/dashboard/send-button';
+import { useFetch } from '@/app/hooks/use-fetch';
+import { useMultiLineInput } from '@/app/hooks/use-mutiline-input';
 
 const CodePage: FC = () => {
   const router = useRouter();
-  const [hasText, setHasText] = useState(false);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const session = useSession();
+  const fetchApi = useFetch<ChatCompletionMessageParam>();
+  const { inputRef, hasText, handleInput, handleEnter } = useMultiLineInput({
+    onEnter: (value) => onSubmit(value),
+  });
+
   const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([]);
   const [inputPrompt, setInputPrompt] = useState<string>('');
   const [loadingResponse, setLoadingResponse] = useState<boolean>(false);
-  const session = useSession();
 
-  const handleInput = () => {
-    if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+  const userId = session.data?.user?.userId;
 
-      setHasText(textareaRef.current.value.trim() !== '');
-    }
-  };
+  const onSubmit = useCallback(
+    async (prompt: string) => {
+      setLoadingResponse(true);
+      setInputPrompt('');
 
-  const onSubmit = async (prompt: string) => {
-    setLoadingResponse(true);
+      const userMessage: ChatCompletionMessageParam = {
+        role: 'user',
+        content: prompt,
+      };
+      const newMessages = [...messages, userMessage];
 
-    setInputPrompt('');
+      setMessages((current) => [userMessage, ...current]);
 
-    const userMessage: ChatCompletionMessageParam = {
-      role: 'user',
-      content: prompt,
-    };
-    const newMessages = [...messages, userMessage];
+      await fetchApi('/code', {
+        body: {
+          messages: newMessages,
+          userId,
+        },
+        onSuccess: (data) => setMessages((current) => [data, ...current]),
+        onError: (error) => errorToast(error),
+      });
 
-    setMessages((current) => [userMessage, ...current]);
-
-    const userId = session.data?.user?.userId;
-
-    const response = await fetch(process.env.NEXT_PUBLIC_API_URL ?? '' + '/code', {
-      method: 'POST',
-      body: JSON.stringify({
-        messages: newMessages,
-        userId,
-      }),
-    });
-
-    if (response.ok) {
-      const responseMessage = await response.json();
-      setMessages((current) => [responseMessage, ...current]);
-    } else {
-      const { error } = await response.json();
-      errorToast(error);
-    }
-
-    setLoadingResponse(false);
-    router.refresh();
-  };
-
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (event.key === 'Enter' && !event.shiftKey) {
-      event.preventDefault();
-
-      if (textareaRef.current?.value !== '') {
-        onSubmit(textareaRef.current?.value || '');
-      }
-    }
-  };
-
-  useEffect(() => {
-    handleInput();
-  }, []);
+      setLoadingResponse(false);
+      router.refresh();
+    },
+    [fetchApi, messages, router, userId],
+  );
 
   return (
     <>
       <header className={styles.sectionTitle}>
-        <CodeIcon styles={styles.codeIcon} size={25} color="#3da555" />
+        <CodeIcon styles={`${styles.codeIcon} ${styles.icon}`} size={25} color="#3da555" />
         <h1>Code generation</h1>
       </header>
       <section className={styles.sectionSubtitle}>
@@ -89,9 +67,9 @@ const CodePage: FC = () => {
       </section>
       <section className={styles.inputContainer}>
         <textarea
-          ref={textareaRef}
+          ref={inputRef}
           spellCheck={false}
-          onKeyDown={handleKeyDown}
+          onKeyDown={handleEnter}
           onInput={handleInput}
           onChange={(e) => setInputPrompt(e.target.value)}
           value={inputPrompt}
@@ -102,13 +80,7 @@ const CodePage: FC = () => {
         {loadingResponse ? (
           <LoadingDots />
         ) : (
-          <button
-            disabled={!hasText}
-            className={`${styles.sendIcon} ${hasText ? styles.active : ''}`}
-            onClick={() => onSubmit(textareaRef.current?.value || '')}
-          >
-            <SendIcon size={25} color="#6B6C7B" />
-          </button>
+          <SendButton disabled={!hasText} onClick={() => onSubmit(inputRef.current?.value || '')} />
         )}
       </section>
       {messages.length > 0 ? (
@@ -117,7 +89,7 @@ const CodePage: FC = () => {
         </section>
       ) : (
         <section className={styles.noConvContainer}>
-          <RobotIcon size={300} color="#6B6C7B" />
+          <RobotIcon styles={styles.robotIcon} size={300} color="#6B6C7B" />
         </section>
       )}
       <Toaster />

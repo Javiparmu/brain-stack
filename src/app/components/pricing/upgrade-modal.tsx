@@ -7,6 +7,7 @@ import { FC } from 'react';
 import { getPlanFromId } from '@/app/utils';
 import ChoosePlanButton from './choose-plan-button';
 import CloseButton from './close-button';
+import { useClickOutside } from '@/app/hooks/use-click-outside';
 
 interface UpgradeModalProps {
   email?: string;
@@ -17,10 +18,11 @@ const UpgradeModal: FC<UpgradeModalProps> = ({ email, plan }) => {
   const planName = getPlanFromId(plan);
 
   const { isOpen, onClose } = useSubscriptionModal();
+  const upgradeModalRef = useClickOutside<HTMLDialogElement>(onClose);
 
   return (
     <div className={isOpen ? styles.modalBackdrop : styles.hidden}>
-      <dialog open={isOpen} className={styles.upgradeModal}>
+      <dialog ref={upgradeModalRef} open={isOpen} className={styles.upgradeModal}>
         <CloseButton onClose={onClose} />
         <h1>Manage your subscription</h1>
         <p>

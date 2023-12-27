@@ -34,6 +34,16 @@
     color: #eaeaea;
 }
 
+.hamburger {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
 .mainContainer {
     display: flex;
     flex-direction: row;
@@ -162,34 +172,29 @@
     gap: 2rem;
 }
 
-.convIcon {
-    background-color: rgba(103, 107, 185, 0.3);
+.icon {
     padding: 10px;
     border-radius: 5px;
+}
+
+.convIcon {
+    background-color: rgba(103, 107, 185, 0.3);
 }
 
 .imgIcon {
     background-color: rgba(229, 78, 78, 0.3);
-    padding: 10px;
-    border-radius: 5px;
 }
 
 .videoIcon {
     background-color: rgba(234, 177, 84, 0.3);
-    padding: 10px;
-    border-radius: 5px;
 }
 
 .codeIcon {
     background-color: rgba(61, 165, 85, 0.3);
-    padding: 10px;
-    border-radius: 5px;
 }
 
 .musicIcon {
     background-color: rgba(218, 229, 96, 0.3);
-    padding: 10px;
-    border-radius: 5px;
 }
 
 .sectionTitle {
@@ -219,6 +224,7 @@
     width: 100%;
     padding: 10px 15px;
     font-size: 18px;
+    font-family: inherit;
     border: 2px solid #dfe1e6;
     border-radius: 4px;
     outline: none;
@@ -226,6 +232,7 @@
     resize: none;
     scrollbar-width: thin;
     scrollbar-color: #D8D8D8 #F5F5F5;
+    z-index: 0;
 }
 
 .imageInput {
@@ -252,7 +259,7 @@
     background-color: #A0A0A0;
 }
 
-.sendIcon {
+.sendButton {
     position: absolute;
     right: 25px;
     top: 50%;
@@ -264,7 +271,7 @@
     transition: opacity 0.2s ease;
 }
 
-.sendIcon:hover {
+.sendButton:hover {
     opacity: 0.8;
 }
 
@@ -320,33 +327,26 @@
 }
 
 .numberSelect {
-    position: absolute;
+    margin-top: 5px;
     min-width: 140px;
     height: 48px;
-    right: 300px;
-    top: 50%;
     padding: 0 1rem;
     border-width: 2px;
     border-radius: 5px;
     border-color: #c7c7c7;
     font-size: 1rem;
-    transform: translateY(-50%);
-    background-color: transparent;
 }
 
 .imageSizeSelect {
-    position: absolute;
+    margin-top: 5px;
+    margin-left: 10px;
     min-width: 140px;
     height: 48px;
-    right: 150px;
-    top: 50%;
     padding: 0 1rem;
     border-width: 2px;
     border-radius: 5px;
     border-color: #c7c7c7;
     font-size: 1rem;
-    transform: translateY(-50%);
-    background-color: transparent;
 }
 
 .conversationContainer {
@@ -479,4 +479,139 @@
     border-radius: 10px;
     background-color: black;
     border-width: 1px;
+}
+
+@media (max-width: 768px) {
+    .mainContainer {
+        flex-direction: column;
+    }
+
+    .navbar {
+        height: 60px;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1.5rem;
+    }
+
+    .logo > img {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        height: calc(100vh - 6rem);
+        width: calc(100% - 2rem);
+        padding: 3rem 1rem;
+        opacity: 0.98;
+        transition: left 0.3s ease;
+        z-index: 1;
+    }
+
+    .open {
+        left: 0;
+    }
+
+    .close {
+        left: -110%;
+    }
+
+    .content {
+        height: calc(100vh - 80px - 1rem);
+        width: calc(100% - 3rem);
+        padding: 1rem 1.5rem;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .subTitle {
+        font-size: 1.2rem;
+    }
+
+    .productCard {
+        height: 3rem;
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .cardText {
+        gap: 1.5rem;
+    }
+
+    .icon {
+        width: 20px;
+        height: 20px;
+        padding: 8px;
+    }
+
+    .conversationInput {
+        min-height: 40px;
+        max-height: 150px;
+        line-height: 1.3;
+        width: 100%;
+        padding: 8px 12px;
+        padding-right: 25px;
+        font-size: 14px;
+    }
+
+    .sendButton {
+        right: 25px;
+    }
+
+    .sendIcon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .sectionTitle {
+        font-size: 1.1rem;
+        gap: 1.2rem;
+    }
+
+    .sectionSubtitle {
+        font-size: 0.6rem;
+    }
+
+    .loadingResponse {
+        right: 10px;
+    }
+
+    .dot {
+        height: 3px;
+        width: 3px;
+    }
+
+    .robotIcon {
+        width: 150px;
+        height: 150px;
+    }
+
+    .conversationContainer {
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .message {
+        line-height: 24px;
+        gap: 0.5rem;
+        padding: 1rem;
+        padding-left: 3rem;
+        font-size: 0.8rem;
+    }
+
+    .video {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1500px) {
+    .sidebarList li a {
+        font-size: 1.1rem;
+    }
 }

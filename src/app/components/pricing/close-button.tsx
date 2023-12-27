@@ -2,12 +2,17 @@ import React, { FC } from 'react';
 import styles from '@/app/styles/Ui.module.css';
 
 interface CloseButtonProps {
+  show?: boolean;
+  side?: 'left' | 'right';
   onClose: () => void;
 }
 
-const CloseButton: FC<CloseButtonProps> = ({ onClose }) => {
+const CloseButton: FC<CloseButtonProps> = ({ show = true, onClose, side = 'right' }) => {
   return (
-    <button className={styles.closeButton} onClick={onClose}>
+    <button
+      className={`${styles.closeButton} ${!show && styles.hidden} ${side === 'right' ? styles.right : styles.left}`}
+      onClick={onClose}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="icon icon-tabler icon-tabler-x"

@@ -48,6 +48,7 @@
 }
 
 .avatar {
+    font-size: 40px;
     object-fit: cover;
 }
 
@@ -171,6 +172,15 @@
     display: none
 }
 
+.avatarIcon {
+    border-radius: 5px;
+    background-color: #1D1E1E;
+    padding: 0 0.1rem;
+    position: absolute;
+    top: 1.7rem;
+    left: 1rem;
+}
+
 @media screen and (max-width: 768px) {
     .navbar {
         padding: 1rem 2rem;
@@ -178,6 +188,10 @@
 
     .logoText {
         display: none;
+    }
+
+    .avatar {
+        font-size: 30px;
     }
 
     .getStarted {
@@ -198,15 +212,23 @@
         top: 60px;
         right: -5vw;
     }
-}
 
-.avatarIcon {
-    border-radius: 5px;
-    background-color: #1D1E1E;
-    padding: 0 0.1rem;
-    position: absolute;
-    top: 1.7rem;
-    left: 1rem;
+    .avatarIcon {
+        width: 25px;
+        height: 25px;
+        top: 1rem;
+        left: 0.65rem;
+    }
+
+    .menu {
+        top: 30px;
+        right: 20px;
+    }
+
+    .menuItem,
+    .upgradeMenuItem {
+        font-size: 1.1rem;
+    }
 }
 
 .progressContainer {
@@ -286,7 +308,7 @@
 .upgradeModal {
     display: block;
     position: fixed;
-    z-index: 999;
+    z-index: 2;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -314,7 +336,6 @@
 .closeButton {
     position: absolute;
     top: 1rem;
-    right: 1rem;
     color: white;
     background-color: transparent;
     border: none;
@@ -326,6 +347,14 @@
 .closeButton:focus {
     color: #bbb;
     cursor: pointer;
+}
+
+.left {
+    left: 1rem;
+}
+
+.right {
+    right: 1rem;
 }
 
 .details div {
@@ -439,8 +468,9 @@
 
 @media (max-width: 768px) {
     .upgradeModal {
-        width: 80vw;
+        width: calc(100% - 4.5rem);
         height: 80vh;
+        padding: 1.2rem;
     }
 
     .upgradeModal h1 {
@@ -470,6 +500,10 @@
         padding: 1rem;
         align-items: flex-start;
     }
+
+    .summary {
+        font-size: 1.2rem;
+    }
 }
 
 .modalBackdrop {
@@ -483,6 +517,7 @@
     justify-content: center;
     align-items: center;
     z-index: 1;
+    animation: fade-in 0.1s forwards;
 }
 
 .hidden {
@@ -495,4 +530,14 @@
         display: none;
     }
 }
-  
+ 
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        display: none;
+    }
+    to {
+        opacity: 1;
+        display: flex;
+    }
+}

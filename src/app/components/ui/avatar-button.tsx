@@ -6,6 +6,7 @@ import React, { FC, useState } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
 import styles from '@/app/styles/Ui.module.css';
 import { useSubscriptionModal } from '@/app/store/use-subscription-modal';
+import { useClickOutside } from '@/app/hooks/use-click-outside';
 
 interface AvatarButtonProps {
   isDashboard?: boolean;
@@ -14,6 +15,7 @@ interface AvatarButtonProps {
 const AvatarButton: FC<AvatarButtonProps> = ({ isDashboard = false }) => {
   const [showMenu, setShowMenu] = useState(false);
   const { onOpen } = useSubscriptionModal();
+  const menuRef = useClickOutside(() => setShowMenu(false));
 
   const handleOpenUpgradeModal = () => {
     setShowMenu(false);
@@ -27,10 +29,10 @@ const AvatarButton: FC<AvatarButtonProps> = ({ isDashboard = false }) => {
   return (
     <>
       <div className={styles.avatarContainer} onClick={toggleMenu}>
-        <FaUserAlt fontSize={40} color="#eaeaea" className={styles.avatar} />
+        <FaUserAlt color="#eaeaea" className={styles.avatar} />
       </div>
       {showMenu && (
-        <div className={styles.menu}>
+        <div ref={menuRef} className={styles.menu}>
           {!isDashboard ? (
             <Link href="/dashboard" className={styles.menuItem}>
               Dashboard
