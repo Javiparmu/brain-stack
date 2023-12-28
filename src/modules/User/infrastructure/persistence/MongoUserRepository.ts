@@ -33,7 +33,7 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
   }
 
   public async search(id: UserId): Promise<User | null> {
-    await MongooseConnection.connect({ url: process.env.MONGO_URL ?? '' });
+    await MongooseConnection.connect({ url: process.env.MONGODB_URI ?? '' });
 
     const user = await UserModel.findById(id).lean<UserDocument>();
 
@@ -41,7 +41,7 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
   }
 
   public async searchByEmail(email: UserEmail): Promise<User | null> {
-    await MongooseConnection.connect({ url: process.env.MONGO_URL ?? '' });
+    await MongooseConnection.connect({ url: process.env.MONGODB_URI ?? '' });
 
     const user = await UserModel.findOne({ email: email.value }).lean<UserDocument>();
 
@@ -49,7 +49,7 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
   }
 
   public async subscribe(subscription: UserSubscription): Promise<void> {
-    await MongooseConnection.connect({ url: process.env.MONGO_URL ?? '' });
+    await MongooseConnection.connect({ url: process.env.MONGODB_URI ?? '' });
 
     await this.userSubscriptionRepository.save(subscription);
 
@@ -66,7 +66,7 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
   }
 
   public async incrementRequestCount(id: UserId): Promise<void> {
-    await MongooseConnection.connect({ url: process.env.MONGO_URL ?? '' });
+    await MongooseConnection.connect({ url: process.env.MONGODB_URI ?? '' });
 
     const user = await UserModel.findById(id);
 

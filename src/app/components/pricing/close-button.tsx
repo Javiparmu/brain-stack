@@ -2,15 +2,18 @@ import React, { FC } from 'react';
 import styles from '@/app/styles/Ui.module.css';
 
 interface CloseButtonProps {
+  className?: string;
   show?: boolean;
   side?: 'left' | 'right';
   onClose: () => void;
 }
 
-const CloseButton: FC<CloseButtonProps> = ({ show = true, onClose, side = 'right' }) => {
+const CloseButton: FC<CloseButtonProps> = ({ className, show = true, onClose, side = 'right' }) => {
   return (
     <button
-      className={`${styles.closeButton} ${!show && styles.hidden} ${side === 'right' ? styles.right : styles.left}`}
+      className={`${styles.closeButton} ${className} ${!show && styles.hidden} ${
+        side === 'right' ? styles.right : styles.left
+      }`}
       onClick={onClose}
     >
       <svg

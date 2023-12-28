@@ -8,11 +8,13 @@ import { UserRequestLimit } from './value-object/UserRequestLimit';
 import { UserRequestReset } from './value-object/UserRequestReset';
 import { UserRole } from './value-object/UserRole';
 import { AggregateRoot } from '@/modules/Shared/domain/AggregateRoot';
+import { UserAuthProvider } from './value-object/UserAuthProvider';
 
 export class User extends AggregateRoot {
   readonly id: UserId;
   readonly email?: UserEmail;
   readonly password?: UserPassword;
+  readonly authProvider?: UserAuthProvider;
   readonly role?: UserRole;
   readonly plan?: UserPlan;
   readonly requestLimit?: UserRequestLimit;
@@ -23,6 +25,7 @@ export class User extends AggregateRoot {
     id,
     email,
     password,
+    authProvider,
     role,
     plan,
     requestLimit,
@@ -32,6 +35,7 @@ export class User extends AggregateRoot {
     id: UserId;
     email?: UserEmail;
     password?: UserPassword;
+    authProvider?: UserAuthProvider;
     role?: UserRole;
     plan?: UserPlan;
     requestLimit?: UserRequestLimit;
@@ -42,6 +46,7 @@ export class User extends AggregateRoot {
     this.id = id;
     this.email = email;
     this.password = password;
+    this.authProvider = authProvider;
     this.role = role;
     this.plan = plan;
     this.requestLimit = requestLimit;
@@ -53,6 +58,7 @@ export class User extends AggregateRoot {
     id,
     email,
     password,
+    authProvider,
     role,
     plan,
     requestLimit,
@@ -62,7 +68,8 @@ export class User extends AggregateRoot {
     return new User({
       id: new UserId(id),
       email: new UserEmail(email!),
-      password: new UserPassword(password!),
+      password: password ? new UserPassword(password) : undefined,
+      authProvider: new UserAuthProvider(authProvider!),
       role: new UserRole(role!),
       plan: new UserPlan(plan!),
       requestLimit: new UserRequestLimit(requestLimit!),
@@ -76,6 +83,7 @@ export class User extends AggregateRoot {
       id: this.id.value,
       email: this.email?.value,
       password: this.password?.value,
+      authProvider: this.authProvider?.value,
       role: this.role?.value,
       plan: this.plan?.value,
       requestLimit: this.requestLimit?.value,

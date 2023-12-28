@@ -1,3 +1,4 @@
+import { UserAuthProvider } from '@/modules/User/domain/value-object/UserAuthProvider';
 import { UserEmail } from '@/modules/User/domain/value-object/UserEmail';
 import { UserId } from '@/modules/User/domain/value-object/UserId';
 import { UserPassword } from '@/modules/User/domain/value-object/UserPassword';
@@ -29,6 +30,13 @@ const userSchema = new Schema(
       required: true,
       get: (password: string) => new UserPassword(password),
       set: (password: UserPassword) => password?.value,
+    },
+    authProvider: {
+      type: String,
+      enum: ['credentials', 'google', 'github'],
+      default: 'credentials',
+      get: (authProvider: string) => new UserAuthProvider(authProvider),
+      set: (authProvider: UserAuthProvider) => authProvider?.value,
     },
     role: {
       type: String,

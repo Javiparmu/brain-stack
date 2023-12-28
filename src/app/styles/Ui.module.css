@@ -62,15 +62,15 @@
 }
 
 .avatar {
-    font-size: 40px;
+    font-size: 35px;
     object-fit: cover;
 }
 
 .menu,
 .hamburgerMenu {
     position: absolute;
-    top: 65px;
-    right: 30px;
+    top: 55px;
+    right: 25px;
     background-color: #1D1E1E;
     border-radius: 5px;
     padding: 0.8rem 0.2rem;
@@ -521,37 +521,38 @@
 }
 
 .modalBackdrop {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1;
-    animation: fade-in 0.1s forwards;
+    animation: fade-out 0.1s forwards;
 }
 
-.hidden {
-    animation: fade-out 0.1s forwards;
+.modalBackdrop.visible {
+    display: flex;
+    animation: fade-in 0.1s forwards;
 }
 
 @keyframes fade-out {
     to {
-        opacity: 0;
         display: none;
+        opacity: 0;
     }
 }
- 
+
 @keyframes fade-in {
     from {
-        opacity: 0;
         display: none;
+        opacity: 0;
     }
     to {
-        opacity: 1;
         display: flex;
+        opacity: 1;
     }
 }

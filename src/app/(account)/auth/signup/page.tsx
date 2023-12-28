@@ -6,6 +6,9 @@ import { signIn } from 'next-auth/react';
 import { Toaster, toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
+import { useFetch } from '@/app/hooks/use-fetch';
+import { errorToast } from '@/app/lib/toasts';
+import LandingLogo from '@/app/components/ui/landing-logo';
 
 interface SignUp {
   email: string;
@@ -14,6 +17,7 @@ interface SignUp {
 
 const SignUp: FC = () => {
   const router = useRouter();
+  const fetchApi = useFetch<SignUp>();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,27 +25,27 @@ const SignUp: FC = () => {
     const email = (e.target as HTMLFormElement).email.value;
     const password = (e.target as HTMLFormElement).password.value;
 
-    await fetch('/api/auth/signup', {
-      method: 'POST',
-      body: JSON.stringify({ userId, email, password }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    const response = await fetchApi('/auth/signup', {
+      body: { userId, email, password },
     });
 
-    try {
-      await signIn('credentials', {
-        email,
-        password,
-        redirect: false,
-      });
+    if (response.ok) {
+      try {
+        await signIn('credentials', {
+          email,
+          password,
+          redirect: false,
+        });
 
-      toast.success('Signed up successfully');
+        toast.success('Signed up successfully');
 
-      router.push('/dashboard');
-      router.refresh();
-    } catch (error) {
-      toast.error('An error occurred');
+        router.push('/dashboard');
+        router.refresh();
+      } catch (error) {
+        errorToast('Something went wrong, please try again.');
+      }
+    } else {
+      errorToast('Something went wrong, please try again.');
     }
   };
 
@@ -55,6 +59,9 @@ const SignUp: FC = () => {
 
   return (
     <main className={styles.mainContainer}>
+      <header className={styles.logoContainer}>
+        <LandingLogo className={styles.logo} />
+      </header>
       <div className={styles.bgWrapper}>
         <div className={styles.bgTiles}></div>
       </div>

@@ -16,7 +16,7 @@ const AvatarButton: FC<AvatarButtonProps> = ({ isDashboard = false }) => {
   const avatarRef = useRef<HTMLDivElement>(null);
   const [showMenu, setShowMenu] = useState(false);
   const { onOpen } = useSubscriptionModal();
-  const menuRef = useClickOutside(() => setShowMenu(false), avatarRef);
+  const menuRef = useClickOutside(showMenu, () => setShowMenu(false), avatarRef);
 
   const handleOpenUpgradeModal = () => {
     setShowMenu(false);

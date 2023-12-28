@@ -5,6 +5,7 @@ import styles from '@/app/styles/Auth.module.css';
 import { signIn } from 'next-auth/react';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import { errorToast } from '@/app/lib/toasts';
 
 interface Login {
   email: string;
@@ -32,9 +33,7 @@ const Login: FC = () => {
       router.refresh();
       router.push('/dashboard');
     } catch (error) {
-      console.log('error: ', error);
-
-      toast.error('An error occurred');
+      errorToast('An error occurred');
     }
   };
 

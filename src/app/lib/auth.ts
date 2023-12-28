@@ -4,6 +4,10 @@ import GoogleProvider from 'next-auth/providers/google';
 import GithubProvider from 'next-auth/providers/github';
 import { UserFinder } from '@/modules/User/application/UserFinder';
 import { MongoUserRepository } from '@/modules/User/infrastructure/persistence/MongoUserRepository';
+import { compare } from 'bcrypt';
+import { UserCreator } from '@/modules/User/application/UserCreator';
+import { AuthProvider } from '@/modules/User/domain/value-object/UserAuthProvider';
+import { randomUUID } from 'crypto';
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -29,6 +33,10 @@ export const authOptions: NextAuthOptions = {
           const user = await userFinder.run(email);
 
           if (!user) return null;
+
+          const isValidPassword = await compare(password, user.password!.value);
+
+          if (!isValidPassword) return null;
 
           return {
             id: user.id.value,
@@ -56,7 +64,22 @@ export const authOptions: NextAuthOptions = {
     maxAge: 30 * 24 * 60 * 60,
   },
   callbacks: {
-    async signIn() {
+    async signIn({ user, account }) {
+      if (!user?.email) return false;
+      if (account?.provider === 'credentials') return true;
+
+      const userFinder = new UserFinder(new MongoUserRepository());
+      const foundUser = await userFinder.run(user.email);
+
+      if (!foundUser) {
+        const userCreator = new UserCreator(new MongoUserRepository());
+        await userCreator.run({
+          id: randomUUID(),
+          email: user.email,
+          authProvider: account?.provider as AuthProvider,
+        });
+      }
+
       return true;
     },
     async redirect({ baseUrl }) {
@@ -72,6 +95,13 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+      } else if (token) {
+        const userFinder = new UserFinder(new MongoUserRepository());
+        const foundUser = await userFinder.run(token.email!);
+
+        if (foundUser) {
+          token.id = foundUser.id.value;
+        }
       }
 
       return token;

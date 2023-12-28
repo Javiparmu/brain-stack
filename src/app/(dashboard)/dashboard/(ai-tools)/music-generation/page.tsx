@@ -2,23 +2,18 @@
 
 import { MusicIcon, RobotIcon } from '@/app/components/icons';
 import styles from '@/app/styles/Dashboard.module.css';
-import { FC, useCallback, useState } from 'react';
+import { FC, useState } from 'react';
 import { Toaster } from 'sonner';
 import { useRouter } from 'next/navigation';
-import LoadingDots from '@/app/components/ui/loading-dots';
 import { errorToast } from '@/app/lib/toasts';
 import { useSession } from 'next-auth/react';
-import SendButton from '@/app/components/dashboard/send-button';
 import { useFetch } from '@/app/hooks/use-fetch';
-import { useMultilineInput } from '@/app/hooks/use-mutiline-input';
+import MultilineInput from '@/app/components/ui/multiline-input';
 
 const MusicPage: FC = () => {
   const router = useRouter();
   const session = useSession();
   const fetchApi = useFetch<{ audio: string }>();
-  const { inputRef, hasText, handleInput, handleEnter } = useMultilineInput({
-    onEnter: (value) => onSubmit(value),
-  });
 
   const [music, setMusic] = useState<string>();
   const [inputPrompt, setInputPrompt] = useState<string>('');
@@ -26,24 +21,21 @@ const MusicPage: FC = () => {
 
   const userId = session.data?.user?.userId;
 
-  const onSubmit = useCallback(
-    async (prompt: string) => {
-      setLoadingResponse(true);
+  const onSubmit = async (prompt: string) => {
+    setLoadingResponse(true);
 
-      await fetchApi('/music', {
-        body: {
-          prompt,
-          userId,
-        },
-        onSuccess: (data) => setMusic(data.audio),
-        onError: (error) => errorToast(error),
-      });
+    await fetchApi('/music', {
+      body: {
+        prompt,
+        userId,
+      },
+      onSuccess: (data) => setMusic(data.audio),
+      onError: (error) => errorToast(error),
+    });
 
-      setLoadingResponse(false);
-      router.refresh();
-    },
-    [fetchApi, router, userId],
-  );
+    setLoadingResponse(false);
+    router.refresh();
+  };
 
   return (
     <>
@@ -54,24 +46,13 @@ const MusicPage: FC = () => {
       <section className={styles.sectionSubtitle}>
         <h2>Turn your prompt into original music.</h2>
       </section>
-      <section className={styles.inputContainer}>
-        <textarea
-          ref={inputRef}
-          spellCheck={false}
-          onKeyDown={handleEnter}
-          onInput={handleInput}
-          onChange={(e) => setInputPrompt(e.target.value)}
-          value={inputPrompt}
-          placeholder="A happy song about a dog"
-          rows={1}
-          className={styles.conversationInput}
-        />
-        {loadingResponse ? (
-          <LoadingDots />
-        ) : (
-          <SendButton disabled={!hasText} onClick={() => onSubmit(inputRef.current?.value ?? '')} />
-        )}
-      </section>
+      <MultilineInput
+        value={inputPrompt}
+        onChange={(e) => setInputPrompt(e.target.value)}
+        onSubmit={() => onSubmit(inputPrompt ?? '')}
+        placeholder="A happy song about a dog"
+        loading={loadingResponse}
+      />
       {music ? (
         <section className={styles.musicContainer}>
           <audio controls className={styles.audioPlayer}>

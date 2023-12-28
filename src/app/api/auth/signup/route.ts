@@ -18,7 +18,7 @@ export async function POST(req: Request): Promise<NextResponse> {
   const hashedPassword = await hash(password, 10);
 
   const creator = new UserCreator(new MongoUserRepository());
-  await creator.run({ id: userId, email, password: hashedPassword });
+  await creator.run({ id: userId, email, password: hashedPassword, authProvider: 'credentials' });
 
   const send = await sendRegistrationEmail(email, email.split('@')[0]);
 

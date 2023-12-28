@@ -1,15 +1,25 @@
+'use client';
+
 import { ChatCompletionMessageParam } from 'openai/resources/chat';
-import { FC } from 'react';
+import { memo, useEffect, useRef } from 'react';
 import AvatarIcon from '../ui/avatar-icon';
 import styles from '@/app/styles/Dashboard.module.css';
 import ReactMarkdown from 'react-markdown';
+import { highlightAll } from 'prismjs';
+import CopyToClipboardButton from '../ui/copy-to-clipboard-button';
 
 interface MessageListProps {
   messages: ChatCompletionMessageParam[];
   isCode?: boolean;
 }
 
-const MessageList: FC<MessageListProps> = ({ messages, isCode = false }) => {
+const MessageList = memo(function MessageList({ messages, isCode = false }: MessageListProps) {
+  const markdownCodeRef = useRef<HTMLPreElement>(null);
+
+  useEffect(() => {
+    highlightAll();
+  }, [messages]);
+
   return (
     <>
       {messages.map((message, index) => (
@@ -21,7 +31,8 @@ const MessageList: FC<MessageListProps> = ({ messages, isCode = false }) => {
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 pre: ({ node, ...props }) => (
                   <div className={styles.markdownPre}>
-                    <pre {...props} />
+                    <CopyToClipboardButton textRef={markdownCodeRef} />
+                    <pre ref={markdownCodeRef} {...props} />
                   </div>
                 ),
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -29,7 +40,7 @@ const MessageList: FC<MessageListProps> = ({ messages, isCode = false }) => {
               }}
               className={styles.markdown}
             >
-              {message.content ?? ''}
+              {message.content as string}
             </ReactMarkdown>
           ) : (
             <>{message.content ?? ''}</>
@@ -38,6 +49,6 @@ const MessageList: FC<MessageListProps> = ({ messages, isCode = false }) => {
       ))}
     </>
   );
-};
+});
 
 export default MessageList;

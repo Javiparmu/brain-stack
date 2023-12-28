@@ -20,7 +20,7 @@ export class MongoUserSubscriptionRepository
   }
 
   public async search(userId: UserId): Promise<UserSubscription | null> {
-    await MongooseConnection.connect({ url: process.env.MONGO_URL ?? '' });
+    await MongooseConnection.connect({ url: process.env.MONGODB_URI ?? '' });
 
     const userSubscription = await UserSubscriptionModel.findOne({ userId }).lean<UserSubscriptionDocument>();
 
@@ -28,7 +28,7 @@ export class MongoUserSubscriptionRepository
   }
 
   public async searchValid(userId: UserId): Promise<UserSubscription | null> {
-    await MongooseConnection.connect({ url: process.env.MONGO_URL ?? '' });
+    await MongooseConnection.connect({ url: process.env.MONGODB_URI ?? '' });
 
     const userSubscription = await UserSubscriptionModel.findOne({
       userId,

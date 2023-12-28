@@ -31,15 +31,11 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     const requestCreator = new RequestCreator(new MongoUserRepository());
     await requestCreator.run({ userId, userIp });
 
-    console.log('Prompt:', prompt);
-
     const response = await openai.images.generate({
       prompt,
       n: parseInt(amount, 10),
       size: resolution,
     });
-
-    console.log('Response:', response);
 
     return NextResponse.json(response.data);
   } catch (error) {

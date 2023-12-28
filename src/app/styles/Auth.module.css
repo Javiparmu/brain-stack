@@ -5,6 +5,12 @@
     height: 100vh;
 }
 
+.logoContainer {
+    position: absolute;
+    top: 2rem;
+    left: 4rem;
+}
+
 .formContainer {
     display: flex;
     flex-direction: column;
@@ -57,7 +63,7 @@
     box-sizing: border-box;
     padding-left: 0.5rem;
     height: 50px;
-    color: black;
+    color: rgba(0, 0, 0, 0.95) !important;
     border-radius: 0.5rem;
     border: 1px solid hsl(var(--border));
     font-size: 18px;
@@ -71,7 +77,7 @@
     padding-left: 0.5rem;
     height: 50px;
     border-radius: 0.5rem;
-    color: black;
+    color: black !important;
     border: 1px solid hsl(var(--border));
     font-size: 18px;
     color: hsl(var(--foreground));
@@ -206,13 +212,32 @@
 }
 
 @media (max-width: 768px) {
+    .logoContainer {
+        left: 2rem;
+    }
+
     .formContainer {
         width: 80%;
     }
 }
 
 @media (max-width: 400px) {
+    .logoContainer {
+        left: 1rem;
+    }
+
     .authTitle {
         font-size: 28px;
+    }
+}
+
+@media (max-height: 860px) {
+    .logoContainer {
+        top: 1rem;
+    }
+    
+    .logo {
+        width: 35px;
+        height: 35px;
     }
 }

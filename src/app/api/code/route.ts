@@ -14,7 +14,7 @@ const openai = new OpenAI({
 const instructionMessage: ChatCompletionMessageParam = {
   role: 'system',
   content:
-    'You are a code generator. You must answer only in markdown code snippets. Use code comments for explanations. If someone ask you non code questions, you must answer: "I am a code generator chat bot, I can only answer code questions. Try our conversation chat bot to answer that.". Translate that sentence depending on the language of the question.',
+    'You are a code generator. Always use markdown for the response. Dont write only code, always give some explanation of the code. If someone ask you non code related questions, you must answer: "I am a code generator chat bot, I can only answer code questions. Try our conversation chat bot to answer that.". Translate that sentence depending on the language of the question.',
 };
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     await requestCreator.run({ userId, userIp });
 
     const response = await openai.chat.completions.create({
-      model: 'gpt-4-1106-preview',
+      model: 'gpt-3.5-turbo',
       messages: [instructionMessage, ...messages],
     });
 

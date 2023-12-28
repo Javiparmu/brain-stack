@@ -18,10 +18,10 @@ const UpgradeModal: FC<UpgradeModalProps> = ({ email, plan }) => {
   const planName = getPlanFromId(plan);
 
   const { isOpen, onClose } = useSubscriptionModal();
-  const upgradeModalRef = useClickOutside<HTMLDialogElement>(onClose);
+  const upgradeModalRef = useClickOutside<HTMLDialogElement>(isOpen, onClose);
 
   return (
-    <div className={isOpen ? styles.modalBackdrop : styles.hidden}>
+    <div className={`${styles.modalBackdrop} ${isOpen ? styles.visible : ''}`}>
       <dialog ref={upgradeModalRef} open={isOpen} className={styles.upgradeModal}>
         <CloseButton onClose={onClose} />
         <h1>Manage your subscription</h1>

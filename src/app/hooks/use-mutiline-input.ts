@@ -1,7 +1,7 @@
 import { KeyboardEvent, RefObject, useEffect, useRef, useState } from 'react';
 
 interface UseMultilineInputOptions {
-  onEnter?: (value: string) => void;
+  onEnter?: () => void;
 }
 
 interface UseMultilineInputWithoutEnter {
@@ -16,7 +16,7 @@ interface UseMultilineInputWithEnter extends UseMultilineInputWithoutEnter {
 
 type UseMultilineInput = UseMultilineInputWithEnter | UseMultilineInputWithoutEnter;
 
-export function useMultilineInput(options: { onEnter: (value: string) => void }): UseMultilineInputWithEnter;
+export function useMultilineInput(options: { onEnter: () => void }): UseMultilineInputWithEnter;
 export function useMultilineInput(options?: UseMultilineInputOptions): UseMultilineInputWithoutEnter;
 
 export function useMultilineInput({ onEnter }: UseMultilineInputOptions = {}): UseMultilineInput {
@@ -39,7 +39,7 @@ export function useMultilineInput({ onEnter }: UseMultilineInputOptions = {}): U
       event.preventDefault();
 
       if (inputRef.current?.value !== '') {
-        onEnter(inputRef.current?.value || '');
+        onEnter();
       }
     }
   };

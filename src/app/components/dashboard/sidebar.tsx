@@ -19,7 +19,7 @@ const Sidebar = ({ apiLimitCount = 0, isSubscribed = false }: SideBarProps): JSX
 
   return (
     <aside className={`${styles.sidebar} ${sidebarOpen ? styles.open : styles.close}`}>
-      <CloseButton onClose={closeSidebar} show={sidebarOpen} />
+      <CloseButton className={styles.sidebarClose} onClose={closeSidebar} show={sidebarOpen} />
       <ul className={styles.sidebarList}>
         <li>
           <Link onClick={closeSidebar} href="/dashboard">

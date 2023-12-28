@@ -7,16 +7,16 @@ const RETRY_INTERVAL = 5000;
 
 export class MongooseConnection {
   static async connect(config: MongoConfig): Promise<void> {
-    if (!connection?.readyState) {
+    if (connection.readyState === 0) {
       await connect(config.url, {
         ignoreUndefined: true,
       });
-    }
 
-    connection.on('disconnected', () => {
-      console.log('Mongoose connection disconnected. Attempting to reconnect...');
-      MongooseConnection.attemptReconnect(config);
-    });
+      connection.on('disconnected', () => {
+        console.log('Mongoose connection disconnected. Attempting to reconnect...');
+        MongooseConnection.attemptReconnect(config);
+      });
+    }
   }
 
   private static async attemptReconnect(config: MongoConfig, attempts = 0): Promise<void> {
@@ -27,7 +27,6 @@ export class MongooseConnection {
             ignoreUndefined: true,
           });
         } catch (error) {
-          console.error('Reconnection attempt failed:', error);
           await MongooseConnection.attemptReconnect(config, attempts + 1);
         }
       }, RETRY_INTERVAL);
