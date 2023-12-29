@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import styles from '@/app/styles/Home.module.css';
+import styles from '@/app/styles/home/Productivity.module.css';
 
 const ProductivitySection: FC = () => {
   return (

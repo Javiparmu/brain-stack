@@ -216,7 +216,7 @@ export const RobotIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black
   );
 };
 
-export const GithubIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black' }) => (
+export const GithubIcon: FC<IconProps> = ({ styles, size = '24', color = 'black' }) => (
   <svg className={styles} width={size} height={size} color={color} viewBox={`0 0 ${size} ${size}`}>
     <path
       fillRule="evenodd"

@@ -1,4 +1,4 @@
-import styles from '@/app/styles/Home.module.css';
+import styles from '@/app/styles/home/Footer.module.css';
 import React, { FC } from 'react';
 
 export const Footer: FC = () => {

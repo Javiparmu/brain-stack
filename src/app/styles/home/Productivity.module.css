@@ -1,0 +1,81 @@
+.boostTextContainer {
+    margin-top: 20rem;
+    max-width: 32rem;
+    text-align: center;
+}
+
+.boostTitle {
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 3rem;
+    color: white;
+}
+
+.boostSubtitle {
+    text-wrap: balance;
+    max-width: 40rem;
+    line-height: 2rem;
+    color: #d1d5db;
+}
+
+.buttonContainer {
+    margin-top: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+@media (max-width: 1280px) {
+    .boostTextContainer {
+        margin-top: 18rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .boostTitle {
+        font-size: 40px;
+    }
+
+    .boostSubtitle {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 970px) {
+    .boostTextContainer {
+        margin-top: 10rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .boostTextContainer {
+        margin-top: 8rem;
+    }
+
+    .boostTitle {
+        font-size: 32px;
+    }
+
+    .boostSubtitle {
+        font-size: 20px;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        line-height: 1.8rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .boostTextContainer {
+        margin-top: 5rem;
+    }
+
+    .boostTitle {
+        font-size: 28px;
+    }
+
+    .boostSubtitle {
+        font-size: 18px;
+        line-height: 1.5rem;
+    }
+}

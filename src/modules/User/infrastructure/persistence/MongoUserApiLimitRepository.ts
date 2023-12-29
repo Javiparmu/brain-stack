@@ -26,7 +26,7 @@ export class MongoUserApiLimitRepository extends MongoRepository<UserApiLimit> i
   public async search(userId: UserId): Promise<UserApiLimit | null> {
     await MongooseConnection.connect({ url: process.env.MONGODB_URI ?? '' });
 
-    const userApiLimit = await UserApiLimitModel.findOne({ userId: userId.value }).lean<UserApiLimitDocument>();
+    const userApiLimit = await UserApiLimitModel.findOne({ userId }).lean<UserApiLimitDocument>();
 
     return userApiLimit ? UserApiLimit.fromPrimitives({ ...userApiLimit, id: userApiLimit._id }) : null;
   }
@@ -34,7 +34,7 @@ export class MongoUserApiLimitRepository extends MongoRepository<UserApiLimit> i
   public async searchByUserIp(userIp: UserIp): Promise<UserApiLimit | null> {
     await MongooseConnection.connect({ url: process.env.MONGODB_URI ?? '' });
 
-    const userApiLimit = await UserApiLimitModel.findOne({ userIp: userIp.value }).lean<UserApiLimitDocument>();
+    const userApiLimit = await UserApiLimitModel.findOne({ userIp }).lean<UserApiLimitDocument>();
 
     return userApiLimit ? UserApiLimit.fromPrimitives({ ...userApiLimit, id: userApiLimit._id }) : null;
   }

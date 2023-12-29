@@ -1,4 +1,4 @@
-import styles from '@/app/styles/Pricing.module.css';
+import styles from '@/app/styles/home/Pricing.module.css';
 import { FC } from 'react';
 
 const PricingSkeleton: FC = () => {

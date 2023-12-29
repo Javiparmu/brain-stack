@@ -89,10 +89,21 @@
   align-items: center;
 }
 
+.pricingButtonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.currentPlan {
+  font-size: 12px;
+  margin-bottom: 0.5rem;
+}
+
 .pricingCardButton {
   width: 100%;
-  color: hsl(var(--foreground));
-  margin-top: 2rem;
+  color: white;
   font-size: 20px;
   border: none;
   border-radius: 10px;
@@ -101,20 +112,32 @@
   transition: background-color 0.2s ease;
 }
 
+.pricingCardButton:disabled {
+  cursor: default;
+}
+
 .standard {
-  background-color: #3599b4;
+  background-color: var(--primary);
 }
 
 .standard:hover {
-  background-color: #247a97 !important;
+  background-color: var(--primary-hover) !important;
+}
+
+.standard:disabled:hover {
+  background-color: var(--primary) !important;
 }
 
 .normal {
-  background-color: #979ce7;
+  background-color: #626697;
 }
 
 .normal:hover {
-  background-color: #6869be !important;
+  background-color: #545781 !important;
+}
+
+.normal:disabled:hover {
+  background-color: #626697 !important;
 }
 
 .pricingGradient {

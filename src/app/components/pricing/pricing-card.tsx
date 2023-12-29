@@ -1,13 +1,14 @@
-import styles from '@/app/styles/Pricing.module.css';
+'use client';
+
+import styles from '@/app/styles/home/Pricing.module.css';
 import CheckIcon from './check-icon';
 import CrossIcon from './cross-icon';
 import { createCheckoutSession } from '@/app/actions/stripe';
 import { PlanEnum } from '@/app/utils/enums';
-import { getServerSession } from 'next-auth';
-import { redirect } from 'next/navigation';
-import { UserFinder } from '@/modules/User/application/UserFinder';
-import { MongoUserRepository } from '@/modules/User/infrastructure/persistence/MongoUserRepository';
-import { authOptions } from '@/app/lib';
+import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import { FC, useState } from 'react';
+import { getCanSubscribe, getPlanFromId, getPlanId } from '@/app/utils';
 
 interface PricingCardProps {
   plan: {
@@ -22,29 +23,32 @@ interface PricingCardProps {
   };
 }
 
-async function PricingCard({ plan }: PricingCardProps): Promise<JSX.Element> {
-  const session = await getServerSession(authOptions);
+const PricingCard: FC<PricingCardProps> = ({ plan }) => {
+  const router = useRouter();
+  const session = useSession();
 
-  const email = session?.user?.email;
+  const [isLoading, setIsLoading] = useState(false);
 
-  const isStandard = plan.title === 'Standard';
+  const user = session?.data?.user;
 
-  async function handlePayment() {
-    'use server';
+  const isStandard = plan.name === PlanEnum.STANDARD;
 
-    if (!email) {
-      redirect('/auth/login');
+  const canSubscribe = getCanSubscribe(user?.plan ?? '', getPlanId(plan.name));
+
+  const handlePayment = async () => {
+    if (!user?.email) {
+      router.push('/auth/signin');
+      return;
     }
 
-    const userFinder = new UserFinder(new MongoUserRepository());
-    const user = await userFinder.run(email);
-
-    if (!user) {
-      redirect('/auth/signup');
+    try {
+      setIsLoading(true);
+      await createCheckoutSession(user.email, plan.name);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
     }
-
-    await createCheckoutSession(email, plan.name);
-  }
+  };
 
   return (
     <div
@@ -86,13 +90,21 @@ async function PricingCard({ plan }: PricingCardProps): Promise<JSX.Element> {
           ))}
         </ul>
       </div>
-      <form action={handlePayment}>
-        <button type="submit" className={`${styles.pricingCardButton} ${isStandard ? styles.standard : styles.normal}`}>
+      <div className={styles.pricingButtonContainer}>
+        {!canSubscribe && (
+          <span className={styles.currentPlan}>You are currently on the {getPlanFromId(user?.plan)} plan.</span>
+        )}
+        <button
+          onClick={async () => await handlePayment()}
+          type="submit"
+          className={`${styles.pricingCardButton} ${isStandard ? styles.standard : styles.normal}`}
+          disabled={isLoading || !canSubscribe}
+        >
           Choose plan
         </button>
-      </form>
+      </div>
     </div>
   );
-}
+};
 
 export default PricingCard;

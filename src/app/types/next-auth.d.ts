@@ -6,6 +6,7 @@ declare module 'next-auth' {
     user: {
       userId: string;
       email: string;
+      plan: string;
     };
   }
 }

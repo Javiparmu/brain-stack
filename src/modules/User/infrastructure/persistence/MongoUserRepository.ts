@@ -43,7 +43,7 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
   public async searchByEmail(email: UserEmail): Promise<User | null> {
     await MongooseConnection.connect({ url: process.env.MONGODB_URI ?? '' });
 
-    const user = await UserModel.findOne({ email: email.value }).lean<UserDocument>();
+    const user = await UserModel.findOne({ email }).lean<UserDocument>();
 
     return user ? User.fromPrimitives({ ...user, id: user._id }) : null;
   }

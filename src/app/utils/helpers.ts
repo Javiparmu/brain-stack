@@ -31,6 +31,19 @@ export const getProgressPercentage = (progress: number): number => {
   return (progress / maxFreeCounts) * 100;
 };
 
+export const getCanSubscribe = (userPlan: string, plan: string): boolean => {
+  switch (userPlan) {
+    case process.env.NEXT_PUBLIC_STRIPE_BASIC_PLAN_ID:
+      return plan !== process.env.NEXT_PUBLIC_STRIPE_BASIC_PLAN_ID;
+    case process.env.NEXT_PUBLIC_STRIPE_STANDARD_PLAN_ID:
+      return plan === process.env.NEXT_PUBLIC_STRIPE_PREMIUM_PLAN_ID;
+    case process.env.NEXT_PUBLIC_STRIPE_PREMIUM_PLAN_ID:
+      return false;
+    default:
+      return true;
+  }
+};
+
 export const assertNever = (value: never): never => {
   throw new Error(`Unexpected value: ${JSON.stringify(value)}`);
 };

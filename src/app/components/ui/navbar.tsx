@@ -20,7 +20,7 @@ const Navbar: FC<NavbarProps> = ({ session }) => {
         {session ? (
           <AvatarButton />
         ) : (
-          <Link href="/auth/signup" className={styles.getStarted}>
+          <Link href="/auth/signin" className={styles.getStarted}>
             <span>Get Started</span>
             <MdArrowForwardIos size={15} />
           </Link>

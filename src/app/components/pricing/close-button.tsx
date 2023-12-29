@@ -11,6 +11,7 @@ interface CloseButtonProps {
 const CloseButton: FC<CloseButtonProps> = ({ className, show = true, onClose, side = 'right' }) => {
   return (
     <button
+      title="Close button"
       className={`${styles.closeButton} ${className} ${!show && styles.hidden} ${
         side === 'right' ? styles.right : styles.left
       }`}

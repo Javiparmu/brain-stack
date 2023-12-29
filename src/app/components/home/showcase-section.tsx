@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React, { FC } from 'react';
-import styles from '@/app/styles/Home.module.css';
+import styles from '@/app/styles/home/Showcase.module.css';
 import dashboardImage from '@/app/assets/images/image-dashboard.webp';
 import dashboardCode from '@/app/assets/images/code-dashboard.webp';
 import dashboardMain from '@/app/assets/images/main-dashboard.webp';
@@ -12,18 +12,22 @@ const ShowcaseSection: FC = () => {
         className={styles.showcaseImage}
         src={dashboardImage}
         sizes="100vw"
-        style={{ width: '31vw', height: '33vw' }}
+        style={{ width: '31vw', height: 'auto' }}
         alt="image generation dashboard"
-        priority
       />
-      <Image className={styles.showcaseMain} src={dashboardMain} alt="main dashboard" priority />
+      <Image
+        className={styles.showcaseMain}
+        src={dashboardMain}
+        alt="main dashboard"
+        fetchPriority="high"
+        loading="eager"
+      />
       <Image
         className={styles.showcaseCode}
         src={dashboardCode}
         sizes="100vw"
         style={{ width: '31vw', height: 'auto' }}
         alt="code generation dashboard"
-        priority
       />
     </section>
   );

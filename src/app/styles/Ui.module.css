@@ -66,8 +66,7 @@
     object-fit: cover;
 }
 
-.menu,
-.hamburgerMenu {
+.menu {
     position: absolute;
     top: 55px;
     right: 25px;
@@ -113,27 +112,6 @@
     border-radius: 5px;
 }
 
-.authButton,
-.hamburgerButton {
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    color: hsl(var(--foreground));
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.authButton.signUp {
-    background: linear-gradient(to right, #676bb9, #359ebb);
-}
-
-.authButton.signIn {
-    background-color: transparent;
-    border-width: 1;
-    border-style: solid;
-    border-color: hsl(var(--foreground));
-}
-
 .logo {
     display: flex;
     flex-direction: row;
@@ -168,24 +146,6 @@
     box-shadow: 0 0.4rem 0 hsla(215, 44%, 51%, 0.5), 0 0 1.5rem hsla(288, 39%, 60%, 0.5);
 }
 
-.authButton:hover,
-.hamburgerButton:hover {
-    filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.6));
-}
-
-.authButton:active,
-.hamburgerButton:active {
-    transform: scale(0.98);
-}
-
-.hamburgerButton {
-    display: none;
-}
-
-.hamburgerMenu {
-    display: none
-}
-
 .avatarIcon {
     border-radius: 5px;
     background-color: #1D1E1E;
@@ -215,16 +175,6 @@
     .links,
     .authButton {
         display: none;
-    }
-
-    .hamburgerButton {
-        display: block;
-    }
-
-    .hamburgerMenu {
-        display: block;
-        top: 60px;
-        right: -5vw;
     }
 
     .avatarIcon {

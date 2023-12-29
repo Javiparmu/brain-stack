@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { maxFreeCounts } from '@/app/utils/constants';
 import { useSubscriptionModal } from '@/app/store/use-subscription-modal';
 import { Progress } from '../ui/progress';
@@ -14,16 +13,7 @@ export const FreeLimitCounter = ({
   isSubscribed: boolean;
   apiLimitCount: number;
 }): JSX.Element | null => {
-  const [mounted, setMounted] = useState(false);
   const { onOpen } = useSubscriptionModal();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
 
   if (isSubscribed) {
     return null;

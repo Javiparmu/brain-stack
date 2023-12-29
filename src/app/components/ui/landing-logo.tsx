@@ -13,7 +13,7 @@ interface LandingLogoProps {
 const LandingLogo: FC<LandingLogoProps> = ({ className }) => {
   return (
     <Link href="/" className={styles.logo}>
-      <Image className={className} width={50} height={50} sizes="5vw" src={logo} alt="logo" />
+      <Image className={className} width={50} height={50} src={logo} alt="logo" />
       <span className={styles.logoText}>Brain Stack</span>
     </Link>
   );

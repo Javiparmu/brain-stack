@@ -2,12 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: [
-      'localhost:3000',
-      'images.unsplash.com',
-      'plus.unsplash.com',
-      'oaidalleapiprodscus.blob.core.windows.net',
-    ],
+    domains: ['localhost:3000'],
   },
   typescript: {
     ignoreBuildErrors: true,

@@ -3,7 +3,7 @@ import { stripe } from '@/app/lib/stripe';
 import { getPlanFromId } from '@/app/utils';
 import { PaymentStatus } from '@/app/utils/enums';
 import { NextResponse } from 'next/server';
-import Stripe from 'stripe';
+import type { Stripe } from 'stripe';
 import { UserFinder } from '@/modules/User/application/UserFinder';
 import { MongoUserRepository } from '@/modules/User/infrastructure/persistence/MongoUserRepository';
 import { UserUpgrade } from '@/modules/User/application/UserUpgrade';

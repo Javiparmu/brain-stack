@@ -41,6 +41,7 @@ export const authOptions: NextAuthOptions = {
           return {
             id: user.id.value,
             email,
+            plan: user.plan?.value,
           };
         } catch (error) {
           return null;
@@ -65,6 +66,7 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async signIn({ user, account }) {
+      console.log('signIn', user, account);
       if (!user?.email) return false;
       if (account?.provider === 'credentials') return true;
 
@@ -86,13 +88,16 @@ export const authOptions: NextAuthOptions = {
       return baseUrl;
     },
     async session({ session, token }) {
+      console.log('session', session, token);
       if (token && session.user) {
         session.user.userId = token.id as string;
+        session.user.plan = token.plan as string;
       }
 
       return session;
     },
     async jwt({ token, user }) {
+      console.log('jwt', token, user);
       if (user) {
         token.id = user.id;
       } else if (token) {
@@ -101,6 +106,7 @@ export const authOptions: NextAuthOptions = {
 
         if (foundUser) {
           token.id = foundUser.id.value;
+          token.plan = foundUser.plan?.value;
         }
       }
 

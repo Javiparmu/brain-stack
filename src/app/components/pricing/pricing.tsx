@@ -13,13 +13,16 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import styles from '@/app/styles/Pricing.module.css';
+'use client';
+
+import styles from '@/app/styles/home/Pricing.module.css';
 import { pricingData } from '@/app/utils';
 import { FC, Suspense } from 'react';
 import PricingCard from './pricing-card';
 import PricingSkeleton from '../skeletons/pricing-skeleton';
+import { SessionProvider } from 'next-auth/react';
 
-export const Pricing: FC = () => {
+const Pricing: FC = () => {
   return (
     <section className={styles.pricingSection}>
       <h2 className={styles.pricingTitle}>Pricing</h2>
@@ -38,11 +41,15 @@ export const Pricing: FC = () => {
       </svg>
       <div className={styles.pricingContainer}>
         <Suspense fallback={<PricingSkeleton />}>
-          <PricingCard plan={pricingData.basic} />
-          <PricingCard plan={pricingData.standard} />
-          <PricingCard plan={pricingData.premium} />
+          <SessionProvider>
+            <PricingCard plan={pricingData.basic} />
+            <PricingCard plan={pricingData.standard} />
+            <PricingCard plan={pricingData.premium} />
+          </SessionProvider>
         </Suspense>
       </div>
     </section>
   );
 };
+
+export default Pricing;

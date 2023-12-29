@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@stripe/react-stripe-js": "^2.3.1",
-    "@stripe/stripe-js": "^2.1.9",
     "bcrypt": "^5.1.1",
     "mongodb": "^6.3.0",
     "mongoose": "^7.6.0",

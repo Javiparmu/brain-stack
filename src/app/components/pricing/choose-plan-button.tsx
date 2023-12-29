@@ -14,7 +14,7 @@ interface ChoosePlanButtonProps {
 const ChoosePlanButton: FC<ChoosePlanButtonProps> = ({ email, plan }) => {
   const handleSubscription = async () => {
     if (!email) {
-      redirect('/auth/login');
+      redirect('/auth/signin');
     }
 
     await createCheckoutSession(email, plan);
