@@ -31,7 +31,7 @@ export const getProgressPercentage = (progress: number): number => {
   return (progress / maxFreeCounts) * 100;
 };
 
-export const getCanSubscribe = (userPlan: string, plan: string): boolean => {
+export const getCanSubscribe = (plan: string, userPlan?: string): boolean => {
   switch (userPlan) {
     case process.env.NEXT_PUBLIC_STRIPE_BASIC_PLAN_ID:
       return plan !== process.env.NEXT_PUBLIC_STRIPE_BASIC_PLAN_ID;

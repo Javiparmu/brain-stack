@@ -33,7 +33,7 @@ const PricingCard: FC<PricingCardProps> = ({ plan }) => {
 
   const isStandard = plan.name === PlanEnum.STANDARD;
 
-  const canSubscribe = getCanSubscribe(user?.plan ?? '', getPlanId(plan.name));
+  const canSubscribe = getCanSubscribe(getPlanId(plan.name), user?.plan);
 
   const handlePayment = async () => {
     if (!user?.email) {
