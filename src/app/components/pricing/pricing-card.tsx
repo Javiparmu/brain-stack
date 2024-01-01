@@ -3,12 +3,8 @@
 import styles from '@/app/styles/home/Pricing.module.css';
 import CheckIcon from './check-icon';
 import CrossIcon from './cross-icon';
-import { createCheckoutSession } from '@/app/actions/stripe';
 import { PlanEnum } from '@/app/utils/enums';
-import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
-import { FC, useState } from 'react';
-import { getCanSubscribe, getPlanFromId, getPlanId } from '@/app/utils';
+import { paymentSession } from '@/app/actions/payment-session';
 
 interface PricingCardProps {
   plan: {
@@ -23,31 +19,11 @@ interface PricingCardProps {
   };
 }
 
-const PricingCard: FC<PricingCardProps> = ({ plan }) => {
-  const router = useRouter();
-  const session = useSession();
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  const user = session?.data?.user;
-
+async function PricingCard({ plan }: PricingCardProps): Promise<JSX.Element> {
   const isStandard = plan.name === PlanEnum.STANDARD;
 
-  const canSubscribe = getCanSubscribe(getPlanId(plan.name), user?.plan);
-
   const handlePayment = async () => {
-    if (!user?.email) {
-      router.push('/auth/signin');
-      return;
-    }
-
-    try {
-      setIsLoading(true);
-      await createCheckoutSession(user.email, plan.name);
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-    }
+    await paymentSession(plan.name);
   };
 
   return (
@@ -91,20 +67,15 @@ const PricingCard: FC<PricingCardProps> = ({ plan }) => {
         </ul>
       </div>
       <div className={styles.pricingButtonContainer}>
-        {!canSubscribe && (
-          <span className={styles.currentPlan}>You are currently on the {getPlanFromId(user?.plan)} plan.</span>
-        )}
         <button
-          onClick={async () => await handlePayment()}
-          type="submit"
+          onClick={handlePayment}
           className={`${styles.pricingCardButton} ${isStandard ? styles.standard : styles.normal}`}
-          disabled={isLoading || !canSubscribe}
         >
           Choose plan
         </button>
       </div>
     </div>
   );
-};
+}
 
 export default PricingCard;

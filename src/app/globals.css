@@ -14,8 +14,9 @@
   --primary-hover: rgb(30, 101, 125);
   --primary-foreground: 222.2 47.4% 11.2%;
 
-  --secondary: #979ce7;
-  --secondary-foreground: 210 40% 98%;
+  --secondary: #626697;
+  --secondary-hover: #545781;
+  --secondary-foreground: 222.2 47.4% 11.2%;
 
   --muted: 217.2 32.6% 17.5%;
   --muted-foreground: 215 20.2% 65.1%;

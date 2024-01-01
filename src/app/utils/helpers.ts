@@ -31,16 +31,16 @@ export const getProgressPercentage = (progress: number): number => {
   return (progress / maxFreeCounts) * 100;
 };
 
-export const getCanSubscribe = (plan: string, userPlan?: string): boolean => {
-  switch (userPlan) {
-    case process.env.NEXT_PUBLIC_STRIPE_BASIC_PLAN_ID:
-      return plan !== process.env.NEXT_PUBLIC_STRIPE_BASIC_PLAN_ID;
-    case process.env.NEXT_PUBLIC_STRIPE_STANDARD_PLAN_ID:
-      return plan === process.env.NEXT_PUBLIC_STRIPE_PREMIUM_PLAN_ID;
-    case process.env.NEXT_PUBLIC_STRIPE_PREMIUM_PLAN_ID:
-      return false;
+export const getPlanPaymentUrl = (plan: PlanEnum): string => {
+  switch (plan) {
+    case PlanEnum.BASIC:
+      return process.env.NEXT_PUBLIC_STRIPE_BASIC_PLAN_PAYMENT_URL ?? '/';
+    case PlanEnum.STANDARD:
+      return process.env.NEXT_PUBLIC_STRIPE_STANDARD_PLAN_PAYMENT_URL ?? '/';
+    case PlanEnum.PREMIUM:
+      return process.env.NEXT_PUBLIC_STRIPE_PREMIUM_PLAN_PAYMENT_URL ?? '/';
     default:
-      return true;
+      return assertNever(plan);
   }
 };
 

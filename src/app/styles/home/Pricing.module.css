@@ -129,15 +129,15 @@
 }
 
 .normal {
-  background-color: #626697;
+  background-color: var(--secondary);
 }
 
 .normal:hover {
-  background-color: #545781 !important;
+  background-color: var(--secondary-hover) !important;
 }
 
 .normal:disabled:hover {
-  background-color: #626697 !important;
+  background-color: var(--secondary) !important;
 }
 
 .pricingGradient {

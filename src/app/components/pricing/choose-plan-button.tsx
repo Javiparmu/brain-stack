@@ -2,9 +2,8 @@
 
 import React, { FC } from 'react';
 import styles from '@/app/styles/Ui.module.css';
-import { createCheckoutSession } from '@/app/actions/stripe';
 import { PlanEnum } from '@/app/utils';
-import { redirect } from 'next/navigation';
+import { paymentSession } from '@/app/actions/payment-session';
 
 interface ChoosePlanButtonProps {
   email?: string;
@@ -13,11 +12,7 @@ interface ChoosePlanButtonProps {
 
 const ChoosePlanButton: FC<ChoosePlanButtonProps> = ({ email, plan }) => {
   const handleSubscription = async () => {
-    if (!email) {
-      redirect('/auth/signin');
-    }
-
-    await createCheckoutSession(email, plan);
+    await paymentSession(plan, email);
   };
 
   return (

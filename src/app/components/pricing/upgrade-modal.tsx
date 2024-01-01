@@ -4,7 +4,7 @@ import { PlanEnum } from '@/app/utils/enums';
 import styles from '@/app/styles/Ui.module.css';
 import { useSubscriptionModal } from '@/app/store/use-subscription-modal';
 import { FC } from 'react';
-import { getCanSubscribe, getPlanFromId, getPlanId } from '@/app/utils';
+import { getPlanFromId } from '@/app/utils';
 import ChoosePlanButton from './choose-plan-button';
 import CloseButton from './close-button';
 import { useClickOutside } from '@/app/hooks/use-click-outside';
@@ -30,8 +30,8 @@ const UpgradeModal: FC<UpgradeModalProps> = ({ email, plan }) => {
         </p>
         <details name="subscription-plan" className={styles.details} open>
           <summary className={styles.summary}>Get basic plan</summary>
-          {!getCanSubscribe(getPlanId(PlanEnum.BASIC), plan) ? (
-            <div>You are currently on the {planName} plan.</div>
+          {planName === PlanEnum.BASIC ? (
+            <div>This is your current plan.</div>
           ) : (
             <div>
               <section>
@@ -51,8 +51,8 @@ const UpgradeModal: FC<UpgradeModalProps> = ({ email, plan }) => {
         </details>
         <details name="subscription-plan" className={styles.details}>
           <summary className={styles.summary}>Get standard plan</summary>
-          {!getCanSubscribe(getPlanId(PlanEnum.STANDARD), plan) ? (
-            <div>You are currently on the {planName} plan.</div>
+          {planName === PlanEnum.STANDARD ? (
+            <div>This is your current plan.</div>
           ) : (
             <div>
               <section>
@@ -72,8 +72,8 @@ const UpgradeModal: FC<UpgradeModalProps> = ({ email, plan }) => {
         </details>
         <details name="subscription-plan" className={styles.details}>
           <summary className={styles.summary}>Get premium plan</summary>
-          {!getCanSubscribe(getPlanId(PlanEnum.PREMIUM), plan) ? (
-            <div>You are currently on the {planName} plan.</div>
+          {planName === PlanEnum.PREMIUM ? (
+            <div>This is your current plan.</div>
           ) : (
             <div>
               <section>
