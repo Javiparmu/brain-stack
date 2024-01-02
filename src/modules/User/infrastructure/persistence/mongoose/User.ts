@@ -27,7 +27,6 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      required: true,
       get: (password: string) => new UserPassword(password),
       set: (password: UserPassword) => password?.value,
     },
