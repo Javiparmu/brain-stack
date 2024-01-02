@@ -1,8 +1,11 @@
 import styles from '@/app/styles/Home.module.css';
+import { getServerSession } from 'next-auth';
 import Link from 'next/link';
-import React, { FC } from 'react';
+import React from 'react';
 
-export const GetStartedButton: FC = () => {
+async function GetStartedButton(): Promise<JSX.Element> {
+  const session = await getServerSession();
+
   return (
     <div className={styles.container}>
       <div className={`${styles.textContainer} ${styles.hideOnMobile}`}>
@@ -10,7 +13,7 @@ export const GetStartedButton: FC = () => {
         <p className={`${styles.textBold} ${styles.centerOnMobile}`}>new</p>
         <p className={`${styles.text} ${styles.centerOnMobile}`}>tools</p>
       </div>
-      <Link className={styles.link} href="/dashboard/song-generator">
+      <Link className={styles.link} href={session ? '/dashboard' : '/auth/signin'}>
         <button className={styles.button}>Get Started</button>
       </Link>
       <div className={`${styles.textContainer} ${styles.hideOnMobile}`}>
@@ -20,4 +23,6 @@ export const GetStartedButton: FC = () => {
       </div>
     </div>
   );
-};
+}
+
+export default GetStartedButton;
