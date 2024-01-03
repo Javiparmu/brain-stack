@@ -56,8 +56,9 @@ const SignIn: FC<SignInProps> = ({ searchParams }) => {
   useEffect(() => {
     if (searchParams?.error) {
       errorToast(searchParams.error);
+      router.replace('/auth/signin');
     }
-  }, [searchParams]);
+  }, [searchParams, router]);
 
   return (
     <>
