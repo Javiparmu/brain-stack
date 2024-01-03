@@ -8,6 +8,8 @@ import { compare } from 'bcrypt';
 import { UserCreator } from '@/modules/User/application/UserCreator';
 import { AuthProvider } from '@/modules/User/domain/value-object/UserAuthProvider';
 import { randomUUID } from 'crypto';
+import { InvalidRequestException } from '@/modules/Shared/domain/exception/InvalidRequestException';
+import { ConflictException } from '@/modules/Shared/domain/exception/ConflictException';
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -26,7 +28,7 @@ export const authOptions: NextAuthOptions = {
           const { email, password } = credentials ?? {};
 
           if (!email || !password) {
-            throw new Error('Invalid credentials');
+            throw new InvalidRequestException('Invalid credentials');
           }
 
           const userFinder = new UserFinder(new MongoUserRepository());
@@ -64,6 +66,9 @@ export const authOptions: NextAuthOptions = {
   jwt: {
     maxAge: 30 * 24 * 60 * 60,
   },
+  pages: {
+    error: '/auth/signin',
+  },
   callbacks: {
     async signIn({ user, account }) {
       if (!user?.email) return false;
@@ -71,6 +76,10 @@ export const authOptions: NextAuthOptions = {
 
       const userFinder = new UserFinder(new MongoUserRepository());
       const foundUser = await userFinder.run(user.email);
+
+      if (foundUser && foundUser.authProvider?.value !== account?.provider) {
+        throw new ConflictException('Your account is already registered with another provider');
+      }
 
       if (!foundUser) {
         const userCreator = new UserCreator(new MongoUserRepository());
@@ -84,7 +93,7 @@ export const authOptions: NextAuthOptions = {
       return true;
     },
     async redirect({ baseUrl }) {
-      return baseUrl;
+      return baseUrl + '/dashboard';
     },
     async session({ session, token }) {
       if (token && session.user) {
