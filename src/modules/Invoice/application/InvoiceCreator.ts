@@ -34,6 +34,7 @@ export class InvoiceCreator {
     receiptNumber,
     total,
     subtotal,
+    refunded,
   }: {
     id: string;
     customer?: string;
@@ -49,6 +50,7 @@ export class InvoiceCreator {
     receiptNumber?: string;
     total?: number;
     subtotal?: number;
+    refunded?: boolean;
   }): Promise<void> {
     const invoice = new Invoice({
       id: new InvoiceId(id),
@@ -65,6 +67,7 @@ export class InvoiceCreator {
       receiptNumber: receiptNumber ? new InvoiceNumber(receiptNumber) : undefined,
       total,
       subtotal,
+      refunded,
     });
 
     await this.repository.save(invoice);

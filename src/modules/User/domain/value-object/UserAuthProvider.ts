@@ -1,6 +1,6 @@
 import { StringValueObject } from '@/modules/Shared/domain/value-object/StringValueObject';
 
-export type AuthProvider = 'credentials' | 'google' | 'github';
+export type AuthProvider = 'credentials' | 'google' | 'github' | 'customer';
 
 const validAuthProviders: AuthProvider[] = ['credentials', 'google', 'github'];
 

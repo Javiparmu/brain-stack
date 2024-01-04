@@ -1,4 +1,8 @@
-import { registrationEmailTemplate, subscriptionEmailTemplate } from '@/app/utils/email-templates';
+import {
+  registrationEmailTemplate,
+  subscriptionEmailTemplate,
+  subscriptionUpdatedEmailTemplate,
+} from '@/app/utils/email-templates';
 import { PlanEnum } from '@/app/utils/enums';
 import { EmailResponse } from '@/app/utils/interfaces';
 import { Resend } from 'resend';
@@ -28,6 +32,32 @@ export const sendSubscriptionEmail = async (
     to: emailTo,
     subject: 'Brain Stack Subscription',
     html: subscriptionEmailTemplate(username, plan),
+  });
+
+  return send;
+};
+
+export const sendSubscriptionUpdatedEmail = async (
+  emailTo: string,
+  username: string,
+  plan: PlanEnum,
+): Promise<EmailResponse> => {
+  const send = await resend.emails.send({
+    from: NO_REPLY_EMAIL,
+    to: emailTo,
+    subject: 'Brain Stack Subscription Updated',
+    html: subscriptionUpdatedEmailTemplate(username, plan),
+  });
+
+  return send;
+};
+
+export const sendRefundEmail = async (emailTo: string, username: string): Promise<EmailResponse> => {
+  const send = await resend.emails.send({
+    from: NO_REPLY_EMAIL,
+    to: emailTo,
+    subject: 'Brain Stack Refund',
+    html: `Hi ${username}, <br /> <br /> Your subscription has been refunded. <br /> <br /> Thank you for using Brain Stack!`,
   });
 
   return send;

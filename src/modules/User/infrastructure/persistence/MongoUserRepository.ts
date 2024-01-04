@@ -15,10 +15,8 @@ import { UserNotFoundException } from '@/modules/Shared/domain/exception/UserNot
 import { MongoUserSubscriptionRepository } from './MongoUserSubscriptionRepository';
 import { MongoUserApiLimitRepository } from './MongoUserApiLimitRepository';
 import { UserSubscription } from '../../domain/UserSubscription';
-import { UserPlan } from '../../domain/value-object/UserPlan';
-import { getRequestLimitFromPlan } from '@/app/lib';
-import { UserRequestLimit } from '../../domain/value-object/UserRequestLimit';
 import { MongooseConnection } from '@/modules/Shared/infrastructure/persistence/MongooseConnection';
+import { SubscriptionId } from '@/modules/Subscription/domain/value-object/SubscriptionId';
 
 export class MongoUserRepository extends MongoRepository<User> implements UserRepository {
   private readonly userSubscriptionRepository = new MongoUserSubscriptionRepository();
@@ -53,13 +51,9 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
 
     await this.userSubscriptionRepository.save(subscription);
 
-    const requestLimit = getRequestLimitFromPlan(subscription.stripePriceId.value);
-
     const user = new User({
-      id: subscription.userId,
-      plan: new UserPlan(subscription.stripePriceId.value),
-      requestLimit: new UserRequestLimit(requestLimit),
-      requestReset: new UserRequestReset(Date.now() + HOUR_IN_MS),
+      id: subscription.userId!,
+      plan: new SubscriptionId(subscription.id.value),
     });
 
     await this.save(user);
@@ -72,21 +66,30 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
 
     if (!user) throw new UserNotFoundException();
 
-    if (!user.requestLimit) throw new InternalServerErrorException('User request limit not found');
+    const userSubscription = await this.userSubscriptionRepository.searchValid(id);
 
-    if (!user.requestReset || user.requestReset.value < Date.now()) {
-      user.requestCount = new UserRequestCount(1);
-      user.requestReset = new UserRequestReset(Date.now() + HOUR_IN_MS);
+    if (!userSubscription) throw new InternalServerErrorException('User is not subscribed');
 
-      await user.save();
+    if (!userSubscription.requestReset || userSubscription.requestReset.value < Date.now()) {
+      return this.userSubscriptionRepository.save(
+        new UserSubscription({
+          ...userSubscription,
+          requestCount: new UserRequestCount(1),
+          requestReset: new UserRequestReset(Date.now() + HOUR_IN_MS),
+        }),
+      );
     }
 
-    if (user.requestCount >= user.requestLimit)
-      throw new SubscriptionLimitException(new Date(user.resetTime).getHours());
+    if (userSubscription.requestCount!.value >= userSubscription.requestLimit!.value) {
+      throw new SubscriptionLimitException(new Date(userSubscription.requestReset.value).getHours());
+    }
 
-    user.requestCount = new UserRequestCount(user.requestCount.value + 1);
-
-    await user.save();
+    await this.userSubscriptionRepository.save(
+      new UserSubscription({
+        ...userSubscription,
+        requestCount: new UserRequestCount(userSubscription.requestCount!.value + 1),
+      }),
+    );
   }
 
   public async getIsSubscribed(id: UserId): Promise<boolean> {

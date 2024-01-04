@@ -1,9 +1,10 @@
+import { SubscriptionId } from '@/modules/Subscription/domain/value-object/SubscriptionId';
 import { UserId } from '@/modules/User/domain/value-object/UserId';
-import { UserSubscriptionId } from '@/modules/User/domain/value-object/UserSubscriptionId';
+import { UserRequestCount } from '@/modules/User/domain/value-object/UserRequestCount';
+import { UserRequestLimit } from '@/modules/User/domain/value-object/UserRequestLimit';
+import { UserRequestReset } from '@/modules/User/domain/value-object/UserRequestReset';
 import { StripeCurrentPeriodEnd } from '@/modules/User/domain/value-object/stripe/StripeCurrentPeriodEnd';
-import { StripeCustomerId } from '@/modules/User/domain/value-object/stripe/StripeCustomerId';
 import { StripePriceId } from '@/modules/User/domain/value-object/stripe/StripePriceid';
-import { StripeSubscriptionId } from '@/modules/User/domain/value-object/stripe/StripeSubscriptionId';
 import { Schema, model, models } from 'mongoose';
 
 const userSubscriptionSchema = new Schema(
@@ -12,8 +13,8 @@ const userSubscriptionSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      get: (id: string) => new UserSubscriptionId(id),
-      set: (id: UserSubscriptionId) => id.value,
+      get: (stripeSubscriptionId: string) => new SubscriptionId(stripeSubscriptionId),
+      set: (stripeSubscriptionId: SubscriptionId) => stripeSubscriptionId.value,
     },
     userId: {
       type: String,
@@ -21,17 +22,11 @@ const userSubscriptionSchema = new Schema(
       get: (userId: string) => new UserId(userId),
       set: (userId: UserId) => userId.value,
     },
-    stripeCustomerId: {
-      type: String,
+    stripeCurrentPeriodEnd: {
+      type: Number,
       required: true,
-      get: (stripeCustomerId: string) => new StripeCustomerId(stripeCustomerId),
-      set: (stripeCustomerId: StripeCustomerId) => stripeCustomerId.value,
-    },
-    stripeSubscriptionId: {
-      type: String,
-      required: true,
-      get: (stripeSubscriptionId: string) => new StripeSubscriptionId(stripeSubscriptionId),
-      set: (stripeSubscriptionId: StripeSubscriptionId) => stripeSubscriptionId.value,
+      get: (stripeCurrentPeriodEnd: number) => new StripeCurrentPeriodEnd(stripeCurrentPeriodEnd),
+      set: (stripeCurrentPeriodEnd: StripeCurrentPeriodEnd) => stripeCurrentPeriodEnd.value,
     },
     stripePriceId: {
       type: String,
@@ -39,11 +34,23 @@ const userSubscriptionSchema = new Schema(
       get: (stripePriceId: string) => new StripePriceId(stripePriceId),
       set: (stripePriceId: StripePriceId) => stripePriceId.value,
     },
-    stripeCurrentPeriodEnd: {
+    requestLimit: {
       type: Number,
-      required: true,
-      get: (stripeCurrentPeriodEnd: number) => new StripeCurrentPeriodEnd(stripeCurrentPeriodEnd),
-      set: (stripeCurrentPeriodEnd: StripeCurrentPeriodEnd) => stripeCurrentPeriodEnd.value,
+      default: 0,
+      get: (requestLimit: number) => new UserRequestLimit(requestLimit),
+      set: (requestLimit: UserRequestLimit) => requestLimit?.value,
+    },
+    requestCount: {
+      type: Number,
+      default: 0,
+      get: (requestCount: number) => new UserRequestCount(requestCount),
+      set: (requestCount: UserRequestCount) => requestCount?.value,
+    },
+    requestReset: {
+      type: Number,
+      default: 0,
+      get: (requestReset: number) => new UserRequestReset(requestReset),
+      set: (requestReset: UserRequestReset) => requestReset?.value,
     },
   },
   {

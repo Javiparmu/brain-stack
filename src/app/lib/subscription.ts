@@ -21,8 +21,8 @@ export const checkSubscription = async (userId?: string): Promise<Subscription |
   }
 
   return {
-    plan: userSubscription.stripePriceId.value,
-    userId: userSubscription.userId.value,
+    plan: userSubscription.id.value,
+    userId: userSubscription.userId!.value,
   };
 };
 

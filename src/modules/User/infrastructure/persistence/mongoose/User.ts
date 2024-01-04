@@ -1,12 +1,10 @@
+import { CustomerId } from '@/modules/Customer/domain/value-object/CustomerId';
 import { UserAuthProvider } from '@/modules/User/domain/value-object/UserAuthProvider';
 import { UserEmail } from '@/modules/User/domain/value-object/UserEmail';
 import { UserId } from '@/modules/User/domain/value-object/UserId';
 import { UserPassword } from '@/modules/User/domain/value-object/UserPassword';
-import { UserPlan } from '@/modules/User/domain/value-object/UserPlan';
-import { UserRequestCount } from '@/modules/User/domain/value-object/UserRequestCount';
-import { UserRequestLimit } from '@/modules/User/domain/value-object/UserRequestLimit';
-import { UserRequestReset } from '@/modules/User/domain/value-object/UserRequestReset';
 import { UserRole } from '@/modules/User/domain/value-object/UserRole';
+import { StripePriceId } from '@/modules/User/domain/value-object/stripe/StripePriceid';
 import { Schema, model, models } from 'mongoose';
 
 const userSchema = new Schema(
@@ -47,26 +45,13 @@ const userSchema = new Schema(
     plan: {
       type: String,
       default: 'none',
-      get: (plan: string) => new UserPlan(plan),
-      set: (plan: UserPlan) => plan?.value,
+      get: (plan: string) => new StripePriceId(plan),
+      set: (plan: StripePriceId) => plan?.value,
     },
-    requestLimit: {
-      type: Number,
-      default: 0,
-      get: (requestLimit: number) => new UserRequestLimit(requestLimit),
-      set: (requestLimit: UserRequestLimit) => requestLimit?.value,
-    },
-    requestCount: {
-      type: Number,
-      default: 0,
-      get: (requestCount: number) => new UserRequestCount(requestCount),
-      set: (requestCount: UserRequestCount) => requestCount?.value,
-    },
-    requestReset: {
-      type: Number,
-      default: 0,
-      get: (requestReset: number) => new UserRequestReset(requestReset),
-      set: (requestReset: UserRequestReset) => requestReset?.value,
+    customerId: {
+      type: String,
+      get: (customerId: string) => new CustomerId(customerId),
+      set: (customerId: CustomerId) => customerId?.value,
     },
   },
   {

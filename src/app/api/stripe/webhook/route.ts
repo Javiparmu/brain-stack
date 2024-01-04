@@ -2,15 +2,23 @@ import { createCustomerAdapter } from '@/app/adapters/customer-adapter';
 import { createInvoiceAdapter } from '@/app/adapters/invoice-adapter';
 import { createSubscriptionAdapter } from '@/app/adapters/subscription-adapter';
 import { createSubscriptionDeletedAdapter } from '@/app/adapters/subscription-deleted-adapter';
-import { stripe } from '@/app/lib';
+import { getRequestLimitFromPlan, sendRefundEmail, sendSubscriptionUpdatedEmail, stripe } from '@/app/lib';
+import { getPlanFromId } from '@/app/utils';
 import { CustomerCreator } from '@/modules/Customer/application/CustomerCreator';
 import { CustomerDeleter } from '@/modules/Customer/application/CustomerDeleter';
+import { CustomerFinder } from '@/modules/Customer/application/CustomerFinder';
 import { MongoCustomerRepository } from '@/modules/Customer/infrastructure/persistence/MongoCustomerRepository';
 import { InvoiceCreator } from '@/modules/Invoice/application/InvoiceCreator';
 import { MongoInvoiceRepository } from '@/modules/Invoice/infrastructure/persistence/MongoInvoiceRepository';
 import { SubscriptionCreator } from '@/modules/Subscription/application/SubscriptionCreator';
 import { SubscriptionDeleter } from '@/modules/Subscription/application/SubscriptionDeleter';
 import { MongoSubscriptionRepository } from '@/modules/Subscription/infrastructure/persistence/MongoSubscriptionRepository';
+import { UserCreator } from '@/modules/User/application/UserCreator';
+import { UserFinder } from '@/modules/User/application/UserFinder';
+import { UserSubscriptionCreator } from '@/modules/User/application/UserSubscriptionCreator';
+import { MongoUserRepository } from '@/modules/User/infrastructure/persistence/MongoUserRepository';
+import { MongoUserSubscriptionRepository } from '@/modules/User/infrastructure/persistence/MongoUserSubscriptionRepository';
+import { randomUUID } from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
@@ -37,6 +45,17 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
       const customerCreator = new CustomerCreator(new MongoCustomerRepository());
       await customerCreator.run(createCustomerAdapter(customerCreated));
+
+      const userFinder = new UserFinder(new MongoUserRepository());
+      const user = await userFinder.run(customerCreated.email!);
+
+      const userCreator = new UserCreator(new MongoUserRepository());
+      await userCreator.run({
+        id: user?.id.value ?? randomUUID(),
+        email: customerCreated.email?.toString(),
+        customerId: customerCreated.id,
+        authProvider: !user ? 'customer' : undefined,
+      });
 
       break;
     case 'customer.deleted':
@@ -72,6 +91,43 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
       const subscriptionUpdater = new SubscriptionCreator(new MongoSubscriptionRepository());
       await subscriptionUpdater.run(createSubscriptionAdapter(subscriptionUpdated));
+
+      const userSubscriptionCreator = new UserSubscriptionCreator(new MongoUserSubscriptionRepository());
+      await userSubscriptionCreator.run({
+        id: subscriptionUpdated.id,
+        stripeCurrentPeriodEnd: subscriptionUpdated.current_period_end * 1000,
+        stripePriceId: subscriptionUpdated.items.data[0].price.id,
+        requestLimit: getRequestLimitFromPlan(subscriptionUpdated.items.data[0].price.id),
+      });
+
+      const customerFinder = new CustomerFinder(new MongoCustomerRepository());
+      const customer = await customerFinder.run(subscriptionUpdated.customer.toString());
+
+      const planName = getPlanFromId(subscriptionUpdated.items.data[0].price.id);
+
+      if (customer && planName) {
+        await sendSubscriptionUpdatedEmail(customer.email!.value, customer.email!.value.split('@')[0], planName);
+      }
+
+      break;
+    case 'charge.refunded':
+      const chargeRefunded = event.data.object;
+
+      if (chargeRefunded.invoice) {
+        const invoiceRefundedCreator = new InvoiceCreator(new MongoInvoiceRepository());
+        await invoiceRefundedCreator.run({
+          id: chargeRefunded.invoice.toString(),
+          refunded: true,
+          created: chargeRefunded.created,
+        });
+      }
+
+      if (chargeRefunded.receipt_email) {
+        await sendRefundEmail(
+          chargeRefunded.receipt_email.toString(),
+          chargeRefunded.receipt_email.toString().split('@')[0],
+        );
+      }
 
       break;
     case 'invoice.created':

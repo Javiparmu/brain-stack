@@ -14,4 +14,5 @@ export interface InvoiceDocument {
   subtotal: number;
   tax: number;
   receiptNumber: string;
+  refunded: boolean;
 }

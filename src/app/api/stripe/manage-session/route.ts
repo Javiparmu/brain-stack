@@ -7,6 +7,8 @@ import type { Stripe } from 'stripe';
 import { UserFinder } from '@/modules/User/application/UserFinder';
 import { MongoUserRepository } from '@/modules/User/infrastructure/persistence/MongoUserRepository';
 import { UserUpgrade } from '@/modules/User/application/UserUpgrade';
+import { getRequestLimitFromPlan } from '@/app/lib';
+import { UserCreator } from '@/modules/User/application/UserCreator';
 import { randomUUID } from 'crypto';
 
 export async function POST(req: Request): Promise<NextResponse> {
@@ -33,10 +35,14 @@ export async function POST(req: Request): Promise<NextResponse> {
     const userFinder = new UserFinder(new MongoUserRepository());
     const subscribedUser = await userFinder.run(customerDetails.email);
 
+    const errorUserId = randomUUID();
+
     if (!subscribedUser) {
-      return NextResponse.json({
-        paymentStatus,
-        error: 'User not found',
+      const userCreator = new UserCreator(new MongoUserRepository());
+      await userCreator.run({
+        id: errorUserId,
+        email: customerDetails.email,
+        authProvider: 'customer',
       });
     }
 
@@ -49,15 +55,16 @@ export async function POST(req: Request): Promise<NextResponse> {
 
     const userUpgrade = new UserUpgrade(new MongoUserRepository());
     await userUpgrade.run({
-      id: randomUUID(),
-      userId: subscribedUser.id.value,
-      stripeCustomerId: customer.toString(),
-      stripeSubscriptionId: subscription.toString(),
+      id: subscription.toString(),
+      userId: subscribedUser?.id.value ?? errorUserId,
       stripePriceId: planId,
       stripeCurrentPeriodEnd: expiresAt * 1000,
+      requestCount: 0,
+      requestLimit: getRequestLimitFromPlan(planId),
+      requestReset: 0,
     });
 
-    await sendSubscriptionEmail(subscribedUser.email!.value, subscribedUser.email!.value.split('@')[0], planName);
+    await sendSubscriptionEmail(customerDetails.email, customerDetails.email.split('@')[0], planName);
   }
 
   return NextResponse.json({ paymentStatus });

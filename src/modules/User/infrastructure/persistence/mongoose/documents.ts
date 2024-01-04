@@ -5,18 +5,16 @@ export interface UserDocument {
   password: string;
   plan: string;
   role: string;
-  requestCount: number;
-  requestLimit: number;
-  requestReset: number;
+  customerId: string;
 }
 
 export interface UserSubscriptionDocument {
   _id: string;
   userId: string;
-  stripeSubscriptionId: string;
-  stripeCustomerId: string;
-  stripePriceId: string;
   stripeCurrentPeriodEnd: number;
+  requestCount: number;
+  requestLimit: number;
+  requestReset: number;
 }
 
 export interface UserApiLimitDocument {

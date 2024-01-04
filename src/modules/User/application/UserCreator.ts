@@ -18,11 +18,13 @@ export class UserCreator {
     email,
     password,
     authProvider,
+    customerId,
   }: {
     id: string;
-    email: string;
+    email?: string;
     password?: string;
-    authProvider: AuthProvider;
+    authProvider?: AuthProvider;
+    customerId?: string;
   }): Promise<void> {
     if (authProvider === 'credentials' && !password) {
       throw new InvalidRequestException('Password is required');
@@ -30,9 +32,10 @@ export class UserCreator {
 
     const user = new User({
       id: new UserId(id),
-      email: new UserEmail(email),
+      email: email ? new UserEmail(email) : undefined,
       password: password ? new UserPassword(password) : undefined,
-      authProvider: new UserAuthProvider(authProvider),
+      authProvider: authProvider ? new UserAuthProvider(authProvider) : undefined,
+      customerId: customerId ? new UserId(customerId) : undefined,
     });
 
     await this.repository.save(user);

@@ -1,6 +1,6 @@
 import { Customer } from '../domain/Customer';
 import { CustomerRepository } from '../domain/CustomerRepository';
-import { CustomerEmail } from '../domain/value-object/CustomerEmail';
+import { CustomerId } from '../domain/value-object/CustomerId';
 
 export class CustomerFinder {
   private repository: CustomerRepository;
@@ -9,7 +9,7 @@ export class CustomerFinder {
     this.repository = repository;
   }
 
-  async run(email: string): Promise<Customer | null> {
-    return this.repository.search(new CustomerEmail(email));
+  async run(id: string): Promise<Customer | null> {
+    return this.repository.search(new CustomerId(id));
   }
 }

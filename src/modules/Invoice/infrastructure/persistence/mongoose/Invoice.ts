@@ -92,6 +92,10 @@ const invoiceSchema = new Schema(
       set: (created: UnixDate) => created?.value,
     },
     tax: Number,
+    refunded: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: false,

@@ -29,6 +29,7 @@ export class Invoice extends AggregateRoot {
   readonly total?: number;
   readonly subtotal?: number;
   readonly tax?: number;
+  readonly refunded?: boolean;
 
   constructor({
     id,
@@ -45,6 +46,7 @@ export class Invoice extends AggregateRoot {
     receiptNumber,
     total,
     subtotal,
+    refunded,
   }: {
     id: InvoiceId;
     billingReason?: InvoiceBillingReason;
@@ -60,6 +62,7 @@ export class Invoice extends AggregateRoot {
     receiptNumber?: InvoiceReceiptNumber;
     total?: number;
     subtotal?: number;
+    refunded?: boolean;
   }) {
     super();
     this.id = id;
@@ -76,6 +79,7 @@ export class Invoice extends AggregateRoot {
     this.receiptNumber = receiptNumber;
     this.total = total;
     this.subtotal = subtotal;
+    this.refunded = refunded;
   }
 
   static fromPrimitives({
@@ -93,6 +97,7 @@ export class Invoice extends AggregateRoot {
     receiptNumber,
     total,
     subtotal,
+    refunded,
   }: Primitives<Invoice>): Invoice {
     return new Invoice({
       id: new InvoiceId(id),
@@ -109,6 +114,7 @@ export class Invoice extends AggregateRoot {
       receiptNumber: receiptNumber ? new InvoiceReceiptNumber(receiptNumber) : undefined,
       total,
       subtotal,
+      refunded,
     });
   }
 
@@ -128,6 +134,7 @@ export class Invoice extends AggregateRoot {
       receiptNumber: this.receiptNumber?.value,
       total: this.total,
       subtotal: this.subtotal,
+      refunded: this.refunded,
     };
   }
 }
