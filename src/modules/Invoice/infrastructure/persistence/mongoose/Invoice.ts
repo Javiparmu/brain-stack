@@ -103,4 +103,4 @@ const invoiceSchema = new Schema(
   },
 );
 
-export default models.Invoice || model('Invoice', invoiceSchema);
+export default models?.Invoice || model('Invoice', invoiceSchema);

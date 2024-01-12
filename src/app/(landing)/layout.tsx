@@ -3,10 +3,9 @@ import { Metadata } from 'next';
 import '@/app/globals.css';
 import { Inter } from 'next/font/google';
 import Navbar from '@/app/components/ui/navbar';
-import { getServerSession } from 'next-auth';
 import styles from '@/app/styles/Home.module.css';
-import { authOptions } from '@/app/lib/auth';
 import BackgroundTiles from '../components/ui/background-tiles';
+import { auth } from '@/app/lib';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,7 +23,7 @@ export const metadata: Metadata = {
 };
 
 const MainLayout = async ({ children }: PropsWithChildren): Promise<JSX.Element> => {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   return (
     <html lang="en">

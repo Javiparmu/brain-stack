@@ -1,7 +1,6 @@
 import styles from '@/app/styles/Home.module.css';
-import React, { FC } from 'react';
 
-export const MainHeader: FC = () => {
+export const MainHeader = () => {
   return (
     <header className={styles.mainHeader}>
       <h1 className={styles.title}>

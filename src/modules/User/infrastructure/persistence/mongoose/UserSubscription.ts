@@ -59,4 +59,4 @@ const userSubscriptionSchema = new Schema(
   },
 );
 
-export default models.UserSubscription || model('UserSubscription', userSubscriptionSchema);
+export default models?.UserSubscription || model('UserSubscription', userSubscriptionSchema);

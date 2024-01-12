@@ -1,10 +1,8 @@
-import React, { FC } from 'react';
-
 interface CrossIconProps {
   color?: string;
 }
 
-const CrossIcon: FC<CrossIconProps> = ({ color }) => {
+const CrossIcon = ({ color }: CrossIconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

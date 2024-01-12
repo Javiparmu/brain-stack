@@ -6,6 +6,8 @@ export const getApiLimitCount = async (userId?: string): Promise<number> => {
     return 0;
   }
 
+  console.log('userId', userId);
+
   const userApiLimitFinder = new UserApiLimitFinder(new MongoUserApiLimitRepository());
   const userApiLimit = await userApiLimitFinder.run(userId);
 

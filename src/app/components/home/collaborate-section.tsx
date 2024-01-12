@@ -1,9 +1,8 @@
-import React, { FC } from 'react';
 import styles from '@/app/styles/home/Collaborate.module.css';
 import { GithubIcon } from '../icons';
 import Link from 'next/link';
 
-const CollaborateSection: FC = () => {
+const CollaborateSection = () => {
   return (
     <section className={styles.collaborateContainer}>
       <h1 className={styles.collaborateHeader}>Collaborate with us</h1>

@@ -1,10 +1,10 @@
 'use client';
 
-import React, { FC } from 'react';
+import React from 'react';
 import styles from '@/app/styles/Auth.module.css';
 import { signIn } from 'next-auth/react';
 
-const GoogleSignIn: FC = () => {
+const GoogleSignIn = () => {
   const handleGoogleAuth = async () => {
     await signIn('google');
   };

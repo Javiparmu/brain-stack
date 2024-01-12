@@ -171,4 +171,4 @@ const subscriptionSchema = new Schema(
   },
 );
 
-export default models.Subscription || model('Subscription', subscriptionSchema);
+export default models?.Subscription || model('Subscription', subscriptionSchema);

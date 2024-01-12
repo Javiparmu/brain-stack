@@ -2,15 +2,17 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
+    color: var(--dashboard-foreground)
 }
 
 .navbar {
-    height: 80px;
-    display: flex;
+    display: none;
+    height: 60px;
+    align-items: center;
     justify-content: space-between;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
+    background-color: var(--dashboard-bg);
     border-bottom: 2px solid #292b2b;
-    background-color: #13151A;
 }
 
 .navItems {
@@ -26,12 +28,14 @@
     flex-direction: row;
     align-items: center;
     gap: 1.5rem;
+    margin-left: 1.5rem;
+    margin-bottom: 5rem;
 }
 
 .logoText {
     font-size: 1rem;
     font-weight: 700;
-    color: #eaeaea;
+    color: var(--dashboard-foreground);
 }
 
 .hamburger {
@@ -58,7 +62,7 @@
     flex-grow: 1;
     padding: 2rem 1rem;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
-    background-color: #13151A;
+    background-color: var(--dashboard-bg);
 }
 
 .sidebarClose {
@@ -88,29 +92,29 @@
     gap: 1rem;
     font-size: 1.2rem;
     font-weight: 500;
-    text-decoration: none; /* Eliminar subrayado */
-    color: #FFFFFF;
+    text-decoration: none;
+    color: var(--dashboard-foreground);
     padding: 1rem 1.5rem;
     border-radius: 10px;
     transition: background-color 0.3s ease;
 }
 
 .sidebarList li a:hover {
-    background-color: #393c44;
+    background-color: var(--dashboard-hover);
 }
 
 .sidebarList li a.activeProduct {
-    background-color: #393c44;
+    background-color: var(--dashboard-hover);
 }
 
 .content {
     overflow-y: auto;
-    height: calc(100vh - 115px);
+    height: 100vh;
     -webkit-overflow-scrolling: touch;
     width: calc(100% / 7 * 6);
     flex-grow: 1;
     padding: 1rem 5rem;
-    background-color: #23262D;
+    background-color: var(--dashboard-content-bg);
     scrollbar-width: thin;
     scrollbar-color: #393c44 transparent;
 }
@@ -143,6 +147,7 @@
     font-weight: 500;
     text-align: center;
     margin-bottom: 3rem;
+    color: var(--dashboard-accent);
 }
 
 .productList {
@@ -160,13 +165,13 @@
     padding: 1rem 2.5rem;
     font-size: 1.2rem;
     border-radius: 10px;
-    background-color: #13151A;
+    background-color: var(--dashboard-bg);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     transition: box-shadow 0.2s ease;
 }
 
 .productCard:hover {
-    box-shadow: 0 0 0 hsla(0,0%,100%,.1), 0 0 2rem hsla(0,0%,20%,.5);
+    box-shadow: 0 0 0 hsla(0,0%,100%,.1), 0 0 2rem var(--dashboard-hover);
 }
 
 .cardText {
@@ -213,7 +218,7 @@
 .sectionSubtitle {
     font-size: 0.8rem;
     font-weight: 200;
-    color: #c7c7c7;
+    color: var(--dashboard-accent);
     margin-bottom: 1rem;
 }
 
@@ -390,11 +395,11 @@
 }
 
 .user {
-    background-color: #292b2b;
+    background-color: var(--dashboard-card);
 }
 
 .bot {
-    background-color: #1D1E1E;
+    background-color: var(--dashboard-bg);
 }
 
 .imagesContainer {
@@ -489,7 +494,7 @@
     top: 0.7rem;
     right: 3rem;
     font-size: 0.8rem;
-    color: #FFFFFF;
+    color: var(--dashboard-foreground)
 }
 
 .musicContainer {
@@ -511,20 +516,28 @@
     border-width: 1px;
 }
 
+.mobileLogo {
+    display: none;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--dashboard-foreground);
+}
+
 @media (max-width: 768px) {
     .mainContainer {
         flex-direction: column;
     }
 
     .navbar {
-        height: 60px;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 1.5rem;
+        display: flex;
     }
 
-    .logo > img {
+    .logo {
         display: none;
+    }
+
+    .mobileLogo {
+        display: flex;
     }
 
     .hamburger {

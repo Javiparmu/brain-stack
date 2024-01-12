@@ -31,7 +31,7 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
   }
 
   public async search(id: UserId): Promise<User | null> {
-    await MongooseConnection.connect({ url: process.env.MONGODB_URI ?? '' });
+    await MongooseConnection.connect();
 
     const user = await UserModel.findById(id).lean<UserDocument>();
 
@@ -39,15 +39,23 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
   }
 
   public async searchByEmail(email: UserEmail): Promise<User | null> {
-    await MongooseConnection.connect({ url: process.env.MONGODB_URI ?? '' });
+    await MongooseConnection.connect();
 
     const user = await UserModel.findOne({ email }).lean<UserDocument>();
 
     return user ? User.fromPrimitives({ ...user, id: user._id }) : null;
   }
 
+  public async searchByProviderAccountId(providerAccountId: string): Promise<User | null> {
+    await MongooseConnection.connect();
+
+    const user = await UserModel.findOne({ providerAccountId }).lean<UserDocument>();
+
+    return user ? User.fromPrimitives({ ...user, id: user._id }) : null;
+  }
+
   public async subscribe(subscription: UserSubscription): Promise<void> {
-    await MongooseConnection.connect({ url: process.env.MONGODB_URI ?? '' });
+    await MongooseConnection.connect();
 
     await this.userSubscriptionRepository.save(subscription);
 
@@ -60,7 +68,7 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
   }
 
   public async incrementRequestCount(id: UserId): Promise<void> {
-    await MongooseConnection.connect({ url: process.env.MONGODB_URI ?? '' });
+    await MongooseConnection.connect();
 
     const user = await UserModel.findById(id);
 
@@ -108,5 +116,11 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
 
   public async incrementApiLimitHits({ userId, userIp }: { userId: UserId; userIp: UserIp }): Promise<void> {
     return this.userApiLimitRepository.incrementHits({ userId, userIp });
+  }
+
+  public async delete(id: UserId): Promise<void> {
+    await MongooseConnection.connect();
+
+    await UserModel.findByIdAndDelete(id);
   }
 }

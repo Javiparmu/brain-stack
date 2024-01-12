@@ -1,13 +1,12 @@
 'use client';
 
 import styles from '@/app/styles/Ui.module.css';
-import { FC } from 'react';
 
 interface UpgradeButtonProps {
   onOpen?: () => void;
 }
 
-const UpgradeButton: FC<UpgradeButtonProps> = ({ onOpen }) => {
+const UpgradeButton = ({ onOpen }: UpgradeButtonProps) => {
   return (
     <button type="button" className={styles.freeButton} onClick={onOpen}>
       Upgrade

@@ -77,4 +77,4 @@ const customerSchema = new Schema(
   },
 );
 
-export default models.Customer || model('Customer', customerSchema);
+export default models?.Customer || model('Customer', customerSchema);

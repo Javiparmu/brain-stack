@@ -2,7 +2,7 @@
 
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
-import React, { FC, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
 import styles from '@/app/styles/Ui.module.css';
 import { useSubscriptionModal } from '@/app/store/use-subscription-modal';
@@ -12,7 +12,7 @@ interface AvatarButtonProps {
   isDashboard?: boolean;
 }
 
-const AvatarButton: FC<AvatarButtonProps> = ({ isDashboard = false }) => {
+const AvatarButton = ({ isDashboard = false }: AvatarButtonProps) => {
   const avatarRef = useRef<HTMLDivElement>(null);
   const [showMenu, setShowMenu] = useState(false);
   const { onOpen } = useSubscriptionModal();

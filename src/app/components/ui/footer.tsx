@@ -1,7 +1,6 @@
 import styles from '@/app/styles/home/Footer.module.css';
-import React, { FC } from 'react';
 
-export const Footer: FC = () => {
+const Footer = () => {
   return (
     <footer className={styles.footerHome}>
       <div className={styles.footerContainer}>
@@ -10,3 +9,5 @@ export const Footer: FC = () => {
     </footer>
   );
 };
+
+export default Footer;

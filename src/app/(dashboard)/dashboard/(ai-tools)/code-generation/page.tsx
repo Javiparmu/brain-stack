@@ -2,7 +2,7 @@
 
 import { CodeIcon, RobotIcon } from '@/app/components/icons';
 import styles from '@/app/styles/Dashboard.module.css';
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import { ChatCompletionMessageParam } from 'openai/resources/chat';
 import { Toaster } from 'sonner';
 import { useRouter } from 'next/navigation';
@@ -12,7 +12,7 @@ import { useSession } from 'next-auth/react';
 import { useFetch } from '@/app/hooks/use-fetch';
 import MultilineInput from '@/app/components/ui/multiline-input';
 
-const CodePage: FC = () => {
+const CodePage = () => {
   const router = useRouter();
   const session = useSession();
   const fetchApi = useFetch<ChatCompletionMessageParam>();

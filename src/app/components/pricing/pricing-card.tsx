@@ -1,8 +1,8 @@
 'use client';
 
 import styles from '@/app/styles/home/Pricing.module.css';
-import CheckIcon from './check-icon';
-import CrossIcon from './cross-icon';
+import CheckIcon from '../ui/check-icon';
+import CrossIcon from '../ui/cross-icon';
 import { PlanEnum } from '@/app/utils/enums';
 import { paymentSession } from '@/app/actions/payment-session';
 
@@ -19,7 +19,7 @@ interface PricingCardProps {
   };
 }
 
-async function PricingCard({ plan }: PricingCardProps): Promise<JSX.Element> {
+async function PricingCard({ plan }: PricingCardProps) {
   const isStandard = plan.name === PlanEnum.STANDARD;
 
   const handlePayment = async () => {
@@ -67,10 +67,7 @@ async function PricingCard({ plan }: PricingCardProps): Promise<JSX.Element> {
         </ul>
       </div>
       <div className={styles.pricingButtonContainer}>
-        <button
-          onClick={handlePayment}
-          className={`${styles.pricingCardButton} ${isStandard ? styles.standard : styles.normal}`}
-        >
+        <button onClick={handlePayment} className={`${styles.pricingCardButton} ${isStandard ? styles.standard : styles.normal}`}>
           Choose plan
         </button>
       </div>

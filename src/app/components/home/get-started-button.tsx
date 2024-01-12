@@ -1,10 +1,9 @@
+import { auth } from '@/app/lib';
 import styles from '@/app/styles/Home.module.css';
-import { getServerSession } from 'next-auth';
 import Link from 'next/link';
-import React from 'react';
 
-async function GetStartedButton(): Promise<JSX.Element> {
-  const session = await getServerSession();
+async function GetStartedButton() {
+  const session = await auth();
 
   return (
     <div className={styles.container}>

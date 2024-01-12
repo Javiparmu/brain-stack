@@ -7,9 +7,8 @@ import { checkSubscription } from '@/app/lib/subscription';
 import UpgradeModal from '@/app/components/pricing/upgrade-modal';
 import { Inter } from 'next/font/google';
 import '@/app/globals.css';
-import { authOptions } from '@/app/lib';
-import { getServerSession } from 'next-auth';
 import Navbar from '@/app/components/dashboard/navbar';
+import { auth } from '@/app/lib';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,8 +24,8 @@ export const metadata: Metadata = {
   },
 };
 
-const DashboardLayout = async ({ children }: PropsWithChildren): Promise<JSX.Element> => {
-  const session = await getServerSession(authOptions);
+const DashboardLayout = async ({ children }: PropsWithChildren) => {
+  const session = await auth();
 
   const apiLimitCount = await getApiLimitCount(session?.user.userId);
   const subscription = await checkSubscription(session?.user.userId);

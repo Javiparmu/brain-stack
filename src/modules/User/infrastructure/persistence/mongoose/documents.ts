@@ -2,7 +2,10 @@ export interface UserDocument {
   _id: string;
   name: string;
   email: string;
+  emailVerified: number;
   password: string;
+  authProvider: string;
+  providerAccountId: string;
   plan: string;
   role: string;
   customerId: string;

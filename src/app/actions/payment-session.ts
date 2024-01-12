@@ -1,13 +1,12 @@
 'use server';
 
 import { redirect } from 'next/navigation';
-import { authOptions, stripe } from '../lib';
-import { getServerSession } from 'next-auth';
+import { auth, stripe } from '../lib';
 import { PlanEnum, getPlanId, getPlanPaymentUrl } from '../utils';
 import { headers } from 'next/headers';
 
 export const paymentSession = async (plan: PlanEnum, email?: string): Promise<void> => {
-  const userEmail = email ?? (await getServerSession(authOptions))?.user.email;
+  const userEmail = email ?? (await auth())?.user.email;
 
   if (!userEmail) {
     redirect(`${headers().get('origin')}/auth/signin`);

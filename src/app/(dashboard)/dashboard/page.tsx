@@ -1,11 +1,10 @@
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/lib/auth';
 import styles from '@/app/styles/Dashboard.module.css';
 import Link from 'next/link';
 import { ChevronRightIcon, CodeIcon, ConversationIcon, ImageIcon, MusicIcon, VideoIcon } from '@/app/components/icons';
+import { auth } from '@/app/lib';
 
 export default async function DashboardPage(): Promise<JSX.Element> {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   if (!session) {
     return <h1>Unauthorized</h1>;

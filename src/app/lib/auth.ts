@@ -1,99 +1,38 @@
-import { NextAuthOptions } from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
-import GoogleProvider from 'next-auth/providers/google';
-import GithubProvider from 'next-auth/providers/github';
 import { UserFinder } from '@/modules/User/application/UserFinder';
 import { MongoUserRepository } from '@/modules/User/infrastructure/persistence/MongoUserRepository';
-import { compare } from 'bcrypt';
-import { UserCreator } from '@/modules/User/application/UserCreator';
-import { AuthProvider } from '@/modules/User/domain/value-object/UserAuthProvider';
-import { randomUUID } from 'crypto';
-import { InvalidRequestException } from '@/modules/Shared/domain/exception/InvalidRequestException';
-import { ConflictException } from '@/modules/Shared/domain/exception/ConflictException';
+import NextAuth from 'next-auth';
+import { MongooseAdapter } from '../adapters/mongoose-adapter';
+import authConfig from './auth.config';
 
-export const authOptions: NextAuthOptions = {
-  providers: [
-    CredentialsProvider({
-      name: 'credentials',
-      credentials: {
-        email: {
-          label: 'email',
-          type: 'text',
-          placeholder: 'email',
-        },
-        password: { label: 'password', type: 'password' },
-      },
-      async authorize(credentials) {
-        try {
-          const { email, password } = credentials ?? {};
-
-          if (!email || !password) {
-            throw new InvalidRequestException('Invalid credentials');
-          }
-
-          const userFinder = new UserFinder(new MongoUserRepository());
-          const user = await userFinder.run(email);
-
-          if (!user) return null;
-
-          const isValidPassword = await compare(password, user.password!.value);
-
-          if (!isValidPassword) return null;
-
-          return {
-            id: user.id.value,
-            email,
-            plan: user.plan?.value,
-          };
-        } catch (error) {
-          return null;
-        }
-      },
-    }),
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID ?? '',
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
-    }),
-    GithubProvider({
-      clientId: process.env.GITHUB_ID ?? '',
-      clientSecret: process.env.GITHUB_SECRET ?? '',
-    }),
-  ],
+export const {
+  handlers: { GET, POST },
+  auth,
+  signIn,
+  signOut,
+  update,
+} = NextAuth({
+  ...authConfig,
   session: {
-    maxAge: 30 * 24 * 60 * 60,
-    updateAge: 24 * 60 * 60,
+    strategy: 'jwt',
   },
   jwt: {
     maxAge: 30 * 24 * 60 * 60,
   },
   pages: {
-    error: '/auth/signin',
+    signIn: '/auth/signin',
+    error: '/auth/error',
   },
   callbacks: {
     async signIn({ user, account }) {
       if (!user?.email) return false;
-      if (account?.provider === 'credentials') return true;
+      if (account?.provider !== 'credentials') return true;
 
       const userFinder = new UserFinder(new MongoUserRepository());
       const foundUser = await userFinder.run(user.email);
 
-      if (foundUser && foundUser.authProvider?.value !== account?.provider) {
-        throw new ConflictException('Your account is already registered with another provider');
-      }
-
-      if (!foundUser) {
-        const userCreator = new UserCreator(new MongoUserRepository());
-        await userCreator.run({
-          id: randomUUID(),
-          email: user.email,
-          authProvider: account?.provider as AuthProvider,
-        });
-      }
+      if (!foundUser?.emailVerified) return false;
 
       return true;
-    },
-    async redirect({ baseUrl }) {
-      return baseUrl + '/dashboard';
     },
     async session({ session, token }) {
       if (token && session.user) {
@@ -119,4 +58,5 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
   },
-};
+  adapter: MongooseAdapter(),
+});

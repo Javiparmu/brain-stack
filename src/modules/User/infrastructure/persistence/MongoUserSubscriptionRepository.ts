@@ -7,10 +7,7 @@ import { UserSubscriptionDocument } from './mongoose/documents';
 import { MONTH_IN_MS } from '../../Shared/constants';
 import { MongooseConnection } from '@/modules/Shared/infrastructure/persistence/MongooseConnection';
 
-export class MongoUserSubscriptionRepository
-  extends MongoRepository<UserSubscription>
-  implements UserSubscriptionRepository
-{
+export class MongoUserSubscriptionRepository extends MongoRepository<UserSubscription> implements UserSubscriptionRepository {
   constructor() {
     super(UserSubscriptionModel);
   }

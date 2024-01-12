@@ -42,4 +42,4 @@ const userApiLimitSchema = new Schema(
   },
 );
 
-export default models.UserApiLimit || model('UserApiLimit', userApiLimitSchema);
+export default models?.UserApiLimit || model('UserApiLimit', userApiLimitSchema);

@@ -1,11 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   images: {
     domains: ['localhost:3000', 'oaidalleapiprodscus.blob.core.windows.net'],
-  },
-  typescript: {
-    ignoreBuildErrors: true,
   },
 };
 

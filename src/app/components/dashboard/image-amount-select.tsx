@@ -1,4 +1,3 @@
-import React, { FC } from 'react';
 import styles from '@/app/styles/Dashboard.module.css';
 
 interface ImageAmountSelectProps {
@@ -6,7 +5,7 @@ interface ImageAmountSelectProps {
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const ImageAmountSelect: FC<ImageAmountSelectProps> = ({ value, onChange }) => {
+const ImageAmountSelect = ({ value, onChange }: ImageAmountSelectProps) => {
   return (
     <select
       name="number-of-images"

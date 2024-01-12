@@ -70,7 +70,7 @@
     position: absolute;
     top: 55px;
     right: 25px;
-    background-color: #1D1E1E;
+    background-color: var(--dashboard-card);
     border-radius: 5px;
     padding: 0.8rem 0.2rem;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -89,7 +89,7 @@
 
 .menuItem:hover {
     opacity: 0.9;
-    background-color: #252727;
+    background-color: var(--dashboard-accent);
     border-radius: 5px;
 }
 
@@ -100,7 +100,7 @@
     font-size: 1.2rem;
     padding: 0.5rem 1rem;
     color: white;
-    background-color: #1D1E1E;
+    background-color: var(--dashboard-card);
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -108,7 +108,7 @@
 
 .upgradeMenuItem:hover {
     opacity: 0.9;
-    background-color: #252727;
+    background-color: var(--dashboard-accent);
     border-radius: 5px;
 }
 
@@ -148,7 +148,7 @@
 
 .avatarIcon {
     border-radius: 5px;
-    background-color: #1D1E1E;
+    background-color: var(--dashboard-bg);
     padding: 0 0.1rem;
     position: absolute;
     top: 1.7rem;
@@ -203,7 +203,7 @@
 }
 
 .progressBar {
-    background-color: #4299e1;
+    background-color: var(--dashboard-accent);
     height: 0.625rem;
     border-radius: 9999px;
 }
@@ -214,7 +214,7 @@
 }
 
 .freeContainer {
-    background-color: var(--card);
+    background-color: var(--dashboard-card);
     padding: 1.5rem 1rem;
     border-radius: 0.375rem;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
@@ -231,7 +231,7 @@
 .freeText {
     margin: 0;
     font-size: 1.1rem;
-    color: #ffffff;
+    color: var(--dashboard-accent);
 }
 
 .freeButton {
@@ -241,7 +241,7 @@
     justify-content: center;
     cursor: pointer;
     gap: 1rem;
-    background-image: linear-gradient(to bottom right, #9f7aea, #4c51bf);
+    background-image: linear-gradient(to bottom right, var(--dashboard-accent), #856f21);
     border-radius: 0.375rem;
     border: none;
     font-weight: 500;
@@ -251,7 +251,7 @@
 }
 
 .freeButton:hover {
-    background-image: linear-gradient(to bottom left, #9f7aea, #4c51bf);
+    background-image: linear-gradient(to bottom left, var(--dashboard-accent), #856f21);
 }
 
 .freeButton:focus {
@@ -281,7 +281,7 @@
     width: 600px;
     height: 80vh;
     overflow: auto;
-    background-color: #1D1E1E;
+    background-color: var(--dashboard-bg);
     color: white;
     padding: 2.5rem;
 }
@@ -294,7 +294,7 @@
 .upgradeModal p {
     font-size: 1.2rem;
     margin: 2rem 0;
-    color: #359ebb;
+    color: var(--dashboard-accent);
 }
 
 .closeButton {
@@ -339,6 +339,19 @@
     margin-bottom: .5rem;
 }
 
+.details ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.details li::before {
+    content: "•";
+    color: var(--dashboard-accent);
+    font-size: 20px;
+    margin-right: 10px;
+    align-items: center;
+}
+
 .summary {
     font-size: 1.5rem;
 	list-style: none;
@@ -350,6 +363,7 @@
 
 .summary {
 	border: 2px solid #0f0f0f;
+    background-color: var(--dashboard-card);
     border-radius: 0.375rem;
 	padding: .75em 1em;
 	cursor: pointer;
@@ -374,7 +388,7 @@
 }
 
 .details[open] .summary {
-	background-color: #252727;
+	background-color: var(--dashboard-hover);
 }
 
 .details[open] .summary:before {
@@ -382,7 +396,7 @@
 }
 
 .summary:hover {
-	background-color: #252727;
+	background-color: var(--dashboard-hover);
 }
 
 .upgradeModal::-webkit-scrollbar {
@@ -416,7 +430,7 @@
     align-items: center;
     cursor: pointer;
     gap: 1rem;
-    background-color: #359ebb;
+    background-color: var(--dashboard-accent);
     border-radius: 0.375rem;
     border: none;
     font-weight: 500;
@@ -487,6 +501,22 @@
 .modalBackdrop.visible {
     display: flex;
     animation: fade-in 0.1s forwards;
+}
+
+.loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 @keyframes fade-out {

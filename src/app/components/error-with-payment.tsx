@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
+import React from 'react';
 import styles from '@/app/styles/Checkout.module.css';
 
-const ErrorWithPayment: FC = () => {
+const ErrorWithPayment = () => {
   return (
     <section className={styles.sectionContainer}>
       <h1 className={styles.headerText}>Oops!</h1>

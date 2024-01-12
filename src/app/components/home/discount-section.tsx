@@ -1,7 +1,6 @@
-import React, { FC } from 'react';
 import styles from '@/app/styles/home/Discount.module.css';
 
-const DiscountSection: FC = () => {
+const DiscountSection = () => {
   return (
     <section className={styles.discountContainer}>
       <div className={styles.discountHeader}>

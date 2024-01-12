@@ -1,7 +1,6 @@
-import React, { FC } from 'react';
 import styles from '@/app/styles/home/Productivity.module.css';
 
-const ProductivitySection: FC = () => {
+const ProductivitySection = () => {
   return (
     <div>
       <div className={styles.boostTextContainer}>

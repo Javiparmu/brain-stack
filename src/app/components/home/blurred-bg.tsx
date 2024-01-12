@@ -1,7 +1,6 @@
-import React, { FC } from 'react';
 import styles from '@/app/styles/Home.module.css';
 
-const BlurredBg: FC = () => {
+const BlurredBg = () => {
   return (
     <div className={styles.backgroundDiv} aria-hidden="true">
       <div

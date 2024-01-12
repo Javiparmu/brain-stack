@@ -1,7 +1,6 @@
 import styles from '@/app/styles/home/Pricing.module.css';
-import { FC } from 'react';
 
-const PricingSkeleton: FC = () => {
+const PricingSkeleton = () => {
   return (
     <div className={styles.pricingSkeleton}>
       <div className={styles.pricingCardSkeleton}></div>

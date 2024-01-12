@@ -123,10 +123,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       }
 
       if (chargeRefunded.receipt_email) {
-        await sendRefundEmail(
-          chargeRefunded.receipt_email.toString(),
-          chargeRefunded.receipt_email.toString().split('@')[0],
-        );
+        await sendRefundEmail(chargeRefunded.receipt_email.toString(), chargeRefunded.receipt_email.toString().split('@')[0]);
       }
 
       break;

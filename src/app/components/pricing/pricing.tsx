@@ -17,12 +17,12 @@
 
 import styles from '@/app/styles/home/Pricing.module.css';
 import { pricingData } from '@/app/utils';
-import { FC, Suspense } from 'react';
-import PricingCard from './pricing-card';
 import PricingSkeleton from '../skeletons/pricing-skeleton';
 import { SessionProvider } from 'next-auth/react';
+import { Suspense } from 'react';
+import PricingCard from './pricing-card';
 
-const Pricing: FC = () => {
+const Pricing = () => {
   return (
     <section className={styles.pricingSection}>
       <h2 className={styles.pricingTitle}>Pricing</h2>

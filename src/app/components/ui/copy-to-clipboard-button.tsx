@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent, RefObject, useState } from 'react';
+import { MouseEvent, RefObject, useState } from 'react';
 import { FaCheck, FaRegCopy } from 'react-icons/fa6';
 import styles from '@/app/styles/Dashboard.module.css';
 
@@ -6,7 +6,7 @@ interface CopyToClipboardButtonProps {
   textRef?: RefObject<HTMLPreElement>;
 }
 
-const CopyToClipboardButton: FC<CopyToClipboardButtonProps> = ({ textRef }) => {
+const CopyToClipboardButton = ({ textRef }: CopyToClipboardButtonProps) => {
   const [textCopied, setTextCopied] = useState(false);
 
   const copyToClipboard = (event: MouseEvent<SVGElement>) => {

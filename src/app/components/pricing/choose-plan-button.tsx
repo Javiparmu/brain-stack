@@ -1,6 +1,5 @@
 'use client';
 
-import React, { FC } from 'react';
 import styles from '@/app/styles/Ui.module.css';
 import { PlanEnum } from '@/app/utils';
 import { paymentSession } from '@/app/actions/payment-session';
@@ -10,7 +9,7 @@ interface ChoosePlanButtonProps {
   plan: PlanEnum;
 }
 
-const ChoosePlanButton: FC<ChoosePlanButtonProps> = ({ email, plan }) => {
+const ChoosePlanButton = ({ email, plan }: ChoosePlanButtonProps) => {
   const handleSubscription = async () => {
     await paymentSession(plan, email);
   };

@@ -1,7 +1,6 @@
 import styles from '@/app/styles/Dashboard.module.css';
-import { FC } from 'react';
 
-const LoadingDots: FC = () => {
+const LoadingDots = () => {
   return (
     <div className={styles.loadingResponse}>
       <div className={styles.dot}></div>

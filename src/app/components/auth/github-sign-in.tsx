@@ -1,10 +1,10 @@
 'use client';
 
-import React, { FC } from 'react';
+import React from 'react';
 import styles from '@/app/styles/Auth.module.css';
 import { signIn } from 'next-auth/react';
 
-const GithubSignIn: FC = () => {
+const GithubSignIn = () => {
   const handleGithubAuth = async () => {
     await signIn('github');
   };

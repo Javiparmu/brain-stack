@@ -1,5 +1,5 @@
 import { sendRegistrationEmail } from '@/app/lib/email';
-import { hash } from 'bcrypt';
+import { hash } from 'bcryptjs';
 import { NextResponse } from 'next/server';
 import { UserCreator } from '@/modules/User/application/UserCreator';
 import { MongoUserRepository } from '@/modules/User/infrastructure/persistence/MongoUserRepository';
@@ -12,7 +12,7 @@ export async function POST(req: Request): Promise<NextResponse> {
   const user = await userFinder.run(email);
 
   if (user) {
-    return NextResponse.json({ email, password });
+    return NextResponse.json({ email, password, newUser: false });
   }
 
   const hashedPassword = await hash(password, 10);
@@ -26,5 +26,5 @@ export async function POST(req: Request): Promise<NextResponse> {
     return NextResponse.json({ status: 500, message: send.error.message });
   }
 
-  return NextResponse.json({ email, password });
+  return NextResponse.json({ email, password, newUser: true });
 }

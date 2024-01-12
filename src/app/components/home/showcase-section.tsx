@@ -1,11 +1,10 @@
 import Image from 'next/image';
-import React, { FC } from 'react';
 import styles from '@/app/styles/home/Showcase.module.css';
 import dashboardImage from '@/app/assets/images/image-dashboard.webp';
 import dashboardCode from '@/app/assets/images/code-dashboard.webp';
 import dashboardMain from '@/app/assets/images/main-dashboard.webp';
 
-const ShowcaseSection: FC = () => {
+const ShowcaseSection = () => {
   return (
     <section className={styles.showcaseContainer}>
       <Image

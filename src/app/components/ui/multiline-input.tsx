@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC } from 'react';
+import { ChangeEvent } from 'react';
 import styles from '@/app/styles/Dashboard.module.css';
 import { useMultilineInput } from '@/app/hooks/use-mutiline-input';
 import LoadingDots from './loading-dots';
@@ -12,7 +12,7 @@ interface MultilineInputProps {
   placeholder: string;
 }
 
-const MultilineInput: FC<MultilineInputProps> = ({ value, onChange, onSubmit, loading, placeholder }) => {
+const MultilineInput = ({ value, onChange, onSubmit, loading, placeholder }: MultilineInputProps) => {
   const { inputRef, hasText, handleInput, handleEnter } = useMultilineInput({
     onEnter: onSubmit,
   });

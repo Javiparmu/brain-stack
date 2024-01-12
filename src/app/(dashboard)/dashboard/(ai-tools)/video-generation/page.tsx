@@ -7,10 +7,10 @@ import { errorToast } from '@/app/lib/toasts';
 import styles from '@/app/styles/Dashboard.module.css';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import { Toaster } from 'sonner';
 
-const VideoPage: FC = () => {
+const VideoPage = () => {
   const router = useRouter();
   const session = useSession();
   const fetchApi = useFetch<string[]>();

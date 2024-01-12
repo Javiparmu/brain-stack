@@ -1,10 +1,8 @@
-import React, { FC } from 'react';
-
 interface CheckIconProps {
   color?: string;
 }
 
-const CheckIcon: FC<CheckIconProps> = ({ color }) => {
+const CheckIcon = ({ color }: CheckIconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

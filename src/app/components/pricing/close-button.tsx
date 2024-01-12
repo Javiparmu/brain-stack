@@ -1,4 +1,3 @@
-import React, { FC } from 'react';
 import styles from '@/app/styles/Ui.module.css';
 
 interface CloseButtonProps {
@@ -8,7 +7,7 @@ interface CloseButtonProps {
   onClose: () => void;
 }
 
-const CloseButton: FC<CloseButtonProps> = ({ className, show = true, onClose, side = 'right' }) => {
+const CloseButton = ({ className, show = true, onClose, side = 'right' }: CloseButtonProps) => {
   return (
     <button
       title="Close button"

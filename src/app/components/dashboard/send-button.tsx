@@ -1,4 +1,3 @@
-import React, { FC } from 'react';
 import { SendIcon } from '../icons';
 import styles from '@/app/styles/Dashboard.module.css';
 
@@ -7,7 +6,7 @@ interface SendButtonProps {
   onClick: () => void;
 }
 
-const SendButton: FC<SendButtonProps> = ({ disabled, onClick }) => {
+const SendButton = ({ disabled, onClick }: SendButtonProps) => {
   return (
     <button
       title="Send button"

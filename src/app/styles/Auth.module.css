@@ -28,6 +28,14 @@
     color: hsl(var(--foreground));
 }
 
+.verifyTitle {
+    margin: 0;
+    margin-bottom: 2rem;
+    font-size: 30px;
+    font-weight: 700;
+    color: hsl(var(--foreground));
+}
+
 .authForm {
     margin-top: 3rem;
     padding: 0;
@@ -45,7 +53,7 @@
     align-items: flex-start;
     justify-content: center;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 1.2rem;
 }
 
 .passwordContainer {
@@ -55,7 +63,7 @@
     align-items: flex-start;
     justify-content: center;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 1.2rem;
 }
 
 .emailInput {
@@ -85,7 +93,7 @@
 }
 
 .submitButton {
-    margin-top: 1rem;
+    margin-top: 1.2rem;
     width: 100%;
     height: 50px;
     border-radius: 0.5rem;
@@ -209,6 +217,37 @@
     bottom: 0%;
     left: 0%;
     right: 0%;
+}
+
+.formResult {
+    display: flex;
+    flex-direction: row;
+    width: calc(100% - 3rem);
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+}
+
+.formResult.success {
+    background-color: hsl(160 95% 39% / 0.5);
+}
+
+.formResult.error {
+    background-color: hsl(0 84.2% 60.2% / 0.5);
+}
+
+.formResultIcon {
+    margin-right: 0.5rem;
+    height: 24px;
+}
+
+.formResultText {
+    margin: 0;
 }
 
 @media (max-width: 768px) {

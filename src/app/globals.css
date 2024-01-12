@@ -4,8 +4,19 @@
   --background: #17181D;
   --foreground: 210 40% 98%;
 
+  --dashboard-bg: #0b1b1c;
+  --dashboard-foreground: #e0f1f3;
+
+  --dashboard-content-bg: #2a3135;
+  --dashboard-hover: #722e3b50;
+
+  --dashboard-accent: #bca65a;
+  
   --card: #2c2e35;
   --card-foreground: 210 40% 98%;
+
+  --dashboard-card: #1a2b2c;
+  --dashboard-card-foreground: 210 40% 98%;
 
   --popover: 222.2 84% 4.9%;
   --popover-foreground: 210 40% 98%;
@@ -36,7 +47,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  -webkit-tap-highlight-color: transparent;
 }
+
+
 
 body {
   margin: 0;

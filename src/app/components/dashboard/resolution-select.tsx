@@ -1,4 +1,3 @@
-import React, { FC } from 'react';
 import styles from '@/app/styles/Dashboard.module.css';
 
 interface ResolutionSelectProps {
@@ -6,7 +5,7 @@ interface ResolutionSelectProps {
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const ResolutionSelect: FC<ResolutionSelectProps> = ({ value, onChange }) => {
+const ResolutionSelect = ({ value, onChange }: ResolutionSelectProps) => {
   return (
     <select name="image-size" id="image-size" className={styles.imageSizeSelect} onChange={onChange} value={value}>
       <option value="256x256">256x256</option>

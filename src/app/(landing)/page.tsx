@@ -13,16 +13,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import { MainHeader, GetStartedButton, Footer } from '@/app/components';
-const ShowcaseSection = lazy(() => import('@/app/components/home/showcase-section'));
-const BlurredBg = lazy(() => import('@/app/components/home/blurred-bg'));
-const ProductivitySection = lazy(() => import('@/app/components/home/productivity-section'));
-const CollaborateSection = lazy(() => import('@/app/components/home/collaborate-section'));
-const DiscountSection = lazy(() => import('@/app/components/home/discount-section'));
-const Pricing = lazy(() => import('@/app/components/pricing/pricing'));
-import { FC, lazy } from 'react';
+import { MainHeader, GetStartedButton } from '@/app/components';
+import dynamic from 'next/dynamic';
+const ShowcaseSection = dynamic(() => import('@/app/components/home/showcase-section'));
+const BlurredBg = dynamic(() => import('@/app/components/home/blurred-bg'));
+const ProductivitySection = dynamic(() => import('@/app/components/home/productivity-section'));
+const CollaborateSection = dynamic(() => import('@/app/components/home/collaborate-section'));
+const DiscountSection = dynamic(() => import('@/app/components/home/discount-section'));
+const Pricing = dynamic(() => import('@/app/components/pricing/pricing'));
+const Footer = dynamic(() => import('@/app/components/ui/footer'));
 
-const Home: FC = () => {
+const Home = () => {
   return (
     <>
       <MainHeader />

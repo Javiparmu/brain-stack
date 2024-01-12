@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { FC } from 'react';
 import styles from '@/app/styles/Dashboard.module.css';
 import Link from 'next/link';
 import { DownloadIcon } from '../icons';
@@ -9,7 +8,7 @@ interface ImageListProps {
   size: number;
 }
 
-const ImageList: FC<ImageListProps> = ({ images, size }) => {
+const ImageList = ({ images, size }: ImageListProps) => {
   return (
     <>
       {images.map((image, index) => (

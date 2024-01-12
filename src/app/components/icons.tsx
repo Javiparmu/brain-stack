@@ -1,12 +1,10 @@
-import { FC } from 'react';
-
 interface IconProps {
   styles?: string;
   size?: number | string;
   color?: string;
 }
 
-export const ConversationIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black' }) => {
+export const ConversationIcon = ({ styles, size = '24px', color = 'black' }: IconProps) => {
   return (
     <svg
       className={`${styles} icon icon-tabler icon-tabler-message`}
@@ -27,7 +25,7 @@ export const ConversationIcon: FC<IconProps> = ({ styles, size = '24px', color =
   );
 };
 
-export const DashboardIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black' }) => {
+export const DashboardIcon = ({ styles, size = '24px', color = 'black' }: IconProps) => {
   return (
     <svg
       className={`${styles} icon icon-tabler icon-tabler-layout-dashboard`}
@@ -49,7 +47,7 @@ export const DashboardIcon: FC<IconProps> = ({ styles, size = '24px', color = 'b
   );
 };
 
-export const MusicIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black' }) => {
+export const MusicIcon = ({ styles, size = '24px', color = 'black' }: IconProps) => {
   return (
     <svg
       className={`${styles} icon icon-tabler icon-tabler-music`}
@@ -71,7 +69,7 @@ export const MusicIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black
   );
 };
 
-export const CodeIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black' }) => {
+export const CodeIcon = ({ styles, size = '24px', color = 'black' }: IconProps) => {
   return (
     <svg
       className={`${styles} icon icon-tabler icon-tabler-code`}
@@ -92,7 +90,7 @@ export const CodeIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black'
   );
 };
 
-export const ImageIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black' }) => {
+export const ImageIcon = ({ styles, size = '24px', color = 'black' }: IconProps) => {
   return (
     <svg
       className={`${styles} icon icon-tabler icon-tabler-photo`}
@@ -114,7 +112,7 @@ export const ImageIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black
   );
 };
 
-export const VideoIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black' }) => {
+export const VideoIcon = ({ styles, size = '24px', color = 'black' }: IconProps) => {
   return (
     <svg
       className={`${styles} icon icon-tabler icon-tabler-video`}
@@ -134,7 +132,7 @@ export const VideoIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black
   );
 };
 
-export const ChevronRightIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black' }) => {
+export const ChevronRightIcon = ({ styles, size = '24px', color = 'black' }: IconProps) => {
   return (
     <svg
       className={`${styles} icon icon-tabler icon-tabler-chevron-right`}
@@ -153,7 +151,7 @@ export const ChevronRightIcon: FC<IconProps> = ({ styles, size = '24px', color =
   );
 };
 
-export const SendIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black' }) => {
+export const SendIcon = ({ styles, size = '24px', color = 'black' }: IconProps) => {
   return (
     <svg
       style={{ transform: 'rotate(90deg)' }}
@@ -171,7 +169,7 @@ export const SendIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black'
   );
 };
 
-export const DownloadIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black' }) => {
+export const DownloadIcon = ({ styles, size = '24px', color = 'black' }: IconProps) => {
   return (
     <svg
       className={`${styles} icon icon-tabler icon-tabler-download`}
@@ -192,7 +190,7 @@ export const DownloadIcon: FC<IconProps> = ({ styles, size = '24px', color = 'bl
   );
 };
 
-export const RobotIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black' }) => {
+export const RobotIcon = ({ styles, size = '24px', color = 'black' }: IconProps) => {
   return (
     <svg
       className={`${styles} icon icon-tabler icon-tabler-robot`}
@@ -216,7 +214,7 @@ export const RobotIcon: FC<IconProps> = ({ styles, size = '24px', color = 'black
   );
 };
 
-export const GithubIcon: FC<IconProps> = ({ styles, size = '24', color = 'black' }) => (
+export const GithubIcon = ({ styles, size = '24', color = 'black' }: IconProps) => (
   <svg className={styles} width={size} height={size} color={color} viewBox={`0 0 ${size} ${size}`}>
     <path
       fillRule="evenodd"

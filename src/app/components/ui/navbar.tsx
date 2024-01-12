@@ -1,7 +1,6 @@
 'use client';
 
 import styles from '@/app/styles/Ui.module.css';
-import React, { FC } from 'react';
 import Link from 'next/link';
 import AvatarButton from './avatar-button';
 import { MdArrowForwardIos } from 'react-icons/md';
@@ -12,7 +11,7 @@ interface NavbarProps {
   session: Session | null;
 }
 
-const Navbar: FC<NavbarProps> = ({ session }) => {
+const Navbar = ({ session }: NavbarProps) => {
   return (
     <nav className={styles.navbar}>
       <LandingLogo />
