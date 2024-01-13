@@ -13,8 +13,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-'use client';
-
 import styles from '@/app/styles/home/Pricing.module.css';
 import { pricingData } from '@/app/utils';
 import PricingSkeleton from '../skeletons/pricing-skeleton';
@@ -27,9 +25,7 @@ const Pricing = () => {
     <section className={styles.pricingSection}>
       <h2 className={styles.pricingTitle}>Pricing</h2>
       <h3 className={styles.pricingHeader}>Choose the plan that fits your needs</h3>
-      <p className={styles.pricingSubHeader}>
-        Your journey towards mastering artificial intelligence begins with a simple choice below.
-      </p>
+      <p className={styles.pricingSubHeader}>Your journey towards mastering artificial intelligence begins with a simple choice below.</p>
       <svg className={styles.pricingGradient} viewBox="0 0 1208 1024">
         <ellipse cx={604} cy={512} fill="url(#6d1bd035-0dd1-437e-93fa-59d316231eb0)" rx={604} ry={512} />
         <defs>
@@ -40,13 +36,13 @@ const Pricing = () => {
         </defs>
       </svg>
       <div className={styles.pricingContainer}>
-        <Suspense fallback={<PricingSkeleton />}>
-          <SessionProvider>
+        <SessionProvider>
+          <Suspense fallback={<PricingSkeleton />}>
             <PricingCard plan={pricingData.basic} />
             <PricingCard plan={pricingData.standard} />
             <PricingCard plan={pricingData.premium} />
-          </SessionProvider>
-        </Suspense>
+          </Suspense>
+        </SessionProvider>
       </div>
     </section>
   );

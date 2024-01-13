@@ -19,7 +19,7 @@ interface PricingCardProps {
   };
 }
 
-async function PricingCard({ plan }: PricingCardProps) {
+const PricingCard = ({ plan }: PricingCardProps) => {
   const isStandard = plan.name === PlanEnum.STANDARD;
 
   const handlePayment = async () => {
@@ -73,6 +73,6 @@ async function PricingCard({ plan }: PricingCardProps) {
       </div>
     </div>
   );
-}
+};
 
 export default PricingCard;

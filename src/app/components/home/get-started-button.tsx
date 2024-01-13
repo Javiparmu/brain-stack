@@ -1,10 +1,11 @@
-import { auth } from '@/app/lib';
 import styles from '@/app/styles/Home.module.css';
 import Link from 'next/link';
 
-async function GetStartedButton() {
-  const session = await auth();
+interface GetStartedButtonProps {
+  isLoggedIn: boolean;
+}
 
+const GetStartedButton = ({ isLoggedIn }: GetStartedButtonProps) => {
   return (
     <div className={styles.container}>
       <div className={`${styles.textContainer} ${styles.hideOnMobile}`}>
@@ -12,7 +13,7 @@ async function GetStartedButton() {
         <p className={`${styles.textBold} ${styles.centerOnMobile}`}>new</p>
         <p className={`${styles.text} ${styles.centerOnMobile}`}>tools</p>
       </div>
-      <Link className={styles.link} href={session ? '/dashboard' : '/auth/signin'}>
+      <Link className={styles.link} href={isLoggedIn ? '/dashboard' : '/auth/signin'}>
         <button className={styles.button}>Get Started</button>
       </Link>
       <div className={`${styles.textContainer} ${styles.hideOnMobile}`}>
@@ -22,6 +23,6 @@ async function GetStartedButton() {
       </div>
     </div>
   );
-}
+};
 
 export default GetStartedButton;

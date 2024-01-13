@@ -2,9 +2,8 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import GithubProvider from 'next-auth/providers/github';
 import { InvalidRequestException } from '@/modules/Shared/domain/exception/InvalidRequestException';
-import { UserFinder } from '@/modules/User/application/UserFinder';
-import { MongoUserRepository } from '@/modules/User/infrastructure/persistence/MongoUserRepository';
 import { compare } from 'bcryptjs';
+import { getUserByEmail } from '../data/get-user-by-email';
 
 const authConfig = {
   providers: [
@@ -17,8 +16,7 @@ const authConfig = {
             throw new InvalidRequestException('Invalid credentials');
           }
 
-          const userFinder = new UserFinder(new MongoUserRepository());
-          const user = await userFinder.run(email);
+          const user = await getUserByEmail(email);
 
           if (!user) return null;
 

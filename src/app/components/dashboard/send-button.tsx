@@ -8,12 +8,7 @@ interface SendButtonProps {
 
 const SendButton = ({ disabled, onClick }: SendButtonProps) => {
   return (
-    <button
-      title="Send button"
-      disabled={disabled}
-      className={`${styles.sendButton} ${!disabled ? styles.active : ''}`}
-      onClick={onClick}
-    >
+    <button title="Send button" disabled={disabled} className={`${styles.sendButton} ${!disabled ? styles.active : ''}`} onClick={onClick}>
       <SendIcon styles={styles.sendIcon} size={25} color="#6B6C7B" />
     </button>
   );

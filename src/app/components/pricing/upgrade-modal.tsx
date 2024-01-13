@@ -28,7 +28,7 @@ const UpgradeModal: FC<UpgradeModalProps> = ({ email, plan }) => {
         <p>
           You are currently on the <strong>{planName}</strong> plan. Upgrade to get access to more features.
         </p>
-        <details name="subscription-plan" className={styles.details} open>
+        <details className={styles.details} open>
           <summary className={styles.summary}>Get basic plan</summary>
           {planName === PlanEnum.BASIC ? (
             <div>This is your current plan.</div>
@@ -49,7 +49,7 @@ const UpgradeModal: FC<UpgradeModalProps> = ({ email, plan }) => {
             </div>
           )}
         </details>
-        <details name="subscription-plan" className={styles.details}>
+        <details className={styles.details}>
           <summary className={styles.summary}>Get standard plan</summary>
           {planName === PlanEnum.STANDARD ? (
             <div>This is your current plan.</div>
@@ -70,7 +70,7 @@ const UpgradeModal: FC<UpgradeModalProps> = ({ email, plan }) => {
             </div>
           )}
         </details>
-        <details name="subscription-plan" className={styles.details}>
+        <details className={styles.details}>
           <summary className={styles.summary}>Get premium plan</summary>
           {planName === PlanEnum.PREMIUM ? (
             <div>This is your current plan.</div>

@@ -23,14 +23,11 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     const requestCreator = new RequestCreator(new MongoUserRepository());
     await requestCreator.run({ userId, userIp });
 
-    const response = await replicate.run(
-      'anotherjesse/zeroscope-v2-xl:71996d331e8ede8ef7bd76eba9fae076d31792e4ddf4ad057779b443d6aea62f',
-      {
-        input: {
-          prompt,
-        },
+    const response = await replicate.run('anotherjesse/zeroscope-v2-xl:71996d331e8ede8ef7bd76eba9fae076d31792e4ddf4ad057779b443d6aea62f', {
+      input: {
+        prompt,
       },
-    );
+    });
 
     return NextResponse.json(response);
   } catch (error) {

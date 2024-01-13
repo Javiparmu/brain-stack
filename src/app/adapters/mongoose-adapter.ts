@@ -8,8 +8,8 @@ import { VerificationTokenCreator } from '@/modules/VerificationToken/applicatio
 import { VerificationTokenDeleter } from '@/modules/VerificationToken/application/VerificationTokenDeleter';
 import { VerificationTokenFinder } from '@/modules/VerificationToken/application/VerificationTokenFinder';
 import { MongoVerificationTokenRepository } from '@/modules/VerificationToken/infrastructure/persistence/MongoVerificationTokenRepository';
-import { randomUUID } from 'crypto';
 import { Account, User } from 'next-auth';
+import { randomUUID } from 'crypto';
 
 type Awaitable<T> = T | PromiseLike<T>;
 

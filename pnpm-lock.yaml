@@ -56,9 +56,6 @@ dependencies:
   stripe:
     specifier: ^14.1.0
     version: 14.1.0
-  uuid:
-    specifier: ^9.0.1
-    version: 9.0.1
   uuid-validate:
     specifier: ^0.0.3
     version: 0.0.3
@@ -4024,11 +4021,6 @@ packages:
 
   /uuid-validate@0.0.3:
     resolution: {integrity: sha512-Fykw5U4eZESbq739BeLvEBFRuJODfrlmjx5eJux7W817LjRaq4b7/i4t2zxQmhcX+fAj4nMfRdTzO4tmwLKn0w==}
-    dev: false
-
-  /uuid@9.0.1:
-    resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
-    hasBin: true
     dev: false
 
   /vfile-message@4.0.2:

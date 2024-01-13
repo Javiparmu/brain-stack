@@ -13,8 +13,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import { MainHeader, GetStartedButton } from '@/app/components';
+import { MainHeader } from '@/app/components';
 import dynamic from 'next/dynamic';
+import GetStartedButton from '@/app/components/home/get-started-button';
+import { auth } from '../lib';
 const ShowcaseSection = dynamic(() => import('@/app/components/home/showcase-section'));
 const BlurredBg = dynamic(() => import('@/app/components/home/blurred-bg'));
 const ProductivitySection = dynamic(() => import('@/app/components/home/productivity-section'));
@@ -23,11 +25,13 @@ const DiscountSection = dynamic(() => import('@/app/components/home/discount-sec
 const Pricing = dynamic(() => import('@/app/components/pricing/pricing'));
 const Footer = dynamic(() => import('@/app/components/ui/footer'));
 
-const Home = () => {
+const Home = async () => {
+  const session = await auth();
+
   return (
     <>
       <MainHeader />
-      <GetStartedButton />
+      <GetStartedButton isLoggedIn={!!session?.user} />
       <ShowcaseSection />
       <BlurredBg />
       <ProductivitySection />

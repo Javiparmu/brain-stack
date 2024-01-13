@@ -1,4 +1,3 @@
-import { User } from '../domain/User';
 import { UserRepository } from '../domain/UserRepository';
 import { UserId } from '../domain/value-object/UserId';
 
@@ -9,7 +8,7 @@ export class UserDeleter {
     this.repository = repository;
   }
 
-  async run(id: string): Promise<User | null> {
+  async run(id: string): Promise<void> {
     return this.repository.delete(new UserId(id));
   }
 }

@@ -8,8 +8,8 @@ const CollaborateSection = () => {
       <h1 className={styles.collaborateHeader}>Collaborate with us</h1>
       <div className={styles.collaborateContent}>
         <p className={styles.collaborateText}>
-          This is an open-source project. We warmly invite you to collaborate with us. Discover the project on GitHub
-          and become a part of our collaborative community.
+          This is an open-source project. We warmly invite you to collaborate with us. Discover the project on GitHub and become a part of
+          our collaborative community.
         </p>
         <Link
           title="Github repository"

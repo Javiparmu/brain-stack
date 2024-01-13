@@ -11,9 +11,7 @@ const CloseButton = ({ className, show = true, onClose, side = 'right' }: CloseB
   return (
     <button
       title="Close button"
-      className={`${styles.closeButton} ${className} ${!show && styles.hidden} ${
-        side === 'right' ? styles.right : styles.left
-      }`}
+      className={`${styles.closeButton} ${className} ${!show && styles.hidden} ${side === 'right' ? styles.right : styles.left}`}
       onClick={onClose}
     >
       <svg

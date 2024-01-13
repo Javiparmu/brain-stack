@@ -83,9 +83,7 @@ export class SubscriptionCreator {
     const subscription = new Subscription({
       id: new SubscriptionId(id),
       customer: new SubscriptionCustomer(customer),
-      applicationFeePercent: applicationFeePercent
-        ? new SubscriptionApplicationFeePercent(applicationFeePercent)
-        : undefined,
+      applicationFeePercent: applicationFeePercent ? new SubscriptionApplicationFeePercent(applicationFeePercent) : undefined,
       status: new SubscriptionStatus(status),
       product: new SubscriptionProduct(product),
       price: price ? new SubscriptionPrice(price) : undefined,
@@ -103,9 +101,7 @@ export class SubscriptionCreator {
       cancellationDetails: new SubscriptionCancellationDetails(cancellationDetails),
       endedAt: endedAt ? new UnixDate(endedAt) : undefined,
       daysUntilDue: daysUntilDue ? new SubscriptionDaysUntilDue(daysUntilDue) : undefined,
-      defaultPaymentMethod: defaultPaymentMethod
-        ? new SubscriptionDefaultPaymentMethod(defaultPaymentMethod)
-        : undefined,
+      defaultPaymentMethod: defaultPaymentMethod ? new SubscriptionDefaultPaymentMethod(defaultPaymentMethod) : undefined,
       defaultTaxRates: defaultTaxRates?.map((rate) => new SubscriptionDefaultTaxRate(rate)),
       discount: discount ? new SubscriptionDiscount(discount) : undefined,
       latestInvoice: latestInvoice ? new SubscriptionLatestInvoice(latestInvoice) : undefined,

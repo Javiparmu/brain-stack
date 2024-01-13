@@ -14,13 +14,7 @@ const ShowcaseSection = () => {
         style={{ width: '31vw', height: 'auto' }}
         alt="image generation dashboard"
       />
-      <Image
-        className={styles.showcaseMain}
-        src={dashboardMain}
-        alt="main dashboard"
-        fetchPriority="high"
-        loading="eager"
-      />
+      <Image className={styles.showcaseMain} src={dashboardMain} alt="main dashboard" fetchPriority="high" loading="eager" />
       <Image
         className={styles.showcaseCode}
         src={dashboardCode}
