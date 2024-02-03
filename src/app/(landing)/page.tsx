@@ -18,7 +18,6 @@ import dynamic from 'next/dynamic';
 import GetStartedButton from '@/app/components/home/get-started-button';
 import { auth } from '../lib';
 const ShowcaseSection = dynamic(() => import('@/app/components/home/showcase-section'));
-const BlurredBg = dynamic(() => import('@/app/components/home/blurred-bg'));
 const ProductivitySection = dynamic(() => import('@/app/components/home/productivity-section'));
 const CollaborateSection = dynamic(() => import('@/app/components/home/collaborate-section'));
 const DiscountSection = dynamic(() => import('@/app/components/home/discount-section'));
@@ -33,7 +32,6 @@ const Home = async () => {
       <MainHeader />
       <GetStartedButton isLoggedIn={!!session?.user} />
       <ShowcaseSection />
-      <BlurredBg />
       <ProductivitySection />
       <CollaborateSection />
       <Pricing />

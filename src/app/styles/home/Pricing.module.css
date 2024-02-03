@@ -8,7 +8,7 @@
 
 .pricingTitle {
   margin: 0;
-  color: #359ebb;
+  color: var(--primary);
   text-align: center;
   font-size: x-large;
 }
@@ -16,6 +16,7 @@
 .pricingHeader {
   text-align: center;
   font-size: 44px;
+  color: var(--foreground);
 }
 
 .pricingSubHeader {
@@ -25,6 +26,7 @@
   text-align: center;
   font-weight: 500;
   font-size: 20px;
+  color: var(--foreground);
 }
 
 .pricingContainer {
@@ -38,7 +40,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 20.8vw;
+  width: 24.8vw;
   background-color: var(--card);
   border-radius: 15px;
   padding: 2.5rem 2rem;
@@ -47,24 +49,27 @@
 .pricingCardHeader {
   margin: 0;
   font-size: 24px;
-  color: #979ce7;
+  color: var(--secondary);
 }
 
 .pricingCardSubHeader {
   font-size: 20px;
   line-height: 1.8rem;
+  color: var(--foreground);
 }
 
 .pricingCardText {
   font-size: 18px;
   margin-top: 1rem;
   margin-bottom: 2rem;
+  color: var(--foreground);
 }
 
 .pricingCardPrice {
   font-size: 48px;
   font-weight: bold;
   margin-bottom: 2rem;
+  color: var(--foreground);
 }
 
 .pricingCardTime {
@@ -73,6 +78,7 @@
   font-size: 18px;
   font-weight: 500;
   margin-bottom: 2rem;
+  color: var(--foreground);
 }
 
 .pricingCardList {
@@ -87,6 +93,7 @@
   gap: 0.5rem;
   display: flex;
   align-items: center;
+  color: var(--foreground);
 }
 
 .pricingButtonContainer {
@@ -262,7 +269,7 @@
   }
 
   .pricingCard {
-    width: 60vw;
+    width: 80vw;
     padding: 1.5rem 2rem;
   }
 

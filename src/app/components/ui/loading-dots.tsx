@@ -1,8 +1,9 @@
 import styles from '@/app/styles/Dashboard.module.css';
+import { CSSProperties } from 'react';
 
-const LoadingDots = () => {
+const LoadingDots = ({ className, style }: { className?: string; style?: CSSProperties }) => {
   return (
-    <div className={styles.loadingResponse}>
+    <div style={style} className={className ?? styles.loadingResponse}>
       <div className={styles.dot}></div>
       <div className={styles.dot}></div>
       <div className={styles.dot}></div>

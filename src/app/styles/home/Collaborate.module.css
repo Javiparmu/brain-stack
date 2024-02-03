@@ -12,7 +12,7 @@
     font-size: 44px;
     font-weight: 700;
     line-height: 3rem;
-    color: white;
+    color: var(--foreground);
 }
 
 .collaborateContent {
@@ -28,7 +28,7 @@
     text-align: center;
     font-size: 1.3rem;
     line-height: 1.8rem;
-    color: hsl(--var(--foreground));
+    color: var(--foreground-secondary);
     max-width: 35rem;
     margin-bottom: 2rem;
 }

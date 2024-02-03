@@ -11,7 +11,7 @@ const DiscountSection = () => {
           height="36"
           viewBox="0 0 24 24"
           strokeWidth="2"
-          stroke="#7fc5f8"
+          stroke="var(--accent)"
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"

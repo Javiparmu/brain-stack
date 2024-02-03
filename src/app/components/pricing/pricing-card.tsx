@@ -33,7 +33,7 @@ const PricingCard = ({ plan }: PricingCardProps) => {
         isStandard
           ? {
               outlineWidth: 4,
-              outlineColor: '#389ABB',
+              outlineColor: 'var(--primary)',
               outlineStyle: 'solid',
               scale: '1.05',
               filter: 'drop-shadow(0px 0px 1rem rgba(56, 154, 187, 0.5))',

@@ -1,5 +1,5 @@
 .boostTextContainer {
-    margin-top: 20rem;
+    margin-top: 12rem;
     max-width: 32rem;
     text-align: center;
 }
@@ -8,14 +8,14 @@
     font-size: 44px;
     font-weight: 700;
     line-height: 3rem;
-    color: white;
+    color: var(--foreground);
 }
 
 .boostSubtitle {
     text-wrap: balance;
     max-width: 40rem;
     line-height: 2rem;
-    color: #d1d5db;
+    color: var(--foreground-secondary);
 }
 
 .buttonContainer {

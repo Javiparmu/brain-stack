@@ -158,7 +158,7 @@ export const SendIcon = ({ styles, size = '24px', color = 'black' }: IconProps) 
       className={`${styles} icon icon-tabler icon-tabler-send`}
       width={size}
       height={size}
-      viewBox="0 0 24 24"
+      viewBox={`0 0 ${size} ${size}`}
       strokeWidth="2"
       fill={color}
       strokeLinecap="round"

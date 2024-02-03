@@ -11,7 +11,7 @@ const ProductivitySection = () => {
         </h2>
         <p className={styles.boostSubtitle}>Unlock new levels of efficiency with AI-Powered tools.</p>
         <div className={styles.buttonContainer}>
-          <svg width={50} height={50} viewBox="0 0 1000 1000" fill="currentColor">
+          <svg width={50} height={50} viewBox="0 0 1000 1000" fill="var(--foreground)">
             <g>
               <polygon points="1000,427.6 1000,540.6 603.4,540.6 603.4,1000 477,1000 477,427.6 	"></polygon>
               <polygon points="1000,213.8 1000,327 364.8,327 364.8,1000 238.4,1000 238.4,213.8 	"></polygon>

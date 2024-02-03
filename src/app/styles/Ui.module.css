@@ -80,6 +80,7 @@
 
 .menuItem {
     display: block;
+    color: var(--foreground);
     margin: 0 5px;
     line-height: 18px;
     font-size: 1.2rem;

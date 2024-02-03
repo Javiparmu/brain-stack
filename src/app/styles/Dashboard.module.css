@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
-    color: var(--dashboard-foreground)
+    color: var(--dashboard-foreground);
 }
 
 .navbar {
@@ -51,14 +51,13 @@
 .mainContainer {
     display: flex;
     flex-direction: row;
-    flex-grow: 1;
 }
 
 .sidebar {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 300px;
+    width: 400px;
     flex-grow: 1;
     padding: 2rem 1rem;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
@@ -111,7 +110,7 @@
     overflow-y: auto;
     height: 100vh;
     -webkit-overflow-scrolling: touch;
-    width: calc(100% / 7 * 6);
+    width: 100%;
     flex-grow: 1;
     padding: 1rem 5rem;
     background-color: var(--dashboard-content-bg);
@@ -140,6 +139,7 @@
     font-size: 3rem;
     text-align: center;
     margin-bottom: 1rem;
+    color: var(--dashboard-foreground) !important;
 }
 
 .subTitle {
@@ -161,13 +161,14 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    height: 3.5rem;
+    height: 5.5rem;
     padding: 1rem 2.5rem;
     font-size: 1.2rem;
     border-radius: 10px;
     background-color: var(--dashboard-bg);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     transition: box-shadow 0.2s ease;
+    color: var(--dashboard-foreground);
 }
 
 .productCard:hover {
@@ -182,6 +183,8 @@
 }
 
 .icon {
+    width: 50px;
+    height: 50px;
     padding: 10px;
     border-radius: 5px;
 }
@@ -547,8 +550,8 @@
     .sidebar {
         position: fixed;
         top: 0;
-        height: calc(100vh - 6rem);
-        width: calc(100% - 2rem);
+        height: 100dvh;
+        width: 100%;
         padding: 3rem 1rem;
         opacity: 0.98;
         transition: left 0.3s ease;
@@ -568,8 +571,8 @@
     }
 
     .content {
-        height: calc(100vh - 80px - 1rem);
-        width: calc(100% - 3rem);
+        height: calc(100vh - 80px);
+        width: 100%;
         padding: 1rem 1.5rem;
     }
 
@@ -582,7 +585,7 @@
     }
 
     .productCard {
-        height: 3rem;
+        height: 5rem;
         padding: 1rem 1.5rem;
         font-size: 1rem;
     }
@@ -592,8 +595,8 @@
     }
 
     .icon {
-        width: 20px;
-        height: 20px;
+        width: 36px;
+        height: 36px;
         padding: 8px;
     }
 
@@ -608,7 +611,7 @@
     }
 
     .sendButton {
-        right: 25px;
+        right: 15px;
     }
 
     .sendIcon {

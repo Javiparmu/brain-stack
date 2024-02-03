@@ -6,7 +6,7 @@ interface Loader {
   color?: string;
 }
 
-const Loader = ({ size = '25px', color = '#359ebb' }: Loader) => {
+const Loader = ({ size = '30px', color = '#359ebb' }: Loader) => {
   return <div style={{ width: size, height: size, borderTopColor: color }} className={styles.loader} />;
 };
 

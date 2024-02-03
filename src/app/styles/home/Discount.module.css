@@ -1,7 +1,7 @@
 .discountContainer {
     width: 700px;
-    border: 3px solid #7fc5f8;
-    background-color: #222326;
+    border: 3px solid var(--primary);
+    background-color: var(--card);
     border-radius: 15px;
     padding: 2rem 0;
     margin-top: 10rem;
@@ -23,7 +23,7 @@
     font-size: 44px;
     font-weight: 700;
     line-height: 3rem;
-    color: white;
+    color: var(--foreground);
 }
 
 .discountText {
@@ -32,7 +32,7 @@
     text-align: center;
     font-size: 1.3rem;
     line-height: 1.8rem;
-    color: hsl(--var(--foreground));
+    color: var(--foreground-secondary);
     max-width: 35rem;
 }
 

@@ -1,27 +1,25 @@
-import Image from 'next/image';
+'use client';
+
 import styles from '@/app/styles/home/Showcase.module.css';
-import dashboardImage from '@/app/assets/images/image-dashboard.webp';
-import dashboardCode from '@/app/assets/images/code-dashboard.webp';
-import dashboardMain from '@/app/assets/images/main-dashboard.webp';
+import { TypingContext } from '@/app/state-machines/typing-machine';
+import Showcase from './showcase';
+import ShapeDivider from './shape-divider';
 
 const ShowcaseSection = () => {
   return (
-    <section className={styles.showcaseContainer}>
-      <Image
-        className={styles.showcaseImage}
-        src={dashboardImage}
-        sizes="100vw"
-        style={{ width: '31vw', height: 'auto' }}
-        alt="image generation dashboard"
-      />
-      <Image className={styles.showcaseMain} src={dashboardMain} alt="main dashboard" fetchPriority="high" loading="eager" />
-      <Image
-        className={styles.showcaseCode}
-        src={dashboardCode}
-        sizes="100vw"
-        style={{ width: '31vw', height: 'auto' }}
-        alt="code generation dashboard"
-      />
+    <section className={styles.container}>
+      <ShapeDivider position="top" />
+      <h1 className={styles.title}>Check our tools!</h1>
+      <div className={styles.cards}>
+        <TypingContext.Provider>
+          <Showcase type="conversation" />
+          <Showcase type="image" />
+        </TypingContext.Provider>
+      </div>
+      <footer className={styles.footer}>
+        <p className={styles.footerText}>And many more...</p>
+      </footer>
+      <ShapeDivider position="bottom" />
     </section>
   );
 };

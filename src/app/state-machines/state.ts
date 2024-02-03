@@ -10,3 +10,10 @@ export const enum FormAction {
   SUCCESS = 'SUCCESS',
   ERROR = 'ERROR',
 }
+
+export enum TypingAnimationState {
+  INITIAL = 'initial',
+  TYPING = 'typing',
+  RESPONSE = 'response',
+  RESTART = 'restart',
+}

@@ -4,7 +4,6 @@ import '@/app/globals.css';
 import { Inter } from 'next/font/google';
 import Navbar from '@/app/components/ui/navbar';
 import styles from '@/app/styles/Home.module.css';
-import BackgroundTiles from '../components/ui/background-tiles';
 import { auth } from '@/app/lib';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -28,7 +27,6 @@ const MainLayout = async ({ children }: PropsWithChildren): Promise<JSX.Element>
   return (
     <html lang="en">
       <body className={inter.className}>
-        <BackgroundTiles />
         <header>
           <Navbar session={session} />
         </header>
