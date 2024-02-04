@@ -156,8 +156,9 @@
     left: 1rem;
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
     .navbar {
+        margin-top: 1rem;
         padding: 1rem 2rem;
     }
 
