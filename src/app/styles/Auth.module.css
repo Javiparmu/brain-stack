@@ -251,12 +251,24 @@
 }
 
 @media (max-width: 768px) {
+    .authForm {
+        margin-top: 2rem;
+    }
+
     .logoContainer {
         left: 2rem;
     }
 
     .formContainer {
-        width: 80%;
+        width: 100%;
+    }
+
+    .authDivider {
+        margin-top: 2rem;
+    }
+
+    .googleAuthButton {
+        margin-top: 2rem;
     }
 }
 
