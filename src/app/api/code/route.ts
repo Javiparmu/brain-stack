@@ -22,7 +22,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     const body = await req.json();
     const { userId, messages } = body;
 
-    const userIp = getUserIp(req);
+    const userIp = getUserIp();
 
     const requestCreator = new RequestCreator(new MongoUserRepository());
     await requestCreator.run({ userId, userIp });

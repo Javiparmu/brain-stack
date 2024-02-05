@@ -18,7 +18,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       return new NextResponse('Prompt is required', { status: 400 });
     }
 
-    const userIp = getUserIp(req);
+    const userIp = getUserIp();
 
     const requestCreator = new RequestCreator(new MongoUserRepository());
     await requestCreator.run({ userId, userIp });
